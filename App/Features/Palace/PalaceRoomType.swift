@@ -24,6 +24,8 @@ enum PalaceRoomType: String, CaseIterable {
     case library
     case doctorRoom
     case classroom
+    // g6: shops, culture and safety (G6ShopBackdrop, G6GarageBackdrop, G6ConcertBackdrop, G6GalleryBackdrop, G6FireBackdrop)
+    case g6Thrift, g6Kiosk, g6Garage, g6ConcertHall, g6Gallery, g6FireStation
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -41,6 +43,12 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "bibliotheek"
         case .doctorRoom: "praktijk"
         case .classroom: "klas"
+        case .g6Thrift: "winkel"
+        case .g6Kiosk: "kiosk"
+        case .g6Garage: "garage"
+        case .g6ConcertHall: "zaal"
+        case .g6Gallery: "galerie"
+        case .g6FireStation: "straat"
         }
     }
 
@@ -60,6 +68,12 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "De bibliotheek"
         case .doctorRoom: "De praktijk van de dokter"
         case .classroom: "Het klaslokaal"
+        case .g6Thrift: "Een tweedehandswinkel"
+        case .g6Kiosk: "Een kiosk met kranten en tijdschriften"
+        case .g6Garage: "Een garage met een werkplaats"
+        case .g6ConcertHall: "Een concertzaal met een orkest en publiek"
+        case .g6Gallery: "Een galerie met schilderijen aan witte muren"
+        case .g6FireStation: "Een kazerne met een rode wagen, en een huis aan de overkant"
         }
     }
 
@@ -77,6 +91,11 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.noor
         case .doctorRoom: DoctorRoom.noor
         case .classroom: Classroom.noor
+        case .g6Thrift, .g6Kiosk: PalaceShop.noor
+        case .g6Garage: G6GarageRoom.noor
+        case .g6ConcertHall: G6ConcertRoom.noor
+        case .g6Gallery: G6GalleryRoom.noor
+        case .g6FireStation: G6FireRoom.noor
         }
     }
 
@@ -93,6 +112,11 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.slots
         case .doctorRoom: DoctorRoom.slots
         case .classroom: Classroom.slots
+        case .g6Thrift, .g6Kiosk: PalaceShop.slots
+        case .g6Garage: G6GarageRoom.slots
+        case .g6ConcertHall: G6ConcertRoom.slots
+        case .g6Gallery: G6GalleryRoom.slots
+        case .g6FireStation: G6FireRoom.slots
         }
     }
 }
@@ -114,6 +138,11 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .library: LibraryBackdrop()
         case .doctorRoom: DoctorRoomBackdrop()
         case .classroom: ClassroomBackdrop()
+        case .g6Thrift, .g6Kiosk: G6ShopBackdrop(type: type)
+        case .g6Garage: G6GarageBackdrop()
+        case .g6ConcertHall: G6ConcertBackdrop()
+        case .g6Gallery: G6GalleryBackdrop()
+        case .g6FireStation: G6FireBackdrop()
         }
     }
 }

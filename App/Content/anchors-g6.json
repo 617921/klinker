@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 38,
+      "type": "g6Thrift",
+      "noor": [250, 288],
+      "order": ["kringloopwinkel", "spullen", "meubel", "servies", "koopje", "staat", "beschadigd", "ouderwets", "opknappen", "wegdoen", "opbrengst"],
+      "prompts": {
+        "meubel": "Waar staat een",
+        "spullen": "Waar liggen oude",
+        "servies": "Waar staat het",
+        "koopje": "Wat is echt een",
+        "staat": "Wat is nog in goede",
+        "opbrengst": "Waar zie je de",
+        "wegdoen": "Wie gaat iets",
+        "opknappen": "Waar is iemand iets aan het"
+      },
+      "weg": [
+        { "target": "koopje", "options": ["koopje", "opbrengst", "staat"] },
+        { "target": "beschadigd", "options": ["staat", "beschadigd", "opknappen"] },
+        { "target": "spullen", "options": ["servies", "spullen", "meubel"] },
+        { "target": "wegdoen", "options": ["wegdoen", "opknappen", "kringloopwinkel"] },
+        { "target": "ouderwets", "options": ["beschadigd", "meubel", "ouderwets"] }
+      ],
+      "anchors": [
+        {
+          "word": "kringloopwinkel", "prop": "g6CycleSign", "slot": "window",
+          "label": "Een rond bord op het raam: twee pijlen draaien rond een stoel, een lamp en een shirt, tweedehands",
+          "params": { "text": "2e hands" }
+        },
+        {
+          "word": "servies", "prop": "g6Crockery", "slot": "shelfTopLeft",
+          "label": "Borden, kopjes op schoteltjes en een theepot, allemaal met dezelfde blauwe rand",
+          "params": { "tone": "blue" }
+        },
+        {
+          "word": "spullen", "prop": "g6Jumble", "slot": "shelfTopMid",
+          "label": "Een plank vol rommel: boeken, een klok, een vaas, een beer en een radio",
+          "params": {}
+        },
+        {
+          "word": "koopje", "prop": "g6Bargain", "slot": "shelfTopRight",
+          "label": "Een mooie gouden klok met een prijskaartje van twee euro, en een duim omhoog",
+          "params": { "text": "€ 2" }
+        },
+        {
+          "word": "ouderwets", "prop": "g6Vintage", "slot": "shelfLeft",
+          "label": "Een lampje met franjes en een telefoon met een draaischijf op een kleedje",
+          "params": {}
+        },
+        {
+          "word": "beschadigd", "prop": "g6Damaged", "slot": "shelfRight",
+          "label": "Een vaas met een grote barst en een bord dat in twee stukken is",
+          "params": {}
+        },
+        {
+          "word": "staat", "prop": "g6Condition", "slot": "counterMid",
+          "label": "Een oude ladekast met een kaartje: de wijzer wijst naar groen, prima",
+          "params": { "highlight": 2, "text": "prima" }
+        },
+        {
+          "word": "opbrengst", "prop": "g6Proceeds", "slot": "counterRight",
+          "label": "Een geldkistje vol munten, een pijl naar een hartje boven twee huizen: twaalfduizend vierhonderd euro",
+          "params": { "text": "€ 12.400" }
+        },
+        {
+          "word": "wegdoen", "prop": "g6DropOff", "slot": "floorLeft", "frame": [2, 266, 108, 132],
+          "label": "Een vrouw brengt een doos met oude dingen naar een groene bak voor de inname",
+          "params": { "text": "inname", "variant": 2 }
+        },
+        {
+          "word": "meubel", "prop": "furnitureSet", "slot": "floorMid", "frame": [112, 300, 134, 96],
+          "label": "Een bank, een lamp en een tafeltje met een prijskaartje van vijfendertig euro",
+          "params": { "text": "€ 35" }
+        },
+        {
+          "word": "opknappen", "prop": "g6Refurbish", "slot": "floorRight", "frame": [296, 282, 70, 118],
+          "label": "Een stoel: de ene helft oud en vol krassen, de andere helft net geverfd, met een kwast en een verfpot",
+          "params": {}
+        }
+      ],
+      "decor": [
+        { "prop": "shelfGoods", "slot": "shelfMid", "params": { "accessory": "jars", "variant": 4 } },
+        { "prop": "shelfGoods", "slot": "counterLeft", "params": { "accessory": "boxes", "variant": 1 } }
+      ]
+    }
+  ]
+}

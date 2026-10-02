@@ -105,7 +105,7 @@ struct ShopBackdrop: View, Equatable {
         }
     }
 
-    private nonisolated static func marks(_ l: ShopLook) -> [PalaceMark] {
+    nonisolated static func marks(_ l: ShopLook) -> [PalaceMark] {
         wall(l) + shelves(l) + floor(l) + counter(l)
     }
 
@@ -192,7 +192,7 @@ struct ShopBackdrop: View, Equatable {
     }
 
     /// Glazing bars and sill drawn over the canal view.
-    private nonisolated static func windowFrame(_ l: ShopLook) -> [PalaceMark] {
+    nonisolated static func windowFrame(_ l: ShopLook) -> [PalaceMark] {
         [
             .s("M18 36H102V216H18Z", PalaceInk.shade(l.trim, 0.8), 1.5),
             .f("M18 138H102V142H18Z", l.trim),

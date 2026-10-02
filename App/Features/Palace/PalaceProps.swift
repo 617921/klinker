@@ -194,6 +194,111 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case pupil
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
+
+    // MARK: g6 — shops, culture and safety (drawn by `G6Props`, PalacePropsG6*.swift)
+
+    /// A standing person (64 × 114) with a tool or a pose: `accessory` "wrench" (mechanic in overalls),
+    /// "inspect" (clipboard and magnifier), "press" (notepad, pen, press card), "box" (carries a box of
+    /// old things), "wow" (hands to cheeks, sparkles), "talk" (points; speech bubble `lines`); `variant`, `flip`.
+    case g6Figure
+    /// Round shop sign: two arrows circling a chair, a lamp and a shirt; `text` on its band.
+    case g6CycleSign
+    /// A shelf bay crammed with odds and ends: a clock, a teddy, a vase, books, a radio.
+    case g6Jumble
+    /// A matching dinner set: stacked plates, cups on saucers, a teapot. `tone` pattern colour.
+    case g6Crockery
+    /// A fine old clock with a tiny price tag (`text`) and a thumbs-up.
+    case g6Bargain
+    /// A chest of drawers with a tag: a red–yellow–green gauge, needle at `highlight` (0–2), `text`.
+    case g6Condition
+    /// A vase with a crack and a chip out of the rim, shards beside it.
+    case g6Damaged
+    /// A chair: one half old and scratched, the other freshly painted, a brush and a paint pot.
+    case g6Refurbish
+    /// A fringed lamp and a dial telephone on a side table with a doily.
+    case g6Vintage
+    /// A hatch in the wall (`text` above it); two hands push a box of old things in.
+    case g6DropOff
+    /// A cash box, an arrow and a heart over little houses; `text` the amount.
+    case g6Proceeds
+    /// A car seen from the side. `variant` colour; `accessory` "lift" (raised on lift arms, oil draining
+    /// into a pan, an oil can and a filter), "sale" (card in the window: `text` price, `caption`), "plain".
+    case g6Car
+    /// A fuel pump; its hose ends in a car's filler; `text` on the display, `caption` under it.
+    case g6FuelPump
+    /// A yellow licence plate with `text`; `mount` "screen" shows it on a desk monitor.
+    case g6Plate
+    /// A car battery with + and − terminals, jump leads and an almost empty charge mark.
+    case g6Battery
+    /// An inspection report: rows `lines` "item|ok" / "item|no" and a big stamp:
+    /// `accessory` "reject" (red cross) or "pass" (green tick).
+    case g6Verdict
+    /// A sign with `count` stars, a picture (`icons`), `text` big and `caption` small.
+    case g6Rating
+    /// A round seal with a car and a tick, ribbons, `text` on the band.
+    case g6Badge
+    /// Newspapers. `accessory` "stack" (a bundle and a strip of day boxes `labels`), "front" (front page:
+    /// headline `text`, photo, `caption`), "article" (open page, one article ringed red, `text` its title),
+    /// "fresh" (a new issue popping out of a box, burst `text`), "strings" (a paper walks free, its
+    /// puppet strings cut).
+    case g6Paper
+    /// A phone with an absurd headline (`text`), its picture, a long nose and a red question mark.
+    case g6Hoax
+    /// A transmitter mast sending waves to a television and a radio.
+    case g6Broadcast
+    /// A television: a news reader at a desk, an inset picture (`icons` first), `caption` tag.
+    case g6NewsTV
+    /// One phone sends a message out along arrows to many phones.
+    case g6Spread
+    /// A screen with a red dot and timed rows `lines` "10:42|headline", `caption` on top.
+    case g6Ticker
+    /// Fire. `accessory` "blaze" (flames and smoke over a roof), "spark" (an overloaded power strip
+    /// bursting into flame), "hose" (a firefighter hosing water onto flames).
+    case g6Fire
+    /// A ladder up to a window; a firefighter carries a child down.
+    case g6Rescue
+    /// `accessory` "flammable" (jerrycan with a flame diamond), "skull" (warning sign with a skull,
+    /// `text` under it), "callPoint" (red break-glass alarm with a flashing light).
+    case g6Hazard
+    /// A smoke alarm on a ceiling plate, smoke rising into it, beeps and a red light.
+    case g6SmokeAlarm
+    /// A police car, an ambulance and a small fire car in a row, blue lights flashing.
+    case g6Responders
+    /// Green exit sign: a running figure through a door and an arrow. `mount` "hang" | "wall".
+    case g6ExitSign
+    /// An orchestra on chairs in two rows: violins, cellos, horns and a kettle drum.
+    case g6Orchestra
+    /// A musician. `accessory` "baton" (conductor from behind on a little box, a score stand),
+    /// "violin" (a soloist playing, notes), "trumpet"; `variant`, `flip`.
+    case g6Musician
+    /// A violin, a trumpet, a flute and a drum together.
+    case g6Instruments
+    /// A ticket with a calendar: price rows `lines` "label|price", `highlight` ringed, `caption`.
+    case g6Ticket
+    /// Audience heads. `accessory` "clap" (clapping hands, bubble `text`), "sing" (open mouths, notes),
+    /// "offkey" (one sings crooked red notes, the neighbour covers their ears).
+    case g6Crowd
+    /// A music stand with a score full of repeat signs, a pencil and a bubble (`text`).
+    case g6Score
+    /// A composer's bust with a curled wig on a pedestal, notes around it.
+    case g6Bust
+    /// The front of a stage: steps up, a spotlight cone, a microphone stand.
+    case g6Podium
+    /// A framed picture. `accessory` "portrait" | "abstract" | "landscape" | "empty" (ornate frame only);
+    /// `tone` frame "gold" | "black" | "white".
+    case g6Painting
+    /// One tree painted three ways: true to life, in blocks, in dots.
+    case g6Styles
+    /// A row of small grey pictures and one big bright red one with rays.
+    case g6Standout
+    /// Three small pictures; a hand points at one, which gets a tick.
+    case g6Choose
+    /// A ribbon cut by scissors between two posts, two glasses clinking.
+    case g6Ribbon
+    /// An exhibition poster: three small pictures, `text` big, `caption` dates.
+    case g6ExpoPoster
+    /// An open book on a stand with hearts and handwritten `lines`.
+    case g6Guestbook
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -267,6 +372,13 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
+            case .g6Figure, .g6CycleSign, .g6Jumble, .g6Crockery, .g6Bargain, .g6Condition, .g6Damaged, .g6Refurbish,
+                 .g6Vintage, .g6DropOff, .g6Proceeds, .g6Car, .g6FuelPump, .g6Plate, .g6Battery, .g6Verdict, .g6Rating,
+                 .g6Badge, .g6Paper, .g6Hoax, .g6Broadcast, .g6NewsTV, .g6Spread, .g6Ticker, .g6Fire, .g6Rescue,
+                 .g6Hazard, .g6SmokeAlarm, .g6Responders, .g6ExitSign, .g6Orchestra, .g6Musician, .g6Instruments,
+                 .g6Ticket, .g6Crowd, .g6Score, .g6Bust, .g6Podium, .g6Painting, .g6Styles, .g6Standout, .g6Choose,
+                 .g6Ribbon, .g6ExpoPoster, .g6Guestbook:
+                G6Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
