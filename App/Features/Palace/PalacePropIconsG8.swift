@@ -1,7 +1,8 @@
 import SwiftUI
 
-/// Pictograms of the city outdoors and the finale, in the same 24 × 24 box as `PalaceIcon`.
-/// The dove's olive branch stays green: the colour is part of the meaning.
+/// Pictograms of the city outdoors and the finale, in the same 24 × 24 box as `PalaceIcon`:
+/// a ballot box, a dove of peace, the city ferry and a storm cloud. The dove's olive branch stays
+/// green and the storm's lightning yellow: the colour is part of the meaning.
 enum G8Icons {
     static func draw(_ icon: PalaceIcon, _ p: PropPen, _ c: UInt32, _ d: UInt32) {
         switch icon {
@@ -19,6 +20,20 @@ enum G8Icons {
             p.svgLine("M21.2 10L23.6 13.6", 0x4E7A3A, 0.9)
             p.oval(21.6, 11.2, 2.4, 1.3, 0x5E8C45)
             p.oval(22.2, 13.2, 1.6, 2.2, 0x5E8C45)
+        case .g8Ferry:
+            p.rect(8.6, 5, 6.8, 6.4, c, radius: 0.8)
+            p.rect(9.8, 6.4, 4.4, 2.4, d)
+            p.rect(11.3, 2, 1.4, 3.4, c)
+            p.svgLine("M10 11.4V14M14 11.4V14", c, 1.2)
+            p.svg("M0.6 14H23.4L21.4 19H2.6Z", c)
+            p.rect(2.6, 15.4, 18.8, 1, d)
+            p.svgLine("M0.6 22Q3.6 20.4 6.6 22T12.6 22T18.6 22T24.6 22", c, 1.2)
+        case .g8Storm:
+            p.dot(8, 8.6, 5, c)
+            p.dot(14.6, 7, 6, c)
+            p.rect(3, 8, 18.6, 6.6, c, radius: 3.3)
+            p.svg("M12.4 13L9.4 18.4H12L10.2 23.4L16 16.2H13.2L15 13Z", 0xFAC775)
+            p.svgLine("M5 17L3.6 20.6M19 17L17.6 20.6", c, 1.4)
         default:
             break
         }

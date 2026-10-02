@@ -293,6 +293,30 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g8Umbrella
     /// Sandbags stopping water before a door, a hand laying the last one, a tick on the dry side.
     case g8Sandbags
+
+    // Ferry (PalacePropsG8Ferry.swift, PalacePropsG8FerryPlan.swift)
+    /// A flat city ferry side-on with a wheelhouse on legs, cyclists and people on deck.
+    case g8FerryBoat
+    /// A village on the far bank with a landing stage, an arrow from this side pointing over.
+    case g8FarBank
+    /// A white sign high on a pole with `icons` (bus, tram, train, ferry) in a 2 × 2 grid.
+    case g8TransportSign
+    /// A blue sign: two banks, a dashed arc with the ferry from landing to landing, `text` duration.
+    case g8CrossingSign
+    /// A traveller with a suitcase under a red map pin with a tick. `variant`.
+    case g8Arrived
+    /// A clock showing `time` over a 0–24 day line with a red pin at that moment.
+    case g8Moment
+    /// A board: good weather → ferry with a tick, storm → ferry with a cross. `icons` [good, bad, what].
+    case g8Depends
+    /// A paper map: the short way over a broken bridge crossed out, a long red route round; `labels` A, B.
+    case g8DetourMap
+    /// An open agenda, a hand writing a new block (first of `icons`) into an empty hour.
+    case g8Agenda
+    /// Two calendar sheets: date `labels`[0] crossed out, an arrow to date `labels`[1] ringed green.
+    case g8Postpone
+    /// A phone held sideways whose screen shows `icons`, `labels` and `text` like a sign.
+    case g8HandPhone
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -371,7 +395,8 @@ struct PalacePropView: View, Equatable {
                  .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal, .g8TrafficLight, .g8TrafficSign, .g8ExitSign,
                  .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine,
                  .g8Storm, .g8FloodedFarm, .g8Gauge, .g8RisingWater, .g8Dike, .g8PumpStation, .g8LowLand, .g8RainGauge,
-                 .g8InfoBoard, .g8Umbrella, .g8Sandbags:
+                 .g8InfoBoard, .g8Umbrella, .g8Sandbags, .g8FerryBoat, .g8FarBank, .g8TransportSign, .g8CrossingSign,
+                 .g8Arrived, .g8Moment, .g8Depends, .g8DetourMap, .g8Agenda, .g8Postpone, .g8HandPhone:
                 G8Props.draw(prop.kind, pen, p)
             }
         }

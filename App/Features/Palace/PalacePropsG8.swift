@@ -49,6 +49,17 @@ enum G8Props {
         case .g8InfoBoard: G8Polder.infoBoard(pen, p)
         case .g8Umbrella: G8Polder.umbrella(pen, p)
         case .g8Sandbags: G8Polder.sandbags(pen, p)
+        case .g8FerryBoat: G8FerryProps.boat(pen, p)
+        case .g8FarBank: G8FerryProps.farBank(pen, p)
+        case .g8TransportSign: G8FerryProps.transportSign(pen, p)
+        case .g8CrossingSign: G8FerryProps.crossingSign(pen, p)
+        case .g8Arrived: G8FerryProps.arrived(pen, p)
+        case .g8Moment: G8FerryPlan.moment(pen, p)
+        case .g8Depends: G8FerryPlan.depends(pen, p)
+        case .g8DetourMap: G8FerryPlan.detourMap(pen, p)
+        case .g8Agenda: G8FerryPlan.agenda(pen, p)
+        case .g8Postpone: G8FerryPlan.postpone(pen, p)
+        case .g8HandPhone: G8FerryPlan.handPhone(pen, p)
         default: break
         }
     }

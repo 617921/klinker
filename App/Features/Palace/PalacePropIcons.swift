@@ -12,7 +12,7 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case heart, globe, pan, lesson, clock, talk, pill, hospital, practice, school, children, book, cap, steps
     case abc, math, music, ball, paint
     // City outdoors and the finale (PalacePropIconsG8.swift)
-    case g8BallotBox, g8Dove
+    case g8BallotBox, g8Dove, g8Ferry, g8Storm
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -69,7 +69,7 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
         case .heart, .globe, .pan, .lesson, .clock, .talk, .pill, .hospital, .practice, .school, .children, .book, .cap, .steps,
              .abc, .math, .music, .ball, .paint:
             PalaceLearningIcons.draw(self, p, c, d)
-        case .g8BallotBox, .g8Dove:
+        case .g8BallotBox, .g8Dove, .g8Ferry, .g8Storm:
             G8Icons.draw(self, p, c, d)
         }
     }

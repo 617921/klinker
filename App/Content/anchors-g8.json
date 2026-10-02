@@ -312,6 +312,84 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 61,
+      "type": "g8Ferry",
+      "order": ["veerpont", "overkant", "vervoer", "overtocht", "tijdstip", "aankomen", "omweg", "inplannen", "uitstellen", "afhankelijk", "haalbaar"],
+      "prompts": {
+        "overtocht": "Hoe lang duurt de",
+        "aankomen": "Waar zie je iemand",
+        "vervoer": "Waar zie je het openbaar",
+        "tijdstip": "Waar zie je het",
+        "inplannen": "Waar kun je een afspraak",
+        "uitstellen": "Waar kun je een reis",
+        "omweg": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "overtocht", "options": ["overtocht", "overkant", "veerpont"] },
+        { "target": "uitstellen", "options": ["inplannen", "uitstellen", "tijdstip"] },
+        { "target": "omweg", "options": ["omweg", "overtocht", "vervoer"] },
+        { "target": "haalbaar", "options": ["afhankelijk", "haalbaar", "aankomen"] },
+        { "target": "tijdstip", "options": ["tijdstip", "inplannen", "haalbaar"] }
+      ],
+      "anchors": [
+        {
+          "word": "overkant", "prop": "g8FarBank", "slot": "farBank",
+          "label": "Een dorpje met een kerk, een molen en een steiger aan de andere kant van het water; een oranje pijl wijst ernaartoe",
+          "params": {}
+        },
+        {
+          "word": "veerpont", "prop": "g8FerryBoat", "slot": "water",
+          "label": "Een platte boot met een stuurhuis op poten, met fietsers en mensen aan boord",
+          "params": {}
+        },
+        {
+          "word": "overtocht", "prop": "g8CrossingSign", "slot": "postRight",
+          "label": "Een blauw bord: twee oevers met water ertussen en een stippellijn met een bootje van de ene steiger naar de andere, 5 min",
+          "params": { "text": "5 min" }
+        },
+        {
+          "word": "aankomen", "prop": "g8Arrived", "slot": "quay1",
+          "label": "Iemand met een koffer staat op de kade onder een rode speld met een vinkje",
+          "params": { "variant": 3 }
+        },
+        {
+          "word": "vervoer", "prop": "g8TransportSign", "slot": "quay2",
+          "label": "Een bord op een paal met een bus, een tram, een trein en een boot",
+          "params": { "icons": ["bus", "tram", "train", "g8Ferry"] }
+        },
+        {
+          "word": "tijdstip", "prop": "g8Moment", "slot": "quay3",
+          "label": "Een bord met een klok op half twaalf 's avonds en een rode speld op een lijn van 0 tot 24 uur",
+          "params": { "time": "23:30" }
+        },
+        {
+          "word": "afhankelijk", "prop": "g8Depends", "slot": "quay4",
+          "label": "Een bord: zon, pijl, boot en een groen vinkje; storm, pijl, boot en een rood kruis",
+          "params": { "icons": ["sun", "g8Storm", "g8Ferry"] }
+        },
+        {
+          "word": "inplannen", "prop": "g8Agenda", "slot": "near1",
+          "label": "Een open agenda; een hand schrijft een nieuw blokje met een bootje bij 9 uur",
+          "params": { "icons": ["g8Ferry"] }
+        },
+        {
+          "word": "uitstellen", "prop": "g8Postpone", "slot": "near2",
+          "label": "Twee kalenderblaadjes: 12 met een rood kruis en een stormwolk, en een pijl naar 19 met een groene ring",
+          "params": { "labels": ["12", "19"] }
+        },
+        {
+          "word": "haalbaar", "prop": "g8HandPhone", "slot": "near3",
+          "label": "Een telefoon in een hand: 3 minuten lopen, de boot over 5 minuten, en een vinkje",
+          "params": { "icons": ["walk", "g8Ferry", "check"], "labels": ["3 min", "5 min", ""] }
+        },
+        {
+          "word": "omweg", "prop": "g8DetourMap", "slot": "near4",
+          "label": "Een kaart: de korte weg over een kapotte brug is doorgestreept, een lange rode route gaat eromheen",
+          "params": { "labels": ["A", "B"] }
+        }
+      ]
     }
   ]
 }
