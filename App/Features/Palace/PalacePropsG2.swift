@@ -39,6 +39,12 @@ enum G2Props {
         case .g2Inherit: G2FamilyProps.inherit(pen, p)
         case .g2Together: G2Pairs.together(pen, p)
         case .g2Proxy: G2Pairs.proxy(pen, p)
+        case .g2Talk: G2Pairs.talk(pen, p)
+        case .g2NewsDesk: G2StudioProps.newsDesk(pen, p)
+        case .g2Broadcast: G2StudioProps.broadcast(pen, p)
+        case .g2Viewer: G2StudioProps.viewer(pen, p)
+        case .g2FilmStrip: G2StudioProps.filmStrip(pen, p)
+        case .g2IdeaBoard: G2StudioProps.ideaBoard(pen, p)
         default: break
         }
     }

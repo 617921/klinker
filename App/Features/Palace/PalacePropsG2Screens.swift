@@ -72,6 +72,12 @@ enum G2Screens {
             cursor(s, at: CGPoint(x: button.midX + 6, y: button.midY))
         case "compare":
             compare(s, p)
+        case "ad":
+            G2ScreenContent.ad(s, p)
+        case "replay":
+            G2ScreenContent.replay(s, p)
+        case "edit":
+            G2ScreenContent.edit(s, p)
         default:
             s.rect(0, 0, w, h, 0x232B3B)
         }

@@ -5,7 +5,9 @@ import SwiftUI
 /// "advisor" — a friendly advisor seen from the waist up behind a counter (58 × 88), lanyard in `tone`;
 /// "objection" — someone frowning, holding up a letter with a struck-out amount (`text`) and a red
 /// note (`caption`) (84 × 114);
-/// "notary" — a grey-haired notary in a dark suit and glasses, seen from the waist up behind a desk (58 × 88).
+/// "notary" — a grey-haired notary in a dark suit and glasses, seen from the waist up behind a desk (58 × 88);
+/// "host" — a presenter in a spotlight, a microphone at the mouth and the other arm open wide (76 × 118);
+/// "critic" — someone frowning through a magnifying glass, a notebook in hand, asking `text` (96 × 114).
 enum G2People {
     typealias Look = PalaceFigures.Look
 
@@ -14,6 +16,8 @@ enum G2People {
         switch p.accessory {
         case "objection": objection(pen, p, v)
         case "notary": notary(pen, v)
+        case "host": host(pen, v)
+        case "critic": critic(pen, p, v)
         default: advisor(pen, p, v)
         }
     }
@@ -88,6 +92,53 @@ enum G2People {
         // Hands folded on the desk
         f.rect(16, 80, 26, 8, v.skin, radius: 4)
         f.svgLine("M10 70L18 82M48 70L40 82", suit, 6)
+    }
+
+    // MARK: Host
+
+    private static func host(_ pen: PropPen, _ v: Look) {
+        let f = pen.fitted(CGSize(width: 76, height: 118))
+        f.oval(0, 104, 76, 14, 0xFFF4D6, 0.35)
+        let me = f.within(CGRect(x: 6, y: 0, width: 64, height: 114))
+        body(me, v)
+        // Sparkles on the jacket, the back arm open wide
+        me.dot(16, 50, 1.2, 0xFAC775)
+        me.dot(28, 60, 1.2, 0xFAC775)
+        me.dot(18, 74, 1.2, 0xFAC775)
+        me.svgLine("M13 42C6 38 2 30 0 22", v.coat, 6)
+        me.dot(0, 20, 3.2, v.skin)
+        head(me, v, cx: 22, cy: 19, mood: "smile")
+        me.svgLine("M25 25Q29 28 32 24", 0x8C5A3C, 1.6)
+        // The microphone held to the mouth
+        me.svgLine("M31 42C38 44 40 38 38 32", v.coat, 6)
+        me.dot(37.5, 31, 3.2, v.skin)
+        me.svgLine("M38 33L33 25", 0x1E1E1C, 3)
+        me.dot(32, 23, 4, 0xB4B2A9)
+        me.svgLine("M30 21.5L34 25M29.5 24L32 26.5", 0x5E6B73, 0.8)
+    }
+
+    // MARK: Critic
+
+    private static func critic(_ pen: PropPen, _ p: PalacePropParams, _ v: Look) {
+        let f = pen.fitted(CGSize(width: 96, height: 114))
+        body(f, v)
+        head(f, v, cx: 22, cy: 19, mood: "frown")
+        // Notebook in the back hand
+        f.rect(4, 64, 14, 18, 0xFFFDF6, radius: 1)
+        f.svgLine("M7 69H15M7 73H13M7 77H15", 0x2F5BD3, 1)
+        // Magnifying glass held up before the eye
+        f.svgLine("M31 42C36 42 38 38 38 34", v.coat, 6)
+        f.dot(38, 33, 3.2, v.skin)
+        f.svgLine("M38 32L34 24", 0x2E2117, 2.6)
+        f.dot(31, 18, 7.5, 0x2E2117)
+        f.dot(31, 18, 5.8, 0xBCCDD6, 0.75)
+        f.dot(30, 18, 2.2, 0x2E2117)
+        guard let text = p.text else { return }
+        let font = PropFont.heavy(9.5)
+        let w = min(56, f.width(of: text, font) + 12)
+        f.rect(94 - w, 4, w, 20, 0xC8261B, radius: 6)
+        f.svg("M\(96 - w + 6) 23L\(94 - w - 2) 30L\(96 - w + 14) 23Z", 0xC8261B)
+        f.text(text, font, 0xFFFFFF, at: CGPoint(x: 94 - w / 2, y: 14), maxWidth: w - 8)
     }
 
     // MARK: Objection

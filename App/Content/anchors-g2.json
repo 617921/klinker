@@ -318,6 +318,85 @@
           "params": {  }
         }
       ]
+    },
+    {
+      "sheet": 57,
+      "type": "g2Studio",
+      "noor": [],
+      "order": ["journaal", "presentator", "interview", "reclame", "kijker", "uitzenden", "aflevering", "terugkijken", "bewerken", "creatief", "kritisch"],
+      "prompts": {
+        "presentator": "Wie is de",
+        "kijker": "Wie is de",
+        "uitzenden": "Waar kun je een programma",
+        "terugkijken": "Waar kun je een programma",
+        "bewerken": "Waar kun je een video",
+        "kritisch": "Wie is",
+        "creatief": "Wat is"
+      },
+      "weg": [
+        { "target": "journaal", "options": ["journaal", "reclame", "aflevering"] },
+        { "target": "presentator", "options": ["kijker", "presentator", "kritisch"] },
+        { "target": "uitzenden", "options": ["uitzenden", "terugkijken", "bewerken"] },
+        { "target": "interview", "options": ["interview", "journaal", "presentator"] },
+        { "target": "creatief", "options": ["kritisch", "creatief", "bewerken"] }
+      ],
+      "anchors": [
+        {
+          "word": "reclame", "prop": "g2Laptop", "slot": "wallA",
+          "label": "Een scherm met een rode fles en een gele ster: NIEUW, voor maar 1 euro 99",
+          "params": { "mount": "tv", "accessory": "ad", "text": "NIEUW!", "caption": "€ 1,99" }
+        },
+        {
+          "word": "aflevering", "prop": "g2FilmStrip", "slot": "wallB",
+          "label": "Een filmstrook van seizoen 2 met vijf genummerde stukjes; nummer 4 is groot en speelt af",
+          "params": { "caption": "seizoen 2", "highlight": 3 }
+        },
+        {
+          "word": "terugkijken", "prop": "g2Laptop", "slot": "wallC",
+          "label": "Een scherm met het programma van gisteren, een grote pijl terug en een play-knop",
+          "params": { "mount": "monitor", "accessory": "replay", "text": "gisteren 20:00" }
+        },
+        {
+          "word": "creatief", "prop": "g2IdeaBoard", "slot": "wallD",
+          "label": "Een bord vol kleuren, schetsen en briefjes, en een lamp die aangaat: een idee!",
+          "params": {  }
+        },
+        {
+          "word": "bewerken", "prop": "g2Laptop", "slot": "setLeft",
+          "label": "Een laptop met een filmpje en een tijdlijn; een schaar knipt er een stukje uit",
+          "params": { "mount": "table", "accessory": "edit" }
+        },
+        {
+          "word": "journaal", "prop": "g2NewsDesk", "slot": "setMid",
+          "label": "Een nieuwslezer aan een desk, met een wereldbol en de klok op acht uur",
+          "params": { "time": "20:00" }
+        },
+        {
+          "word": "interview", "prop": "g2Talk", "slot": "setRight",
+          "label": "Twee mensen op stoelen: de een houdt een microfoon bij de ander en stelt een vraag",
+          "params": { "accessory": "mic", "variant": 2 }
+        },
+        {
+          "word": "uitzenden", "prop": "g2Broadcast", "slot": "floorA",
+          "label": "Een camera met een rode lamp: LIVE, en golven die het beeld de wereld in sturen",
+          "params": { "text": "LIVE" }
+        },
+        {
+          "word": "kijker", "prop": "g2Viewer", "slot": "floorB",
+          "label": "Iemand op de bank met popcorn en de afstandsbediening kijkt naar de tv",
+          "params": {  }
+        },
+        {
+          "word": "kritisch", "prop": "g2Person", "slot": "floorC",
+          "label": "Een journalist fronst door een vergrootglas: Klopt dat wel?",
+          "params": { "accessory": "critic", "variant": 6, "text": "Klopt dat wel?" }
+        },
+        {
+          "word": "presentator", "prop": "g2Person", "slot": "floorD",
+          "label": "Een man in een glimmend jasje praat in een microfoon, in het licht van de lamp",
+          "params": { "accessory": "host", "variant": 5 }
+        }
+      ]
     }
   ]
 }
