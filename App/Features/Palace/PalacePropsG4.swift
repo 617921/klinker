@@ -37,6 +37,10 @@ enum G4Props {
         case .g4PriceCard: G4Hotel.priceCard(pen, p)
         case .g4Guest: G4HotelGuests.guest(pen, p)
         case .g4Laptop: G4HotelGuests.laptop(pen, p)
+        case .g4Menu: G4Dining.menu(pen, p)
+        case .g4Plate: G4Dining.plate(pen, p)
+        case .g4Table: G4DiningTables.table(pen, p)
+        case .g4Waiter: G4Dining.waiter(pen, p)
         default: break
         }
     }

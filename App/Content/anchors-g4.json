@@ -1068,6 +1068,206 @@
      }
     }
    ]
+  },
+  {
+   "sheet": 28,
+   "type": "g4Restaurant",
+   "order": [
+    "ober",
+    "menukaart",
+    "tafeltje",
+    "nagerecht",
+    "pittig",
+    "gerecht",
+    "klagen",
+    "hoofdgerecht",
+    "afruimen",
+    "vegetarisch",
+    "portie"
+   ],
+   "prompts": {
+    "ober": "Wie is de",
+    "tafeltje": "Waar is een vrij",
+    "afruimen": "Waar gaat iemand de tafel",
+    "klagen": "Wie gaat",
+    "pittig": "Welk eten is",
+    "vegetarisch": "Welk bord is",
+    "portie": "Waar zie je een grote",
+    "gerecht": "Waar zie je een warm"
+   },
+   "weg": [
+    {
+     "target": "hoofdgerecht",
+     "options": [
+      "gerecht",
+      "hoofdgerecht",
+      "nagerecht"
+     ]
+    },
+    {
+     "target": "pittig",
+     "options": [
+      "pittig",
+      "vegetarisch",
+      "portie"
+     ]
+    },
+    {
+     "target": "afruimen",
+     "options": [
+      "ober",
+      "afruimen",
+      "tafeltje"
+     ]
+    },
+    {
+     "target": "klagen",
+     "options": [
+      "klagen",
+      "pittig",
+      "portie"
+     ]
+    },
+    {
+     "target": "menukaart",
+     "options": [
+      "menukaart",
+      "gerecht",
+      "nagerecht"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "menukaart",
+     "prop": "g4Menu",
+     "slot": "menu",
+     "label": "In een glazen kastje: een kaart met soep, vis en ijs en de prijzen",
+     "params": {
+      "lines": [
+       "7,50",
+       "19,50",
+       "8,00"
+      ]
+     }
+    },
+    {
+     "word": "gerecht",
+     "prop": "g4Plate",
+     "slot": "pass2",
+     "pin": [
+      160,
+      66
+     ],
+     "align": "leading",
+     "label": "Een hand tilt de deksel van een bord: er komt warme damp af",
+     "params": {
+      "accessory": "cloche"
+     }
+    },
+    {
+     "word": "hoofdgerecht",
+     "prop": "g4Plate",
+     "slot": "pass1",
+     "pin": [
+      112,
+      154
+     ],
+     "align": "leading",
+     "label": "Een groot bord met vlees, aardappels en boontjes, met mes en vork",
+     "params": {
+      "accessory": "main"
+     }
+    },
+    {
+     "word": "vegetarisch",
+     "prop": "g4Plate",
+     "slot": "pass4",
+     "pin": [
+      366,
+      154
+     ],
+     "align": "trailing",
+     "label": "Een bord met alleen groenten en een groen blaadje erbij",
+     "params": {
+      "accessory": "veg"
+     }
+    },
+    {
+     "word": "nagerecht",
+     "prop": "g4Plate",
+     "slot": "pass3",
+     "pin": [
+      246,
+      66
+     ],
+     "align": "leading",
+     "label": "Een coupe met drie bolletjes ijs, slagroom en een kers",
+     "params": {
+      "accessory": "dessert"
+     }
+    },
+    {
+     "word": "afruimen",
+     "prop": "g4Table",
+     "slot": "tableLeft",
+     "label": "Twee handen pakken de vieze borden van een tafel en stapelen ze",
+     "params": {
+      "accessory": "clear"
+     }
+    },
+    {
+     "word": "klagen",
+     "prop": "g4Table",
+     "slot": "tableMid",
+     "label": "Een boze man wijst naar zijn soep en zegt: koud!",
+     "params": {
+      "accessory": "complain",
+      "text": "koud!",
+      "variant": 0
+     }
+    },
+    {
+     "word": "tafeltje",
+     "prop": "g4Table",
+     "slot": "tableRight",
+     "pin": [
+      244,
+      186
+     ],
+     "label": "Een lege tafel met vier borden, vier glazen en een kaartje met een 4",
+     "params": {
+      "accessory": "set",
+      "text": "4"
+     }
+    },
+    {
+     "word": "pittig",
+     "prop": "g4Table",
+     "slot": "frontLeft",
+     "label": "Een vrouw met een rood hoofd: er komt vuur uit haar mond; op haar bord liggen rode pepers",
+     "params": {
+      "accessory": "spicy",
+      "variant": 3
+     }
+    },
+    {
+     "word": "portie",
+     "prop": "g4Table",
+     "slot": "frontMid",
+     "label": "Een man kijkt met grote ogen naar een enorme berg patat op zijn bord",
+     "params": {
+      "accessory": "portion",
+      "variant": 6
+     }
+    },
+    {
+     "word": "ober",
+     "prop": "g4Waiter",
+     "slot": "waiter",
+     "label": "Een man met een vlinderdas, een schort en een doek over zijn arm schrijft de bestelling op"
+    }
+   ]
   }
  ]
 }

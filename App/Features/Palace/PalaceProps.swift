@@ -281,6 +281,20 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4Guest
     /// A laptop: a bed, a calendar with two days chosen, a pointer clicking the green button.
     case g4Laptop
+
+    // Restaurant (PalacePropsG4Dining.swift, PalacePropsG4DiningTables.swift)
+    /// An open menu in a glass case: fork and knife, three courses with pictures and `lines` prices.
+    case g4Menu
+    /// A plate on the pass: `accessory` "cloche" (a hand lifts the cover off a steaming dish), "main"
+    /// (meat, potatoes, beans, knife and fork), "veg" (vegetables, a green leaf badge), "dessert" (ice cream).
+    case g4Plate
+    /// A restaurant table with a white cloth: `accessory` "set" (laid for four, a card with `text`),
+    /// "clear" (hands stacking the dirty plates), "complain" (a guest points at cold soup; bubble
+    /// `text`), "spicy" (a red-faced guest breathing fire over hot peppers), "portion" (a guest stares at
+    /// a huge heap of fries). `variant` the guest.
+    case g4Table
+    /// A waiter: white shirt, black waistcoat and bow tie, long apron, towel on the arm, a notepad.
+    case g4Waiter
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -358,7 +372,8 @@ struct PalacePropView: View, Equatable {
                  .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
                  .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit,
                  .g4Neighbour, .g4JoinIn, .g4LocalMap, .g4Network, .g4PlanBoard,
-                 .g4HotelBed, .g4KeyRack, .g4Receptionist, .g4PriceCard, .g4Guest, .g4Laptop:
+                 .g4HotelBed, .g4KeyRack, .g4Receptionist, .g4PriceCard, .g4Guest, .g4Laptop,
+                 .g4Menu, .g4Plate, .g4Table, .g4Waiter:
                 G4Props.draw(prop.kind, pen, p)
             }
         }
