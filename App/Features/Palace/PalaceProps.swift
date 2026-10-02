@@ -221,6 +221,23 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1Growth
     /// A worried person on a chair beside a pile of bills with red stamps; the top one `text` in red.
     case g1Bills
+    /// A parcel. `accessory` "label" (address `lines`, barcode), "fragile" (cracked-glass label,
+    /// `text`), "return" (open, shoes inside, a U-turn arrow, `text` on a tag).
+    case g1Parcel
+    /// A parcel on a flat post scale, the weight `text` on its display.
+    case g1PostScale
+    /// A sheet of six stamps with a tulip and value `text`, one peeling off.
+    case g1Stamps
+    /// Back of an envelope: the sender's house and name/street `lines` on the flap, ringed.
+    case g1EnvelopeBack
+    /// Price list: a van and `caption` on top, rows `lines` "letter|€ 1,15" ("box", "bigBox").
+    case g1RateBoard
+    /// A letter with a yellow "R" sticker and barcode, a hand signing on a scanner.
+    case g1Registered
+    /// A hand holds something out to an open hand, an arrow over them. `accessory` "parcel" | "letter" | "key".
+    case g1GiveAcross
+    /// A letter box in the wall: a hand pushes a letter in, another letter flies off on a dotted line.
+    case g1MailSlot
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -295,7 +312,8 @@ struct PalacePropView: View, Equatable {
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
-                 .g1Finance, .g1Growth, .g1Bills:
+                 .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
+                 .g1Registered, .g1GiveAcross, .g1MailSlot:
                 G1Props.draw(prop.kind, pen, p)
             }
         }

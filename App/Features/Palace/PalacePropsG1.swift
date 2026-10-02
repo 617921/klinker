@@ -16,6 +16,14 @@ enum G1Props {
         case .g1Finance: G1BankPosters.finance(pen, p)
         case .g1Growth: G1BankPosters.growth(pen, p)
         case .g1Bills: G1BankPosters.bills(pen, p)
+        case .g1Parcel: G1Post.parcel(pen, p)
+        case .g1PostScale: G1Post.scale(pen, p)
+        case .g1Stamps: G1Post.stamps(pen, p)
+        case .g1EnvelopeBack: G1Post.envelopeBack(pen, p)
+        case .g1RateBoard: G1Post.rateBoard(pen, p)
+        case .g1Registered: G1PostDesk.registered(pen, p)
+        case .g1GiveAcross: G1PostDesk.giveAcross(pen, p)
+        case .g1MailSlot: G1PostDesk.mailSlot(pen, p)
         default: break
         }
     }

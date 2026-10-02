@@ -101,16 +101,14 @@ enum G1People {
         head(f, v)
         f.svg("M11 16C11 8 15 5 22 5C29 5 33 8 33 16Z", 0xF2711C)
         f.svg("M30 13H41Q42 16 38 16H30Z", 0xC8561B)
-        // Parcels held in front
-        G1Props.parcel(f, CGRect(x: 26, y: 70, width: 26, height: 18))
-        G1Props.parcel(f, CGRect(x: 30, y: 54, width: 20, height: 14), 0xB98652)
-        G1Props.parcel(f, CGRect(x: 28, y: 42, width: 16, height: 10), 0xD9AE7A)
-        f.svgLine("M15 44C16 58 20 72 28 80", PalaceInk.shade(jacket, 0.8), 6)
-        f.dot(29, 81, 3.2, v.skin)
-        f.svgLine("M30 42C36 50 44 58 52 70", jacket, 6)
-        f.dot(52.5, 72, 3.2, v.skin)
-        f.rect(50, 60, 8, 14, 0x1E1E1C, radius: 2)
-        f.rect(51.5, 62, 5, 5, 0x5DCAA5, radius: 1)
+        // Both arms forward round a stack of two parcels
+        f.svgLine("M15 44C15 56 20 64 26 68", PalaceInk.shade(jacket, 0.8), 6)
+        G1Props.parcel(f, CGRect(x: 24, y: 64, width: 30, height: 20))
+        G1Props.parcel(f, CGRect(x: 27, y: 50, width: 24, height: 12), 0xD9AE7A)
+        f.rect(28, 70, 12, 8, 0xFFFDF6, radius: 0.8)
+        f.svgLine("M30 42C38 48 50 56 56 66", jacket, 6)
+        f.dot(25, 76, 3.4, v.skin)
+        f.dot(56, 70, 3.4, v.skin)
     }
 
     /// A temp worker: hard hat, orange hi-vis vest with silver stripes, a crate in the hands.

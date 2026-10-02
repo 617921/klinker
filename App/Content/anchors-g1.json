@@ -4,7 +4,19 @@
     {
       "sheet": 15,
       "type": "g1Bank",
-      "order": ["pinpas", "opnemen", "sparen", "rekening", "overmaken", "bedrag", "rente", "lening", "schuld", "maandelijks", "financieel"],
+      "order": [
+        "pinpas",
+        "opnemen",
+        "sparen",
+        "rekening",
+        "overmaken",
+        "bedrag",
+        "rente",
+        "lening",
+        "schuld",
+        "maandelijks",
+        "financieel"
+      ],
       "prompts": {
         "rekening": "Waar zie je je",
         "overmaken": "Waar kun je geld",
@@ -16,67 +28,357 @@
         "maandelijks": "Wat gebeurt"
       },
       "weg": [
-        { "target": "overmaken", "options": ["overmaken", "opnemen", "sparen"] },
-        { "target": "rekening", "options": ["bedrag", "rekening", "pinpas"] },
-        { "target": "rente", "options": ["lening", "schuld", "rente"] },
-        { "target": "maandelijks", "options": ["financieel", "maandelijks", "rente"] },
-        { "target": "schuld", "options": ["schuld", "lening", "bedrag"] }
+        {
+          "target": "overmaken",
+          "options": [
+            "overmaken",
+            "opnemen",
+            "sparen"
+          ]
+        },
+        {
+          "target": "rekening",
+          "options": [
+            "bedrag",
+            "rekening",
+            "pinpas"
+          ]
+        },
+        {
+          "target": "rente",
+          "options": [
+            "lening",
+            "schuld",
+            "rente"
+          ]
+        },
+        {
+          "target": "maandelijks",
+          "options": [
+            "financieel",
+            "maandelijks",
+            "rente"
+          ]
+        },
+        {
+          "target": "schuld",
+          "options": [
+            "schuld",
+            "lening",
+            "bedrag"
+          ]
+        }
       ],
       "anchors": [
         {
-          "word": "financieel", "prop": "g1Finance", "slot": "highLeft",
+          "word": "financieel",
+          "prop": "g1Finance",
+          "slot": "highLeft",
           "label": "Een bord met een taartgrafiek met een euroteken, staafjes en een rekenmachine",
           "params": {}
         },
         {
-          "word": "maandelijks", "prop": "g1MonthStrip", "slot": "highMid",
+          "word": "maandelijks",
+          "prop": "g1MonthStrip",
+          "slot": "highMid",
           "label": "Twaalf kalenderblaadjes, op elk blaadje een muntje op de eerste dag",
           "params": {}
         },
         {
-          "word": "lening", "prop": "g1Loan", "slot": "highRight",
+          "word": "lening",
+          "prop": "g1Loan",
+          "slot": "highRight",
           "label": "Een poster: veel geld gaat van de bank naar een auto, en kleine muntjes gaan terug",
-          "params": { "text": "€ 15.000" }
+          "params": {
+            "text": "€ 15.000"
+          }
         },
         {
-          "word": "opnemen", "prop": "g1Atm", "slot": "side",
+          "word": "opnemen",
+          "prop": "g1Atm",
+          "slot": "side",
           "label": "Een geldautomaat in de muur: er komen briefjes uit en een hand pakt ze",
-          "params": { "text": "€ 50" }
+          "params": {
+            "text": "€ 50"
+          }
         },
         {
-          "word": "rekening", "prop": "g1BankApp", "slot": "glassLeft",
+          "word": "rekening",
+          "prop": "g1BankApp",
+          "slot": "glassLeft",
           "label": "Een scherm met een nummer met NL ervoor, en wat erbij en eraf ging",
-          "params": { "accessory": "account", "caption": "NL12 BANK 0345 67", "lines": ["salaris|+ 2.150", "huur|– 950"] }
+          "params": {
+            "accessory": "account",
+            "caption": "NL12 BANK 0345 67",
+            "lines": [
+              "salaris|+ 2.150",
+              "huur|– 950"
+            ]
+          }
         },
         {
-          "word": "overmaken", "prop": "g1BankApp", "slot": "glassRight",
+          "word": "overmaken",
+          "prop": "g1BankApp",
+          "slot": "glassRight",
           "label": "Een scherm: een muntje gaat met een pijl van Noor naar Sam",
-          "params": { "accessory": "transfer", "lines": ["Noor", "Sam"], "text": "€ 50" }
+          "params": {
+            "accessory": "transfer",
+            "lines": [
+              "Noor",
+              "Sam"
+            ],
+            "text": "€ 50"
+          }
         },
         {
-          "word": "pinpas", "prop": "g1BankCard", "slot": "counterLeft",
+          "word": "pinpas",
+          "prop": "g1BankCard",
+          "slot": "counterLeft",
           "label": "Een hand houdt een blauw kaartje met een chip omhoog",
-          "params": { "text": "•••• 4821" }
+          "params": {
+            "text": "•••• 4821"
+          }
         },
         {
-          "word": "bedrag", "prop": "g1MoneyCounter", "slot": "counterMid",
+          "word": "bedrag",
+          "prop": "g1MoneyCounter",
+          "slot": "counterMid",
           "label": "Een telmachine met briefjes, op het schermpje staat 500 euro",
-          "params": { "text": "€ 500" }
+          "params": {
+            "text": "€ 500"
+          }
         },
         {
-          "word": "schuld", "prop": "g1Bills", "slot": "floorLeft",
+          "word": "schuld",
+          "prop": "g1Bills",
+          "slot": "floorLeft",
           "label": "Iemand zit met zijn handen op zijn hoofd naast een stapel brieven met rode stempels: min 3200 euro",
-          "params": { "text": "– € 3.200" }
+          "params": {
+            "text": "– € 3.200"
+          }
         },
         {
-          "word": "sparen", "prop": "g1PiggyBank", "slot": "floorMid",
+          "word": "sparen",
+          "prop": "g1PiggyBank",
+          "slot": "floorMid",
           "label": "Een roze spaarvarken, er valt een muntje in",
           "params": {}
         },
         {
-          "word": "rente", "prop": "g1Growth", "slot": "floorRight",
+          "word": "rente",
+          "prop": "g1Growth",
+          "slot": "floorRight",
           "label": "Een bord met stapeltjes munten die groter worden: 2,5 procent per jaar",
-          "params": { "text": "2,5 %", "caption": "per jaar" }
+          "params": {
+            "text": "2,5 %",
+            "caption": "per jaar"
+          }
+        }
+      ]
+    },
+    {
+      "sheet": 16,
+      "type": "g1PostOffice",
+      "order": [
+        "pakket",
+        "postzegel",
+        "bezorger",
+        "gewicht",
+        "versturen",
+        "afzender",
+        "breekbaar",
+        "verzendkosten",
+        "afgeven",
+        "terugsturen",
+        "aangetekend"
+      ],
+      "prompts": {
+        "versturen": "Waar kun je een brief",
+        "bezorger": "Wie is de",
+        "afzender": "Waar staat de",
+        "gewicht": "Waar zie je het",
+        "verzendkosten": "Waar staan de"
+      },
+      "weg": [
+        {
+          "target": "afzender",
+          "options": [
+            "afzender",
+            "bezorger",
+            "aangetekend"
+          ]
+        },
+        {
+          "target": "pakket",
+          "options": [
+            "breekbaar",
+            "pakket",
+            "terugsturen"
+          ]
+        },
+        {
+          "target": "versturen",
+          "options": [
+            "afgeven",
+            "terugsturen",
+            "versturen"
+          ]
+        },
+        {
+          "target": "gewicht",
+          "options": [
+            "gewicht",
+            "verzendkosten",
+            "postzegel"
+          ]
+        },
+        {
+          "target": "aangetekend",
+          "options": [
+            "postzegel",
+            "aangetekend",
+            "afzender"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "word": "verzendkosten",
+          "prop": "g1RateBoard",
+          "slot": "highLeft",
+          "pin": [
+            8,
+            96
+          ],
+          "label": "Een prijslijst met een busje: een brief 1,15 euro, een kleine doos 4,95, een grote doos 13,25",
+          "params": {
+            "caption": "naar NL",
+            "lines": [
+              "letter|€ 1,15",
+              "box|€ 4,95",
+              "bigBox|€ 13,25"
+            ]
+          }
+        },
+        {
+          "word": "postzegel",
+          "prop": "g1Stamps",
+          "slot": "highMid",
+          "label": "Een vel met zes kleine plaatjes met een tulp en een 1, eentje komt los",
+          "params": {
+            "text": "1"
+          }
+        },
+        {
+          "word": "afzender",
+          "prop": "g1EnvelopeBack",
+          "slot": "highRight",
+          "label": "De achterkant van een envelop: op de klep staan de naam en de straat van Noor, met een oranje rondje erom",
+          "params": {
+            "lines": [
+              "Noor",
+              "Gracht 12"
+            ]
+          }
+        },
+        {
+          "word": "versturen",
+          "prop": "g1MailSlot",
+          "slot": "sideTop",
+          "label": "Een brievenbus in de muur: een hand duwt er een brief in, een andere brief vliegt weg",
+          "params": {}
+        },
+        {
+          "word": "pakket",
+          "prop": "g1Parcel",
+          "slot": "sideLow",
+          "label": "Een bruine doos met tape en een adreslabel",
+          "params": {
+            "accessory": "label",
+            "lines": [
+              "S. de Vries",
+              "Kade 4"
+            ]
+          }
+        },
+        {
+          "word": "gewicht",
+          "prop": "g1PostScale",
+          "slot": "counterLeft",
+          "label": "Een doos op een weegschaal: 2,4 kilo",
+          "params": {
+            "text": "2,4 kg"
+          }
+        },
+        {
+          "word": "afgeven",
+          "prop": "g1GiveAcross",
+          "slot": "counterMid",
+          "label": "Een hand geeft een doos over de balie aan een andere hand",
+          "params": {
+            "accessory": "parcel"
+          }
+        },
+        {
+          "word": "aangetekend",
+          "prop": "g1Registered",
+          "slot": "counterRight",
+          "pin": [
+            366,
+            262
+          ],
+          "label": "Een brief met een geel plakkertje met een R, iemand zet een krabbel op een scanner",
+          "params": {}
+        },
+        {
+          "word": "bezorger",
+          "prop": "g1Person",
+          "slot": "floorLeft",
+          "label": "Een man met een pet en een stapel dozen in zijn armen",
+          "params": {
+            "accessory": "courier",
+            "variant": 1
+          }
+        },
+        {
+          "word": "terugsturen",
+          "prop": "g1Parcel",
+          "slot": "floorMid",
+          "label": "Een open doos met schoenen en een grote oranje pijl die teruggaat",
+          "params": {
+            "accessory": "return",
+            "text": "retour"
+          }
+        },
+        {
+          "word": "breekbaar",
+          "prop": "g1Parcel",
+          "slot": "floorRight",
+          "pin": [
+            366,
+            306
+          ],
+          "label": "Een doos met een groot etiket: een glas met een barst",
+          "params": {
+            "accessory": "fragile",
+            "text": "voorzichtig"
+          }
+        }
+      ],
+      "decor": [
+        {
+          "prop": "g1Person",
+          "frame": [
+            282,
+            138,
+            64,
+            84
+          ],
+          "params": {
+            "accessory": "clerk",
+            "variant": 2,
+            "tone": "red"
+          }
         }
       ]
     }
