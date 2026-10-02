@@ -198,6 +198,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     // MARK: g2 — offices and paperwork (PalacePropsG2*.swift, where each one's params are described)
     case g2MoneyFlow, g2Bill, g2TaxReturn, g2TopUp, g2Refund, g2Gross, g2Laptop, g2Person
     case g2Shelter, g2Tagged, g2Damage, g2HouseContents, g2SmallPrint, g2Handshake, g2AddOn, g2Liable
+    case g2Meter, g2Instalments, g2Chart, g2Supply, g2Thermostat, g2EnergyLabel, g2SolarPanel
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -272,7 +273,8 @@ struct PalacePropView: View, Equatable {
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g2MoneyFlow, .g2Bill, .g2TaxReturn, .g2TopUp, .g2Refund, .g2Gross, .g2Laptop, .g2Person,
-                 .g2Shelter, .g2Tagged, .g2Damage, .g2HouseContents, .g2SmallPrint, .g2Handshake, .g2AddOn, .g2Liable:
+                 .g2Shelter, .g2Tagged, .g2Damage, .g2HouseContents, .g2SmallPrint, .g2Handshake, .g2AddOn, .g2Liable,
+                 .g2Meter, .g2Instalments, .g2Chart, .g2Supply, .g2Thermostat, .g2EnergyLabel, .g2SolarPanel:
                 G2Props.draw(prop.kind, pen, p)
             }
         }

@@ -22,6 +22,13 @@ enum G2Props {
         case .g2Handshake: G2PolicyProps.handshake(pen, p)
         case .g2AddOn: G2PolicyProps.addOn(pen, p)
         case .g2Liable: G2PolicyProps.liable(pen, p)
+        case .g2Meter: G2EnergyProps.meter(pen, p)
+        case .g2Instalments: G2EnergyProps.instalments(pen, p)
+        case .g2Chart: G2EnergyProps.chart(pen, p)
+        case .g2Supply: G2EnergyProps.supply(pen, p)
+        case .g2Thermostat: G2EnergyHomeProps.thermostat(pen, p)
+        case .g2EnergyLabel: G2EnergyHomeProps.energyLabel(pen, p)
+        case .g2SolarPanel: G2EnergyHomeProps.solarPanel(pen, p)
         default: break
         }
     }

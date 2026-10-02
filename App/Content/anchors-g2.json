@@ -162,6 +162,83 @@
       "decor": [
         {"prop": "g2Person", "slot": "advisor", "params": {"accessory": "advisor", "variant": 0, "tone": "green"}}
       ]
+    },
+    {
+      "sheet": 42,
+      "type": "g2EnergyOffice",
+      "order": ["meterstand", "zonnepaneel", "jaarafrekening", "voorschot", "verbruik", "doorgeven", "besparen", "leverancier", "zuinig", "bijbetalen", "variabel"],
+      "prompts": {
+        "doorgeven": "Waar kun je je meterstand",
+        "besparen": "Waar kun je energie",
+        "bijbetalen": "Waar moet je",
+        "zuinig": "Wat is",
+        "variabel": "Welke prijs is",
+        "verbruik": "Waar zie je het"
+      },
+      "weg": [
+        { "target": "voorschot", "options": ["jaarafrekening", "voorschot", "bijbetalen"] },
+        { "target": "meterstand", "options": ["meterstand", "doorgeven", "verbruik"] },
+        { "target": "zuinig", "options": ["besparen", "zonnepaneel", "zuinig"] },
+        { "target": "variabel", "options": ["verbruik", "variabel", "leverancier"] },
+        { "target": "bijbetalen", "options": ["bijbetalen", "jaarafrekening", "voorschot"] }
+      ],
+      "anchors": [
+        {
+          "word": "bijbetalen", "prop": "g2MoneyFlow", "slot": "wallA",
+          "label": "Een kaart: nog meer geld gaat uit je portemonnee naar het energiebedrijf, plus 80 euro",
+          "params": { "icons": ["g2Wallet", "g2Bolt"], "tone": "red", "text": "+ € 80", "caption": "extra" }
+        },
+        {
+          "word": "verbruik", "prop": "g2Chart", "slot": "wallB",
+          "label": "Een grafiek van het gas: in de winter hoge staven met sneeuw, in de zomer lage met een zon",
+          "params": { "accessory": "bars", "icons": ["g2Flame", "g2Snow", "sun"], "caption": "gas per maand" }
+        },
+        {
+          "word": "leverancier", "prop": "g2Supply", "slot": "wallC",
+          "label": "Een centrale met een bliksem stuurt stroom via een mast naar een huis",
+          "params": {  }
+        },
+        {
+          "word": "variabel", "prop": "g2Chart", "slot": "wallD",
+          "label": "Een scherm met een prijs die steeds op en neer gaat, met pijlen omhoog en omlaag",
+          "params": { "accessory": "zigzag", "text": "€ 0,31", "caption": "€ per kWh" }
+        },
+        {
+          "word": "jaarafrekening", "prop": "g2Bill", "slot": "counterA",
+          "label": "Een brief in een oranje envelop over het hele jaar 2025, van januari tot december",
+          "params": { "accessory": "envelope", "tone": "orange", "icons": ["g2Bolt"], "caption": "jan – dec", "text": "2025" }
+        },
+        {
+          "word": "doorgeven", "prop": "smartphone", "slot": "counterB", "frame": [92, 120, 92, 84],
+          "label": "Een telefoon: Wat is uw stand? Je stuurt het getal van de meter terug",
+          "params": { "lines": ["in|Uw stand?", "out|04731 kWh"] }
+        },
+        {
+          "word": "besparen", "prop": "g2Thermostat", "slot": "counterC", "frame": [188, 120, 68, 84], "pin": [222, 212],
+          "label": "Een thermostaat gaat van 21 naar 19 graden, met een pijl omlaag en een spaarvarken",
+          "params": { "text": "19°", "caption": "21°" }
+        },
+        {
+          "word": "voorschot", "prop": "g2Instalments", "slot": "counterD", "frame": [262, 118, 104, 86], "pin": [368, 214],
+          "label": "Twaalf kalenderblaadjes met elk een munt: elke maand 120 euro vooruit",
+          "params": { "text": "€ 120", "caption": "elke maand vooruit" }
+        },
+        {
+          "word": "meterstand", "prop": "g2Meter", "slot": "frontLeft",
+          "label": "Een open meterkast: de meter wijst 04731 kWh aan",
+          "params": { "text": "04731", "caption": "kWh" }
+        },
+        {
+          "word": "zuinig", "prop": "g2EnergyLabel", "slot": "frontMid",
+          "label": "Een wasmachine met een energielabel: de groene A, het beste label",
+          "params": { "highlight": 0 }
+        },
+        {
+          "word": "zonnepaneel", "prop": "g2SolarPanel", "slot": "standing", "frame": [270, 244, 96, 132], "pin": [366, 380],
+          "label": "Een blauw paneel op een standaard in de zon, met een kabel naar een stekker",
+          "params": {  }
+        }
+      ]
     }
   ]
 }
