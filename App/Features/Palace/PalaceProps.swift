@@ -235,6 +235,22 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4Swimmers
     /// A floating thermometer with a `text` tag, steam over the water, a heater coil under it.
     case g4PoolThermometer
+
+    // Day care (PalacePropsG4Kids.swift, PalacePropsG4KidsCare.swift)
+    /// A small child, front-facing. `accessory` "toddle" (walking with a teddy, wobbling; `text` a
+    /// badge), "shy" (peeking round a door, blushing), "potty" (proud on a potty by a star chart),
+    /// "sleep" (asleep in a cot, zzz). `variant` look.
+    case g4Child
+    /// A shelf with a stack of nappies, a pack with a baby on it and one open nappy.
+    case g4Nappies
+    /// A changing table: a baby on the mat, hands fastening a clean nappy, a bin with a used one.
+    case g4ChangingTable
+    /// An open toy box overflowing: ball, teddy, rings; letter blocks and a toy car beside it.
+    case g4ToyBox
+    /// A chart of three days (`labels`): a child's face from tears to a smile, an arrow under it.
+    case g4SettleChart
+    /// A framed evening at home: a teenager reads to a child on the sofa, the parents wave goodbye.
+    case g4Babysit
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -310,7 +326,7 @@ struct PalacePropView: View, Equatable {
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam,
                  .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
-                 .g4PoolThermometer:
+                 .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit:
                 G4Props.draw(prop.kind, pen, p)
             }
         }

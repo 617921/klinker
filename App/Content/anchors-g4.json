@@ -451,6 +451,224 @@
      }
     }
    ]
+  },
+  {
+   "sheet": 36,
+   "type": "g4Daycare",
+   "order": [
+    "peuter",
+    "speelgoed",
+    "luier",
+    "dutje",
+    "kinderopvang",
+    "verschonen",
+    "zindelijk",
+    "verlegen",
+    "oppas",
+    "wennen",
+    "kinderopvangtoeslag"
+   ],
+   "prompts": {
+    "dutje": "Waar doet een kind een",
+    "oppas": "Wie is de",
+    "kinderopvangtoeslag": "Waar zie je de",
+    "wennen": "Waar zie je een kind",
+    "verschonen": "Waar gaat iemand de baby",
+    "verlegen": "Welk kind is",
+    "zindelijk": "Welk kind is al"
+   },
+   "weg": [
+    {
+     "target": "luier",
+     "options": [
+      "luier",
+      "verschonen",
+      "dutje"
+     ]
+    },
+    {
+     "target": "verlegen",
+     "options": [
+      "peuter",
+      "verlegen",
+      "zindelijk"
+     ]
+    },
+    {
+     "target": "oppas",
+     "options": [
+      "oppas",
+      "kinderopvang",
+      "wennen"
+     ]
+    },
+    {
+     "target": "kinderopvangtoeslag",
+     "options": [
+      "kinderopvangtoeslag",
+      "kinderopvang",
+      "speelgoed"
+     ]
+    },
+    {
+     "target": "wennen",
+     "options": [
+      "wennen",
+      "verlegen",
+      "peuter"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "kinderopvang",
+     "prop": "sign",
+     "slot": "signDoor",
+     "label": "Het bord boven de deur: kinderen in een huis, open van half acht tot half zeven",
+     "params": {
+      "icons": [
+       "children",
+       "house"
+      ],
+      "text": "7:30 – 18:30",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "oppas",
+     "prop": "g4Babysit",
+     "slot": "frameLeft",
+     "label": "Een schilderijtje: 's avonds leest een tiener voor aan een kind; de ouders zwaaien bij de deur"
+    },
+    {
+     "word": "wennen",
+     "prop": "g4SettleChart",
+     "slot": "frameRight",
+     "label": "Een kaart met drie dagen: eerst huilt het kind, dan twijfelt het, dan lacht het",
+     "params": {
+      "labels": [
+       "dag 1",
+       "dag 2",
+       "dag 3"
+      ]
+     }
+    },
+    {
+     "word": "kinderopvangtoeslag",
+     "prop": "paperSheet",
+     "slot": "paper",
+     "pin": [
+      120,
+      140
+     ],
+     "align": "trailing",
+     "tilt": -1.5,
+     "label": "Een brief met een euroteken en kinderen: elke maand geld erbij",
+     "params": {
+      "icons": [
+       "euro",
+       "children"
+      ],
+      "tone": "green",
+      "text": "+ € 420",
+      "caption": "per maand",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "luier",
+     "prop": "g4Nappies",
+     "slot": "shelf",
+     "label": "Een plank met een stapel witte broekjes voor baby's en een pak met een baby erop"
+    },
+    {
+     "word": "verschonen",
+     "prop": "g4ChangingTable",
+     "slot": "changer",
+     "frame": [
+      184,
+      166,
+      108,
+      98
+     ],
+     "pin": [
+      238,
+      246
+     ],
+     "label": "Een baby op de commode; twee handen doen een schone aan, de vieze gaat in de bak"
+    },
+    {
+     "word": "verlegen",
+     "prop": "g4Child",
+     "slot": "doorway",
+     "frame": [
+      300,
+      162,
+      66,
+      92
+     ],
+     "label": "Een klein kind kijkt om de deur, met rode wangen en de ogen naar beneden",
+     "params": {
+      "accessory": "shy",
+      "variant": 5
+     }
+    },
+    {
+     "word": "dutje",
+     "prop": "g4Child",
+     "slot": "cot",
+     "label": "Een kind slaapt in een bedje met spijlen: z z z",
+     "params": {
+      "accessory": "sleep",
+      "variant": 2
+     }
+    },
+    {
+     "word": "peuter",
+     "prop": "g4Child",
+     "slot": "floorLeft",
+     "frame": [
+      8,
+      294,
+      62,
+      88
+     ],
+     "label": "Een klein kind van twee loopt wiebelig met een beer in de hand",
+     "params": {
+      "accessory": "toddle",
+      "variant": 1,
+      "text": "2 jaar"
+     }
+    },
+    {
+     "word": "speelgoed",
+     "prop": "g4ToyBox",
+     "slot": "floorMid",
+     "frame": [
+      84,
+      298,
+      112,
+      84
+     ],
+     "label": "Een open kist vol: een bal, een beer, blokken en een autootje"
+    },
+    {
+     "word": "zindelijk",
+     "prop": "g4Child",
+     "slot": "floorRight",
+     "frame": [
+      204,
+      294,
+      90,
+      88
+     ],
+     "label": "Een trots kind op het potje, naast een kaart vol sterren",
+     "params": {
+      "accessory": "potty",
+      "variant": 6
+     }
+    }
+   ]
   }
  ]
 }

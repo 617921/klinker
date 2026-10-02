@@ -20,6 +20,12 @@ enum G4Props {
         case .g4TowelDry: G4Swim.towelDry(pen, p)
         case .g4Swimmers: G4Swim.swimmers(pen, p)
         case .g4PoolThermometer: G4Swim.poolThermometer(pen, p)
+        case .g4Child: G4Kids.child(pen, p)
+        case .g4Nappies: G4Kids.nappies(pen, p)
+        case .g4ChangingTable: G4KidsCare.changingTable(pen, p)
+        case .g4ToyBox: G4KidsCare.toyBox(pen, p)
+        case .g4SettleChart: G4KidsCare.settleChart(pen, p)
+        case .g4Babysit: G4KidsCare.babysit(pen, p)
         default: break
         }
     }
