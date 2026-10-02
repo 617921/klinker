@@ -869,6 +869,205 @@
      }
     }
    ]
+  },
+  {
+   "sheet": 49,
+   "type": "g4HotelLobby",
+   "order": [
+    "receptie",
+    "tweepersoonskamer",
+    "boeken",
+    "bevestiging",
+    "overnachting",
+    "uitchecken",
+    "wekken",
+    "volgeboekt",
+    "inbegrepen",
+    "verblijf",
+    "toeristenbelasting"
+   ],
+   "prompts": {
+    "wekken": "Waar zie je de wekker iemand",
+    "overnachting": "Waar zie je de prijs van een",
+    "verblijf": "Hoe lang is het",
+    "boeken": "Waar kun je een kamer",
+    "uitchecken": "Wie gaat",
+    "inbegrepen": "Wat is bij de prijs"
+   },
+   "weg": [
+    {
+     "target": "bevestiging",
+     "options": [
+      "boeken",
+      "bevestiging",
+      "receptie"
+     ]
+    },
+    {
+     "target": "verblijf",
+     "options": [
+      "overnachting",
+      "verblijf",
+      "toeristenbelasting"
+     ]
+    },
+    {
+     "target": "volgeboekt",
+     "options": [
+      "inbegrepen",
+      "volgeboekt",
+      "overnachting"
+     ]
+    },
+    {
+     "target": "wekken",
+     "options": [
+      "wekken",
+      "uitchecken",
+      "tweepersoonskamer"
+     ]
+    },
+    {
+     "target": "inbegrepen",
+     "options": [
+      "toeristenbelasting",
+      "inbegrepen",
+      "boeken"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "tweepersoonskamer",
+     "prop": "g4HotelBed",
+     "slot": "roomLeft",
+     "label": "Een kamer boven met een breed bed, twee kussens en twee lampjes",
+     "params": {
+      "accessory": "double"
+     }
+    },
+    {
+     "word": "wekken",
+     "prop": "g4HotelBed",
+     "slot": "roomRight",
+     "label": "Een wekker rinkelt om zeven uur; een man schiet rechtop in bed",
+     "params": {
+      "accessory": "wake",
+      "time": "7:00",
+      "variant": 0
+     }
+    },
+    {
+     "word": "overnachting",
+     "prop": "sign",
+     "slot": "wallLeft",
+     "label": "Een wit bord: van de maan naar de zon, voor 95 euro",
+     "params": {
+      "icons": [
+       "g4Moon",
+       "arrow",
+       "sun"
+      ],
+      "text": "€ 95",
+      "tone": "white",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "verblijf",
+     "prop": "wallCalendar",
+     "slot": "calendar",
+     "label": "Een kalender: een hele week is geel, met een koffer erin",
+     "params": {
+      "caption": "juli",
+      "highlight": 2,
+      "icons": [
+       "g4Suitcase"
+      ]
+     }
+    },
+    {
+     "word": "volgeboekt",
+     "prop": "g4KeyRack",
+     "slot": "keys",
+     "label": "Het sleutelbord: alle haakjes zijn leeg en er hangt een rood bordje over",
+     "params": {
+      "text": "vol",
+      "count": 0
+     }
+    },
+    {
+     "word": "toeristenbelasting",
+     "prop": "sign",
+     "slot": "wallRight",
+     "label": "Een geel bord: een fototoestel, een pijl naar het stadhuis en 3,50 euro",
+     "params": {
+      "caption": "per persoon, per nacht",
+      "icons": [
+       "g4Camera",
+       "arrow",
+       "townHall"
+      ],
+      "text": "€ 3,50",
+      "tone": "yellow",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "receptie",
+     "prop": "g4Receptionist",
+     "slot": "desk",
+     "label": "Achter de lange balie: een vrouw in een blauw jasje en een belletje",
+     "params": {
+      "flip": true
+     }
+    },
+    {
+     "word": "boeken",
+     "prop": "g4Laptop",
+     "slot": "deskLeft",
+     "label": "Een laptop: je kiest twee dagen en een bed en klikt op de groene knop"
+    },
+    {
+     "word": "bevestiging",
+     "prop": "g4Guest",
+     "slot": "guestLeft",
+     "label": "Een gast houdt zijn telefoon omhoog: een mail met een groot groen vinkje",
+     "params": {
+      "accessory": "phone",
+      "lines": [
+       "kamer 12",
+       "3 nachten"
+      ],
+      "variant": 7
+     }
+    },
+    {
+     "word": "uitchecken",
+     "prop": "g4Guest",
+     "slot": "guestRight",
+     "label": "Een gast loopt met zijn koffer naar de uitgang; de klok wijst elf uur",
+     "params": {
+      "accessory": "checkout",
+      "time": "11:00",
+      "variant": 3
+     }
+    },
+    {
+     "word": "inbegrepen",
+     "prop": "g4PriceCard",
+     "slot": "front",
+     "label": "Een bord: 95 euro is bed, koffie en wifi, alles met een groen vinkje",
+     "params": {
+      "text": "€ 95",
+      "icons": [
+       "g4Bed",
+       "g4Cup",
+       "g4Wifi"
+      ]
+     }
+    }
+   ]
   }
  ]
 }

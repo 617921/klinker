@@ -31,6 +31,12 @@ enum G4Props {
         case .g4LocalMap: G4NeighbourWall.localMap(pen, p)
         case .g4Network: G4NeighbourWall.network(pen, p)
         case .g4PlanBoard: G4NeighbourWall.planBoard(pen, p)
+        case .g4HotelBed: G4Hotel.hotelBed(pen, p)
+        case .g4KeyRack: G4Hotel.keyRack(pen, p)
+        case .g4Receptionist: G4Hotel.receptionist(pen, p)
+        case .g4PriceCard: G4Hotel.priceCard(pen, p)
+        case .g4Guest: G4HotelGuests.guest(pen, p)
+        case .g4Laptop: G4HotelGuests.laptop(pen, p)
         default: break
         }
     }

@@ -265,6 +265,22 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4Network
     /// A whiteboard on an easel: bunting, a date `text`, a checklist of `icons`, `count` ticked.
     case g4PlanBoard
+
+    // Hotel (PalacePropsG4Hotel.swift, PalacePropsG4HotelGuests.swift)
+    /// A guest room's bed: `accessory` "double" (wide bed, two pillows, two lamps, a two-person
+    /// plaque) or "wake" (a man bolt upright, an alarm clock ringing at `time`). `variant`.
+    case g4HotelBed
+    /// A key rack with numbered hooks, keys on the first `count`, a red board with `text` across it.
+    case g4KeyRack
+    /// The receptionist behind the desk (desk top at the bottom), a desk bell ringing. `variant`, `flip`.
+    case g4Receptionist
+    /// A standing board: a price `text` = `icons` (bed, cup, wifi …) each with a green tick.
+    case g4PriceCard
+    /// A guest: `accessory` "checkout" (walking out with a suitcase under an exit sign, a clock at
+    /// `time`) or "phone" (holding up a phone; a bubble with a mail, a big tick and `lines`). `variant`.
+    case g4Guest
+    /// A laptop: a bed, a calendar with two days chosen, a pointer clicking the green button.
+    case g4Laptop
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -341,7 +357,8 @@ struct PalacePropView: View, Equatable {
             case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam,
                  .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
                  .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit,
-                 .g4Neighbour, .g4JoinIn, .g4LocalMap, .g4Network, .g4PlanBoard:
+                 .g4Neighbour, .g4JoinIn, .g4LocalMap, .g4Network, .g4PlanBoard,
+                 .g4HotelBed, .g4KeyRack, .g4Receptionist, .g4PriceCard, .g4Guest, .g4Laptop:
                 G4Props.draw(prop.kind, pen, p)
             }
         }
