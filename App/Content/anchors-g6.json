@@ -407,6 +407,87 @@
           "params": { "accessory": "offkey" }
         }
       ]
+    },
+    {
+      "sheet": 56,
+      "type": "g6Gallery",
+      "order": ["portret", "abstract", "lijst", "opvallend", "stijl", "expositie", "opening", "indruk", "beschrijven", "uitkiezen", "waarderen"],
+      "prompts": {
+        "expositie": "Waar hangt de affiche van de",
+        "lijst": "Waar hangt een lege",
+        "stijl": "Waar zie je drie keer een andere",
+        "indruk": "Wie is onder de",
+        "portret": "Waar hangt het",
+        "uitkiezen": "Waar mag je iets",
+        "waarderen": "Waar laten mensen zien dat ze de kunst",
+        "beschrijven": "Wie gaat het schilderij",
+        "abstract": "Welk schilderij is",
+        "opvallend": "Wat is heel"
+      },
+      "weg": [
+        { "target": "lijst", "options": ["portret", "lijst", "abstract"] },
+        { "target": "indruk", "options": ["indruk", "waarderen", "beschrijven"] },
+        { "target": "stijl", "options": ["opvallend", "stijl", "expositie"] },
+        { "target": "opening", "options": ["expositie", "uitkiezen", "opening"] },
+        { "target": "abstract", "options": ["abstract", "opvallend", "portret"] }
+      ],
+      "anchors": [
+        {
+          "word": "expositie", "prop": "g6ExpoPoster", "slot": "door",
+          "label": "Een affiche op de glazen deur: drie schilderijtjes, Licht en kleur, van twaalf maart tot eind mei",
+          "params": { "text": "Licht & kleur", "caption": "12 mrt – 31 mei" }
+        },
+        {
+          "word": "portret", "prop": "g6Painting", "slot": "wallLeft",
+          "label": "Een schilderij van een meisje met een blauwe doek en een parel",
+          "params": { "accessory": "portrait" }
+        },
+        {
+          "word": "abstract", "prop": "g6Painting", "slot": "wallMid",
+          "label": "Een schilderij met alleen vormen: een rode cirkel, een blauwe driehoek, een geel vierkant en lijnen",
+          "params": { "accessory": "abstract" }
+        },
+        {
+          "word": "lijst", "prop": "g6Painting", "slot": "wallRight",
+          "label": "Een brede gouden rand met krullen, zonder schilderij erin",
+          "params": { "accessory": "empty" }
+        },
+        {
+          "word": "opvallend", "prop": "g6Standout", "slot": "lowLeft",
+          "label": "Vier kleine grijze schilderijen en één groot knalrood schilderij",
+          "params": {}
+        },
+        {
+          "word": "stijl", "prop": "g6Styles", "slot": "lowRight",
+          "label": "Drie keer dezelfde boom: echt, in harde blokken en in stipjes",
+          "params": {}
+        },
+        {
+          "word": "opening", "prop": "g6Ribbon", "slot": "floor1",
+          "label": "Een rood lint wordt doorgeknipt, en twee glazen wijn tikken tegen elkaar",
+          "params": {}
+        },
+        {
+          "word": "beschrijven", "prop": "g6Figure", "slot": "floor2",
+          "label": "Een man wijst en vertelt: een meisje, een blauwe doek, een parel",
+          "params": { "accessory": "talk", "lines": ["een meisje", "blauwe doek", "een parel"], "variant": 6 }
+        },
+        {
+          "word": "uitkiezen", "prop": "g6Choose", "slot": "floor3",
+          "label": "Drie schilderijtjes op een tafel; een hand wijst er één aan, met een groen vinkje",
+          "params": {}
+        },
+        {
+          "word": "indruk", "prop": "g6Figure", "slot": "floor4",
+          "label": "Een vrouw met haar handen op haar wangen en haar mond open, met sterretjes: wauw",
+          "params": { "accessory": "wow", "variant": 5 }
+        },
+        {
+          "word": "waarderen", "prop": "g6Guestbook", "slot": "floor5",
+          "label": "Een open gastenboek op een standaard met hartjes: prachtig, mooi werk",
+          "params": { "lines": ["prachtig!", "mooi werk"] }
+        }
+      ]
     }
   ]
 }
