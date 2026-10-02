@@ -231,6 +231,81 @@
           "params": {  }
         }
       ]
+    },
+    {
+      "sheet": 29,
+      "type": "g3LectureHall",
+      "order": ["college", "hoogleraar", "tentamen", "studiefinanciering", "afstuderen", "scriptie", "aanwezig", "collegegeld", "herkansen", "bijbaan", "wetenschappelijk"],
+      "prompts": {
+        "afstuderen": "Waar zie je iemand",
+        "aanwezig": "Wie is er",
+        "hoogleraar": "Wie is de",
+        "bijbaan": "Wie heeft een"
+      },
+      "weg": [
+        { "target": "collegegeld", "options": ["studiefinanciering", "collegegeld", "college"] },
+        { "target": "tentamen", "options": ["tentamen", "herkansen", "scriptie"] },
+        { "target": "hoogleraar", "options": ["college", "hoogleraar", "afstuderen"] },
+        { "target": "bijbaan", "options": ["bijbaan", "studiefinanciering", "aanwezig"] },
+        { "target": "afstuderen", "options": ["scriptie", "afstuderen", "wetenschappelijk"] }
+      ],
+      "anchors": [
+        {
+          "word": "wetenschappelijk", "prop": "sign", "slot": "signLeft",
+          "label": "Een wit bord met een microscoop en een glazen kolf: onderzoek",
+          "params": { "caption": "onderzoek", "icons": ["g3Microscope", "g3Flask"], "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "college", "prop": "g3Lecture", "slot": "screen",
+          "label": "Een docent wijst naar een grafiek op het grote scherm; voor hem zit een rij studenten; de klok zegt negen uur",
+          "params": { "time": "9:00", "variant": 4 }
+        },
+        {
+          "word": "collegegeld", "prop": "paperSheet", "slot": "board",
+          "label": "Een rekening op het prikbord met een rode kop: 2530 euro per jaar om te studeren",
+          "params": { "tone": "red", "icons": ["cap", "euro"], "text": "€ 2.530", "caption": "per jaar", "mount": "wall" }
+        },
+        {
+          "word": "scriptie", "prop": "g3Thesis", "slot": "desk1",
+          "label": "Een dik ingebonden boekwerk met een blauwe kaft over migratie; erachter een klad met rode strepen",
+          "params": { "text": "Migratie", "caption": "bachelor · 2026" }
+        },
+        {
+          "word": "tentamen", "prop": "testPaper", "slot": "desk2",
+          "label": "Een blad met vragen en lege vakjes, een potlood en een zandloper",
+          "params": { "accessory": "timer", "lines": ["1. 12 x 15 =", "2. 2^5 =", "3. 15% van 80", "4. log 100 ="] }
+        },
+        {
+          "word": "herkansen", "prop": "g3Retry", "slot": "desk3",
+          "label": "Een blad met een rode 4,5 en een kruis; een groene pijl gaat rond naar een nieuw, leeg blad",
+          "params": { "text": "4,5", "caption": "ronde 2" }
+        },
+        {
+          "word": "studiefinanciering", "prop": "paperSheet", "slot": "desk4",
+          "label": "Een groen briefje: elke maand driehonderd euro erbij voor een student",
+          "params": { "tone": "green", "icons": ["euro", "cap"], "text": "+ € 300", "caption": "elke maand" }
+        },
+        {
+          "word": "hoogleraar", "prop": "g3Worker", "slot": "step1",
+          "label": "Een oudere man in een zwarte toga met een witte bef en een zwarte muts, een dik boek in zijn hand",
+          "params": { "accessory": "professor", "variant": 5 }
+        },
+        {
+          "word": "aanwezig", "prop": "g3Speaker", "slot": "step2",
+          "label": "Een student steekt haar hand op en roept: hier!",
+          "params": { "accessory": "hand", "text": "Hier!", "variant": 6 }
+        },
+        {
+          "word": "bijbaan", "prop": "g3Worker", "slot": "step3",
+          "label": "Een student met een rugzak en een schort draagt koffie op een dienblad",
+          "params": { "accessory": "waiter", "variant": 2 }
+        },
+        {
+          "word": "afstuderen", "prop": "g3Worker", "slot": "step4",
+          "label": "Een student met een plat hoedje met een kwastje houdt een opgerold papier met een rood lint omhoog; er vallen snippers",
+          "params": { "accessory": "graduate", "variant": 1 }
+        }
+      ]
     }
   ]
 }
