@@ -23,6 +23,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case g3Flowers, g3Tube, g3Microscope, g3Flask, g3Repeat, g3Hanger, g3Tooth, g3Headphones, g3Dumbbell, g3Scissors
     // g4 · care, community and hospitality (PalacePropIconsG4.swift)
     case g4Group, g4Moon, g4Camera, g4Suitcase, g4Bed, g4Cup, g4Wifi, g4Paw
+    // City outdoors and the finale (PalacePropIconsG8.swift)
+    case g8BallotBox, g8Dove, g8Ferry, g8Storm
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -91,6 +93,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             G3Icons.draw(self, p, c, d)
         case .g4Group, .g4Moon, .g4Camera, .g4Suitcase, .g4Bed, .g4Cup, .g4Wifi, .g4Paw:
             G4Icons.draw(self, p, c, d)
+        case .g8BallotBox, .g8Dove, .g8Ferry, .g8Storm:
+            G8Icons.draw(self, p, c, d)
         }
     }
 

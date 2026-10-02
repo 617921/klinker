@@ -42,6 +42,9 @@ enum PalaceRoomType: String, CaseIterable {
     case g3Ward, g3Gym, g3Salon, g3LectureHall
     // g4 · care, community and hospitality: see G4Rooms.swift and G4*Backdrop.swift.
     case g4Pool, g4Daycare, g4CommunityHall, g4HotelLobby, g4Restaurant
+    // The city outdoors and the finale (G8Rooms.swift): allotment, town hall square, roundabout,
+    // dike, ferry, lookout tower.
+    case g8Allotment, g8TownSquare, g8Roundabout, g8Dike, g8Ferry, g8Lookout
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -84,6 +87,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Salon: "salon"
         case .g3LectureHall: "zaal"
         case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.hall(self)
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.hall(self)
         }
     }
 
@@ -132,6 +136,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Salon: "Een kapsalon met spiegels"
         case .g3LectureHall: "Een zaal van de universiteit met een groot scherm"
         case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.sceneLabel(self)
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.sceneLabel(self)
         }
     }
 
@@ -172,6 +177,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Salon: G3SalonRoom.noor
         case .g3LectureHall: G3LectureHall.noor
         case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.noor(self)
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.noor(self)
         }
     }
 
@@ -211,6 +217,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Salon: G3SalonRoom.slots
         case .g3LectureHall: G3LectureHall.slots
         case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.slots(self)
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.slots(self)
         }
     }
 }
@@ -255,6 +262,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g3Salon: G3SalonBackdrop()
         case .g3LectureHall: G3LectureHallBackdrop()
         case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4RoomBackdrop(type: type)
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8RoomBackdrop(type: type)
         }
     }
 }

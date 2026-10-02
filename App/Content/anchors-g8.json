@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 52,
+      "type": "g8Allotment",
+      "order": ["volkstuin", "schuur", "kas", "zaad", "onkruid", "bodem", "vereniging", "zaaien", "aanleggen", "zelfgekweekt", "vruchtbaar"],
+      "prompts": {
+        "vereniging": "Waar zie je de",
+        "zaaien": "Waar zie je iemand",
+        "aanleggen": "Waar zie je iemand een pad",
+        "zelfgekweekt": "Welke groente is",
+        "vruchtbaar": "Welke grond is"
+      },
+      "weg": [
+        { "target": "zaaien", "options": ["zaad", "zaaien", "bodem"] },
+        { "target": "kas", "options": ["kas", "schuur", "volkstuin"] },
+        { "target": "vruchtbaar", "options": ["bodem", "vruchtbaar", "onkruid"] },
+        { "target": "zelfgekweekt", "options": ["zelfgekweekt", "aanleggen", "vereniging"] },
+        { "target": "onkruid", "options": ["onkruid", "zaaien", "zaad"] }
+      ],
+      "anchors": [
+        {
+          "word": "schuur", "prop": "g8Shed", "slot": "shed",
+          "label": "Een groen houten huisje met een open deur; binnen hangen een schop en een hark",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "kas", "prop": "g8Greenhouse", "slot": "glass",
+          "label": "Een klein glazen huisje met tomatenplanten erin",
+          "params": {}
+        },
+        {
+          "word": "vereniging", "prop": "g8Clubhouse", "slot": "club",
+          "label": "Een clubhuis met een groene vlag, een bord voor de leden en drie mensen in hetzelfde groene shirt",
+          "params": { "text": "Leden", "caption": "za 10:00" }
+        },
+        {
+          "word": "volkstuin", "prop": "g8Plot", "slot": "plot",
+          "label": "Een eigen stuk grond achter een wit hekje, met een poortje met nummer 14, bonen, kolen en een zonnebloem",
+          "params": { "text": "14" }
+        },
+        {
+          "word": "onkruid", "prop": "g8Weeds", "slot": "weeds",
+          "label": "Een bed vol paardenbloemen en een distel; een hand trekt er één met wortel en al uit",
+          "params": {}
+        },
+        {
+          "word": "zelfgekweekt", "prop": "g8Gardener", "slot": "gardener",
+          "label": "Iemand met een strohoed houdt trots een kist met wortels, tomaten en sla uit de eigen tuin vast",
+          "params": { "variant": 4, "text": "eigen oogst" }
+        },
+        {
+          "word": "aanleggen", "prop": "g8LayPath", "slot": "path",
+          "label": "Nieuwe tegels in het zand, een touwtje tussen twee paaltjes en een hand die de volgende tegel neerlegt",
+          "params": {}
+        },
+        {
+          "word": "zaaien", "prop": "g8Sowing", "slot": "sow",
+          "label": "Een hand strooit kleine korrels in een rechte geul in de aarde",
+          "params": {}
+        },
+        {
+          "word": "bodem", "prop": "g8SoilCut", "slot": "soil",
+          "label": "Een plak grond: gras, donkere aarde met een worm en wortels, en daaronder klei met stenen",
+          "params": {}
+        },
+        {
+          "word": "zaad", "prop": "g8SeedPacket", "slot": "seed",
+          "label": "Een zakje met een tomaat erop; er vallen kleine korrels uit in een hand",
+          "params": {}
+        },
+        {
+          "word": "vruchtbaar", "prop": "g8Fertile", "slot": "ground",
+          "label": "Twee hoopjes aarde: droog en gebarsten met een rood kruis, en donker met een plant vol tomaten en een groen vinkje",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 54,
+      "type": "g8TownSquare",
+      "order": ["burgemeester", "stembureau", "verkiezing", "stempas", "stemmen", "partij", "demonstratie", "vrijheid", "vreedzaam", "gelijk", "opkomen"],
+      "prompts": {
+        "partij": "Waar zie je de",
+        "vrijheid": "Waar zie je",
+        "stemmen": "Waar kun je",
+        "opkomen": "Waar zie je iemand voor een ander",
+        "gelijk": "Waar zijn twee mensen",
+        "vreedzaam": "Welk teken is"
+      },
+      "weg": [
+        { "target": "stemmen", "options": ["stempas", "stemmen", "stembureau"] },
+        { "target": "partij", "options": ["verkiezing", "partij", "demonstratie"] },
+        { "target": "vreedzaam", "options": ["vrijheid", "vreedzaam", "gelijk"] },
+        { "target": "opkomen", "options": ["opkomen", "demonstratie", "burgemeester"] },
+        { "target": "stembureau", "options": ["stembureau", "verkiezing", "stempas"] }
+      ],
+      "anchors": [
+        {
+          "word": "stembureau", "prop": "g8PollingStation", "slot": "doorLeft",
+          "label": "Een open deur met een bordje met een bus erop; binnen twee hokjes, iemand in een hokje en een oranje bus met een gleuf",
+          "params": {}
+        },
+        {
+          "word": "vreedzaam", "prop": "g8Banner", "slot": "facade",
+          "label": "Een blauw doek aan de gevel met een witte duif met een olijftakje",
+          "params": { "icons": ["g8Dove"] }
+        },
+        {
+          "word": "burgemeester", "prop": "g8Mayor", "slot": "steps",
+          "label": "Iemand in een donker pak met een gouden ketting en een grote penning, die zwaait op de trap van het stadhuis",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "verkiezing", "prop": "g8ElectionBoard", "slot": "boardRight",
+          "label": "Een groen bord op twee palen met acht genummerde vakken, elk met een andere poster, en een datum erboven",
+          "params": { "text": "21 maart", "count": 8 }
+        },
+        {
+          "word": "demonstratie", "prop": "g8March", "slot": "squareLeft",
+          "label": "Een groep mensen loopt samen over het plein met een lang spandoek en borden met een hart, een wereld en een huis",
+          "params": { "icons": ["heart", "globe", "house", "sun"] }
+        },
+        {
+          "word": "vrijheid", "prop": "g8Cage", "slot": "squareMid",
+          "label": "Een sokkel met een gouden vogelkooi; het deurtje staat open en een gele vogel vliegt weg",
+          "params": {}
+        },
+        {
+          "word": "partij", "prop": "g8PartyStand", "slot": "squareRight",
+          "label": "Een kraam onder een paarse parasol met een gele ster, ballonnen en een kleed met Lijst 4",
+          "params": { "text": "Lijst 4", "tone": "purple" }
+        },
+        {
+          "word": "stempas", "prop": "g8PollCard", "slot": "nearLeft",
+          "label": "Een hand houdt een kaart met een oranje kop met een bus, een naam, een nummer en een streepjescode",
+          "params": { "tone": "orange", "icons": ["g8BallotBox"], "caption": "Gemeente", "lines": ["N. de Vries", "nr. 0412"] }
+        },
+        {
+          "word": "stemmen", "prop": "g8Ballot", "slot": "nearMid",
+          "label": "Een hand kleurt met een rood potlood één vakje rood op een groot papier met drie lijsten",
+          "params": { "highlight": 7 }
+        },
+        {
+          "word": "opkomen", "prop": "g8Megaphone", "slot": "nearSpeaker",
+          "label": "Iemand met een megafoon houdt een arm uit voor een kleiner iemand achter zich",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "gelijk", "prop": "g8Equal", "slot": "nearRight",
+          "label": "Een bord met een poster: twee verschillende mensen, even groot, met een rood is-teken ertussen",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 59,
+      "type": "g8Roundabout",
+      "order": ["verkeerslicht", "zebrapad", "verkeer", "voetganger", "afslag", "bekeuring", "verboden", "voorrang", "oversteken", "inhalen", "overzichtelijk"],
+      "prompts": {
+        "voetganger": "Waar loopt een",
+        "voorrang": "Waar geeft een auto",
+        "verkeer": "Waar is veel",
+        "inhalen": "Waar zie je een auto",
+        "oversteken": "Waar gaan mensen",
+        "bekeuring": "Waar zie je een",
+        "afslag": "Waar zie je de",
+        "overzichtelijk": "Welke kruising is"
+      },
+      "weg": [
+        { "target": "zebrapad", "options": ["oversteken", "zebrapad", "voetganger"] },
+        { "target": "voorrang", "options": ["voorrang", "verkeer", "inhalen"] },
+        { "target": "verboden", "options": ["verboden", "afslag", "verkeerslicht"] },
+        { "target": "bekeuring", "options": ["bekeuring", "verboden", "overzichtelijk"] },
+        { "target": "inhalen", "options": ["verkeer", "inhalen", "voorrang"] }
+      ],
+      "anchors": [
+        {
+          "word": "verkeerslicht", "prop": "g8TrafficLight", "slot": "lightFar",
+          "label": "Een paal met drie lampen boven elkaar; de rode lamp brandt",
+          "params": { "highlight": 0 }
+        },
+        {
+          "word": "voetganger", "prop": "g8Pedestrian", "slot": "paveFar",
+          "label": "Iemand met een rode tas loopt over de stoep, onder een rond blauw bord met een lopend poppetje",
+          "params": { "variant": 2 }
+        },
+        {
+          "word": "verboden", "prop": "g8TrafficSign", "slot": "alley",
+          "label": "Een rond rood bord met een witte streep bij het begin van een smal straatje",
+          "params": { "accessory": "noEntry" }
+        },
+        {
+          "word": "afslag", "prop": "g8ExitSign", "slot": "signFar",
+          "label": "Een blauw bord met een rondje en drie wegen eraf; een gele pijl wijst de weg rechtdoor naar de haven",
+          "params": { "labels": ["Centrum", "Haven", "Dijk"], "highlight": 1 }
+        },
+        {
+          "word": "voorrang", "prop": "g8GiveWay", "slot": "entryLeft",
+          "label": "Een auto wacht bij witte driehoekjes op de weg en een driehoekig bord; een fietser rijdt eerst",
+          "params": {}
+        },
+        {
+          "word": "verkeer", "prop": "g8RingTraffic", "slot": "ring",
+          "label": "Een bus, auto's en fietsers rijden rond het groene pleintje in het midden",
+          "params": {}
+        },
+        {
+          "word": "inhalen", "prop": "g8Overtake", "slot": "roadRight",
+          "label": "Een rode auto rijdt om een fietser heen en gaat ervoor; een witte pijl laat zien hoe",
+          "params": {}
+        },
+        {
+          "word": "overzichtelijk", "prop": "g8Overview", "slot": "nearLeft",
+          "label": "Een bord: links een rommelig kruispunt met een rood kruis, rechts een rustig rondje met een oog en een groen vinkje",
+          "params": {}
+        },
+        {
+          "word": "oversteken", "prop": "g8KerbCross", "slot": "kerb",
+          "label": "Een ouder en een kind hand in hand aan de rand van de weg; ze kijken links en rechts en een pijl wijst naar de andere kant",
+          "params": { "variant": 7 }
+        },
+        {
+          "word": "zebrapad", "prop": "g8Zebra", "slot": "crossing",
+          "label": "Witte strepen over de weg en een blauw bord met een lopend poppetje",
+          "params": { "count": 7 }
+        },
+        {
+          "word": "bekeuring", "prop": "g8Fine", "slot": "nearRight",
+          "label": "Een geparkeerde auto met een geel briefje onder de ruitenwisser; het briefje is groot getekend: € 95",
+          "params": { "text": "€ 95" }
+        }
+      ]
+    },
+    {
+      "sheet": 60,
+      "type": "g8Dike",
+      "order": ["dijk", "overstroming", "zeespiegel", "klimaat", "neerslag", "waterschap", "stijgen", "beschermen", "voorkomen", "laaggelegen", "hevig"],
+      "prompts": {
+        "hevig": "Waar is de regen",
+        "zeespiegel": "Waar zie je de",
+        "stijgen": "Waar zie je het water",
+        "neerslag": "Waar meet je de",
+        "laaggelegen": "Welk huis is",
+        "waterschap": "Waar werkt het",
+        "klimaat": "Waar zie je het",
+        "beschermen": "Waar zie je iemand een kind",
+        "voorkomen": "Waar kun je een overstroming"
+      },
+      "weg": [
+        { "target": "stijgen", "options": ["zeespiegel", "stijgen", "overstroming"] },
+        { "target": "hevig", "options": ["hevig", "neerslag", "klimaat"] },
+        { "target": "voorkomen", "options": ["beschermen", "voorkomen", "dijk"] },
+        { "target": "laaggelegen", "options": ["laaggelegen", "waterschap", "zeespiegel"] },
+        { "target": "neerslag", "options": ["neerslag", "hevig", "stijgen"] }
+      ],
+      "anchors": [
+        {
+          "word": "dijk", "prop": "g8Dike", "slot": "dike",
+          "label": "Een hoge, groene wal met stenen aan de kant van het water, een weg met een fietser erop en schapen",
+          "params": {}
+        },
+        {
+          "word": "hevig", "prop": "g8Storm", "slot": "sky",
+          "label": "Een donkere wolk met een bliksemschicht en dikke, schuine regen",
+          "params": {}
+        },
+        {
+          "word": "overstroming", "prop": "g8FloodedFarm", "slot": "floodplain",
+          "label": "Een boerderij en een boom staan tot de ramen in het water",
+          "params": {}
+        },
+        {
+          "word": "zeespiegel", "prop": "g8Gauge", "slot": "gauge",
+          "label": "Een paal met een meetlat in het water; het water staat precies bij de rode 0",
+          "params": { "labels": ["+1", "0", "-1"] }
+        },
+        {
+          "word": "stijgen", "prop": "g8RisingWater", "slot": "water",
+          "label": "In het water oude waterlijnen met jaartallen, 1900, 1950 en 2000, en een grote blauwe pijl omhoog",
+          "params": { "labels": ["1900", "1950", "2000"] }
+        },
+        {
+          "word": "neerslag", "prop": "g8RainGauge", "slot": "polderSky",
+          "label": "Een wolk laat druppels vallen in een buisje met streepjes op een paal: 12 mm",
+          "params": { "text": "12 mm" }
+        },
+        {
+          "word": "laaggelegen", "prop": "g8LowLand", "slot": "low",
+          "label": "Een huis ver onder een blauwe stippellijn op de hoogte van het water, met een pijl: 4 meter lager",
+          "params": { "text": "-4 m" }
+        },
+        {
+          "word": "waterschap", "prop": "g8PumpStation", "slot": "pump",
+          "label": "Een stenen gebouwtje met een blauw schild met een druppel; een buis pompt het water uit de sloot weg",
+          "params": {}
+        },
+        {
+          "word": "klimaat", "prop": "g8InfoBoard", "slot": "pathLeft",
+          "label": "Een bord met een wereldbol en een thermometer",
+          "params": { "icons": ["globe", "thermometer"] }
+        },
+        {
+          "word": "beschermen", "prop": "g8Umbrella", "slot": "pathMid",
+          "label": "Iemand houdt een grote rode paraplu boven een kind; om hen heen valt de regen",
+          "params": { "variant": 4 }
+        },
+        {
+          "word": "voorkomen", "prop": "g8Sandbags", "slot": "pathRight",
+          "label": "Zandzakken voor een deur; het water komt niet verder, een hand legt de laatste zak en bij de deur staat een groen vinkje",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 61,
+      "type": "g8Ferry",
+      "order": ["veerpont", "overkant", "vervoer", "overtocht", "tijdstip", "aankomen", "omweg", "inplannen", "uitstellen", "afhankelijk", "haalbaar"],
+      "prompts": {
+        "overtocht": "Hoe lang duurt de",
+        "aankomen": "Waar zie je iemand",
+        "vervoer": "Waar zie je het openbaar",
+        "tijdstip": "Waar zie je het",
+        "inplannen": "Waar kun je een afspraak",
+        "uitstellen": "Waar kun je een reis",
+        "omweg": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "overtocht", "options": ["overtocht", "overkant", "veerpont"] },
+        { "target": "uitstellen", "options": ["inplannen", "uitstellen", "tijdstip"] },
+        { "target": "omweg", "options": ["omweg", "overtocht", "vervoer"] },
+        { "target": "haalbaar", "options": ["afhankelijk", "haalbaar", "aankomen"] },
+        { "target": "tijdstip", "options": ["tijdstip", "inplannen", "haalbaar"] }
+      ],
+      "anchors": [
+        {
+          "word": "overkant", "prop": "g8FarBank", "slot": "farBank",
+          "label": "Een dorpje met een kerk, een molen en een steiger aan de andere kant van het water; een oranje pijl wijst ernaartoe",
+          "params": {}
+        },
+        {
+          "word": "veerpont", "prop": "g8FerryBoat", "slot": "water",
+          "label": "Een platte boot met een stuurhuis op poten, met fietsers en mensen aan boord",
+          "params": {}
+        },
+        {
+          "word": "overtocht", "prop": "g8CrossingSign", "slot": "postRight",
+          "label": "Een blauw bord: twee oevers met water ertussen en een stippellijn met een bootje van de ene steiger naar de andere, 5 min",
+          "params": { "text": "5 min" }
+        },
+        {
+          "word": "aankomen", "prop": "g8Arrived", "slot": "quay1",
+          "label": "Iemand met een koffer staat op de kade onder een rode speld met een vinkje",
+          "params": { "variant": 3 }
+        },
+        {
+          "word": "vervoer", "prop": "g8TransportSign", "slot": "quay2",
+          "label": "Een bord op een paal met een bus, een tram, een trein en een boot",
+          "params": { "icons": ["bus", "tram", "train", "g8Ferry"] }
+        },
+        {
+          "word": "tijdstip", "prop": "g8Moment", "slot": "quay3",
+          "label": "Een bord met een klok op half twaalf 's avonds en een rode speld op een lijn van 0 tot 24 uur",
+          "params": { "time": "23:30" }
+        },
+        {
+          "word": "afhankelijk", "prop": "g8Depends", "slot": "quay4",
+          "label": "Een bord: zon, pijl, boot en een groen vinkje; storm, pijl, boot en een rood kruis",
+          "params": { "icons": ["sun", "g8Storm", "g8Ferry"] }
+        },
+        {
+          "word": "inplannen", "prop": "g8Agenda", "slot": "near1",
+          "label": "Een open agenda; een hand schrijft een nieuw blokje met een bootje bij 9 uur",
+          "params": { "icons": ["g8Ferry"] }
+        },
+        {
+          "word": "uitstellen", "prop": "g8Postpone", "slot": "near2",
+          "label": "Twee kalenderblaadjes: 12 met een rood kruis en een stormwolk, en een pijl naar 19 met een groene ring",
+          "params": { "labels": ["12", "19"] }
+        },
+        {
+          "word": "haalbaar", "prop": "g8HandPhone", "slot": "near3",
+          "label": "Een telefoon in een hand: 3 minuten lopen, de boot over 5 minuten, en een vinkje",
+          "params": { "icons": ["walk", "g8Ferry", "check"], "labels": ["3 min", "5 min", ""] }
+        },
+        {
+          "word": "omweg", "prop": "g8DetourMap", "slot": "near4",
+          "label": "Een kaart: de korte weg over een kapotte brug is doorgestreept, een lange rode route gaat eromheen",
+          "params": { "labels": ["A", "B"] }
+        }
+      ]
+    },
+    {
+      "sheet": 62,
+      "type": "g8Lookout",
+      "order": ["uitzicht", "verleden", "toekomst", "mening", "vooruitgang", "voornemen", "bereiken", "trots", "terugblikken", "verwachten", "optimistisch"],
+      "prompts": {
+        "uitzicht": "Waar heb je het mooiste",
+        "verleden": "Waar zie je het",
+        "vooruitgang": "Waar zie je je",
+        "mening": "Waar geef je je",
+        "terugblikken": "Waar zie je iemand",
+        "voornemen": "Waar staat je",
+        "trots": "Wie is hier",
+        "bereiken": "Waar kun je de top",
+        "toekomst": "Waar wijst de pijl naar de"
+      },
+      "weg": [
+        { "target": "vooruitgang", "options": ["vooruitgang", "bereiken", "toekomst"] },
+        { "target": "verleden", "options": ["verleden", "terugblikken", "uitzicht"] },
+        { "target": "trots", "options": ["trots", "optimistisch", "mening"] },
+        { "target": "verwachten", "options": ["voornemen", "verwachten", "toekomst"] },
+        { "target": "mening", "options": ["mening", "voornemen", "uitzicht"] }
+      ],
+      "anchors": [
+        {
+          "word": "verwachten", "prop": "g8ThoughtBubble", "slot": "skyLeft",
+          "label": "Een denkwolkje boven Noor met een diploma B1 en een groen vinkje",
+          "params": { "text": "B1" }
+        },
+        {
+          "word": "optimistisch", "prop": "g8Sunrise", "slot": "skyRight",
+          "label": "Een lachende zon komt achter een grijze wolk vandaan, met een regenboog erachter",
+          "params": {}
+        },
+        {
+          "word": "uitzicht", "prop": "g8Binoculars", "slot": "railFarLeft",
+          "label": "Een verrekijker op een paal; erboven twee ronde kijkgaten met daken, een toren en de zon",
+          "params": {}
+        },
+        {
+          "word": "verleden", "prop": "g8OldPhoto", "slot": "railLeft",
+          "label": "Een oude bruine foto van grachtenhuizen en een paard met wagen, met 1900 eronder",
+          "params": { "text": "1900" }
+        },
+        {
+          "word": "vooruitgang", "prop": "g8ProgressBoard", "slot": "railRight",
+          "label": "Een bord met een groene balk die bijna vol is, van A2 naar B1, en sterren die steeds hoger staan",
+          "params": { "labels": ["A2", "B1"], "count": 85 }
+        },
+        {
+          "word": "mening", "prop": "g8OpinionBoard", "slot": "railFarRight",
+          "label": "Een bord met de vraag Wat vind jij? en drie tekstballonnen: een duim omhoog, een duim omlaag en een hart",
+          "params": { "text": "Wat vind jij?" }
+        },
+        {
+          "word": "terugblikken", "prop": "g8LookBack", "slot": "deckLeft",
+          "label": "Iemand loopt verder maar kijkt om, naar een stippelweg met speldjes van een station, een huis en een boek",
+          "params": { "variant": 5, "icons": ["train", "house", "book"] }
+        },
+        {
+          "word": "voornemen", "prop": "g8Resolutions", "slot": "deckMidLeft",
+          "label": "Een schrift op een standaard: 1 jan, een vuurwerkje en een lijstje met lege vakjes bij een boek, een fiets en een praatwolkje",
+          "params": { "caption": "1 jan", "icons": ["book", "bike", "talk"] }
+        },
+        {
+          "word": "trots", "prop": "g8Proud", "slot": "deckMid",
+          "label": "Iemand met de kin omhoog, de handen in de zij en een gouden medaille om",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "bereiken", "prop": "g8Summit", "slot": "deckMidRight",
+          "label": "Een trap naar boven met een rode vlag op de hoogste tree en sterretjes eromheen",
+          "params": {}
+        },
+        {
+          "word": "toekomst", "prop": "g8Signpost", "slot": "deckRight",
+          "label": "Een houten wegwijzer met een pijl naar voren, 2040, en een opkomende zon",
+          "params": { "text": "2040" }
+        }
+      ]
+    }
+  ]
+}

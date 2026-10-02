@@ -602,6 +602,152 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4Table
     /// A waiter: white shirt, black waistcoat and bow tie, long apron, towel on the arm, a notepad.
     case g4Waiter
+    // MARK: City outdoors and the finale (g8: PalacePropsG8*.swift, routed by `G8Props`)
+
+    // Allotment (PalacePropsG8Garden.swift)
+    /// A wooden garden shed, door open on a spade and a rake. `variant` 0 green, 1 brown.
+    case g8Shed
+    /// A small greenhouse with tomato plants behind the glass.
+    case g8Greenhouse
+    /// A clubhouse with the club's flag, a notice (`text`, `caption`) and members in club shirts.
+    case g8Clubhouse
+    /// A fenced garden plot with a gate; `text` on the gate's number plate.
+    case g8Plot
+    /// A bed overgrown with dandelions and thistles, a hand pulling one out by the roots.
+    case g8Weeds
+    /// A gardener in a straw hat holding up a crate of vegetables; `text` on the crate's tag.
+    case g8Gardener
+    /// A path being laid: tiles, a string between pegs, a hand lowering the next tile, a barrow.
+    case g8LayPath
+    /// A hand scattering seeds into a furrow.
+    case g8Sowing
+    /// A slice of ground: grass, dark earth with a worm and roots, clay and stones, a spade.
+    case g8SoilCut
+    /// A seed packet (`icons` picture) pouring seeds into a hand.
+    case g8SeedPacket
+    /// Two patches side by side: dry cracked ground with a wilted sprout (cross) and dark rich
+    /// ground with a laden plant (tick).
+    case g8Fertile
+
+    // Town hall square (PalacePropsG8Square.swift, PalacePropsG8SquarePeople.swift)
+    /// A doorway open on two voting booths and a ballot box, a ballot-box sign over it.
+    case g8PollingStation
+    /// An election poster board on two posts: `text` (date) on top, `count` numbered posters.
+    case g8ElectionBoard
+    /// A campaign stand under a parasol: `text` on the cloth, `tone` the party colour, balloons.
+    case g8PartyStand
+    /// People marching with a long banner and placards; `icons` the placards' pictures.
+    case g8March
+    /// An open birdcage on a plinth, a bird flying out of it.
+    case g8Cage
+    /// A cloth banner hanging from a rod: `icons` (first one big), `tone` the cloth.
+    case g8Banner
+    /// A person with the gold chain of office, waving. `variant` skin and hair.
+    case g8Mayor
+    /// A hand holding a card: `tone` header with `icons` and `caption`, `lines` printed, a barcode.
+    case g8PollCard
+    /// A ballot paper with lists of boxes, a hand colouring box `highlight` with a red pencil.
+    case g8Ballot
+    /// Someone with a megaphone, the other arm shielding a smaller person behind them.
+    case g8Megaphone
+    /// A notice board with a poster: two different people, a big equals sign between them.
+    case g8Equal
+
+    // Roundabout (PalacePropsG8Traffic.swift, PalacePropsG8Street.swift)
+    /// A traffic light on a pole; `highlight` the lit lamp (0 red, 1 amber, 2 green).
+    case g8TrafficLight
+    /// A road sign on a pole: `accessory` "noEntry" | "giveWay" | "zebra" | "roundabout".
+    case g8TrafficSign
+    /// A blue direction sign: a ring with three exits `labels`, exit `highlight` bold with an arrow.
+    case g8ExitSign
+    /// Someone walking with a shopping bag under the round blue footpath sign. `variant`.
+    case g8Pedestrian
+    /// A parent and child at the kerb looking both ways, an arrow showing the way across.
+    case g8KerbCross
+    /// A zebra crossing in perspective (`count` bars) with the blue crossing sign at the kerb.
+    case g8Zebra
+    /// A board: a muddled junction under a red cross beside a tidy roundabout with an eye and a tick.
+    case g8Overview
+    /// Busy traffic round a roundabout: a bus, cars and cyclists.
+    case g8RingTraffic
+    /// A car waiting at shark's teeth under the give-way sign while a cyclist rides past first.
+    case g8GiveWay
+    /// A car overtaking a cyclist, a curved arrow from behind to in front.
+    case g8Overtake
+    /// A parked car with a slip under the wiper, shown big in a close-up with the amount `text`.
+    case g8Fine
+
+    // Dike (PalacePropsG8Water.swift, PalacePropsG8Polder.swift)
+    /// A dark storm cloud with lightning and thick slanting rain.
+    case g8Storm
+    /// A farm and a tree standing in floodwater up to the windows.
+    case g8FloodedFarm
+    /// A water-level gauge in the water, its middle mark (`labels` +1, 0, -1) at the surface.
+    case g8Gauge
+    /// Old water levels as dashed lines with years (`labels`) and a big arrow up to the surface.
+    case g8RisingWater
+    /// A dike in cross-section: stones on the water side, a road with a cyclist on top, sheep.
+    case g8Dike
+    /// A pumping station with the water board's badge on its door and flag, a pipe carrying water away.
+    case g8PumpStation
+    /// A house far below a dashed water line, a double arrow with the depth `text`.
+    case g8LowLand
+    /// A rain gauge on a post under a raining cloud; `text` the amount on a tag.
+    case g8RainGauge
+    /// An information board on legs: `caption`, `icons`, `labels`, `text` as on a sign.
+    case g8InfoBoard
+    /// A grown-up holding an umbrella over a child in the rain. `variant`.
+    case g8Umbrella
+    /// Sandbags stopping water before a door, a hand laying the last one, a tick on the dry side.
+    case g8Sandbags
+
+    // Ferry (PalacePropsG8Ferry.swift, PalacePropsG8FerryPlan.swift)
+    /// A flat city ferry side-on with a wheelhouse on legs, cyclists and people on deck.
+    case g8FerryBoat
+    /// A village on the far bank with a landing stage, an arrow from this side pointing over.
+    case g8FarBank
+    /// A white sign high on a pole with `icons` (bus, tram, train, ferry) in a 2 × 2 grid.
+    case g8TransportSign
+    /// A blue sign: two banks, a dashed arc with the ferry from landing to landing, `text` duration.
+    case g8CrossingSign
+    /// A traveller with a suitcase under a red map pin with a tick. `variant`.
+    case g8Arrived
+    /// A clock showing `time` over a 0–24 day line with a red pin at that moment.
+    case g8Moment
+    /// A board: good weather → ferry with a tick, storm → ferry with a cross. `icons` [good, bad, what].
+    case g8Depends
+    /// A paper map: the short way over a broken bridge crossed out, a long red route round; `labels` A, B.
+    case g8DetourMap
+    /// An open agenda, a hand writing a new block (first of `icons`) into an empty hour.
+    case g8Agenda
+    /// Two calendar sheets: date `labels`[0] crossed out, an arrow to date `labels`[1] ringed green.
+    case g8Postpone
+    /// A phone held sideways whose screen shows `icons`, `labels` and `text` like a sign.
+    case g8HandPhone
+
+    // Lookout tower (PalacePropsG8Tower.swift, PalacePropsG8TowerPeople.swift)
+    /// Coin binoculars on a post with the two round windows of the view they show above them.
+    case g8Binoculars
+    /// An old sepia photo of canal houses and a horse and cart on a stand; `text` the year.
+    case g8OldPhoto
+    /// A board with a progress bar filled `count` percent from `labels`[0] to `labels`[1], stars rising.
+    case g8ProgressBoard
+    /// A board asking `text` with three pinned speech bubbles: thumb up, thumb down, heart.
+    case g8OpinionBoard
+    /// A wooden signpost: a big arrow pointing ahead with `text` (a year to come), a rising sun.
+    case g8Signpost
+    /// A thought bubble trailing down to the person under it: a diploma (`text`) and a tick.
+    case g8ThoughtBubble
+    /// A rainbow behind a grey cloud and a smiling sun breaking out over it.
+    case g8Sunrise
+    /// Someone on their way who looks back along a dotted road past pins with `icons`. `variant`.
+    case g8LookBack
+    /// A notebook on a lectern: `caption` (a date) with a firework, a list of plans (`icons`) with empty boxes.
+    case g8Resolutions
+    /// Someone proud: chin up, hands on hips, a gold medal, sparkles. `variant`.
+    case g8Proud
+    /// Stairs climbing up to a flag planted on the top step, little stars round it.
+    case g8Summit
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -721,6 +867,16 @@ struct PalacePropView: View, Equatable {
                  .g4HotelBed, .g4KeyRack, .g4Receptionist, .g4PriceCard, .g4Guest, .g4Laptop,
                  .g4Menu, .g4Plate, .g4Table, .g4Waiter:
                 G4Props.draw(prop.kind, pen, p)
+            case .g8Shed, .g8Greenhouse, .g8Clubhouse, .g8Plot, .g8Weeds, .g8Gardener, .g8LayPath, .g8Sowing, .g8SoilCut,
+                 .g8SeedPacket, .g8Fertile, .g8PollingStation, .g8ElectionBoard, .g8PartyStand, .g8March, .g8Cage, .g8Banner,
+                 .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal, .g8TrafficLight, .g8TrafficSign, .g8ExitSign,
+                 .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine,
+                 .g8Storm, .g8FloodedFarm, .g8Gauge, .g8RisingWater, .g8Dike, .g8PumpStation, .g8LowLand, .g8RainGauge,
+                 .g8InfoBoard, .g8Umbrella, .g8Sandbags, .g8FerryBoat, .g8FarBank, .g8TransportSign, .g8CrossingSign,
+                 .g8Arrived, .g8Moment, .g8Depends, .g8DetourMap, .g8Agenda, .g8Postpone, .g8HandPhone, .g8Binoculars,
+                 .g8OldPhoto, .g8ProgressBoard, .g8OpinionBoard, .g8Signpost, .g8ThoughtBubble, .g8Sunrise, .g8LookBack,
+                 .g8Resolutions, .g8Proud, .g8Summit:
+                G8Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
