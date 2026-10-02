@@ -7,7 +7,7 @@ nonisolated struct KaartColors: Sendable {
     let tree, treeDark, waterLabel, landLabel: Color
 
     init(night: Bool) {
-        let h = { (v: UInt32) in StadInk.hex(v) }
+        let h = { (v: UInt32) in Ink.hex(v) }
         ground = h(night ? 0x20263A : 0xEDE7D6)
         north = h(night ? 0x262C3F : 0xE3DCC8)
         northEdge = h(night ? 0x3A3F4E : 0x6E6B64)
@@ -103,30 +103,30 @@ struct KaartMapCanvas: View, Equatable {
         ctx.fill(m.treesDark, with: .color(c.treeDark))
         ctx.fill(m.trees, with: .color(c.tree))
 
-        let lampGreen = StadInk.hex(0x2B3A33)
+        let lampGreen = Ink.hex(0x2B3A33)
         for q in m.lamps {
             if night {
-                let glow = Gradient(colors: [StadInk.hex(0xF6D27A, 0.6), StadInk.hex(0xF6D27A, 0)])
+                let glow = Gradient(colors: [Ink.hex(0xF6D27A, 0.6), Ink.hex(0xF6D27A, 0)])
                 ctx.fill(
                     Path(ellipseIn: CGRect(x: q.x - 28, y: q.y - 28, width: 56, height: 56)),
                     with: .radialGradient(glow, center: q, startRadius: 0, endRadius: 27.7)
                 )
             }
             let dot = Path(ellipseIn: CGRect(x: q.x - 2.25, y: q.y - 2.25, width: 4.5, height: 4.5))
-            ctx.fill(dot, with: .color(StadInk.hex(night ? 0xF6D27A : 0xDDE6E8)))
+            ctx.fill(dot, with: .color(Ink.hex(night ? 0xF6D27A : 0xDDE6E8)))
             ctx.stroke(dot, with: .color(lampGreen), lineWidth: 1.5)
         }
         for (q, coat, skin) in m.people {
             var p = ctx
             p.translateBy(x: q.x - 6, y: q.y - 20)
-            p.fill(Path(ellipseIn: CGRect(x: 2.6, y: 0.6, width: 6.8, height: 6.8)), with: .color(StadInk.hex(skin)))
-            p.fill(KaartArt.personBody, with: .color(StadInk.hex(coat)))
+            p.fill(Path(ellipseIn: CGRect(x: 2.6, y: 0.6, width: 6.8, height: 6.8)), with: .color(Ink.hex(skin)))
+            p.fill(KaartArt.personBody, with: .color(Ink.hex(coat)))
         }
         for (q, frame) in m.bikes {
             var b = ctx
             b.translateBy(x: q.x - 12, y: q.y - 14)
-            b.stroke(KaartArt.bikeWheels, with: .color(StadInk.hex(0x1E1E1C)), lineWidth: 1.4)
-            b.stroke(KaartArt.bikeFrame, with: .color(StadInk.hex(frame)), style: StrokeStyle(lineWidth: 1.8, lineCap: .round, lineJoin: .round))
+            b.stroke(KaartArt.bikeWheels, with: .color(Ink.hex(0x1E1E1C)), lineWidth: 1.4)
+            b.stroke(KaartArt.bikeFrame, with: .color(Ink.hex(frame)), style: StrokeStyle(lineWidth: 1.8, lineCap: .round, lineJoin: .round))
         }
     }
 }
@@ -184,7 +184,7 @@ struct KaartPlaceView: View, Equatable {
     private var badge: some View {
         let (fill, fg): (Color, Color) = switch status {
         case .current: (Theme.orange, Theme.ink)
-        case .fading: (StadInk.hex(0xD9D6CC), Theme.muted)
+        case .fading: (Ink.hex(0xD9D6CC), Theme.muted)
         default: (Theme.note, Theme.ink)
         }
         return Circle()
@@ -200,12 +200,12 @@ struct KaartPlaceView: View, Equatable {
     private var numberTag: some View {
         Text("\(place.n)")
             .font(Fonts.label(11))
-            .foregroundStyle(night ? StadInk.hex(0xC9CDD8) : Theme.muted)
+            .foregroundStyle(night ? Ink.hex(0xC9CDD8) : Theme.muted)
             .padding(.horizontal, 4)
-            .background(night ? StadInk.hex(0x2E3446) : Theme.note, in: RoundedRectangle(cornerRadius: 2))
+            .background(night ? Ink.hex(0x2E3446) : Theme.note, in: RoundedRectangle(cornerRadius: 2))
             .overlay(
                 RoundedRectangle(cornerRadius: 2)
-                    .stroke(night ? StadInk.hex(0x5A6175) : Theme.tapeOther, style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
+                    .stroke(night ? Ink.hex(0x5A6175) : Theme.tapeOther, style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
             )
             .fixedSize()
     }
@@ -246,20 +246,20 @@ struct KaartHouseCanvas: View, Equatable {
         let trim: UInt32 = night ? 0xB9B4A8 : 0xEFEBE2
         let glass: UInt32 = night ? 0x232B3B : 0x3E4C55
         let palette = GevelPalette(
-            body: StadInk.hex(Gevelkit.shade(geo.color, f)),
-            door: StadInk.hex(Gevelkit.shade(geo.door, f)),
-            awning: StadInk.hex(Gevelkit.shade(geo.awning, f)),
-            trim: StadInk.hex(trim),
-            glass: StadInk.hex(glass),
-            litGlass: StadInk.hex(night && status == .built ? 0xF6D27A : glass),
-            box: StadInk.hex(0x3F5A4A),
-            bloom: StadInk.hex(0xC8261B),
+            body: Ink.hex(Ink.shade(geo.color, f)),
+            door: Ink.hex(Ink.shade(geo.door, f)),
+            awning: Ink.hex(Ink.shade(geo.awning, f)),
+            trim: Ink.hex(trim),
+            glass: Ink.hex(glass),
+            litGlass: Ink.hex(night && status == .built ? 0xF6D27A : glass),
+            box: Ink.hex(0x3F5A4A),
+            bloom: Ink.hex(0xC8261B),
             snow: nil
         )
-        let side = StadInk.hex(Gevelkit.shade(geo.color, night ? 0.42 : 0.74))
-        let roof = StadInk.hex(Gevelkit.shade(geo.roofColor, night ? 0.6 : 1))
-        let extras = geo.spFills.map { StadInk.hex(Gevelkit.shade($0, f)) }
-        let poleColor = StadInk.hex(night ? 0xA8A69E : 0x5F5E5A)
+        let side = Ink.hex(Ink.shade(geo.color, night ? 0.42 : 0.74))
+        let roof = Ink.hex(Ink.shade(geo.roofColor, night ? 0.6 : 1))
+        let extras = geo.spFills.map { Ink.hex(Ink.shade($0, f)) }
+        let poleColor = Ink.hex(night ? 0xA8A69E : 0x5F5E5A)
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             ctx.translateBy(x: pad, y: pad)
@@ -271,7 +271,7 @@ struct KaartHouseCanvas: View, Equatable {
                 house.addFilter(.contrast(0.82))
                 house.addFilter(.brightness(0.04))
             }
-            house.fill(geo.shadow, with: .color(StadInk.hex(0x1E1E1C, 0.16)))
+            house.fill(geo.shadow, with: .color(Ink.hex(0x1E1E1C, 0.16)))
             house.fill(geo.side, with: .color(side))
             house.fill(geo.roof, with: .color(roof))
             GevelPainter.draw(geo.gevel, palette: palette, in: &house)
@@ -279,9 +279,9 @@ struct KaartHouseCanvas: View, Equatable {
             house.fill(geo.spB, with: .color(extras[1]))
             house.fill(geo.spC, with: .color(extras[2]))
             if let scaffold {
-                ctx.fill(scaffold.net, with: .color(StadInk.hex(0xF2711C, 0.22)))
+                ctx.fill(scaffold.net, with: .color(Ink.hex(0xF2711C, 0.22)))
                 ctx.stroke(scaffold.poles, with: .color(poleColor), style: StrokeStyle(lineWidth: 3.2, lineCap: .round))
-                ctx.fill(scaffold.planks, with: .color(StadInk.hex(0xC9A15B)))
+                ctx.fill(scaffold.planks, with: .color(Ink.hex(0xC9A15B)))
             }
         }
         .frame(width: (geo.spriteSize.width + 2 * pad) * zoom, height: (geo.spriteSize.height + 2 * pad) * zoom)
@@ -299,11 +299,11 @@ struct KaartPlotCanvas: View, Equatable {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             let base = KaartArt.base(outline)
-            ctx.fill(base, with: .color(night ? StadInk.hex(0xA0AABE, 0.10) : StadInk.hex(0xC9C4B8, 0.28)))
-            ctx.stroke(base, with: .color(StadInk.hex(night ? 0x6C7385 : 0xB4B2A9)), style: StrokeStyle(lineWidth: 1.4, dash: [3, 3]))
+            ctx.fill(base, with: .color(night ? Ink.hex(0xA0AABE, 0.10) : Ink.hex(0xC9C4B8, 0.28)))
+            ctx.stroke(base, with: .color(Ink.hex(night ? 0x6C7385 : 0xB4B2A9)), style: StrokeStyle(lineWidth: 1.4, dash: [3, 3]))
             let shape = KaartArt.outline(outline)
-            ctx.fill(shape, with: .color(night ? Color.white.opacity(0.05) : StadInk.hex(0xFFFDF6, 0.6)))
-            ctx.stroke(shape, with: .color(StadInk.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
+            ctx.fill(shape, with: .color(night ? Color.white.opacity(0.05) : Ink.hex(0xFFFDF6, 0.6)))
+            ctx.stroke(shape, with: .color(Ink.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
         }
         .frame(width: 60 * zoom, height: 60 * zoom)
         .allowsHitTesting(false)

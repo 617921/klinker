@@ -59,7 +59,7 @@ struct StadPlaceSheet: View {
         .scrollBounceBehavior(.basedOnSize)
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .presentationBackground(StadInk.hex(0xFBFAF7))
+        .presentationBackground(Ink.hex(0xFBFAF7))
         .sheet(item: $openWord) { word in
             WordDetailView(word: word)
         }
@@ -87,7 +87,7 @@ struct StadPlaceSheet: View {
         let (fill, fg): (Color, Color) = switch status {
         case .built: (Theme.ink, Theme.onInk)
         case .current: (Theme.orange, Theme.ink)
-        case .fading: (StadInk.hex(0xD9D6CC), Theme.ink)
+        case .fading: (Ink.hex(0xD9D6CC), Theme.ink)
         case .locked: (Color.white, Theme.muted)
         }
         return ZStack {
@@ -119,10 +119,10 @@ struct StadPlaceSheet: View {
             (fill, fg, line, dot) = (Theme.okBg, Theme.okText, Theme.okLine, Theme.okLine)
         case .current:
             text = "In aanbouw · \(learned) van \(total)"
-            (fill, fg, line, dot) = (StadInk.hex(0xFCE3CF), Theme.orangeText, Theme.orange, Theme.orange)
+            (fill, fg, line, dot) = (Ink.hex(0xFCE3CF), Theme.orangeText, Theme.orange, Theme.orange)
         case .fading:
             text = "Verbleekt · \(fading) \(fading == 1 ? "woord" : "woorden") bijna vergeten"
-            (fill, fg, line, dot) = (StadInk.hex(0xECEAE4), Theme.muted, Theme.tapeOther, Theme.tapeOther)
+            (fill, fg, line, dot) = (Ink.hex(0xECEAE4), Theme.muted, Theme.tapeOther, Theme.tapeOther)
         case .locked:
             text = n > 1 ? "Op slot · na vel \(n - 1)" : "Op slot"
             (fill, fg, line, dot) = (Color.clear, Theme.muted, Theme.dashed, Theme.dashed)

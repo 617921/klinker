@@ -94,11 +94,3 @@ struct StadRoundButton: View {
         .accessibilityLabel(label)
     }
 }
-
-/// Night follows the clock: 20:00–7:00.
-enum StadClock {
-    static func isNight(_ date: Date = .now) -> Bool {
-        let hour = Calendar.current.component(.hour, from: date)
-        return hour >= 20 || hour < 7
-    }
-}

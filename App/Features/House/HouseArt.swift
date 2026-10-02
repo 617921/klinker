@@ -14,11 +14,11 @@ nonisolated enum HouseArt {
     static func layers(_ id: String) -> [HouseLayer] { table[id] ?? [] }
 
     private static func f(_ d: String, _ color: UInt32) -> HouseLayer {
-        HouseLayer(path: HouseSVG.path(d), color: color, stroke: nil)
+        HouseLayer(path: SVGPath.parse(d), color: color, stroke: nil)
     }
 
     private static func s(_ d: String, _ color: UInt32, _ width: CGFloat = 2.5) -> HouseLayer {
-        HouseLayer(path: HouseSVG.path(d), color: color, stroke: width)
+        HouseLayer(path: SVGPath.parse(d), color: color, stroke: width)
     }
 
     /// Draws `layers` fitted into `size` (SVG `meet`): bottom-aligned for floor objects, centred for wall
@@ -31,13 +31,13 @@ nonisolated enum HouseArt {
         c.scaleBy(x: k, y: k)
         for layer in layers {
             if locked {
-                c.stroke(layer.path, with: .color(HouseInk.hex(0x8E8B83)),
+                c.stroke(layer.path, with: .color(Ink.hex(0x8E8B83)),
                          style: StrokeStyle(lineWidth: 1.4, lineJoin: .round, dash: [3, 2.5]))
             } else if let width = layer.stroke {
-                c.stroke(layer.path, with: .color(HouseInk.hex(layer.color)),
+                c.stroke(layer.path, with: .color(Ink.hex(layer.color)),
                          style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
             } else {
-                c.fill(layer.path, with: .color(HouseInk.hex(layer.color)))
+                c.fill(layer.path, with: .color(Ink.hex(layer.color)))
             }
         }
     }
@@ -282,7 +282,7 @@ struct HousePlacedArt: View {
                 if hanging {
                     let gap = max(0, slot.rect.minY - slot.room.ceiling(atX: slot.rect.midX))
                     Rectangle()
-                        .fill(HouseInk.hex(0xA88442))
+                        .fill(Ink.hex(0xA88442))
                         .frame(width: 1.4, height: gap + 1)
                         .offset(y: -gap)
                 }

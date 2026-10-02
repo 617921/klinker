@@ -40,7 +40,7 @@ struct HouseShareSheet: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(HouseInk.hex(0x2B2A27).ignoresSafeArea())
+        .background(Ink.hex(0x2B2A27).ignoresSafeArea())
         .task {
             rendered = HouseRenderedPostcard.make(state: state, night: night, scale: displayScale)
         }
@@ -121,7 +121,7 @@ struct HouseStamp: View {
         VStack(spacing: 2) {
             Text("682")
                 .font(Fonts.cta(17))
-                .foregroundStyle(HouseInk.hex(0xC8261B))
+                .foregroundStyle(Ink.hex(0xC8261B))
             Text("NL")
                 .font(Fonts.label(11))
                 .foregroundStyle(Theme.ink)
@@ -129,7 +129,7 @@ struct HouseStamp: View {
         .frame(width: 52, height: 62)
         .background(Color.white)
         .overlay {
-            Rectangle().strokeBorder(HouseInk.hex(0xC8261B), style: StrokeStyle(lineWidth: 2, dash: [4, 3]))
+            Rectangle().strokeBorder(Ink.hex(0xC8261B), style: StrokeStyle(lineWidth: 2, dash: [4, 3]))
         }
     }
 }

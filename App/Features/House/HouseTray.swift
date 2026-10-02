@@ -61,7 +61,7 @@ struct HouseTrayCard: View {
             .frame(width: 96, height: 114, alignment: .top)
             .background {
                 RoundedRectangle(cornerRadius: 3)
-                    .fill(!unlocked ? Color.clear : (slot != nil || flying) ? HouseInk.hex(0xE9E5DA) : Color.white)
+                    .fill(!unlocked ? Color.clear : (slot != nil || flying) ? Ink.hex(0xE9E5DA) : Color.white)
             }
             .overlay {
                 if !unlocked {

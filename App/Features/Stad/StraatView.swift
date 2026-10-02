@@ -29,7 +29,7 @@ struct StraatView: View {
                 scene
             }
             .frame(height: Self.sceneHeight)
-            .background(StadInk.hex(0xBCCDD6))
+            .background(Ink.hex(0xBCCDD6))
             .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Jouw straat. Tik op een huis.")
@@ -207,7 +207,7 @@ private struct StraatInfoCard: View {
             .foregroundStyle(Theme.muted)
             .fixedSize(horizontal: false, vertical: true)
         Line()
-            .stroke(StadInk.hex(0xD3D1C7), style: StrokeStyle(lineWidth: 2, dash: [2, 3]))
+            .stroke(Ink.hex(0xD3D1C7), style: StrokeStyle(lineWidth: 2, dash: [2, 3]))
             .frame(height: 2)
         Button {
             Speech.shared.say(stone.nl)

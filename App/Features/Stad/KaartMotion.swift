@@ -178,7 +178,7 @@ private struct KaartRiaBubble: View {
         .frame(width: 220, alignment: .leading)
         .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
         .overlay(alignment: .topLeading) {
-            Rectangle().fill(StadInk.hex(0xC8261B, 0.9)).frame(width: 40, height: 12).rotationEffect(.degrees(-6)).offset(x: 16, y: -7)
+            Rectangle().fill(Ink.hex(0xC8261B, 0.9)).frame(width: 40, height: 12).rotationEffect(.degrees(-6)).offset(x: 16, y: -7)
         }
         .rotationEffect(.degrees(-1.2))
         .shadow(color: Theme.ink.opacity(0.25), radius: 10, y: 8)
@@ -194,10 +194,10 @@ private struct KaartBargeSprite: View, Equatable {
     var body: some View {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
-            ctx.fill(KaartArt.bargeHull, with: .color(StadInk.hex(night ? 0x151515 : 0x2C2C2A)))
-            ctx.fill(Path(CGRect(x: 16, y: 5, width: 14, height: 10)), with: .color(StadInk.hex(0xC9A15B)))
-            ctx.fill(Path(CGRect(x: 33, y: 5, width: 14, height: 10)), with: .color(StadInk.hex(0x7B3F2E)))
-            ctx.fill(Path(CGRect(x: 50, y: 5, width: 12, height: 10)), with: .color(StadInk.hex(0xEFEBE2)))
+            ctx.fill(KaartArt.bargeHull, with: .color(Ink.hex(night ? 0x151515 : 0x2C2C2A)))
+            ctx.fill(Path(CGRect(x: 16, y: 5, width: 14, height: 10)), with: .color(Ink.hex(0xC9A15B)))
+            ctx.fill(Path(CGRect(x: 33, y: 5, width: 14, height: 10)), with: .color(Ink.hex(0x7B3F2E)))
+            ctx.fill(Path(CGRect(x: 50, y: 5, width: 12, height: 10)), with: .color(Ink.hex(0xEFEBE2)))
         }
         .frame(width: 72 * zoom, height: 20 * zoom)
     }
@@ -211,12 +211,12 @@ private struct KaartBoatSprite: View, Equatable {
             ctx.scaleBy(x: zoom, y: zoom)
             ctx.translateBy(x: 6, y: 0)
             ctx.stroke(KaartArt.boatWake, with: .color(.white.opacity(0.7)), lineWidth: 1.5)
-            ctx.fill(KaartArt.boatHull, with: .color(StadInk.hex(0x6B4A2E)))
-            ctx.stroke(KaartArt.boatStripe, with: .color(StadInk.hex(0xF4F1EA)), lineWidth: 1.5)
-            ctx.fill(KaartArt.boatCabin, with: .color(StadInk.hex(0x2F4B3A)))
-            ctx.fill(Path(ellipseIn: CGRect(x: 22.6, y: 3.6, width: 4.8, height: 4.8)), with: .color(StadInk.hex(0xE8C4A0)))
-            ctx.fill(Path(ellipseIn: CGRect(x: 22.6, y: 8.1, width: 4.8, height: 4.8)), with: .color(StadInk.hex(0x8C5A3C)))
-            ctx.fill(KaartArt.boatFlag, with: .color(StadInk.hex(0xAE1C28)))
+            ctx.fill(KaartArt.boatHull, with: .color(Ink.hex(0x6B4A2E)))
+            ctx.stroke(KaartArt.boatStripe, with: .color(Ink.hex(0xF4F1EA)), lineWidth: 1.5)
+            ctx.fill(KaartArt.boatCabin, with: .color(Ink.hex(0x2F4B3A)))
+            ctx.fill(Path(ellipseIn: CGRect(x: 22.6, y: 3.6, width: 4.8, height: 4.8)), with: .color(Ink.hex(0xE8C4A0)))
+            ctx.fill(Path(ellipseIn: CGRect(x: 22.6, y: 8.1, width: 4.8, height: 4.8)), with: .color(Ink.hex(0x8C5A3C)))
+            ctx.fill(KaartArt.boatFlag, with: .color(Ink.hex(0xAE1C28)))
         }
         .frame(width: 48 * zoom, height: 16 * zoom)
     }
@@ -229,13 +229,13 @@ private struct KaartCraneSprite: View, Equatable {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             let orange = Color(.sRGB, red: 242 / 255, green: 113 / 255, blue: 28 / 255)
-            let grey = StadInk.hex(0x5F5E5A)
+            let grey = Ink.hex(0x5F5E5A)
             ctx.stroke(KaartArt.craneLattice, with: .color(orange), style: StrokeStyle(lineWidth: 2, lineJoin: .round))
             ctx.stroke(KaartArt.craneJib, with: .color(orange), style: StrokeStyle(lineWidth: 2, lineJoin: .round))
             ctx.stroke(KaartArt.craneCables, with: .color(grey), lineWidth: 1.2)
             ctx.fill(KaartArt.craneWeights, with: .color(grey))
-            ctx.fill(KaartArt.craneCabin, with: .color(StadInk.hex(0x1E1E1C)))
-            ctx.fill(KaartArt.craneWindow, with: .color(StadInk.hex(0xA9CBE0)))
+            ctx.fill(KaartArt.craneCabin, with: .color(Ink.hex(0x1E1E1C)))
+            ctx.fill(KaartArt.craneWindow, with: .color(Ink.hex(0xA9CBE0)))
         }
         .frame(width: 160 * zoom, height: 146 * zoom)
     }
@@ -248,9 +248,9 @@ private struct KaartHookSprite: View, Equatable {
     var body: some View {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
-            ctx.stroke(KaartArt.hookLine, with: .color(StadInk.hex(0x1E1E1C)), lineWidth: 1.2)
-            ctx.fill(KaartArt.hook, with: .color(StadInk.hex(0x1E1E1C)))
-            ctx.fill(KaartArt.hookLoad, with: .color(StadInk.hex(0x8A6A3E)))
+            ctx.stroke(KaartArt.hookLine, with: .color(Ink.hex(0x1E1E1C)), lineWidth: 1.2)
+            ctx.fill(KaartArt.hook, with: .color(Ink.hex(0x1E1E1C)))
+            ctx.fill(KaartArt.hookLoad, with: .color(Ink.hex(0x8A6A3E)))
         }
         .frame(width: 40 * zoom, height: 70 * zoom)
     }
@@ -263,8 +263,8 @@ private struct KaartMillSails: View, Equatable {
     var body: some View {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
-            ctx.fill(KaartArt.millSails, with: .color(night ? Color.white.opacity(0.05) : StadInk.hex(0xFFFDF6, 0.6)))
-            ctx.stroke(KaartArt.millSails, with: .color(StadInk.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
+            ctx.fill(KaartArt.millSails, with: .color(night ? Color.white.opacity(0.05) : Ink.hex(0xFFFDF6, 0.6)))
+            ctx.stroke(KaartArt.millSails, with: .color(Ink.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
         }
         .frame(width: 44 * zoom, height: 44 * zoom)
     }
@@ -277,13 +277,13 @@ private struct KaartRiaSprite: View, Equatable {
     var body: some View {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom * 38 / 70, y: zoom * 34 / 62)
-            ctx.stroke(KaartArt.riaWheels, with: .color(StadInk.hex(0x1E1E1C)), lineWidth: 3)
-            ctx.stroke(KaartArt.riaFrame, with: .color(StadInk.hex(0xC8261B)), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
-            ctx.fill(KaartArt.riaBag, with: .color(StadInk.hex(0xF2711C)))
-            ctx.fill(KaartArt.riaLetter, with: .color(StadInk.hex(0xFFFDF6)))
-            ctx.stroke(KaartArt.riaBody, with: .color(StadInk.hex(0x1F3A6B)), style: StrokeStyle(lineWidth: 6, lineCap: .round))
-            ctx.fill(KaartArt.riaHead, with: .color(StadInk.hex(0xC99A74)))
-            ctx.fill(KaartArt.riaCap, with: .color(StadInk.hex(0xF2711C)))
+            ctx.stroke(KaartArt.riaWheels, with: .color(Ink.hex(0x1E1E1C)), lineWidth: 3)
+            ctx.stroke(KaartArt.riaFrame, with: .color(Ink.hex(0xC8261B)), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+            ctx.fill(KaartArt.riaBag, with: .color(Ink.hex(0xF2711C)))
+            ctx.fill(KaartArt.riaLetter, with: .color(Ink.hex(0xFFFDF6)))
+            ctx.stroke(KaartArt.riaBody, with: .color(Ink.hex(0x1F3A6B)), style: StrokeStyle(lineWidth: 6, lineCap: .round))
+            ctx.fill(KaartArt.riaHead, with: .color(Ink.hex(0xC99A74)))
+            ctx.fill(KaartArt.riaCap, with: .color(Ink.hex(0xF2711C)))
         }
         .frame(width: 38 * zoom, height: 34 * zoom)
     }

@@ -99,7 +99,7 @@ struct HouseCaption: View {
         VStack(alignment: .leading, spacing: 3) {
             Text("VIA DE HIJSBALK")
                 .font(Fonts.cta(15))
-                .foregroundStyle(HouseInk.hex(0xFAC775))
+                .foregroundStyle(Ink.hex(0xFAC775))
             Text(text)
                 .font(.system(size: 13))
                 .foregroundStyle(Theme.onInk)

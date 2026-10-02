@@ -193,13 +193,13 @@ nonisolated struct KaartHouseGeometry: Sendable {
 
         case .park:
             W = 100; B = 104; x1 = 103; cx = 53; yb = 56; topY = 12; wallTop = 56
-            spA = StadSVG.path("M10 92H96L102 104H4Z")
+            spA = SVGPath.parse("M10 92H96L102 104H4Z")
             for x in [14.0, 31, 50, 69, 86] { g.trim.addPath(rect(x, 58, 3, 34)) }
             g.trim.addPath(rect(2, 56, 99, 4))
             g.deco.addPath(rect(12, 80, 82, 2.5))
             g.deco.addPath(dot(53, 22, 3))
-            g.deco.addPath(StadSVG.path("M52.4 12h1.2v10h-1.2Z"))
-            spB = StadSVG.path("M2 58L53 26L104 58Z")
+            g.deco.addPath(SVGPath.parse("M52.4 12h1.2v10h-1.2Z"))
+            spB = SVGPath.parse("M2 58L53 26L104 58Z")
             for (x, y) in [(14.0, 63.0), (30, 64.5), (46, 65), (62, 65), (78, 64.5), (94, 63)] { spC.addPath(dot(x, y, 2.5)) }
             badgeAt = CGPoint(x: 0, y: 50)
             bangAt = CGPoint(x: x1, y: 40)
@@ -212,7 +212,7 @@ nonisolated struct KaartHouseGeometry: Sendable {
             g.deco.addPath(rect(18, 84, 56, 4)); g.deco.addPath(rect(22, 88, 2.5, 12)); g.deco.addPath(rect(68, 88, 2.5, 12))
             spA = dot(106, 34, 9)
             spB = rect(6, 42, 80, 7)
-            spB.addPath(StadSVG.path("M6 42L14 36H92L86 42Z"))
+            spB.addPath(SVGPath.parse("M6 42L14 36H92L86 42Z"))
             spC = rect(102, 30, 8, 2.5)
             spC.addPath(rect(104.8, 30, 2.4, 9))
             badgeAt = CGPoint(x: 6, y: 40)
@@ -319,7 +319,7 @@ nonisolated struct KaartHouseGeometry: Sendable {
         case (.markt, _): spFills = [0x6B4A2E, 0xF2711C, 0x5E8C45]
         case (.park, _): spFills = [0xD9CDB4, 0x2F4B3A, 0xF2711C]
         case (.tram, _): spFills = [0xF6D27A, 0x1E1E1C, 0x1E1E1C]
-        case (_, .station): spFills = [Gevelkit.shade(color, 0.86), 0x2C2C2A, 0xEFEBE2]
+        case (_, .station): spFills = [Ink.shade(color, 0.86), 0x2C2C2A, 0xEFEBE2]
         case (_, .flag): spFills = [0xAE1C28, 0xFFFFFF, 0x21468B]
         default: spFills = [0x1E1E1C, 0x1E1E1C, 0x1E1E1C]
         }

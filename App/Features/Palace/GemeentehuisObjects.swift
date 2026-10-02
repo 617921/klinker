@@ -57,7 +57,7 @@ struct GemeentehuisObjectArt: View {
         ZStack(alignment: .topLeading) {
             PalaceArtwork(marks: Self.idSignMarks, width: 56, height: 44)
             PalaceLettering(lines: ["ID", "VERPLICHT"], font: .custom("AvenirNextCondensed-Heavy", fixedSize: 11),
-                            color: PalaceInk.hex(0x7A1A12), width: 46, height: 28, spacing: -2, tracking: 0.3)
+                            color: Ink.hex(0x7A1A12), width: 46, height: 28, spacing: -2, tracking: 0.3)
                 .palaceAt(5, 8)
         }
         .frame(width: 56, height: 44, alignment: .topLeading)

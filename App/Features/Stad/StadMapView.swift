@@ -104,7 +104,7 @@ struct StadMapView: View {
                     .padding(.horizontal, 14)
                     .frame(minHeight: 44)
                     .foregroundStyle(fresh ? Theme.okText : Theme.orangeText)
-                    .background(fresh ? Theme.okBg : StadInk.hex(0xFCE3CF), in: Capsule())
+                    .background(fresh ? Theme.okBg : Ink.hex(0xFCE3CF), in: Capsule())
                     .overlay(Capsule().stroke(fresh ? Theme.okLine : Theme.orange, lineWidth: 2))
                     .contentShape(Capsule())
             }
@@ -152,7 +152,7 @@ struct StadMapView: View {
         .overlay {
             if night {
                 RadialGradient(
-                    colors: [StadInk.hex(0x0A0E1E, 0), StadInk.hex(0x0A0E1E, 0.42)],
+                    colors: [Ink.hex(0x0A0E1E, 0), Ink.hex(0x0A0E1E, 0.42)],
                     center: .center, startRadius: 120, endRadius: 360
                 )
                 .allowsHitTesting(false)
@@ -349,15 +349,15 @@ private struct KaartLegend: View {
 private struct KaartLegendIcon: View {
     let status: SheetStatus
 
-    private static let house = StadSVG.path("M2 13V6l5-4 5 4v7z")
-    private static let window = StadSVG.path("M5.5 8h3v3h-3z")
+    private static let house = SVGPath.parse("M2 13V6l5-4 5 4v7z")
+    private static let window = SVGPath.parse("M5.5 8h3v3h-3z")
 
     var body: some View {
         switch status {
         case .built:
             ZStack {
-                Self.house.fill(StadInk.hex(0x9A5238))
-                Self.window.fill(StadInk.hex(0xF6D27A))
+                Self.house.fill(Ink.hex(0x9A5238))
+                Self.window.fill(Ink.hex(0xF6D27A))
             }
         case .current:
             Ellipse()
@@ -370,7 +370,7 @@ private struct KaartLegendIcon: View {
             }
         case .locked:
             RoundedRectangle(cornerRadius: 2)
-                .strokeBorder(StadInk.hex(0x8E8A80), style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
+                .strokeBorder(Ink.hex(0x8E8A80), style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
                 .frame(width: 14, height: 12)
         }
     }
@@ -387,8 +387,8 @@ private struct KaartCompass: View {
             ZStack {
                 Circle().fill(Theme.note)
                 Circle().stroke(Theme.ink, lineWidth: 1.5)
-                StadSVG.path("M17 5l4.25 11.9h-8.5z").fill(Theme.ink)
-                StadSVG.path("M17 29l-4.25-11.9h8.5z").fill(Theme.dashed)
+                SVGPath.parse("M17 5l4.25 11.9h-8.5z").fill(Theme.ink)
+                SVGPath.parse("M17 29l-4.25-11.9h8.5z").fill(Theme.dashed)
             }
             .frame(width: 34, height: 34)
         }

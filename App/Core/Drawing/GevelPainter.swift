@@ -1,0 +1,122 @@
+import SwiftUI
+
+// Painting for the gevelkit: seasons, palettes and the prototype's fixed path order.
+
+/// The four seasons of the street: tree crowns, flower boxes, snow.
+nonisolated enum GevelSeason: String, CaseIterable, Identifiable, Hashable, Sendable {
+    case lente, zomer, herfst, winter
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .lente: "Lente"
+        case .zomer: "Zomer"
+        case .herfst: "Herfst"
+        case .winter: "Winter"
+        }
+    }
+
+    /// Tree crown colours c1, c2, c3. `nil` in winter: bare branches.
+    var crowns: [UInt32]? {
+        switch self {
+        case .lente: [0x8DBE5A, 0xA7CF6E, 0xF4C0D1]
+        case .zomer: [0x4E7A3A, 0x5E8C45, 0x6E9C52]
+        case .herfst: [0xC7772E, 0xD9A441, 0xA3410A]
+        case .winter: nil
+        }
+    }
+
+    var bloom: UInt32? {
+        switch self {
+        case .lente: 0xE24B4A
+        case .zomer: 0xC8261B
+        case .herfst: 0xD9A441
+        case .winter: nil
+        }
+    }
+
+    var box: UInt32? {
+        switch self {
+        case .lente: 0x4A3524
+        case .zomer: 0x3F5A4A
+        case .herfst: 0x4A3524
+        case .winter: nil
+        }
+    }
+
+    /// The season of a date (March–May lente, June–August zomer, ...).
+    static func of(_ date: Date) -> GevelSeason {
+        switch Calendar.current.component(.month, from: date) {
+        case 3...5: .lente
+        case 6...8: .zomer
+        case 9...11: .herfst
+        default: .winter
+        }
+    }
+}
+
+/// Fill colours for one house's path set.
+nonisolated struct GevelPalette: Sendable {
+    var body: Color
+    var door: Color
+    var awning: Color
+    var trim: Color
+    var glass: Color
+    var litGlass: Color
+    var box: Color?
+    var bloom: Color?
+    var snow: Color?
+
+    static let deco = Ink.hex(0x2E2117)
+    static let stripes = Color.white.opacity(0.85)
+
+    /// The street colours: night darkens facades (×0.62), lights the lit windows; seasons recolour flowers and snow.
+    /// The palace windows use the summer day colours; Noor's house uses summer, day or night.
+    static func street(_ spec: HouseSpec, night: Bool = false, season: GevelSeason = .zomer) -> GevelPalette {
+        let f = night ? 0.62 : 1
+        return GevelPalette(
+            body: Ink.hex(Ink.shade(spec.color, f)),
+            door: Ink.hex(Ink.shade(spec.door, f)),
+            awning: Ink.hex(Ink.shade(spec.awning, f)),
+            trim: Ink.hex(night ? 0xB9B4A8 : 0xEFEBE2),
+            glass: Ink.hex(night ? 0x232B3B : 0x3E4C55),
+            litGlass: Ink.hex(night ? 0xF6D27A : 0x3E4C55),
+            box: season.box.map { Ink.hex($0) },
+            bloom: season.bloom.map { Ink.hex($0) },
+            snow: season == .winter ? .white : nil
+        )
+    }
+}
+
+/// Draws a `GevelGeometry` into a GraphicsContext, in the prototype's fixed path order.
+nonisolated enum GevelPainter {
+    static func draw(_ g: GevelGeometry, palette p: GevelPalette, in ctx: inout GraphicsContext) {
+        ctx.fill(g.body, with: .color(p.body))
+        ctx.stroke(g.edge, with: .color(p.trim), style: StrokeStyle(lineWidth: 3, lineJoin: .round))
+        ctx.fill(g.trim, with: .color(p.trim))
+        ctx.fill(g.glass, with: .color(p.glass))
+        ctx.stroke(g.glass, with: .color(p.trim), lineWidth: 2.5)
+        ctx.fill(g.lit, with: .color(p.litGlass))
+        ctx.stroke(g.lit, with: .color(p.trim), lineWidth: 2.5)
+        ctx.stroke(g.mull, with: .color(p.trim), lineWidth: 1.5)
+        ctx.fill(g.door, with: .color(p.door))
+        ctx.fill(g.awning, with: .color(p.awning))
+        ctx.fill(g.stripes, with: .color(GevelPalette.stripes))
+        if let box = p.box { ctx.fill(g.box, with: .color(box)) }
+        if let bloom = p.bloom { ctx.fill(g.bloom, with: .color(bloom)) }
+        if let snow = p.snow { ctx.fill(g.snow, with: .color(snow)) }
+        ctx.fill(g.deco, with: .color(GevelPalette.deco))
+    }
+
+    /// The water reflection keeps only body, trim, glass, lit and door (as in the prototype).
+    static func drawReflection(_ g: GevelGeometry, palette p: GevelPalette, in ctx: inout GraphicsContext) {
+        ctx.fill(g.body, with: .color(p.body))
+        ctx.fill(g.trim, with: .color(p.trim))
+        ctx.fill(g.glass, with: .color(p.glass))
+        ctx.stroke(g.glass, with: .color(p.trim), lineWidth: 2.5)
+        ctx.fill(g.lit, with: .color(p.litGlass))
+        ctx.stroke(g.lit, with: .color(p.trim), lineWidth: 2.5)
+        ctx.fill(g.door, with: .color(p.door))
+    }
+}

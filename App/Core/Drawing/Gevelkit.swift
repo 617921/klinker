@@ -1,7 +1,9 @@
 import SwiftUI
 
-// The 682 gevelkit: a faithful port of `gevel()`, `street()`, `rng()` and `shade()` from the
-// StadStraat prototype. Same constants, same rounding, same geometry, so houses look identical.
+// The 682 gevelkit: a faithful port of `gevel()`, `street()` and `rng()` from the StadStraat
+// prototype. Same constants, same rounding, same geometry, so houses look identical.
+// Shared by the street and map (Stad), the palace windows (Palace) and Noor's house (House);
+// `shade()` lives in `Ink`, painting in `GevelPainter`.
 
 /// mulberry32, the prototype's seeded random generator (same constants, same sequence).
 nonisolated struct GevelRandom {
@@ -39,39 +41,6 @@ nonisolated enum GableType: String, CaseIterable, Hashable, Sendable {
         case .lijst: 26
         }
     }
-
-    var name: String {
-        switch self {
-        case .trap: "Trapgevel"
-        case .hals: "Halsgevel"
-        case .klok: "Klokgevel"
-        case .tuit: "Tuitgevel"
-        case .lijst: "Lijstgevel"
-        }
-    }
-
-    /// The Dutch word (always a de-word): "trapgevel".
-    var word: String { name.lowercased() }
-
-    var fact: String {
-        switch self {
-        case .trap: "De top gaat omhoog als een trap. Vooral gebouwd rond 1600–1665."
-        case .hals: "Een smalle hals met krullen opzij. Populair vanaf ongeveer 1640."
-        case .klok: "De top heeft de vorm van een klok. Vooral in de achttiende eeuw."
-        case .tuit: "Smal en spits, vaak bij pakhuizen aan het water. Met een hijsbalk boven."
-        case .lijst: "Een rechte bovenkant met een kroonlijst. Mode vanaf het eind van de zeventiende eeuw."
-        }
-    }
-
-    var factEnglish: String {
-        switch self {
-        case .trap: "Step gable: the top climbs like a staircase. Mostly built around 1600–1665."
-        case .hals: "Neck gable: a narrow neck with scrolls on the sides. Popular from about 1640."
-        case .klok: "Bell gable: the top is shaped like a bell. Mostly 18th century."
-        case .tuit: "Spout gable: narrow and pointed, often on warehouses by the water, with a hoist beam."
-        case .lijst: "Cornice gable: a straight top with a cornice. Fashionable from the late 17th century."
-        }
-    }
 }
 
 /// One canal house (the prototype's `o` object plus its colours and gevelsteen).
@@ -83,16 +52,13 @@ nonisolated struct HouseSpec: Hashable, Sendable {
     var doorLeft: Bool
     var shop: Bool
     var flowers: Bool
-    var lit: [Bool]
+    /// Which windows are lit at night, in drawing order (cycled). One `false`: all dark.
+    var lit: [Bool] = [false]
     var color: UInt32
     var door: UInt32
     var awning: UInt32
-    var stone: Int
-
-    /// The gevelsteen word on this house: ("de gracht", "canal").
-    var stoneWord: (nl: String, en: String) {
-        Gevelkit.stones[((stone % Gevelkit.stones.count) + Gevelkit.stones.count) % Gevelkit.stones.count]
-    }
+    /// Index of the gevelsteen word (Stad's street only).
+    var stone = 0
 }
 
 /// The path set of one house, in the house's own coordinates (0,0)–(W+6, T).
@@ -165,13 +131,6 @@ nonisolated enum Gevelkit {
     static let awnings: [UInt32] = [0xC8261B, 0x2F4B3A, 0x1F3A6B, 0xF2711C]
     static let streetTypes: [GableType] = [.trap, .trap, .hals, .hals, .hals, .klok, .klok, .klok, .tuit, .lijst, .lijst]
 
-    static let stones: [(nl: String, en: String)] = [
-        ("de gracht", "canal"), ("de brug", "bridge"), ("de boot", "boat"), ("het raam", "window"), ("de deur", "door"),
-        ("het dak", "roof"), ("de trap", "stairs"), ("de fiets", "bike"), ("de sleutel", "key"), ("de bloem", "flower"),
-        ("de vis", "fish"), ("het schip", "ship"), ("de buurman", "neighbour"), ("het loket", "service counter"),
-        ("de afspraak", "appointment"), ("de gemeente", "municipality"), ("de huur", "rent"),
-    ]
-
     // MARK: Helpers (same rounding as the prototype)
 
     /// `Math.round(v * 10) / 10`
@@ -199,12 +158,6 @@ nonisolated enum Gevelkit {
         p.addRelativeArc(center: CGPoint(x: left.x + d, y: left.y), radius: d, startAngle: .degrees(180), delta: .degrees(-360))
         p.closeSubpath()
         return p
-    }
-
-    /// Multiplies each channel by `f` (prototype `shade(hex, f)`).
-    static func shade(_ hex: UInt32, _ f: Double) -> UInt32 {
-        func ch(_ v: UInt32) -> UInt32 { UInt32(max(0, min(255, jsRound(Double(v) * f)))) }
-        return (ch((hex >> 16) & 0xFF) << 16) | (ch((hex >> 8) & 0xFF) << 8) | ch(hex & 0xFF)
     }
 
     // MARK: gevel()

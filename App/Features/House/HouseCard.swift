@@ -6,7 +6,7 @@ struct HouseCard: View {
     @Environment(ProgressStore.self) private var progress
 
     @State private var isOpen = false
-    @State private var clockNight = HouseClock.isNight()
+    @State private var clockNight = NightClock.isNight()
     private let store: HouseStore
 
     init(store: HouseStore = .shared) {
@@ -63,11 +63,11 @@ struct HouseCard: View {
             HouseView(store: store)
                 .environment(progress)
         }
-        .onAppear { clockNight = HouseClock.isNight() }
+        .onAppear { clockNight = NightClock.isNight() }
         .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(60))
-                clockNight = HouseClock.isNight()
+                clockNight = NightClock.isNight()
             }
         }
     }
@@ -94,10 +94,10 @@ struct HouseFacadeMini: View {
         Canvas { ctx, size in
             let box = CGRect(origin: .zero, size: size)
             ctx.fill(Path(box), with: .linearGradient(
-                Gradient(colors: night ? [HouseInk.hex(0x141C33), HouseInk.hex(0x4A4A66)] : [HouseInk.hex(0xBCCDD6), HouseInk.hex(0xE8E2D2)]),
+                Gradient(colors: night ? [Ink.hex(0x141C33), Ink.hex(0x4A4A66)] : [Ink.hex(0xBCCDD6), Ink.hex(0xE8E2D2)]),
                 startPoint: .zero, endPoint: CGPoint(x: 0, y: size.height)))
             if night {
-                ctx.fill(Path(ellipseIn: CGRect(x: size.width - 17, y: 7, width: 10, height: 10)), with: .color(HouseInk.hex(0xF4F1EA)))
+                ctx.fill(Path(ellipseIn: CGRect(x: size.width - 17, y: 7, width: 10, height: 10)), with: .color(Ink.hex(0xF4F1EA)))
             }
             let street: CGFloat = 7
             let k = min((size.width - 8) / HouseStreet.noorSize.width, (size.height - street - 6) / HouseStreet.noorSize.height)
@@ -105,7 +105,7 @@ struct HouseFacadeMini: View {
             house.translateBy(x: (size.width - HouseStreet.noorSize.width * k) / 2, y: size.height - street - HouseStreet.noorSize.height * k)
             house.scaleBy(x: k, y: k)
             HouseStreet.drawNoor(lights, night: night, in: &house)
-            ctx.fill(Path(CGRect(x: 0, y: size.height - street, width: size.width, height: street)), with: .color(HouseInk.hex(0xA19E95)))
+            ctx.fill(Path(CGRect(x: 0, y: size.height - street, width: size.width, height: street)), with: .color(Ink.hex(0xA19E95)))
         }
         .clipShape(RoundedRectangle(cornerRadius: 3))
         .accessibilityHidden(true)

@@ -19,7 +19,7 @@ struct HouseInteriorDrawing: View {
 }
 
 enum HouseInteriorPainter {
-    private static func p(_ d: String) -> Path { HouseSVG.path(d) }
+    private static func p(_ d: String) -> Path { SVGPath.parse(d) }
 
     static let shellOutline = "M24 134C51 130 80.7 120 80.7 94C80.7 26 237.3 26 237.3 94C237.3 120 267 130 294 134"
     static let shell = p("M24 416V134C51 130 80.7 120 80.7 94C80.7 26 237.3 26 237.3 94C237.3 120 267 130 294 134V416Z")
@@ -107,12 +107,12 @@ enum HouseInteriorPainter {
     private static let warm: [HouseRoom: UInt32] = [.keuken: 0xEAD7AE, .woonkamer: 0xEFC9A2, .slaapkamer: 0xD9CDAE, .zolder: 0xE2C796]
 
     static func paint(_ ctx: inout GraphicsContext, night: Bool, lights: HouseLights, rope: Bool) {
-        func c(_ hex: UInt32) -> GraphicsContext.Shading { .color(HouseInk.hex(hex)) }
-        func nf(_ hex: UInt32, _ f: Double) -> GraphicsContext.Shading { c(night ? HouseInk.shade(hex, f) : hex) }
+        func c(_ hex: UInt32) -> GraphicsContext.Shading { .color(Ink.hex(hex)) }
+        func nf(_ hex: UInt32, _ f: Double) -> GraphicsContext.Shading { c(night ? Ink.shade(hex, f) : hex) }
         func room(_ r: HouseRoom) -> UInt32 {
             let base = day[r] ?? 0xEDE6D3
             if !night { return base }
-            return lights.isOn(r) ? (warm[r] ?? base) : HouseInk.shade(base, 0.38)
+            return lights.isOn(r) ? (warm[r] ?? base) : Ink.shade(base, 0.38)
         }
         let trim: UInt32 = night ? 0xB9B4A8 : 0xEFEBE2
         func glass(_ on: Bool) -> GraphicsContext.Shading { c(night ? (on ? 0xF6D27A : 0x232B3B) : 0x3E4C55) }
@@ -125,12 +125,12 @@ enum HouseInteriorPainter {
 
         ctx.fill(shell, with: nf(0x9A5238, 0.62))
         for (r, path) in rooms { ctx.fill(path, with: c(room(r))) }
-        ctx.fill(tiles, with: c(!night ? 0xFFFFFF : lights.keuken ? 0xF3E7CB : HouseInk.shade(0xFFFFFF, 0.4)))
+        ctx.fill(tiles, with: c(!night ? 0xFFFFFF : lights.keuken ? 0xF3E7CB : Ink.shade(0xFFFFFF, 0.4)))
         ctx.stroke(tileGrid, with: c(0xCFCAB9), lineWidth: 0.8)
-        ctx.fill(tileDots, with: c(night && !lights.keuken ? HouseInk.shade(0x2F5BD3, 0.5) : 0x2F5BD3))
-        ctx.fill(stripes, with: c(HouseInk.shade(room(.woonkamer), 0.94)))
-        ctx.fill(dots, with: c(HouseInk.shade(room(.slaapkamer), 0.86)))
-        ctx.stroke(rafters, with: c(HouseInk.shade(room(.zolder), 0.8)), style: StrokeStyle(lineWidth: 4, lineCap: .round))
+        ctx.fill(tileDots, with: c(night && !lights.keuken ? Ink.shade(0x2F5BD3, 0.5) : 0x2F5BD3))
+        ctx.fill(stripes, with: c(Ink.shade(room(.woonkamer), 0.94)))
+        ctx.fill(dots, with: c(Ink.shade(room(.slaapkamer), 0.86)))
+        ctx.stroke(rafters, with: c(Ink.shade(room(.zolder), 0.8)), style: StrokeStyle(lineWidth: 4, lineCap: .round))
         ctx.fill(plinth, with: nf(0xB79A78, 0.6))
         ctx.fill(slabs, with: nf(0x4A3524, 0.75))
         ctx.fill(hole, with: nf(0x2E2117, 0.8))
@@ -163,7 +163,7 @@ enum HouseInteriorPainter {
                 var g = ctx
                 g.clip(to: Path(box))
                 g.fill(Path(box), with: .radialGradient(
-                    Gradient(colors: [HouseInk.hex(0xF6D27A, 0.55), HouseInk.hex(0xF6D27A, 0)]),
+                    Gradient(colors: [Ink.hex(0xF6D27A, 0.55), Ink.hex(0xF6D27A, 0)]),
                     center: center, startRadius: 0, endRadius: 120))
             }
         }

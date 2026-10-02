@@ -132,7 +132,7 @@ struct HouseLampGlows: View {
                 var c = ctx
                 c.clip(to: room)
                 c.fill(Path(CGRect(x: center.x - 70, y: center.y - 34, width: 140, height: 120)), with: .radialGradient(
-                    Gradient(colors: [HouseInk.hex(0xF6D27A, 0.75), HouseInk.hex(0xF6D27A, 0)]),
+                    Gradient(colors: [Ink.hex(0xF6D27A, 0.75), Ink.hex(0xF6D27A, 0)]),
                     center: center, startRadius: 0, endRadius: 64))
             }
         }
@@ -150,7 +150,7 @@ struct HouseHoistView: View {
         let r = hoist.slot.rect
         ZStack(alignment: .topLeading) {
             Rectangle()
-                .fill(HouseInk.hex(0x2E2117))
+                .fill(Ink.hex(0x2E2117))
                 .frame(width: 2, height: max(0, hoist.top - HouseHoist.ropeTop))
                 .opacity(hoist.swingingIn ? 0 : 1)
                 .houseAt(HouseHoist.ropeX - 1, HouseHoist.ropeTop)
@@ -183,7 +183,7 @@ struct HouseStraps: View {
             path.addLine(to: CGPoint(x: 6, y: size.height))
             path.move(to: CGPoint(x: size.width / 2, y: 0))
             path.addLine(to: CGPoint(x: size.width - 6, y: size.height))
-            ctx.stroke(path, with: .color(HouseInk.hex(0x2E2117)), lineWidth: 1.5)
+            ctx.stroke(path, with: .color(Ink.hex(0x2E2117)), lineWidth: 1.5)
         }
     }
 }

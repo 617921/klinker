@@ -13,10 +13,10 @@ struct HouseItemSheet: View {
             HouseWordCard(item: item, room: room, onClose: { dismiss() }, onBack: onBack)
         }
         .scrollBounceBehavior(.basedOnSize)
-        .background(HouseInk.hex(0xFBFAF7))
+        .background(Ink.hex(0xFBFAF7))
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .presentationBackground(HouseInk.hex(0xFBFAF7))
+        .presentationBackground(Ink.hex(0xFBFAF7))
     }
 }
 
@@ -85,7 +85,7 @@ struct HouseWordCard: View {
                 .padding(.top, 12)
                 .overlay(alignment: .top) {
                     Line()
-                        .stroke(HouseInk.hex(0xD3D1C7), style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [0.1, 6]))
+                        .stroke(Ink.hex(0xD3D1C7), style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [0.1, 6]))
                         .frame(height: 3)
                 }
                 .contentShape(Rectangle())

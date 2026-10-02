@@ -8,7 +8,7 @@ struct StadView: View {
     @Environment(\.enterPlace) private var enterPlace
 
     @State private var nightOverride: Bool?
-    @State private var clockNight = StadClock.isNight()
+    @State private var clockNight = NightClock.isNight()
     @State private var picked: StadPlacePick?
     @State private var pendingRound: RoundKind?
     @State private var pendingVisit: Int?
@@ -88,13 +88,13 @@ struct StadView: View {
         }
         .onAppear {
             onScreen = true
-            clockNight = StadClock.isNight()
+            clockNight = NightClock.isNight()
         }
         .onDisappear { onScreen = false }
         .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(60))
-                clockNight = StadClock.isNight()
+                clockNight = NightClock.isNight()
             }
         }
     }

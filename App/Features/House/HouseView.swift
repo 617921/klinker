@@ -7,7 +7,7 @@ struct HouseView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State private var play: HousePlay
-    @State private var clockNight = HouseClock.isNight()
+    @State private var clockNight = NightClock.isNight()
     private let store: HouseStore
 
     init(store: HouseStore = .shared, play: HousePlay? = nil) {
@@ -36,13 +36,13 @@ struct HouseView: View {
         }
         .onAppear {
             store.prune(keeping: state.unlocked)
-            clockNight = HouseClock.isNight()
+            clockNight = NightClock.isNight()
         }
         .onDisappear { play.stop(store: store) }
         .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(60))
-                clockNight = HouseClock.isNight()
+                clockNight = NightClock.isNight()
             }
         }
     }

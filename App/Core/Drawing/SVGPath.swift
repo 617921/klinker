@@ -1,19 +1,16 @@
 import SwiftUI
 
-// Copied from the Stad feature (StadSVG) with its own type names, so the house can draw the
-// prototype's SVG path strings verbatim without importing across features.
-
 /// Parses SVG path data into a SwiftUI `Path`, so the prototype's path strings can be used verbatim.
 /// Supports M L H V C S Q T A Z (absolute and relative). Same fill semantics as the browser.
-nonisolated enum HouseSVG {
-    static func path(_ data: String) -> Path {
-        var parser = HouseSVGParser(bytes: Array(data.utf8))
+nonisolated enum SVGPath {
+    static func parse(_ data: String) -> Path {
+        var parser = SVGPathParser(bytes: Array(data.utf8))
         parser.parse()
         return parser.path
     }
 }
 
-nonisolated private struct HouseSVGParser {
+nonisolated private struct SVGPathParser {
     let bytes: [UInt8]
     var index = 0
     var path = Path()

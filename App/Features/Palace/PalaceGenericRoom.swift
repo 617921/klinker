@@ -21,7 +21,7 @@ struct PalaceRoomStyle {
     static let coats: [UInt32] = [0x8C4A3A, 0x2F5BD3, 0x3F5A4A, 0xC9A15B, 0x993556]
 
     static func seeded(_ sheetNumber: Int) -> PalaceRoomStyle {
-        var rnd = PalaceRandom(seed: PalaceGenericRoom.mix(sheetNumber))
+        var rnd = GevelRandom(seed: PalaceGenericRoom.mix(sheetNumber))
         return PalaceRoomStyle(
             wall: rnd.pick(walls), panel: rnd.pick(panels), floor: rnd.pick(floors),
             door: rnd.pick(PalaceCanal.doors), rug: rnd.pick(rugs), coat: rnd.pick(coats),
@@ -100,7 +100,7 @@ enum PalaceGenericRoom {
 
     static func make(sheetNumber: Int, words: [Word]) -> PalaceRoom {
         let style = PalaceRoomStyle.seeded(sheetNumber)
-        var rnd = PalaceRandom(seed: mix(sheetNumber &* 31 &+ 7))
+        var rnd = GevelRandom(seed: mix(sheetNumber &* 31 &+ 7))
         let all = slots(style, symbol: PlaceCatalog.symbol(sheetNumber)).map { mirror($0, style.mirrored) }
         // Which object places carry a word (seeded), and which word goes where.
         let chosen = shuffled(Array(all.indices), &rnd).prefix(min(words.count, all.count)).sorted()
@@ -139,7 +139,7 @@ enum PalaceGenericRoom {
                     label: s.label, pin: CGPoint(x: 370 - s.pin.x, y: s.pin.y), align: align, tilt: -s.tilt)
     }
 
-    private static func shuffled<T>(_ items: [T], _ rnd: inout PalaceRandom) -> [T] {
+    private static func shuffled<T>(_ items: [T], _ rnd: inout GevelRandom) -> [T] {
         var a = items
         guard a.count > 1 else { return a }
         for i in stride(from: a.count - 1, to: 0, by: -1) {

@@ -52,7 +52,7 @@ nonisolated struct KaartMapPaths: Sendable {
         for R in [150.0, 290, 430, 570] {
             canals += "M\(500 - R) 44V96A\(R) \(R) 0 0 0 \(500 + R) 96V44"
         }
-        m.canals = StadSVG.path(canals)
+        m.canals = SVGPath.parse(canals)
 
         var streets = ""
         for R in [220.0, 360, 500] {
@@ -60,11 +60,11 @@ nonisolated struct KaartMapPaths: Sendable {
         }
         streets += "M-140 96A640 640 0 0 0 1140 96"
         streets += "M500 736V1062M500 880C420 880 330 872 250 900S110 960 40 968M500 836C600 836 700 800 860 782M540 1062C700 1054 850 1060 1000 1052"
-        m.streets = StadSVG.path(streets)
+        m.streets = SVGPath.parse(streets)
 
         var radials = "M0 76H1000M500 96V736"
         for t in [18.0, 54, 126, 162] { radials += line(p(120, t), p(660, t)) }
-        m.radials = StadSVG.path(radials)
+        m.radials = SVGPath.parse(radials)
 
         var rails = ""
         for t in [18.0, 54, 90, 126, 162] {
@@ -82,32 +82,32 @@ nonisolated struct KaartMapPaths: Sendable {
                 rails += "M\(x - 14) 69.5H\(x + 14)M\(x - 14) 82.5H\(x + 14)"
             }
         }
-        m.rails = StadSVG.path(rails)
+        m.rails = SVGPath.parse(rails)
 
-        m.water = StadSVG.path(
+        m.water = SVGPath.parse(
             "M0 0H1000V50C900 62 820 44 720 54S560 62 480 52S300 44 200 56S60 52 0 58Z"
                 + "M0 1112C150 1100 300 1120 450 1108S760 1102 1000 1104V1200H0Z"
                 + "M176 356a22 11 0 1 0 44 0a22 11 0 1 0-44 0Z"
         )
-        m.park = StadSVG.path("M140 338a82 64 0 1 0 164 0a82 64 0 1 0-164 0Z")
-        m.parkPath = StadSVG.path("M160 304C200 282 262 292 292 322S262 396 210 392S150 362 160 304Z")
-        m.meadow = StadSVG.path("M0 495.3A640 640 0 0 0 1000 495.3V1200H0Z")
+        m.park = SVGPath.parse("M140 338a82 64 0 1 0 164 0a82 64 0 1 0-164 0Z")
+        m.parkPath = SVGPath.parse("M160 304C200 282 262 292 292 322S262 396 210 392S150 362 160 304Z")
+        m.meadow = SVGPath.parse("M0 495.3A640 640 0 0 0 1000 495.3V1200H0Z")
         for row in 0..<5 {
             for c in 0..<3 {
                 let d = rect(590 + Double(c) * 140, 772 + Double(row) * 50, 132, 44)
                 if (row + c) % 2 == 0 { m.fieldsA.addPath(d) } else { m.fieldsB.addPath(d) }
             }
         }
-        m.ditch = StadSVG.path("M586 768V1024M726 768V1024M866 768V1024")
-        m.sand = StadSVG.path("M0 1040C120 1030 260 1050 400 1040S540 1034 560 1044V1116H0Z")
-        m.dike = StadSVG.path("M540 1036C700 1026 850 1032 1000 1024V1108H540Z")
-        m.runway = StadSVG.path("M18 692L246 702L245 722L17 712Z")
-        m.runwayDash = StadSVG.path("M30 702.5L236 711.5")
+        m.ditch = SVGPath.parse("M586 768V1024M726 768V1024M866 768V1024")
+        m.sand = SVGPath.parse("M0 1040C120 1030 260 1050 400 1040S540 1034 560 1044V1116H0Z")
+        m.dike = SVGPath.parse("M540 1036C700 1026 850 1032 1000 1024V1108H540Z")
+        m.runway = SVGPath.parse("M18 692L246 702L245 722L17 712Z")
+        m.runwayDash = SVGPath.parse("M30 702.5L236 711.5")
         for (x, y, h) in [(790.0, 12.0, 42.0), (850, 8, 46), (910, 12, 42), (962, 18, 36)] {
             m.jetty.addPath(rect(x, y, 10, h))
         }
-        m.mooredA = StadSVG.path("M806 22q14-12 28 0v26h-28Z")
-        m.mooredB = StadSVG.path("M868 26q12-10 24 0v22h-24Z")
+        m.mooredA = SVGPath.parse("M806 22q14-12 28 0v26h-28Z")
+        m.mooredB = SVGPath.parse("M868 26q12-10 24 0v22h-24Z")
 
         var shimmer = "M60 24h50M300 18h70M620 30h60M740 16h36M180 1150h60M560 1160h80M860 1140h50"
         for (R, t) in [(150.0, 40.0), (150, 128), (290, 22), (290, 100), (290, 160), (430, 50), (430, 118), (570, 70), (570, 108)] {
@@ -115,7 +115,7 @@ nonisolated struct KaartMapPaths: Sendable {
             let q = p(R, t)
             shimmer += "M\(r(q.x + 9 * sin(a))) \(r(q.y - 9 * cos(a)))L\(r(q.x - 9 * sin(a))) \(r(q.y + 9 * cos(a)))"
         }
-        m.shimmer = StadSVG.path(shimmer)
+        m.shimmer = SVGPath.parse(shimmer)
 
         // Trees: same seeded placement as the prototype (rng 4242).
         var rnd = GevelRandom(seed: 4242)
@@ -207,19 +207,19 @@ nonisolated struct KaartMapPaths: Sendable {
 
 /// Small fixed drawings on the map.
 nonisolated enum KaartArt {
-    static let personBody = StadSVG.path("M1.5 20v-6.5a4.5 4.5 0 0 1 9 0V20z")
-    static let bikeWheels = StadSVG.path("M0.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z M14.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z")
-    static let bikeFrame = StadSVG.path("M5 10h6l-2-6zM9 4h7l-5 6M16 4l3 6M7 3h4M16 4l.5-2.5H19")
+    static let personBody = SVGPath.parse("M1.5 20v-6.5a4.5 4.5 0 0 1 9 0V20z")
+    static let bikeWheels = SVGPath.parse("M0.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z M14.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z")
+    static let bikeFrame = SVGPath.parse("M5 10h6l-2-6zM9 4h7l-5 6M16 4l3 6M7 3h4M16 4l.5-2.5H19")
 
-    static let outlineHouse = StadSVG.path("M12 50V31L23 20L34 31V50ZM34 31L43 25V44L34 50M23 20L32 14L43 25")
-    static let outlineWide = StadSVG.path("M9 50V31H39V50ZM39 31L48 25V44L39 50M9 31L18 25H48")
-    static let outlineMill = StadSVG.path("M22 50L25 26H35L38 50ZM23 26Q30 15 37 26")
-    static let outlineTower = StadSVG.path("M25 50L27.5 14H32.5L35 50ZM22 14H38L36 8H24ZM26 32H34")
-    static let outlineRing = StadSVG.path("M10 46a20 7 0 1 0 40 0a20 7 0 1 0-40 0ZM24 46a6 2 0 1 0 12 0a6 2 0 1 0-12 0Z")
-    static let outlineBoat = StadSVG.path("M8 40H52L46 49H14ZM21 40V33H37V40")
-    static let baseFlat = StadSVG.path("M4 50H50L57 40H11Z")
-    static let baseDefault = StadSVG.path("M8 50H48L54 43H14Z")
-    static let millSails = StadSVG.path("M22 22V3M22 22H41M22 22V41M22 22H3M22 3h5v13h-5M41 22v5H28v-5M22 41h-5V28h5M3 22v-5h13v5")
+    static let outlineHouse = SVGPath.parse("M12 50V31L23 20L34 31V50ZM34 31L43 25V44L34 50M23 20L32 14L43 25")
+    static let outlineWide = SVGPath.parse("M9 50V31H39V50ZM39 31L48 25V44L39 50M9 31L18 25H48")
+    static let outlineMill = SVGPath.parse("M22 50L25 26H35L38 50ZM23 26Q30 15 37 26")
+    static let outlineTower = SVGPath.parse("M25 50L27.5 14H32.5L35 50ZM22 14H38L36 8H24ZM26 32H34")
+    static let outlineRing = SVGPath.parse("M10 46a20 7 0 1 0 40 0a20 7 0 1 0-40 0ZM24 46a6 2 0 1 0 12 0a6 2 0 1 0-12 0Z")
+    static let outlineBoat = SVGPath.parse("M8 40H52L46 49H14ZM21 40V33H37V40")
+    static let baseFlat = SVGPath.parse("M4 50H50L57 40H11Z")
+    static let baseDefault = SVGPath.parse("M8 50H48L54 43H14Z")
+    static let millSails = SVGPath.parse("M22 22V3M22 22H41M22 22V41M22 22H3M22 3h5v13h-5M41 22v5H28v-5M22 41h-5V28h5M3 22v-5h13v5")
 
     static func outline(_ kind: KaartOutline) -> Path {
         switch kind {
@@ -242,30 +242,30 @@ nonisolated enum KaartArt {
     }
 
     // Crane over the place under construction (svg 160 × 146).
-    static let craneLattice = StadSVG.path("M97 144V22M107 144V22M97 144L107 132L97 120L107 108L97 96L107 84L97 72L107 60L97 48L107 36L97 24")
-    static let craneJib = StadSVG.path("M8 18H152M8 25H152M8 25L16 18L24 25L32 18L40 25L48 18L56 25L64 18L72 25L80 18L88 25L96 18M112 18L120 25L128 18L136 25L144 18L152 25")
-    static let craneCables = StadSVG.path("M102 2L97 18M102 2L107 18M102 2L20 18M102 2L148 18")
-    static let craneWeights = StadSVG.path("M132 26h20v12h-20z M90 140h24v6H90z")
-    static let craneCabin = StadSVG.path("M94 26h16v12H94z")
-    static let craneWindow = StadSVG.path("M96 28h12v5H96z")
-    static let hookLine = StadSVG.path("M22 25V54")
-    static let hook = StadSVG.path("M19 54h6v4h-6z")
-    static let hookLoad = StadSVG.path("M8 58h28v6H8z")
+    static let craneLattice = SVGPath.parse("M97 144V22M107 144V22M97 144L107 132L97 120L107 108L97 96L107 84L97 72L107 60L97 48L107 36L97 24")
+    static let craneJib = SVGPath.parse("M8 18H152M8 25H152M8 25L16 18L24 25L32 18L40 25L48 18L56 25L64 18L72 25L80 18L88 25L96 18M112 18L120 25L128 18L136 25L144 18L152 25")
+    static let craneCables = SVGPath.parse("M102 2L97 18M102 2L107 18M102 2L20 18M102 2L148 18")
+    static let craneWeights = SVGPath.parse("M132 26h20v12h-20z M90 140h24v6H90z")
+    static let craneCabin = SVGPath.parse("M94 26h16v12H94z")
+    static let craneWindow = SVGPath.parse("M96 28h12v5H96z")
+    static let hookLine = SVGPath.parse("M22 25V54")
+    static let hook = SVGPath.parse("M19 54h6v4h-6z")
+    static let hookLoad = SVGPath.parse("M8 58h28v6H8z")
 
     // Canal boat (viewBox -6 0 48 16) and river barge (72 × 20).
-    static let boatWake = StadSVG.path("M-6 4L3 8L-6 12")
-    static let boatHull = StadSVG.path("M2 8C2 3.5 8 2 14 2H28L35 8L28 14H14C8 14 2 12.5 2 8Z")
-    static let boatStripe = StadSVG.path("M6 8H31")
-    static let boatCabin = StadSVG.path("M12 5h9v6h-9z")
-    static let boatFlag = StadSVG.path("M3 6h3v4H3z")
-    static let bargeHull = StadSVG.path("M3 10L10 2H68V18H10Z")
+    static let boatWake = SVGPath.parse("M-6 4L3 8L-6 12")
+    static let boatHull = SVGPath.parse("M2 8C2 3.5 8 2 14 2H28L35 8L28 14H14C8 14 2 12.5 2 8Z")
+    static let boatStripe = SVGPath.parse("M6 8H31")
+    static let boatCabin = SVGPath.parse("M12 5h9v6h-9z")
+    static let boatFlag = SVGPath.parse("M3 6h3v4H3z")
+    static let bargeHull = SVGPath.parse("M3 10L10 2H68V18H10Z")
 
     // Ria de postbode (viewBox 70 × 62).
-    static let riaWheels = StadSVG.path("M4 50a10 10 0 1 0 20 0a10 10 0 1 0-20 0Z M44 50a10 10 0 1 0 20 0a10 10 0 1 0-20 0Z")
-    static let riaFrame = StadSVG.path("M14 50h18l-5-16zM27 34h20l-15 16M47 34l7 16M44 34l2-6h6")
-    static let riaBag = StadSVG.path("M50 26h16v12H50z")
-    static let riaLetter = StadSVG.path("M53 30h10v4H53z")
-    static let riaBody = StadSVG.path("M30 32l6-16M35 18l12 10M33 32l6 12")
-    static let riaHead = StadSVG.path("M30.5 10a6.5 6.5 0 1 0 13 0a6.5 6.5 0 1 0-13 0Z")
-    static let riaCap = StadSVG.path("M30.5 8a6.5 6.5 0 0 1 13 0h3v2.5h-16z")
+    static let riaWheels = SVGPath.parse("M4 50a10 10 0 1 0 20 0a10 10 0 1 0-20 0Z M44 50a10 10 0 1 0 20 0a10 10 0 1 0-20 0Z")
+    static let riaFrame = SVGPath.parse("M14 50h18l-5-16zM27 34h20l-15 16M47 34l7 16M44 34l2-6h6")
+    static let riaBag = SVGPath.parse("M50 26h16v12H50z")
+    static let riaLetter = SVGPath.parse("M53 30h10v4H53z")
+    static let riaBody = SVGPath.parse("M30 32l6-16M35 18l12 10M33 32l6 12")
+    static let riaHead = SVGPath.parse("M30.5 10a6.5 6.5 0 1 0 13 0a6.5 6.5 0 1 0-13 0Z")
+    static let riaCap = SVGPath.parse("M30.5 8a6.5 6.5 0 0 1 13 0h3v2.5h-16z")
 }

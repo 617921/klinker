@@ -111,7 +111,7 @@ struct PalaceScaledScene: View {
 
     private func tape(_ angle: Double) -> some View {
         Rectangle()
-            .fill(PalaceInk.hex(0xFAC775, 0.8))
+            .fill(Ink.hex(0xFAC775, 0.8))
             .frame(width: 42, height: 13)
             .rotationEffect(.degrees(angle))
             .allowsHitTesting(false)

@@ -47,7 +47,7 @@ struct PalaceHeader: View {
                     .padding(.horizontal, 10)
                     .padding(.vertical, 2)
                     .background(Color.white)
-                    .overlay(Rectangle().stroke(PalaceInk.hex(0xD3D1C7), lineWidth: 1))
+                    .overlay(Rectangle().stroke(Ink.hex(0xD3D1C7), lineWidth: 1))
                     .rotationEffect(.degrees(1.5))
             }
             if doodle {

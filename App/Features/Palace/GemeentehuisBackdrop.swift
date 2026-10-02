@@ -10,7 +10,7 @@ struct GemeentehuisBackdrop: View, Equatable {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            PalaceInk.hex(0xE8DDC6)
+            Ink.hex(0xE8DDC6)
             PalaceCanalWindow(houses: window).palaceAt(12, 40)
             PalaceArtwork(marks: Self.marks, width: 370, height: 408)
             PalaceLettering(lines: ["LOKET 3"], font: .custom("AvenirNext-Heavy", fixedSize: 11), color: Theme.onInk,
@@ -19,7 +19,7 @@ struct GemeentehuisBackdrop: View, Equatable {
             PalaceLettering(lines: ["TREK EEN", "NUMMER"], font: .custom("AvenirNextCondensed-Heavy", fixedSize: 11),
                             color: Theme.ink, width: 52, height: 26, spacing: -2, tracking: 0.3)
                 .palaceAt(10, 232)
-            PalaceLettering(lines: ["A23"], font: .custom("CourierNewPS-BoldMT", fixedSize: 11), color: PalaceInk.hex(0xF6D27A), width: 24, height: 16)
+            PalaceLettering(lines: ["A23"], font: .custom("CourierNewPS-BoldMT", fixedSize: 11), color: Ink.hex(0xF6D27A), width: 24, height: 16)
                 .palaceAt(24, 270)
             PalaceClock().frame(width: 32, height: 32).palaceAt(116, 36)
         }
@@ -151,7 +151,7 @@ struct PalaceClock: View {
                 PalaceArtwork(marks: Self.face, width: 32, height: 32)
                 hand(width: 2.5, length: 8, angle: hours * 30)
                 hand(width: 2, length: 12, angle: minutes * 6)
-                Circle().fill(PalaceInk.hex(0xC8261B)).frame(width: 4, height: 4)
+                Circle().fill(Ink.hex(0xC8261B)).frame(width: 4, height: 4)
             }
             .frame(width: 32, height: 32)
         }
@@ -160,7 +160,7 @@ struct PalaceClock: View {
 
     private func hand(width: CGFloat, length: CGFloat, angle: Double) -> some View {
         RoundedRectangle(cornerRadius: width / 2)
-            .fill(PalaceInk.hex(0x2E2117))
+            .fill(Ink.hex(0x2E2117))
             .frame(width: width, height: length)
             .offset(y: -length / 2)
             .rotationEffect(.degrees(angle))

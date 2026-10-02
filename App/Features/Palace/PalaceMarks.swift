@@ -1,24 +1,5 @@
 import SwiftUI
 
-/// Colours for the palace drawings, usable from any isolation.
-nonisolated enum PalaceInk {
-    static func hex(_ value: UInt32, _ opacity: Double = 1) -> Color {
-        Color(
-            .sRGB,
-            red: Double((value >> 16) & 0xFF) / 255,
-            green: Double((value >> 8) & 0xFF) / 255,
-            blue: Double(value & 0xFF) / 255,
-            opacity: opacity
-        )
-    }
-
-    /// Multiplies each channel by `f` (the prototype's `shade(hex, f)`).
-    static func shade(_ value: UInt32, _ f: Double) -> UInt32 {
-        func ch(_ v: UInt32) -> UInt32 { UInt32(max(0, min(255, (Double(v) * f + 0.5).rounded(.down)))) }
-        return (ch((value >> 16) & 0xFF) << 16) | (ch((value >> 8) & 0xFF) << 8) | ch(value & 0xFF)
-    }
-}
-
 /// One flat vector shape of a drawing: a path with a fill or a stroke, like one SVG `<path>`.
 nonisolated struct PalaceMark: Sendable {
     enum Paint: Sendable {
@@ -33,39 +14,39 @@ nonisolated struct PalaceMark: Sendable {
     // MARK: Builders (SVG path strings are copied verbatim from the prototype)
 
     static func f(_ d: String, _ hex: UInt32, _ opacity: Double = 1) -> PalaceMark {
-        PalaceMark(path: PalaceSVG.path(d), paint: .fill(PalaceInk.hex(hex), evenOdd: false), opacity: opacity)
+        PalaceMark(path: SVGPath.parse(d), paint: .fill(Ink.hex(hex), evenOdd: false), opacity: opacity)
     }
 
     static func eo(_ d: String, _ hex: UInt32) -> PalaceMark {
-        PalaceMark(path: PalaceSVG.path(d), paint: .fill(PalaceInk.hex(hex), evenOdd: true))
+        PalaceMark(path: SVGPath.parse(d), paint: .fill(Ink.hex(hex), evenOdd: true))
     }
 
     static func s(_ d: String, _ hex: UInt32, _ width: CGFloat, round: Bool = false, _ opacity: Double = 1) -> PalaceMark {
-        PalaceMark(path: PalaceSVG.path(d), paint: .stroke(PalaceInk.hex(hex), width: width, round: round), opacity: opacity)
+        PalaceMark(path: SVGPath.parse(d), paint: .stroke(Ink.hex(hex), width: width, round: round), opacity: opacity)
     }
 
     static func dot(_ cx: CGFloat, _ cy: CGFloat, _ r: CGFloat, _ hex: UInt32, _ opacity: Double = 1) -> PalaceMark {
         PalaceMark(path: Path(ellipseIn: CGRect(x: cx - r, y: cy - r, width: 2 * r, height: 2 * r)),
-                   paint: .fill(PalaceInk.hex(hex), evenOdd: false), opacity: opacity)
+                   paint: .fill(Ink.hex(hex), evenOdd: false), opacity: opacity)
     }
 
     static func ring(_ cx: CGFloat, _ cy: CGFloat, _ r: CGFloat, _ hex: UInt32, _ width: CGFloat) -> PalaceMark {
         PalaceMark(path: Path(ellipseIn: CGRect(x: cx - r, y: cy - r, width: 2 * r, height: 2 * r)),
-                   paint: .stroke(PalaceInk.hex(hex), width: width, round: false))
+                   paint: .stroke(Ink.hex(hex), width: width, round: false))
     }
 
     static func oval(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ hex: UInt32, _ opacity: Double = 1) -> PalaceMark {
         PalaceMark(path: Path(ellipseIn: CGRect(x: x, y: y, width: w, height: h)),
-                   paint: .fill(PalaceInk.hex(hex), evenOdd: false), opacity: opacity)
+                   paint: .fill(Ink.hex(hex), evenOdd: false), opacity: opacity)
     }
 
     static func box(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ hex: UInt32, _ opacity: Double = 1) -> PalaceMark {
-        PalaceMark(path: Path(CGRect(x: x, y: y, width: w, height: h)), paint: .fill(PalaceInk.hex(hex), evenOdd: false), opacity: opacity)
+        PalaceMark(path: Path(CGRect(x: x, y: y, width: w, height: h)), paint: .fill(Ink.hex(hex), evenOdd: false), opacity: opacity)
     }
 
     static func rounded(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ r: CGFloat, _ hex: UInt32) -> PalaceMark {
         PalaceMark(path: Path(roundedRect: CGRect(x: x, y: y, width: w, height: h), cornerRadius: r),
-                   paint: .fill(PalaceInk.hex(hex), evenOdd: false))
+                   paint: .fill(Ink.hex(hex), evenOdd: false))
     }
 
     // MARK: Drawing

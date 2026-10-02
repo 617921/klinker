@@ -183,11 +183,3 @@ enum HouseCatalog {
     static func item(_ id: String) -> HouseItem? { itemsByID[id] }
     static func slot(_ id: String) -> HouseSlot? { slotsByID[id] }
 }
-
-/// Night by the real clock: 20:00 to 7:00.
-enum HouseClock {
-    static func isNight(_ date: Date = .now) -> Bool {
-        let hour = Calendar.current.component(.hour, from: date)
-        return hour >= 20 || hour < 7
-    }
-}

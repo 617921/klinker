@@ -133,7 +133,7 @@ struct PalaceGenericObjectArt: View {
         [
             .f("M10 26H26L34 64H2Z", 0xFAC775, 0.16),
             .f("M6 24L12 2H24L30 24Z", shade),
-            .f("M6 23H30V26H6Z", PalaceInk.shade(shade, 0.8)),
+            .f("M6 23H30V26H6Z", Ink.shade(shade, 0.8)),
             .f("M17 26H19V106H17Z", 0x2E2117),
             .oval(8, 104, 20, 7, 0x2E2117),
         ]
