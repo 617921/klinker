@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 24,
+      "type": "g7Harbour",
+      "noor": [],
+      "order": ["schip", "kade", "sluis", "goederen", "bemanning", "douane", "varen", "vervoeren", "werkgelegenheid", "internationaal", "zeeziek"],
+      "prompts": {
+        "goederen": "Waar liggen de",
+        "varen": "Waar zie je een bootje",
+        "vervoeren": "Waarmee kun je containers",
+        "zeeziek": "Wie is er"
+      },
+      "weg": [
+        { "target": "schip", "options": ["schip", "varen", "zeeziek"] },
+        { "target": "bemanning", "options": ["werkgelegenheid", "bemanning", "douane"] },
+        { "target": "vervoeren", "options": ["goederen", "internationaal", "vervoeren"] },
+        { "target": "kade", "options": ["kade", "sluis", "schip"] },
+        { "target": "zeeziek", "options": ["varen", "zeeziek", "bemanning"] }
+      ],
+      "anchors": [
+        {
+          "word": "sluis", "prop": "g7Lock", "slot": "waterLeft",
+          "label": "Twee houten deuren in het water tussen stenen muren, met witte balken en een rood licht; een bootje wacht",
+          "params": {}
+        },
+        {
+          "word": "schip", "prop": "g7Ship", "slot": "waterMid",
+          "label": "Een grote boot met een witte brug, een schoorsteen en een anker aan de voorkant",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "varen", "prop": "g7Sailboat", "slot": "waterFar",
+          "label": "Een zeilbootje met een wit en een rood zeil gaat over het water",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "zeeziek", "prop": "g7SeasickBoat", "slot": "waterNear",
+          "label": "Een klein bootje op hoge golven; iemand met een groen gezicht hangt over de rand",
+          "params": {}
+        },
+        {
+          "word": "internationaal", "prop": "g7Signpost", "slot": "quayBackLeft",
+          "label": "Een wegwijzer met een wereldbol: pijlen naar steden over de hele wereld",
+          "params": { "icons": ["globe"], "lines": ["Shanghai|9000 km", "New York|5900 km", "Lagos|5000 km"] }
+        },
+        {
+          "word": "bemanning", "prop": "g7Worker", "slot": "quayBackMid",
+          "label": "Drie zeelui in streepjestruien met witte petjes",
+          "params": { "count": 3, "accessory": "sailor", "variant": 1 }
+        },
+        {
+          "word": "kade", "prop": "g7Bollard", "slot": "edge",
+          "label": "De stenen rand langs het water met een ijzeren paal en een dik touw",
+          "params": {}
+        },
+        {
+          "word": "vervoeren", "prop": "g7Truck", "slot": "quayBackRight",
+          "label": "Een vrachtwagen rijdt weg met een container; een pijl wijst vooruit",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "goederen", "prop": "g7Goods", "slot": "quayFrontLeft",
+          "label": "Dozen, zakken en vaten op een houten pallet",
+          "params": {}
+        },
+        {
+          "word": "douane", "prop": "g7Customs", "slot": "quayFrontMid",
+          "label": "Een beambte met een pet en een zaklamp; een hond snuffelt aan een open koffer",
+          "params": {}
+        },
+        {
+          "word": "werkgelegenheid", "prop": "g7Worker", "slot": "quayFrontRight",
+          "label": "Havenwerkers met helmen en oranje hesjes; een bordje: 2000 banen",
+          "params": { "count": 3, "accessory": "vest", "variant": 2, "text": "+2000 banen" }
+        }
+      ]
+    }
+  ]
+}
