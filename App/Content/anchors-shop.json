@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 2,
+      "type": "bakery",
+      "order": ["gebak", "deeg", "bestelling", "knapperig", "beleg", "proeven", "allergie", "ophalen", "glutenvrij", "trakteren", "ingrediënt"],
+      "prompts": {
+        "ophalen": "Wie komt zijn taart",
+        "proeven": "Waar mag je iets",
+        "trakteren": "Wie gaat",
+        "knapperig": "Wat is lekker",
+        "glutenvrij": "Welk brood is",
+        "allergie": "Waar staat iets over",
+        "ingrediënt": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "deeg", "options": ["ingrediënt", "deeg", "knapperig"] },
+        { "target": "ophalen", "options": ["bestelling", "ophalen", "trakteren"] },
+        { "target": "glutenvrij", "options": ["allergie", "knapperig", "glutenvrij"] },
+        { "target": "gebak", "options": ["gebak", "trakteren", "proeven"] },
+        { "target": "proeven", "options": ["beleg", "gebak", "proeven"] }
+      ],
+      "anchors": [
+        {
+          "word": "allergie", "prop": "warningSign", "slot": "window",
+          "label": "Een bord op het raam: een rode driehoek met een pinda",
+          "params": { "caption": "Let op:", "text": "noten!" }
+        },
+        {
+          "word": "knapperig", "prop": "breadLoaf", "slot": "shelfTopLeft",
+          "label": "Een stokbrood dat krakend in tweeën breekt",
+          "params": { "accessory": "baguette", "text": "krak!" }
+        },
+        {
+          "word": "glutenvrij", "prop": "breadLoaf", "slot": "shelfTopRight",
+          "label": "Een brood met een etiket: een doorgestreepte graanaar",
+          "params": { "accessory": "loaf", "tone": "noWheat" }
+        },
+        {
+          "word": "deeg", "prop": "doughBoard", "slot": "shelfLeft",
+          "label": "Een zachte witte bal op een plank met meel, en een rolstok",
+          "params": {}
+        },
+        {
+          "word": "ingrediënt", "prop": "ingredientRow", "slot": "shelfRight",
+          "label": "Bloem plus eieren plus boter",
+          "params": {}
+        },
+        {
+          "word": "beleg", "prop": "toppings", "slot": "counterLeft",
+          "label": "Een boterham met kaas en ham, en een doos hagelslag",
+          "params": {}
+        },
+        {
+          "word": "gebak", "prop": "pastryCase", "slot": "counterMid",
+          "label": "De glazen vitrine met tompoezen, taart en soesjes",
+          "params": {}
+        },
+        {
+          "word": "bestelling", "prop": "orderSlip", "slot": "counterRight",
+          "label": "Een klembord: Jansen, één taart, zes broodjes, zaterdag om tien uur",
+          "params": { "caption": "Jansen", "lines": ["1 × taart", "6 × broodjes", "za 10:00"] }
+        },
+        {
+          "word": "ophalen", "prop": "shopper", "slot": "floorLeft", "frame": [14, 272, 68, 122],
+          "label": "Een man loopt weg met een taartdoos met het kaartje Jansen",
+          "params": { "accessory": "cakeBox", "text": "Jansen", "variant": 0 }
+        },
+        {
+          "word": "proeven", "prop": "tastingPlate", "slot": "floorMid",
+          "label": "Een bord met gratis stukjes op prikkers, en een smullend gezichtje",
+          "params": { "text": "gratis" }
+        },
+        {
+          "word": "trakteren", "prop": "shopper", "slot": "floorRight", "frame": [272, 270, 92, 130],
+          "label": "Een vrouw met een feesthoedje biedt een dienblad met cakejes aan",
+          "params": { "accessory": "tray", "variant": 3 }
+        }
+      ],
+      "decor": [
+        { "prop": "shelfGoods", "slot": "shelfTopMid", "params": { "accessory": "bread" } },
+        { "prop": "shelfGoods", "slot": "shelfMid", "params": { "accessory": "bread", "variant": 2 } }
+      ]
+    },
+    {
+      "sheet": 4,
+      "type": "supermarket",
+      "order": ["boodschappen", "pinnen", "aanbieding", "kassabon", "afwegen", "statiegeld", "korting", "uitverkocht", "houdbaarheidsdatum", "biologisch", "verpakking"],
+      "prompts": {
+        "pinnen": "Waar kun je",
+        "afwegen": "Waar kun je je tomaten",
+        "uitverkocht": "Wat is",
+        "statiegeld": "Waar krijg je je",
+        "korting": "Waar krijg je",
+        "aanbieding": "Wat is in de",
+        "boodschappen": "Waar zijn de",
+        "houdbaarheidsdatum": "Waar staat de"
+      },
+      "weg": [
+        { "target": "korting", "options": ["aanbieding", "korting", "kassabon"] },
+        { "target": "pinnen", "options": ["kassabon", "statiegeld", "pinnen"] },
+        { "target": "uitverkocht", "options": ["uitverkocht", "biologisch", "afwegen"] },
+        { "target": "houdbaarheidsdatum", "options": ["verpakking", "houdbaarheidsdatum", "boodschappen"] },
+        { "target": "boodschappen", "options": ["statiegeld", "korting", "boodschappen"] }
+      ],
+      "anchors": [
+        {
+          "word": "aanbieding", "prop": "offerPoster", "slot": "window",
+          "label": "Een gele poster op het raam: één plus één gratis, met kaas",
+          "params": { "text": "1+1", "caption": "gratis" }
+        },
+        {
+          "word": "verpakking", "prop": "overPacked", "slot": "shelfTopLeft",
+          "label": "Een grote doos vol plastic, met één klein koekje erin",
+          "params": {}
+        },
+        {
+          "word": "houdbaarheidsdatum", "prop": "datedPack", "slot": "shelfTopRight",
+          "label": "Een pak melk en een loep op de datum twaalf oktober",
+          "params": { "caption": "THT", "text": "12-10" }
+        },
+        {
+          "word": "korting", "prop": "priceTag", "slot": "shelfLeft",
+          "label": "Pakken sap met een rode ster: min vijfentwintig procent",
+          "params": { "text": "-25%", "lines": ["2,49", "1,87"] }
+        },
+        {
+          "word": "uitverkocht", "prop": "produceCrate", "slot": "shelfMid",
+          "label": "Een lege krat voor aardbeien met een briefje: sorry, op",
+          "params": { "accessory": "strawberry", "count": 0, "text": "sorry, op!" }
+        },
+        {
+          "word": "afwegen", "prop": "weighScale", "slot": "counterLeft",
+          "label": "Een weegschaal met een zakje tomaten erop",
+          "params": { "text": "0,8 kg", "accessory": "tomato" }
+        },
+        {
+          "word": "kassabon", "prop": "tillReceipt", "slot": "counterMid",
+          "label": "De kassa met een lang wit papiertje met prijzen",
+          "params": { "lines": ["melk|1,15", "brood|2,49", "kaas|4,99"], "caption": "totaal", "text": "€ 23,40" }
+        },
+        {
+          "word": "pinnen", "prop": "cardTerminal", "slot": "counterRight",
+          "label": "Een betaalautomaat met een bankpas, en een vinger op de groene knop",
+          "params": { "text": "€ 23,40" }
+        },
+        {
+          "word": "statiegeld", "prop": "bottleReturn", "slot": "floorLeft",
+          "label": "De automaat waar je lege flessen in stopt, met een bonnetje van vijfentwintig cent",
+          "params": { "text": "€ 0,25" }
+        },
+        {
+          "word": "biologisch", "prop": "produceCrate", "slot": "floorMid", "frame": [110, 300, 86, 74], "pin": [153, 372],
+          "label": "Een krat wortels met aarde eraan en een groen blaadje",
+          "params": { "accessory": "carrot", "count": 9, "tone": "leaf", "text": "puur natuur" }
+        },
+        {
+          "word": "boodschappen", "prop": "shoppingCart", "slot": "floorRight", "frame": [282, 300, 84, 86], "pin": [366, 354],
+          "label": "Een winkelwagen vol brood, melk en groente",
+          "params": {}
+        }
+      ],
+      "decor": [
+        { "prop": "shelfGoods", "slot": "shelfTopMid", "params": { "accessory": "boxes" } },
+        { "prop": "shelfGoods", "slot": "shelfRight", "params": { "accessory": "jars", "variant": 1 } }
+      ]
+    },
+    {
+      "sheet": 10,
+      "type": "pharmacy",
+      "order": ["medicijn", "bijsluiter", "pijnstiller", "innemen", "dosering", "zorgverzekering", "middel", "bijwerking", "vergoeden", "nuchter", "verkrijgbaar"],
+      "prompts": {
+        "innemen": "Wie gaat een pil",
+        "vergoeden": "Wie gaat de kosten",
+        "verkrijgbaar": "Wat is zonder recept",
+        "nuchter": "Wat betekent",
+        "dosering": "Waar zie je de",
+        "bijwerking": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "middel", "options": ["medicijn", "middel", "pijnstiller"] },
+        { "target": "bijwerking", "options": ["bijsluiter", "dosering", "bijwerking"] },
+        { "target": "vergoeden", "options": ["zorgverzekering", "vergoeden", "verkrijgbaar"] },
+        { "target": "nuchter", "options": ["innemen", "nuchter", "dosering"] },
+        { "target": "pijnstiller", "options": ["pijnstiller", "bijsluiter", "medicijn"] }
+      ],
+      "anchors": [
+        {
+          "word": "bijwerking", "prop": "effectPoster", "slot": "window",
+          "label": "Een poster: een capsule, een pijl en een duizelig groen gezicht",
+          "params": { "lines": ["duizelig?", "misselijk?"] }
+        },
+        {
+          "word": "medicijn", "prop": "pillJar", "slot": "shelfTopLeft",
+          "label": "Een bruin potje met capsules en tabletten",
+          "params": {}
+        },
+        {
+          "word": "middel", "prop": "syrupBottle", "slot": "shelfTopRight",
+          "label": "Een flesje drank met een lepel en een kaartje: tegen hoest",
+          "params": { "text": "tegen hoest" }
+        },
+        {
+          "word": "pijnstiller", "prop": "medBox", "slot": "shelfLeft",
+          "label": "Een doosje tabletten met een hoofd met een bliksem erop, en een strip",
+          "params": {}
+        },
+        {
+          "word": "dosering", "prop": "measureCup", "slot": "shelfRight",
+          "label": "Een maatbekertje met een rode pijl bij tien milliliter, drie keer per dag",
+          "params": { "text": "10 ml", "caption": "3× per dag" }
+        },
+        {
+          "word": "bijsluiter", "prop": "medLeaflet", "slot": "counterLeft",
+          "label": "Een doosje met een lang gevouwen papier vol kleine letters",
+          "params": {}
+        },
+        {
+          "word": "zorgverzekering", "prop": "insuranceCard", "slot": "counterMid", "pin": [242, 258],
+          "label": "Een pasje in een hand, met een paraplu boven een hartje",
+          "params": { "text": "N. Jansen", "caption": "1234 5678" }
+        },
+        {
+          "word": "vergoeden", "prop": "refundSlip", "slot": "counterRight",
+          "label": "Een rekening van dertig euro, en munten die terugvliegen naar een hand",
+          "params": { "text": "€ 30,00", "caption": "terug" }
+        },
+        {
+          "word": "verkrijgbaar", "prop": "otcRack", "slot": "floorLeft",
+          "label": "Een open rek met doosjes en een bord: zonder recept",
+          "params": { "text": "zonder recept" }
+        },
+        {
+          "word": "nuchter", "prop": "breakfastTable", "slot": "floorMid",
+          "label": "Een tafeltje met een leeg bord, een wekker op zeven uur en een doorgestreepte boterham",
+          "params": { "time": "7:00" }
+        },
+        {
+          "word": "innemen", "prop": "shopper", "slot": "floorRight", "frame": [290, 278, 70, 124],
+          "label": "Een man stopt een pil in zijn mond en houdt een glas water vast",
+          "params": { "accessory": "pill", "variant": 2 }
+        }
+      ],
+      "decor": [
+        { "prop": "shelfGoods", "slot": "shelfTopMid", "params": { "accessory": "medicine" } },
+        { "prop": "shelfGoods", "slot": "shelfMid", "params": { "accessory": "medicine", "variant": 3 } }
+      ]
+    }
+  ]
+}

@@ -21,6 +21,15 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case reader
     /// A train window packed with heads. `count` heads.
     case crowdedWindow
+
+    // Shops (bakery, supermarket, pharmacy): drawn in PalacePropsShop/Grocer/Bakery/Pharmacy*.swift,
+    // where each one's params are described.
+    case shelfGoods, shopper
+    case cardTerminal, tillReceipt, weighScale, produceCrate, priceTag, offerPoster
+    case bottleReturn, shoppingCart, datedPack, overPacked
+    case pastryCase, doughBoard, toppings, ingredientRow, warningSign, orderSlip, tastingPlate, breadLoaf
+    case pillJar, medLeaflet, effectPoster, measureCup, medBox, syrupBottle
+    case insuranceCard, refundSlip, otcRack, breakfastTable
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -73,6 +82,12 @@ struct PalacePropView: View, Equatable {
             case .clock: PalaceFigures.clock(pen, p)
             case .reader: PalaceFigures.reader(pen, p)
             case .crowdedWindow: PalaceFigures.crowdedWindow(pen, p)
+            case .shelfGoods, .shopper, .cardTerminal, .tillReceipt, .weighScale, .produceCrate, .priceTag,
+                 .offerPoster, .bottleReturn, .shoppingCart, .datedPack, .overPacked, .pastryCase, .doughBoard,
+                 .toppings, .ingredientRow, .warningSign, .orderSlip, .tastingPlate, .breadLoaf, .pillJar,
+                 .medLeaflet, .effectPoster, .measureCup, .medBox, .syrupBottle, .insuranceCard, .refundSlip,
+                 .otcRack, .breakfastTable:
+                PalaceShopProps.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
