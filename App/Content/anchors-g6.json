@@ -166,6 +166,86 @@
       "decor": [
         { "prop": "magazines", "slot": "shelfMid", "params": { "labels": ["TUIN", "AUTO", "REIS"], "count": 3 } }
       ]
+    },
+    {
+      "sheet": 43,
+      "type": "g6Garage",
+      "order": ["monteur", "tanken", "occasion", "kenteken", "accu", "onderhoudsbeurt", "apk", "keuren", "afgekeurd", "offerte", "betrouwbaar"],
+      "prompts": {
+        "apk": "Waar zie je de",
+        "onderhoudsbeurt": "Welke auto krijgt een",
+        "monteur": "Wie is de",
+        "kenteken": "Waar zie je het",
+        "accu": "Waar staat de",
+        "offerte": "Waar hangt de",
+        "occasion": "Welke auto is een",
+        "keuren": "Wie komt de auto",
+        "tanken": "Waar kun je"
+      },
+      "weg": [
+        { "target": "apk", "options": ["apk", "keuren", "afgekeurd"] },
+        { "target": "tanken", "options": ["accu", "tanken", "onderhoudsbeurt"] },
+        { "target": "offerte", "options": ["offerte", "kenteken", "afgekeurd"] },
+        { "target": "occasion", "options": ["betrouwbaar", "onderhoudsbeurt", "occasion"] },
+        { "target": "monteur", "options": ["keuren", "monteur", "kenteken"] }
+      ],
+      "anchors": [
+        {
+          "word": "betrouwbaar", "prop": "g6Rating", "slot": "sign",
+          "label": "Een groen bord boven de deur: een handdruk, vijf sterren, sinds 1978",
+          "params": { "icons": ["handshake"], "count": 5, "text": "sinds 1978", "caption": "klanten: 9,4" }
+        },
+        {
+          "word": "tanken", "prop": "g6FuelPump", "slot": "doorway",
+          "label": "Buiten bij de pomp: de slang zit in een blauwe auto, het scherm telt de euro's en de liters",
+          "params": { "text": "€ 52,40", "caption": "31,2 L" }
+        },
+        {
+          "word": "apk", "prop": "g6Badge", "slot": "wallLeft",
+          "label": "Een rond zegel aan de muur: een witte auto met een groen vinkje, één keer per jaar",
+          "params": { "text": "1× per jaar" }
+        },
+        {
+          "word": "afgekeurd", "prop": "g6Verdict", "slot": "wallMid",
+          "label": "Een rapport op een klembord: lichten en banden goed, remmen fout, en een grote rode stempel met een kruis",
+          "params": { "lines": ["lichten|ok", "banden|ok", "remmen|no"], "accessory": "reject" }
+        },
+        {
+          "word": "offerte", "prop": "paperSheet", "slot": "wallRight",
+          "label": "Een briefje aan de muur met prijzen: remmen en banden, samen vierhonderdveertig euro, akkoord?",
+          "params": { "mount": "wall", "lines": ["remmen|€ 280", "banden|€ 160"], "text": "€ 440", "caption": "akkoord?" }
+        },
+        {
+          "word": "onderhoudsbeurt", "prop": "g6Car", "slot": "lift", "pin": [224, 210],
+          "label": "Een rode auto hoog op de brug: de oude olie loopt eruit, ernaast een nieuwe fles olie en een filter",
+          "params": { "accessory": "lift", "variant": 0 }
+        },
+        {
+          "word": "accu", "prop": "g6Battery", "slot": "bench", "pin": [366, 212],
+          "label": "Een zwart blok met een plus en een min, startkabels eraan, en een bijna leeg batterijtje",
+          "params": {}
+        },
+        {
+          "word": "monteur", "prop": "g6Figure", "slot": "floorLeft",
+          "label": "Een man in een blauwe overall met een pet en een grote moersleutel",
+          "params": { "accessory": "wrench", "variant": 1 }
+        },
+        {
+          "word": "occasion", "prop": "g6Car", "slot": "floorMid",
+          "label": "Een groene tweedehands auto met een kaart achter het raam: te koop, zesduizend negenhonderdvijftig euro",
+          "params": { "accessory": "sale", "variant": 2, "caption": "te koop", "text": "€ 6.950" }
+        },
+        {
+          "word": "keuren", "prop": "g6Figure", "slot": "floorRight",
+          "label": "Een man in een grijze jas met een klembord vol vinkjes en een vergrootglas",
+          "params": { "accessory": "inspect", "variant": 4 }
+        },
+        {
+          "word": "kenteken", "prop": "g6Plate", "slot": "desk",
+          "label": "Een computer op een bureautje met een gele nummerplaat op het scherm",
+          "params": { "mount": "screen", "text": "XL-482-K" }
+        }
+      ]
     }
   ]
 }

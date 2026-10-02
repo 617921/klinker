@@ -1,12 +1,6 @@
 import SwiftUI
 
 // TEMPORARY stubs (removed as each g6 room is written).
-enum G6Cars { static func car(_ pen: PropPen, _ p: PalacePropParams) {}; static func fuelPump(_ pen: PropPen, _ p: PalacePropParams) {} }
-enum G6Garage {
-    static func plate(_ pen: PropPen, _ p: PalacePropParams) {}; static func battery(_ pen: PropPen, _ p: PalacePropParams) {}
-    static func verdict(_ pen: PropPen, _ p: PalacePropParams) {}; static func rating(_ pen: PropPen, _ p: PalacePropParams) {}
-    static func badge(_ pen: PropPen, _ p: PalacePropParams) {}
-}
 enum G6Fire { static func fire(_ pen: PropPen, _ p: PalacePropParams) {}; static func rescue(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G6Safety {
     static func hazard(_ pen: PropPen, _ p: PalacePropParams) {}; static func smokeAlarm(_ pen: PropPen, _ p: PalacePropParams) {}
@@ -29,11 +23,9 @@ enum G6ArtFloor {
     static func ribbon(_ pen: PropPen, _ p: PalacePropParams) {}; static func expoPoster(_ pen: PropPen, _ p: PalacePropParams) {}
     static func guestbook(_ pen: PropPen, _ p: PalacePropParams) {}
 }
-enum G6GarageRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
 enum G6ConcertRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
 enum G6GalleryRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
 enum G6FireRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
-struct G6GarageBackdrop: View, Equatable { var body: some View { Color.clear } }
 struct G6ConcertBackdrop: View, Equatable { var body: some View { Color.clear } }
 struct G6GalleryBackdrop: View, Equatable { var body: some View { Color.clear } }
 struct G6FireBackdrop: View, Equatable { var body: some View { Color.clear } }
