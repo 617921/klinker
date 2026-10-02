@@ -39,6 +39,46 @@
       ]
     },
     {
+      "sheet": 22,
+      "type": "g5Museum",
+      "noor": [],
+      "order": ["schilderij", "beeld", "kunstenaar", "rondleiding", "tentoonstelling", "museumkaart", "eeuw", "aanraken", "beroemd", "bewonderen", "indrukwekkend"],
+      "prompts": {
+        "aanraken": "Wat mag je niet",
+        "bewonderen": "Wie staat iets te",
+        "beroemd": "Welk portret is",
+        "indrukwekkend": "Wat is heel",
+        "eeuw": "Waar zie je een hele",
+        "rondleiding": "Wie geeft een",
+        "kunstenaar": "Waar werkt de",
+        "museumkaart": "Waar is je",
+        "tentoonstelling": "Waar zie je de nieuwe"
+      },
+      "weg": [
+        {"target": "beeld", "options": ["schilderij", "beeld", "aanraken"]},
+        {"target": "beroemd", "options": ["beroemd", "indrukwekkend", "bewonderen"]},
+        {"target": "rondleiding", "options": ["tentoonstelling", "kunstenaar", "rondleiding"]},
+        {"target": "eeuw", "options": ["eeuw", "museumkaart", "tentoonstelling"]},
+        {"target": "kunstenaar", "options": ["bewonderen", "kunstenaar", "schilderij"]}
+      ],
+      "anchors": [
+        {"word": "tentoonstelling", "prop": "g5Banner", "slot": "banner", "label": "Een rode banier aan het plafond met een klein landschap in een gouden lijst: Hollandse meesters, van 12 maart tot 30 juni", "params": {"lines": ["Hollandse", "meesters"], "caption": "12/3 – 30/6", "tone": "red"}},
+        {"word": "schilderij", "prop": "g5Frame", "slot": "paintingLeft", "label": "Een landschap met een molen en een sloot in een gouden lijst", "params": {"accessory": "landscape"}},
+        {"word": "eeuw", "prop": "sign", "slot": "plaque", "label": "Een bordje aan de muur: van 1600 tot 1700, honderd jaar", "params": {"caption": "1600 – 1700", "text": "100 jaar", "tone": "white", "mount": "wall"}},
+        {"word": "indrukwekkend", "prop": "g5Frame", "slot": "paintingBig", "label": "Een enorm donker doek met een groep mannen met hoeden en een lans; een piepklein mensje staat ervoor", "params": {"accessory": "group", "variant": 1}},
+        {"word": "beroemd", "prop": "g5Frame", "slot": "paintingRight", "label": "Een klein portret van een meisje met een parel; ervoor een drukte van mensen die foto's maken met flitsen", "params": {"accessory": "portrait", "count": 3}},
+        {"word": "beeld", "prop": "g5Statue", "slot": "plinthLeft", "label": "Een witte marmeren figuur op een sokkel", "params": {"accessory": "statue"}},
+        {"word": "aanraken", "prop": "g5Statue", "slot": "niche", "label": "Een blauw-witte vaas op een sokkel; een kleine hand komt er tegenaan, en een rond bordje met een doorgestreepte hand", "params": {"accessory": "vase", "variant": 1}},
+        {"word": "museumkaart", "prop": "card", "slot": "floorLeft", "label": "Een hand houdt een pasje met een foto omhoog: een jaarkaart", "params": {"accessory": "hand", "caption": "jaarkaart", "text": "N. Bakker", "tone": "red", "variant": 2}, "pin": [4, 384], "align": "leading", "frame": [2, 300, 66, 82]},
+        {"word": "bewonderen", "prop": "g5Fan", "slot": "floorMid", "label": "Een vrouw met haar handen gevouwen en hartjes boven haar hoofd, ze kijkt verliefd omhoog", "params": {"accessory": "admire", "mount": "stand", "variant": 3}, "pin": [108, 384], "align": "leading"},
+        {"word": "kunstenaar", "prop": "g5Maker", "slot": "floorCenter", "label": "Een man met een rode baret en een palet werkt met een penseel aan een doek op een ezel", "params": {"accessory": "painter", "variant": 7}, "pin": [250, 352], "align": "trailing"},
+        {"word": "rondleiding", "prop": "g5Group", "slot": "floorRight", "label": "Een gids met een oranje vlaggetje praat, en een groepje mensen loopt achter haar aan", "params": {"accessory": "tour", "text": "Hier ziet u…", "variant": 6}, "pin": [366, 384], "align": "trailing"}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
       "sheet": 23,
       "type": "g5Cinema",
       "noor": [],
