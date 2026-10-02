@@ -245,6 +245,30 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g8Megaphone
     /// A notice board with a poster: two different people, a big equals sign between them.
     case g8Equal
+
+    // Roundabout (PalacePropsG8Traffic.swift, PalacePropsG8Street.swift)
+    /// A traffic light on a pole; `highlight` the lit lamp (0 red, 1 amber, 2 green).
+    case g8TrafficLight
+    /// A road sign on a pole: `accessory` "noEntry" | "giveWay" | "zebra" | "roundabout".
+    case g8TrafficSign
+    /// A blue direction sign: a ring with three exits `labels`, exit `highlight` bold with an arrow.
+    case g8ExitSign
+    /// Someone walking with a shopping bag under the round blue footpath sign. `variant`.
+    case g8Pedestrian
+    /// A parent and child at the kerb looking both ways, an arrow showing the way across.
+    case g8KerbCross
+    /// A zebra crossing in perspective (`count` bars) with the blue crossing sign at the kerb.
+    case g8Zebra
+    /// A board: a muddled junction under a red cross beside a tidy roundabout with an eye and a tick.
+    case g8Overview
+    /// Busy traffic round a roundabout: a bus, cars and cyclists.
+    case g8RingTraffic
+    /// A car waiting at shark's teeth under the give-way sign while a cyclist rides past first.
+    case g8GiveWay
+    /// A car overtaking a cyclist, a curved arrow from behind to in front.
+    case g8Overtake
+    /// A parked car with a slip under the wiper, shown big in a close-up with the amount `text`.
+    case g8Fine
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -320,7 +344,8 @@ struct PalacePropView: View, Equatable {
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g8Shed, .g8Greenhouse, .g8Clubhouse, .g8Plot, .g8Weeds, .g8Gardener, .g8LayPath, .g8Sowing, .g8SoilCut,
                  .g8SeedPacket, .g8Fertile, .g8PollingStation, .g8ElectionBoard, .g8PartyStand, .g8March, .g8Cage, .g8Banner,
-                 .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal:
+                 .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal, .g8TrafficLight, .g8TrafficSign, .g8ExitSign,
+                 .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine:
                 G8Props.draw(prop.kind, pen, p)
             }
         }

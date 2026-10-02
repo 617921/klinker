@@ -27,6 +27,17 @@ enum G8Props {
         case .g8Ballot: G8SquarePeople.ballot(pen, p)
         case .g8Megaphone: G8SquarePeople.megaphone(pen, p)
         case .g8Equal: G8SquarePeople.equal(pen, p)
+        case .g8TrafficLight: G8Street.trafficLight(pen, p)
+        case .g8TrafficSign: G8Street.trafficSign(pen, p)
+        case .g8ExitSign: G8Street.exitSign(pen, p)
+        case .g8Pedestrian: G8Street.pedestrian(pen, p)
+        case .g8KerbCross: G8Street.kerbCross(pen, p)
+        case .g8Zebra: G8Street.zebra(pen, p)
+        case .g8Overview: G8Street.overview(pen, p)
+        case .g8RingTraffic: G8Traffic.ring(pen, p)
+        case .g8GiveWay: G8Traffic.giveWay(pen, p)
+        case .g8Overtake: G8Traffic.overtake(pen, p)
+        case .g8Fine: G8Traffic.fine(pen, p)
         default: break
         }
     }

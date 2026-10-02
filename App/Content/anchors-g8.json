@@ -153,6 +153,85 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 59,
+      "type": "g8Roundabout",
+      "order": ["verkeerslicht", "zebrapad", "verkeer", "voetganger", "afslag", "bekeuring", "verboden", "voorrang", "oversteken", "inhalen", "overzichtelijk"],
+      "prompts": {
+        "voetganger": "Waar loopt een",
+        "voorrang": "Waar geeft een auto",
+        "verkeer": "Waar is veel",
+        "inhalen": "Waar zie je een auto",
+        "oversteken": "Waar gaan mensen",
+        "bekeuring": "Waar zie je een",
+        "afslag": "Waar zie je de",
+        "overzichtelijk": "Welke kruising is"
+      },
+      "weg": [
+        { "target": "zebrapad", "options": ["oversteken", "zebrapad", "voetganger"] },
+        { "target": "voorrang", "options": ["voorrang", "verkeer", "inhalen"] },
+        { "target": "verboden", "options": ["verboden", "afslag", "verkeerslicht"] },
+        { "target": "bekeuring", "options": ["bekeuring", "verboden", "overzichtelijk"] },
+        { "target": "inhalen", "options": ["verkeer", "inhalen", "voorrang"] }
+      ],
+      "anchors": [
+        {
+          "word": "verkeerslicht", "prop": "g8TrafficLight", "slot": "lightFar",
+          "label": "Een paal met drie lampen boven elkaar; de rode lamp brandt",
+          "params": { "highlight": 0 }
+        },
+        {
+          "word": "voetganger", "prop": "g8Pedestrian", "slot": "paveFar",
+          "label": "Iemand met een rode tas loopt over de stoep, onder een rond blauw bord met een lopend poppetje",
+          "params": { "variant": 2 }
+        },
+        {
+          "word": "verboden", "prop": "g8TrafficSign", "slot": "alley",
+          "label": "Een rond rood bord met een witte streep bij het begin van een smal straatje",
+          "params": { "accessory": "noEntry" }
+        },
+        {
+          "word": "afslag", "prop": "g8ExitSign", "slot": "signFar",
+          "label": "Een blauw bord met een rondje en drie wegen eraf; een gele pijl wijst de weg rechtdoor naar de haven",
+          "params": { "labels": ["Centrum", "Haven", "Dijk"], "highlight": 1 }
+        },
+        {
+          "word": "voorrang", "prop": "g8GiveWay", "slot": "entryLeft",
+          "label": "Een auto wacht bij witte driehoekjes op de weg en een driehoekig bord; een fietser rijdt eerst",
+          "params": {}
+        },
+        {
+          "word": "verkeer", "prop": "g8RingTraffic", "slot": "ring",
+          "label": "Een bus, auto's en fietsers rijden rond het groene pleintje in het midden",
+          "params": {}
+        },
+        {
+          "word": "inhalen", "prop": "g8Overtake", "slot": "roadRight",
+          "label": "Een rode auto rijdt om een fietser heen en gaat ervoor; een witte pijl laat zien hoe",
+          "params": {}
+        },
+        {
+          "word": "overzichtelijk", "prop": "g8Overview", "slot": "nearLeft",
+          "label": "Een bord: links een rommelig kruispunt met een rood kruis, rechts een rustig rondje met een oog en een groen vinkje",
+          "params": {}
+        },
+        {
+          "word": "oversteken", "prop": "g8KerbCross", "slot": "kerb",
+          "label": "Een ouder en een kind hand in hand aan de rand van de weg; ze kijken links en rechts en een pijl wijst naar de andere kant",
+          "params": { "variant": 7 }
+        },
+        {
+          "word": "zebrapad", "prop": "g8Zebra", "slot": "crossing",
+          "label": "Witte strepen over de weg en een blauw bord met een lopend poppetje",
+          "params": { "count": 7 }
+        },
+        {
+          "word": "bekeuring", "prop": "g8Fine", "slot": "nearRight",
+          "label": "Een geparkeerde auto met een geel briefje onder de ruitenwisser; het briefje is groot getekend: € 95",
+          "params": { "text": "€ 95" }
+        }
+      ]
     }
   ]
 }
