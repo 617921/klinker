@@ -7,9 +7,9 @@ enum G8Roundabout {
     static let noor: CGPoint? = nil
 
     nonisolated static let slots: [String: PalaceSlot] = [
-        "lightFar": PalaceSlot(frame: CGRect(x: 6, y: 44, width: 40, height: 108), pin: CGPoint(x: 6, y: 18), tilt: -1.5),
+        "lightFar": PalaceSlot(frame: CGRect(x: 4, y: 44, width: 44, height: 108), pin: CGPoint(x: 6, y: 18), tilt: -1.5),
         "paveFar": PalaceSlot(frame: CGRect(x: 76, y: 82, width: 104, height: 68), pin: CGPoint(x: 130, y: 56), align: .center, tilt: 1),
-        "alley": PalaceSlot(frame: CGRect(x: 226, y: 62, width: 40, height: 90), pin: CGPoint(x: 246, y: 36), align: .center, tilt: 1.5),
+        "alley": PalaceSlot(frame: CGRect(x: 224, y: 62, width: 44, height: 90), pin: CGPoint(x: 246, y: 36), align: .center, tilt: 1.5),
         "signFar": PalaceSlot(frame: CGRect(x: 270, y: 48, width: 96, height: 104), pin: CGPoint(x: 366, y: 20), align: .trailing, tilt: -1),
         "entryLeft": PalaceSlot(frame: CGRect(x: 0, y: 156, width: 104, height: 80), pin: CGPoint(x: 6, y: 236), tilt: 1),
         "ring": PalaceSlot(frame: CGRect(x: 104, y: 152, width: 166, height: 84), pin: CGPoint(x: 185, y: 236), align: .center, tilt: -1),

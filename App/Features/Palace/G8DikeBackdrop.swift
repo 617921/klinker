@@ -8,9 +8,9 @@ enum G8Dike {
 
     nonisolated static let slots: [String: PalaceSlot] = [
         "sky": PalaceSlot(frame: CGRect(x: 4, y: 4, width: 120, height: 96), pin: CGPoint(x: 128, y: 18), tilt: -1.5),
-        "floodplain": PalaceSlot(frame: CGRect(x: 2, y: 130, width: 88, height: 82), pin: CGPoint(x: 6, y: 92), tilt: 1),
-        "gauge": PalaceSlot(frame: CGRect(x: 88, y: 104, width: 40, height: 140), pin: CGPoint(x: 124, y: 236), align: .center, tilt: -1),
-        "water": PalaceSlot(frame: CGRect(x: 2, y: 178, width: 84, height: 144), pin: CGPoint(x: 6, y: 296), tilt: 1.5),
+        "floodplain": PalaceSlot(frame: CGRect(x: 2, y: 139, width: 88, height: 66), pin: CGPoint(x: 6, y: 110), tilt: 1),
+        "gauge": PalaceSlot(frame: CGRect(x: 86, y: 104, width: 44, height: 140), pin: CGPoint(x: 124, y: 236), align: .center, tilt: -1),
+        "water": PalaceSlot(frame: CGRect(x: 2, y: 188, width: 84, height: 134), pin: CGPoint(x: 6, y: 296), tilt: 1.5),
         "dike": PalaceSlot(frame: CGRect(x: 96, y: 134, width: 156, height: 196), pin: CGPoint(x: 190, y: 270), align: .center, tilt: -1),
         "polderSky": PalaceSlot(frame: CGRect(x: 296, y: 36, width: 68, height: 100), pin: CGPoint(x: 366, y: 10), align: .trailing, tilt: 1.5),
         "low": PalaceSlot(frame: CGRect(x: 306, y: 166, width: 60, height: 134), pin: CGPoint(x: 366, y: 140), align: .trailing, tilt: -1),

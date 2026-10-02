@@ -257,6 +257,11 @@
       ],
       "anchors": [
         {
+          "word": "dijk", "prop": "g8Dike", "slot": "dike",
+          "label": "Een hoge, groene wal met stenen aan de kant van het water, een weg met een fietser erop en schapen",
+          "params": {}
+        },
+        {
           "word": "hevig", "prop": "g8Storm", "slot": "sky",
           "label": "Een donkere wolk met een bliksemschicht en dikke, schuine regen",
           "params": {}
@@ -275,11 +280,6 @@
           "word": "stijgen", "prop": "g8RisingWater", "slot": "water",
           "label": "In het water oude waterlijnen met jaartallen, 1900, 1950 en 2000, en een grote blauwe pijl omhoog",
           "params": { "labels": ["1900", "1950", "2000"] }
-        },
-        {
-          "word": "dijk", "prop": "g8Dike", "slot": "dike",
-          "label": "Een hoge, groene wal met stenen aan de kant van het water, een weg met een fietser erop en schapen",
-          "params": {}
         },
         {
           "word": "neerslag", "prop": "g8RainGauge", "slot": "polderSky",

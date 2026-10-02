@@ -8,7 +8,7 @@ enum G8TownSquare {
 
     nonisolated static let slots: [String: PalaceSlot] = [
         "doorLeft": PalaceSlot(frame: CGRect(x: 2, y: 108, width: 102, height: 90), pin: CGPoint(x: 6, y: 194), tilt: -1.5),
-        "facade": PalaceSlot(frame: CGRect(x: 122, y: 82, width: 36, height: 76), pin: CGPoint(x: 120, y: 86), align: .trailing, tilt: 1.5),
+        "facade": PalaceSlot(frame: CGRect(x: 118, y: 80, width: 44, height: 80), pin: CGPoint(x: 116, y: 86), align: .trailing, tilt: 1.5),
         "steps": PalaceSlot(frame: CGRect(x: 164, y: 98, width: 46, height: 96), pin: CGPoint(x: 187, y: 194), align: .center, tilt: -1),
         "boardRight": PalaceSlot(frame: CGRect(x: 262, y: 110, width: 106, height: 86), pin: CGPoint(x: 366, y: 194), align: .trailing, tilt: 1.5),
         "squareLeft": PalaceSlot(frame: CGRect(x: 2, y: 210, width: 138, height: 78), pin: CGPoint(x: 6, y: 286), tilt: 1),
