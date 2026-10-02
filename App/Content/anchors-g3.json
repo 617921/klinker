@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 17,
+      "type": "g3Ward",
+      "order": ["verpleegkundige", "operatie", "bezoekuur", "herstellen", "uitslag", "opereren", "wachtlijst", "ernstig", "afdeling", "chronisch", "behandeling"],
+      "prompts": {
+        "opereren": "Waar zie je iemand",
+        "herstellen": "Wie is aan het",
+        "verpleegkundige": "Wie is de",
+        "bezoekuur": "Wanneer is het",
+        "behandeling": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "operatie", "options": ["opereren", "operatie", "behandeling"] },
+        { "target": "herstellen", "options": ["herstellen", "ernstig", "chronisch"] },
+        { "target": "wachtlijst", "options": ["uitslag", "wachtlijst", "bezoekuur"] },
+        { "target": "verpleegkundige", "options": ["afdeling", "verpleegkundige", "opereren"] },
+        { "target": "chronisch", "options": ["behandeling", "ernstig", "chronisch"] }
+      ],
+      "anchors": [
+        {
+          "word": "bezoekuur", "prop": "sign", "slot": "signLeft",
+          "label": "Het bordje met een bos bloemen en een klok: elke dag van drie tot acht uur",
+          "params": { "caption": "ma t/m zo", "icons": ["g3Flowers", "clock"], "text": "15:00 – 20:00", "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "afdeling", "prop": "sign", "slot": "signMid",
+          "label": "Het blauwe bord aan het plafond: een hart en een pijl naar cardiologie",
+          "params": { "caption": "2e etage", "icons": ["heart", "arrow"], "text": "Cardiologie" }
+        },
+        {
+          "word": "chronisch", "prop": "g3PillWeek", "slot": "signRight",
+          "label": "Een kaart met een pillendoos voor elke dag van de week, al jaren: 2019, 2021, 2023, 2025 en verder",
+          "params": { "labels": ["2019", "2021", "2023", "2025"] }
+        },
+        {
+          "word": "operatie", "prop": "g3Door", "slot": "door",
+          "label": "De dubbele deur met ronde raampjes: binnen een grote lamp en mensen in het groen; boven de deur brandt een rode lamp",
+          "params": { "accessory": "lamp", "text": "OK" }
+        },
+        {
+          "word": "wachtlijst", "prop": "clipboard", "slot": "wallLeft",
+          "label": "Een klembord met een lange rij namen, nummer 46 tot 49, voor een nieuwe heup over drie maanden",
+          "params": { "caption": "heup · 3 mnd", "lines": ["46. Bakker", "47. Smit", "48. Yilmaz", "49. Noor"] }
+        },
+        {
+          "word": "uitslag", "prop": "letter", "slot": "wallRight",
+          "label": "Een brief van het lab: een buisje bloed, een pijl en een groen vinkje",
+          "params": { "icons": ["g3Tube", "arrow", "check"], "caption": "LAB", "tone": "green" }
+        },
+        {
+          "word": "ernstig", "prop": "g3Bed", "slot": "bedLeft",
+          "label": "Een man ligt plat in bed met een kapje op zijn gezicht; het scherm boven hem knippert rood",
+          "params": { "accessory": "serious", "variant": 0 }
+        },
+        {
+          "word": "herstellen", "prop": "g3Bed", "slot": "bedRight",
+          "label": "Een vrouw zit rechtop in bed en steekt haar duim op; de lijn op de kaart gaat omhoog",
+          "params": { "accessory": "recover", "variant": 3 }
+        },
+        {
+          "word": "behandeling", "prop": "g3Drip", "slot": "floorLeft",
+          "label": "Een man rust in een stoel; uit een zakje aan een paal loopt een slangetje naar zijn arm",
+          "params": { "variant": 2 }
+        },
+        {
+          "word": "opereren", "prop": "g3Worker", "slot": "floorMid",
+          "label": "Een chirurg in het groen met een mondkapje houdt een mesje omhoog onder de grote lamp",
+          "params": { "accessory": "surgeon", "variant": 1 }
+        },
+        {
+          "word": "verpleegkundige", "prop": "g3Worker", "slot": "floorRight",
+          "label": "Een vrouw in een lichtblauw pakje met een horloge op haar borst en een kaart in haar hand",
+          "params": { "accessory": "nurse", "variant": 5, "flip": true }
+        }
+      ]
+    },
+    {
+      "sheet": 18,
+      "type": "g3Gym",
+      "order": ["kluisje", "spierpijn", "lidmaatschap", "conditie", "stijf", "kleedkamer", "afvallen", "blessure", "opzeggen", "intensief", "volhouden"],
+      "prompts": {
+        "afvallen": "Waar zie je iemand",
+        "volhouden": "Waar zie je iemand het",
+        "stijf": "Wie is er",
+        "spierpijn": "Wie heeft er",
+        "blessure": "Wie heeft er een",
+        "conditie": "Wie werkt aan haar"
+      },
+      "weg": [
+        { "target": "spierpijn", "options": ["spierpijn", "stijf", "blessure"] },
+        { "target": "lidmaatschap", "options": ["opzeggen", "lidmaatschap", "kluisje"] },
+        { "target": "kleedkamer", "options": ["kluisje", "kleedkamer", "lidmaatschap"] },
+        { "target": "conditie", "options": ["intensief", "conditie", "volhouden"] },
+        { "target": "afvallen", "options": ["afvallen", "conditie", "stijf"] }
+      ],
+      "anchors": [
+        {
+          "word": "lidmaatschap", "prop": "card", "slot": "wallLeft",
+          "label": "Een hand houdt een pasje van de sportschool op, met een foto: dertig euro per maand",
+          "params": { "caption": "SPORT", "text": "€ 30 p/m", "tone": "orange", "variant": 1, "accessory": "hand" }
+        },
+        {
+          "word": "volhouden", "prop": "g3Streak", "slot": "wallMid",
+          "label": "Een kaart aan de muur: week na week drie groene vinkjes, onderaan een beker",
+          "params": { "labels": ["ma", "wo", "vr"], "count": 5 }
+        },
+        {
+          "word": "opzeggen", "prop": "g3CutCard", "slot": "wallRight",
+          "label": "Een schaar knipt het pasje van de sportschool in twee stukken, naast een brief",
+          "params": { "caption": "SPORT" }
+        },
+        {
+          "word": "kleedkamer", "prop": "g3Door", "slot": "door",
+          "label": "Een deur staat open: binnen hangen kleren aan haakjes boven een bankje",
+          "params": { "accessory": "ajar", "icons": ["g3Hanger"], "tone": "brown" }
+        },
+        {
+          "word": "kluisje", "prop": "g3Lockers", "slot": "lockers",
+          "label": "Een rij metalen kastjes; één staat open met een tas erin en een sleutel aan een bandje",
+          "params": { "count": 6, "highlight": 4 }
+        },
+        {
+          "word": "conditie", "prop": "g3Treadmill", "slot": "machineLeft",
+          "label": "Een vrouw rent op een loopband; op het schermpje een hart en vijfenveertig minuten",
+          "params": { "text": "45:00", "variant": 7 }
+        },
+        {
+          "word": "intensief", "prop": "g3Bike", "slot": "machineRight",
+          "label": "Een man trapt hard op een fiets die stilstaat; hij zweet, zijn gezicht is rood, zijn hart klopt 180",
+          "params": { "text": "180", "variant": 3 }
+        },
+        {
+          "word": "spierpijn", "prop": "g3Athlete", "slot": "floor1",
+          "label": "Een man met een vertrokken gezicht pakt zijn schouder vast; rode lijntjes op zijn arm en benen",
+          "params": { "accessory": "sore", "variant": 2 }
+        },
+        {
+          "word": "blessure", "prop": "g3Athlete", "slot": "floor2",
+          "label": "Een vrouw op krukken met een verband om haar knie",
+          "params": { "accessory": "injured", "variant": 5 }
+        },
+        {
+          "word": "stijf", "prop": "g3Athlete", "slot": "floor3",
+          "label": "Een man buigt voorover, maar zijn handen komen niet bij zijn tenen",
+          "params": { "accessory": "stiff", "variant": 4 }
+        },
+        {
+          "word": "afvallen", "prop": "g3Athlete", "slot": "floor4",
+          "label": "Een man op de weegschaal houdt zijn veel te wijde broek op: tien kilo minder",
+          "params": { "accessory": "scale", "text": "−10 kg", "variant": 0 }
+        }
+      ]
+    }
+  ]
+}
