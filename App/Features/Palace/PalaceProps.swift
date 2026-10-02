@@ -194,6 +194,33 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case pupil
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
+
+    // MARK: City outdoors and the finale (g8: PalacePropsG8*.swift, routed by `G8Props`)
+
+    // Allotment (PalacePropsG8Garden.swift)
+    /// A wooden garden shed, door open on a spade and a rake. `variant` 0 green, 1 brown.
+    case g8Shed
+    /// A small greenhouse with tomato plants behind the glass.
+    case g8Greenhouse
+    /// A clubhouse with the club's flag, a notice (`text`, `caption`) and members in club shirts.
+    case g8Clubhouse
+    /// A fenced garden plot with a gate; `text` on the gate's number plate.
+    case g8Plot
+    /// A bed overgrown with dandelions and thistles, a hand pulling one out by the roots.
+    case g8Weeds
+    /// A gardener in a straw hat holding up a crate of vegetables; `text` on the crate's tag.
+    case g8Gardener
+    /// A path being laid: tiles, a string between pegs, a hand lowering the next tile, a barrow.
+    case g8LayPath
+    /// A hand scattering seeds into a furrow.
+    case g8Sowing
+    /// A slice of ground: grass, dark earth with a worm and roots, clay and stones, a spade.
+    case g8SoilCut
+    /// A seed packet (`icons` picture) pouring seeds into a hand.
+    case g8SeedPacket
+    /// Two patches side by side: dry cracked ground with a wilted sprout (cross) and dark rich
+    /// ground with a laden plant (tick).
+    case g8Fertile
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -267,6 +294,9 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
+            case .g8Shed, .g8Greenhouse, .g8Clubhouse, .g8Plot, .g8Weeds, .g8Gardener, .g8LayPath, .g8Sowing, .g8SoilCut,
+                 .g8SeedPacket, .g8Fertile:
+                G8Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

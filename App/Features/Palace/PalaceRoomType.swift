@@ -24,6 +24,9 @@ enum PalaceRoomType: String, CaseIterable {
     case library
     case doctorRoom
     case classroom
+    // The city outdoors and the finale (G8Rooms.swift): allotment, town hall square, roundabout,
+    // dike, ferry, lookout tower.
+    case g8Allotment, g8TownSquare, g8Roundabout, g8Dike, g8Ferry, g8Lookout
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -41,6 +44,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "bibliotheek"
         case .doctorRoom: "praktijk"
         case .classroom: "klas"
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.hall(self)
         }
     }
 
@@ -60,6 +64,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "De bibliotheek"
         case .doctorRoom: "De praktijk van de dokter"
         case .classroom: "Het klaslokaal"
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.sceneLabel(self)
         }
     }
 
@@ -77,6 +82,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.noor
         case .doctorRoom: DoctorRoom.noor
         case .classroom: Classroom.noor
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.noor(self)
         }
     }
 
@@ -93,6 +99,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.slots
         case .doctorRoom: DoctorRoom.slots
         case .classroom: Classroom.slots
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8Rooms.slots(self)
         }
     }
 }
@@ -114,6 +121,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .library: LibraryBackdrop()
         case .doctorRoom: DoctorRoomBackdrop()
         case .classroom: ClassroomBackdrop()
+        case .g8Allotment, .g8TownSquare, .g8Roundabout, .g8Dike, .g8Ferry, .g8Lookout: G8RoomBackdrop(type: type)
         }
     }
 }

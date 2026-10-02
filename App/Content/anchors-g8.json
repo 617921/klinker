@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 52,
+      "type": "g8Allotment",
+      "order": ["volkstuin", "schuur", "kas", "zaad", "onkruid", "bodem", "vereniging", "zaaien", "aanleggen", "zelfgekweekt", "vruchtbaar"],
+      "prompts": {
+        "vereniging": "Waar zie je de",
+        "zaaien": "Waar zie je iemand",
+        "aanleggen": "Waar zie je iemand een pad",
+        "zelfgekweekt": "Welke groente is",
+        "vruchtbaar": "Welke grond is"
+      },
+      "weg": [
+        { "target": "zaaien", "options": ["zaad", "zaaien", "bodem"] },
+        { "target": "kas", "options": ["kas", "schuur", "volkstuin"] },
+        { "target": "vruchtbaar", "options": ["bodem", "vruchtbaar", "onkruid"] },
+        { "target": "zelfgekweekt", "options": ["zelfgekweekt", "aanleggen", "vereniging"] },
+        { "target": "onkruid", "options": ["onkruid", "zaaien", "zaad"] }
+      ],
+      "anchors": [
+        {
+          "word": "schuur", "prop": "g8Shed", "slot": "shed",
+          "label": "Een groen houten huisje met een open deur; binnen hangen een schop en een hark",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "kas", "prop": "g8Greenhouse", "slot": "glass",
+          "label": "Een klein glazen huisje met tomatenplanten erin",
+          "params": {}
+        },
+        {
+          "word": "vereniging", "prop": "g8Clubhouse", "slot": "club",
+          "label": "Een clubhuis met een groene vlag, een bord voor de leden en drie mensen in hetzelfde groene shirt",
+          "params": { "text": "Leden", "caption": "za 10:00" }
+        },
+        {
+          "word": "volkstuin", "prop": "g8Plot", "slot": "plot",
+          "label": "Een eigen stuk grond achter een wit hekje, met een poortje met nummer 14, bonen, kolen en een zonnebloem",
+          "params": { "text": "14" }
+        },
+        {
+          "word": "onkruid", "prop": "g8Weeds", "slot": "weeds",
+          "label": "Een bed vol paardenbloemen en een distel; een hand trekt er één met wortel en al uit",
+          "params": {}
+        },
+        {
+          "word": "zelfgekweekt", "prop": "g8Gardener", "slot": "gardener",
+          "label": "Iemand met een strohoed houdt trots een kist met wortels, tomaten en sla uit de eigen tuin vast",
+          "params": { "variant": 4, "text": "eigen oogst" }
+        },
+        {
+          "word": "aanleggen", "prop": "g8LayPath", "slot": "path",
+          "label": "Nieuwe tegels in het zand, een touwtje tussen twee paaltjes en een hand die de volgende tegel neerlegt",
+          "params": {}
+        },
+        {
+          "word": "zaaien", "prop": "g8Sowing", "slot": "sow",
+          "label": "Een hand strooit kleine korrels in een rechte geul in de aarde",
+          "params": {}
+        },
+        {
+          "word": "bodem", "prop": "g8SoilCut", "slot": "soil",
+          "label": "Een plak grond: gras, donkere aarde met een worm en wortels, en daaronder klei met stenen",
+          "params": {}
+        },
+        {
+          "word": "zaad", "prop": "g8SeedPacket", "slot": "seed",
+          "label": "Een zakje met een tomaat erop; er vallen kleine korrels uit in een hand",
+          "params": {}
+        },
+        {
+          "word": "vruchtbaar", "prop": "g8Fertile", "slot": "ground",
+          "label": "Twee hoopjes aarde: droog en gebarsten met een rood kruis, en donker met een plant vol tomaten en een groen vinkje",
+          "params": {}
+        }
+      ]
+    }
+  ]
+}
