@@ -306,6 +306,82 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 47,
+      "type": "g7Camping",
+      "noor": [],
+      "order": ["staanplaats", "slaapzak", "kampvuur", "sanitair", "luchtbed", "haring", "opzetten", "afbreken", "nachtrust", "waterdicht", "primitief"],
+      "prompts": {
+        "nachtrust": "Waar lees je over de",
+        "opzetten": "Waar zie je iemand een tent",
+        "afbreken": "Waar zie je iemand de tent",
+        "waterdicht": "Welke tent is"
+      },
+      "weg": [
+        { "target": "opzetten", "options": ["afbreken", "opzetten", "haring"] },
+        { "target": "sanitair", "options": ["sanitair", "primitief", "staanplaats"] },
+        { "target": "luchtbed", "options": ["slaapzak", "luchtbed", "nachtrust"] },
+        { "target": "waterdicht", "options": ["waterdicht", "opzetten", "primitief"] },
+        { "target": "kampvuur", "options": ["nachtrust", "haring", "kampvuur"] }
+      ],
+      "anchors": [
+        {
+          "word": "primitief", "prop": "g7Outhouse", "slot": "backLeft",
+          "label": "Een houten wc-hokje met een hartje in de deur en een oude waterpomp met een emmer",
+          "params": {}
+        },
+        {
+          "word": "waterdicht", "prop": "g7Tent", "slot": "backMid",
+          "label": "Het regent op een blauwe tent, maar binnen zit iemand droog; een groen vinkje",
+          "params": { "accessory": "rain" }
+        },
+        {
+          "word": "nachtrust", "prop": "g7PostBoard", "slot": "backSign",
+          "label": "Een bord met een maan en een doorgestreepte muzieknoot: van 23 tot 7 uur stil",
+          "params": { "caption": "23:00 – 07:00", "icons": ["g7Moon", "g7NoMusic"] }
+        },
+        {
+          "word": "sanitair", "prop": "g7Washblock", "slot": "backRight",
+          "label": "Een gebouwtje met twee deuren: een wc en een douche",
+          "params": {}
+        },
+        {
+          "word": "staanplaats", "prop": "g7Pitch", "slot": "midLeft",
+          "label": "Een leeg grasveldje tussen lage heggen, met een paaltje en het nummer 12",
+          "params": { "text": "12" }
+        },
+        {
+          "word": "opzetten", "prop": "g7Tent", "slot": "midMid",
+          "label": "Iemand duwt een stok omhoog en de tent gaat staan; een groene pijl omhoog",
+          "params": { "accessory": "up", "variant": 1 }
+        },
+        {
+          "word": "afbreken", "prop": "g7Tent", "slot": "midRight",
+          "label": "De tent zakt in, de stokken liggen eruit en de zak is ingepakt; een rode pijl omlaag",
+          "params": { "accessory": "down", "variant": 6 }
+        },
+        {
+          "word": "luchtbed", "prop": "g7AirBed", "slot": "frontLeft",
+          "label": "Een opblaasmatras met een voetpomp ernaast",
+          "params": {}
+        },
+        {
+          "word": "kampvuur", "prop": "g7Campfire", "slot": "frontFire",
+          "label": "Een vuurtje in een kring van stenen, met een marshmallow aan een stokje",
+          "params": {}
+        },
+        {
+          "word": "haring", "prop": "g7TentPeg", "slot": "frontPeg",
+          "label": "Een metalen pen wordt met een hamer in de grond geslagen; er zit een touw aan",
+          "params": {}
+        },
+        {
+          "word": "slaapzak", "prop": "g7SleepingBag", "slot": "frontRight",
+          "label": "Een blauwe, gewatteerde zak met een kap om in te slapen, op een matje",
+          "params": {}
+        }
+      ]
     }
   ]
 }
