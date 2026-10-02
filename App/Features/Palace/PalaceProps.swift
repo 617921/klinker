@@ -253,6 +253,18 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1Community
     /// Hanging screen: a long queue of little people, a clock and the waiting time `text`.
     case g1QueueScreen
+    /// Poster: at night a masked burglar climbs through a broken window with a crowbar.
+    case g1BreakIn
+    /// A hand with a megaphone shouting a bubble: a warning sign and `text`.
+    case g1Megaphone
+    /// Sign: a spray can crossed out in a red ring, an arrow, handcuffs.
+    case g1Forbidden
+    /// Photo on a cork board: a bike rack, a dashed outline where a bike stood, a cut chain lock.
+    case g1CutLock
+    /// Hanging camera screen: a hooded figure peering round a corner at night, question marks, `caption`.
+    case g1Cctv
+    /// An open handbag, a black-gloved hand sneaking a wallet out.
+    case g1Pickpocket
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -329,7 +341,7 @@ struct PalacePropView: View, Equatable {
             case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
                  .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
                  .g1Registered, .g1GiveAcross, .g1MailSlot, .g1OpenWindow, .g1Mould, .g1Repair, .g1HomeAd, .g1Objection,
-                 .g1Community, .g1QueueScreen:
+                 .g1Community, .g1QueueScreen, .g1BreakIn, .g1Megaphone, .g1Forbidden, .g1CutLock, .g1Cctv, .g1Pickpocket:
                 G1Props.draw(prop.kind, pen, p)
             }
         }

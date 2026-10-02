@@ -599,6 +599,230 @@
           }
         }
       ]
+    },
+    {
+      "sheet": 21,
+      "type": "g1PoliceDesk",
+      "order": [
+        "wijkagent",
+        "aangifte",
+        "legitimatiebewijs",
+        "diefstal",
+        "stelen",
+        "getuige",
+        "slachtoffer",
+        "inbreken",
+        "verdacht",
+        "waarschuwen",
+        "strafbaar"
+      ],
+      "prompts": {
+        "aangifte": "Waar doe je",
+        "diefstal": "Waar zie je de",
+        "getuige": "Wie is de",
+        "slachtoffer": "Wie is het",
+        "wijkagent": "Wie is de",
+        "stelen": "Waar zie je iemand",
+        "inbreken": "Waar zie je iemand",
+        "waarschuwen": "Waar wil iemand je",
+        "verdacht": "Wie is hier"
+      },
+      "weg": [
+        {
+          "target": "stelen",
+          "options": [
+            "inbreken",
+            "stelen",
+            "diefstal"
+          ]
+        },
+        {
+          "target": "getuige",
+          "options": [
+            "getuige",
+            "slachtoffer",
+            "wijkagent"
+          ]
+        },
+        {
+          "target": "aangifte",
+          "options": [
+            "legitimatiebewijs",
+            "aangifte",
+            "waarschuwen"
+          ]
+        },
+        {
+          "target": "verdacht",
+          "options": [
+            "strafbaar",
+            "verdacht",
+            "inbreken"
+          ]
+        },
+        {
+          "target": "slachtoffer",
+          "options": [
+            "diefstal",
+            "verdacht",
+            "slachtoffer"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "word": "inbreken",
+          "prop": "g1BreakIn",
+          "slot": "highLeft",
+          "label": "Een poster: 's nachts klimt een man met een masker en een breekijzer door een kapot raam",
+          "params": {}
+        },
+        {
+          "word": "waarschuwen",
+          "prop": "g1Megaphone",
+          "slot": "highMid",
+          "label": "Een geel bord: een hand met een megafoon roept: pas op!",
+          "params": {
+            "text": "Pas op!"
+          }
+        },
+        {
+          "word": "strafbaar",
+          "prop": "g1Forbidden",
+          "slot": "highRight",
+          "label": "Een bord: een spuitbus in een rode cirkel met een streep erdoor, een pijl en handboeien",
+          "params": {}
+        },
+        {
+          "word": "diefstal",
+          "prop": "g1CutLock",
+          "slot": "sideTop",
+          "label": "Een foto op een prikbord: een fietsenrek, waar een fiets stond is alleen een stippellijn, en een doorgeknipt slot",
+          "params": {}
+        },
+        {
+          "word": "verdacht",
+          "prop": "g1Cctv",
+          "slot": "glassRight",
+          "pin": [
+            364,
+            158
+          ],
+          "label": "Een camerabeeld: iemand met een capuchon kijkt 's nachts stiekem om de hoek",
+          "params": {
+            "caption": "CAM 2"
+          }
+        },
+        {
+          "word": "legitimatiebewijs",
+          "prop": "card",
+          "slot": "counterLeft",
+          "pin": [
+            116,
+            262
+          ],
+          "label": "Een hand houdt een kaart met een pasfoto en een naam omhoog",
+          "params": {
+            "caption": "ID-KAART",
+            "tone": "blue",
+            "text": "N. Bakker",
+            "accessory": "hand",
+            "variant": 3
+          }
+        },
+        {
+          "word": "aangifte",
+          "prop": "paperSheet",
+          "slot": "counterMid",
+          "label": "Een formulier van de politie op een klembord: wat is er gebeurd en waar; een pen schrijft",
+          "params": {
+            "icons": [
+              "g1Badge"
+            ],
+            "tone": "blue",
+            "lines": [
+              "wat|fiets weg"
+            ],
+            "accessory": "pen",
+            "mount": "clipboard"
+          }
+        },
+        {
+          "word": "stelen",
+          "prop": "g1Pickpocket",
+          "slot": "counterRight",
+          "frame": [
+            288,
+            186,
+            78,
+            50
+          ],
+          "label": "Een hand in een zwarte handschoen haalt stiekem een portemonnee uit een tas",
+          "params": {}
+        },
+        {
+          "word": "wijkagent",
+          "prop": "g1Person",
+          "slot": "floorLeft",
+          "frame": [
+            2,
+            268,
+            104,
+            134
+          ],
+          "label": "Een agent op de fiets die naar de buurt zwaait",
+          "params": {
+            "accessory": "officer",
+            "mount": "bike",
+            "variant": 1
+          }
+        },
+        {
+          "word": "getuige",
+          "prop": "g1Person",
+          "slot": "floorMid",
+          "frame": [
+            104,
+            290,
+            100,
+            112
+          ],
+          "label": "Iemand wijst en zegt: ik zag het!",
+          "params": {
+            "accessory": "witness",
+            "variant": 7,
+            "text": "Ik zag het!"
+          }
+        },
+        {
+          "word": "slachtoffer",
+          "prop": "g1Person",
+          "slot": "floorRight",
+          "label": "Iemand met een verband om het hoofd en een arm in een mitella, verdrietig",
+          "params": {
+            "accessory": "victim",
+            "variant": 2,
+            "flip": true
+          }
+        }
+      ],
+      "decor": [
+        {
+          "prop": "g1Person",
+          "frame": [
+            150,
+            138,
+            64,
+            84
+          ],
+          "params": {
+            "accessory": "clerk",
+            "variant": 4,
+            "tone": "blue",
+            "mount": "cap"
+          }
+        }
+      ]
     }
   ]
 }

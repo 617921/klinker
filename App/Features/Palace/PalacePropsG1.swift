@@ -31,6 +31,12 @@ enum G1Props {
         case .g1Objection: G1HousingDesk.objection(pen, p)
         case .g1Community: G1HousingDesk.community(pen, p)
         case .g1QueueScreen: G1HousingDesk.queueScreen(pen, p)
+        case .g1BreakIn: G1Police.breakIn(pen, p)
+        case .g1Megaphone: G1Police.megaphone(pen, p)
+        case .g1Forbidden: G1Police.forbidden(pen, p)
+        case .g1CutLock: G1Police.cutLock(pen, p)
+        case .g1Cctv: G1Police.cctv(pen, p)
+        case .g1Pickpocket: G1Police.pickpocket(pen, p)
         default: break
         }
     }
