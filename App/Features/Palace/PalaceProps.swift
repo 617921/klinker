@@ -216,6 +216,25 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4PetCare
     /// A vet in green scrubs with a paw badge listening to a dog on a steel table, a lamp.
     case g4VetExam
+
+    // Pool (PalacePropsG4Pool.swift, PalacePropsG4Swim.swift)
+    /// A water slide: ladder, a curving yellow chute with a child sliding down, a splash.
+    case g4Slide
+    /// A diving board from a ladder tower, a swimmer jumping above its tip, a splash below.
+    case g4DivingBoard
+    /// A lifeguard on a high white chair, whistle blowing, a ring hanging on the chair. `variant`.
+    case g4LifeguardChair
+    /// A changing cubicle: a sign (shirt → swimsuit), a T-shirt over the door, feet and dropped trousers.
+    case g4Cubicle
+    /// A swimsuit on a hanger on a hook. `tone`.
+    case g4Swimsuit
+    /// A bather rubbing their hair with a striped towel, drops flying, a puddle. `variant`, `tone` suit.
+    case g4TowelDry
+    /// Swimmers: `accessory` "laps" (crawl and an arrow there and back), "lesson" (teacher and children
+    /// with armbands), "shallow" (a child in water to the knees, a depth tile `text`).
+    case g4Swimmers
+    /// A floating thermometer with a `text` tag, steam over the water, a heater coil under it.
+    case g4PoolThermometer
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -289,7 +308,9 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
-            case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam:
+            case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam,
+                 .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
+                 .g4PoolThermometer:
                 G4Props.draw(prop.kind, pen, p)
             }
         }

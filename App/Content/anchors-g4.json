@@ -247,6 +247,210 @@
      }
     }
    ]
+  },
+  {
+   "sheet": 35,
+   "type": "g4Pool",
+   "order": [
+    "badmeester",
+    "glijbaan",
+    "duikplank",
+    "zwemles",
+    "badpak",
+    "omkleden",
+    "afdrogen",
+    "baantje",
+    "ondiep",
+    "verwarmd",
+    "zwemdiploma"
+   ],
+   "prompts": {
+    "badmeester": "Wie is de",
+    "baantje": "Waar zwemt iemand een",
+    "omkleden": "Waar kun je je",
+    "afdrogen": "Wie gaat zich",
+    "ondiep": "Waar is het water"
+   },
+   "weg": [
+    {
+     "target": "zwemles",
+     "options": [
+      "zwemles",
+      "zwemdiploma",
+      "baantje"
+     ]
+    },
+    {
+     "target": "duikplank",
+     "options": [
+      "glijbaan",
+      "duikplank",
+      "badmeester"
+     ]
+    },
+    {
+     "target": "afdrogen",
+     "options": [
+      "omkleden",
+      "afdrogen",
+      "badpak"
+     ]
+    },
+    {
+     "target": "ondiep",
+     "options": [
+      "ondiep",
+      "verwarmd",
+      "baantje"
+     ]
+    },
+    {
+     "target": "badpak",
+     "options": [
+      "badpak",
+      "omkleden",
+      "zwemdiploma"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "glijbaan",
+     "prop": "g4Slide",
+     "slot": "slide",
+     "label": "Een gele bocht naar het water; een kind glijdt naar beneden"
+    },
+    {
+     "word": "zwemdiploma",
+     "prop": "certificate",
+     "slot": "wallLeft",
+     "label": "Een ingelijst papier met een rood zegel: deze kinderen kunnen zwemmen",
+     "params": {
+      "caption": "zwemmen",
+      "text": "A + B"
+     }
+    },
+    {
+     "word": "badpak",
+     "prop": "g4Swimsuit",
+     "slot": "hook",
+     "pin": [
+      266,
+      34
+     ],
+     "align": "leading",
+     "label": "Een blauw zwempak met witte stippen aan een hanger"
+    },
+    {
+     "word": "omkleden",
+     "prop": "g4Cubicle",
+     "slot": "cubicle",
+     "label": "Een hokje met een shirt over de deur en blote voeten onder de deur"
+    },
+    {
+     "word": "afdrogen",
+     "prop": "g4TowelDry",
+     "slot": "deck",
+     "pin": [
+      196,
+      242
+     ],
+     "align": "leading",
+     "label": "Iemand wrijft met een handdoek over zijn haar; er vallen druppels"
+    },
+    {
+     "word": "badmeester",
+     "prop": "g4LifeguardChair",
+     "slot": "chair",
+     "pin": [
+      250,
+      170
+     ],
+     "label": "Een man in een rood shirt op een hoge stoel blaast op een fluitje"
+    },
+    {
+     "word": "duikplank",
+     "prop": "g4DivingBoard",
+     "slot": "board",
+     "pin": [
+      366,
+      182
+     ],
+     "label": "Een lange plank boven het water; iemand springt eraf"
+    },
+    {
+     "word": "baantje",
+     "prop": "g4Swimmers",
+     "slot": "lane",
+     "pin": [
+      106,
+      262
+     ],
+     "align": "leading",
+     "label": "Een zwemmer gaat heen en weer door het water; een witte pijl draait om",
+     "params": {
+      "accessory": "laps"
+     }
+    },
+    {
+     "word": "zwemles",
+     "prop": "g4Swimmers",
+     "slot": "waterLeft",
+     "frame": [
+      2,
+      320,
+      128,
+      62
+     ],
+     "pin": [
+      6,
+      382
+     ],
+     "label": "Een juf in het water leert twee kinderen met bandjes zwemmen",
+     "params": {
+      "accessory": "lesson"
+     }
+    },
+    {
+     "word": "ondiep",
+     "prop": "g4Swimmers",
+     "slot": "waterMid",
+     "frame": [
+      134,
+      320,
+      112,
+      62
+     ],
+     "pin": [
+      190,
+      382
+     ],
+     "label": "Een kind staat in het water tot aan de knieën, naast een eendje",
+     "params": {
+      "accessory": "shallow",
+      "text": "0,5 m"
+     }
+    },
+    {
+     "word": "verwarmd",
+     "prop": "g4PoolThermometer",
+     "slot": "waterRight",
+     "frame": [
+      250,
+      320,
+      118,
+      62
+     ],
+     "pin": [
+      366,
+      382
+     ],
+     "label": "Een thermometer drijft in het water: 29 graden; er komt damp af",
+     "params": {
+      "text": "29°"
+     }
+    }
+   ]
   }
  ]
 }

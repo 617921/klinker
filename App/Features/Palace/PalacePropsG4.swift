@@ -12,6 +12,14 @@ enum G4Props {
         case .g4FoodBag: G4Vet.foodBag(pen, p)
         case .g4PetCare: G4VetPeople.petCare(pen, p)
         case .g4VetExam: G4VetPeople.vetExam(pen, p)
+        case .g4Slide: G4PoolProps.slide(pen, p)
+        case .g4DivingBoard: G4PoolProps.divingBoard(pen, p)
+        case .g4LifeguardChair: G4PoolProps.lifeguardChair(pen, p)
+        case .g4Cubicle: G4PoolProps.cubicle(pen, p)
+        case .g4Swimsuit: G4PoolProps.swimsuit(pen, p)
+        case .g4TowelDry: G4Swim.towelDry(pen, p)
+        case .g4Swimmers: G4Swim.swimmers(pen, p)
+        case .g4PoolThermometer: G4Swim.poolThermometer(pen, p)
         default: break
         }
     }
