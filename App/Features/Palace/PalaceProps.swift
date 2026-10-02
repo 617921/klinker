@@ -252,8 +252,8 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g6Spread
     /// A screen with a red dot and timed rows `lines` "10:42|headline", `caption` on top.
     case g6Ticker
-    /// Fire. `accessory` "blaze" (flames and smoke over a roof), "spark" (an overloaded power strip
-    /// bursting into flame), "hose" (a firefighter hosing water onto flames).
+    /// Fire. `accessory` "blaze" (a house top ablaze, smoke rolling up), "burst" (flames shooting out
+    /// through a breaking window), "hose" (a firefighter hosing water onto a burning bin).
     case g6Fire
     /// A ladder up to a window; a firefighter carries a child down.
     case g6Rescue

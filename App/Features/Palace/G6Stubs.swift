@@ -1,11 +1,6 @@
 import SwiftUI
 
 // TEMPORARY stubs (removed as each g6 room is written).
-enum G6Fire { static func fire(_ pen: PropPen, _ p: PalacePropParams) {}; static func rescue(_ pen: PropPen, _ p: PalacePropParams) {} }
-enum G6Safety {
-    static func hazard(_ pen: PropPen, _ p: PalacePropParams) {}; static func smokeAlarm(_ pen: PropPen, _ p: PalacePropParams) {}
-    static func responders(_ pen: PropPen, _ p: PalacePropParams) {}; static func exitSign(_ pen: PropPen, _ p: PalacePropParams) {}
-}
 enum G6Music {
     static func orchestra(_ pen: PropPen, _ p: PalacePropParams) {}; static func musician(_ pen: PropPen, _ p: PalacePropParams) {}
     static func instruments(_ pen: PropPen, _ p: PalacePropParams) {}
@@ -25,7 +20,5 @@ enum G6ArtFloor {
 }
 enum G6ConcertRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
 enum G6GalleryRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
-enum G6FireRoom { static let noor: CGPoint? = nil; nonisolated static let slots: [String: PalaceSlot] = [:] }
 struct G6ConcertBackdrop: View, Equatable { var body: some View { Color.clear } }
 struct G6GalleryBackdrop: View, Equatable { var body: some View { Color.clear } }
-struct G6FireBackdrop: View, Equatable { var body: some View { Color.clear } }

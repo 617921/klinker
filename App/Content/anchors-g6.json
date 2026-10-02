@@ -246,6 +246,87 @@
           "params": { "mount": "screen", "text": "XL-482-K" }
         }
       ]
+    },
+    {
+      "sheet": 53,
+      "type": "g6FireStation",
+      "order": ["brand", "uitbreken", "blussen", "redden", "hulpdienst", "alarmnummer", "rookmelder", "nooduitgang", "noodgeval", "brandbaar", "levensgevaarlijk"],
+      "prompts": {
+        "brand": "Waar is er",
+        "rookmelder": "Waar hangt de",
+        "noodgeval": "Wat gebruik je in een",
+        "alarmnummer": "Waar staat het",
+        "hulpdienst": "Waar rijdt een",
+        "blussen": "Wie gaat het vuur",
+        "redden": "Wie gaat een kind",
+        "uitbreken": "Waar zie je vuur",
+        "brandbaar": "Wat is",
+        "levensgevaarlijk": "Welk bord zegt: dit is"
+      },
+      "weg": [
+        { "target": "brand", "options": ["uitbreken", "brand", "blussen"] },
+        { "target": "nooduitgang", "options": ["nooduitgang", "noodgeval", "alarmnummer"] },
+        { "target": "brandbaar", "options": ["levensgevaarlijk", "brandbaar", "rookmelder"] },
+        { "target": "redden", "options": ["hulpdienst", "blussen", "redden"] },
+        { "target": "alarmnummer", "options": ["rookmelder", "alarmnummer", "noodgeval"] }
+      ],
+      "anchors": [
+        {
+          "word": "alarmnummer", "prop": "sign", "slot": "facade", "pin": [75, 12],
+          "label": "Een wit bord op de kazerne: bel één één twee",
+          "params": { "mount": "wall", "tone": "white", "caption": "bel", "text": "112" }
+        },
+        {
+          "word": "rookmelder", "prop": "g6SmokeAlarm", "slot": "bayCeiling", "pin": [92, 150],
+          "label": "Een wit dopje aan het plafond met een rood lampje; er stijgt rook op en het piept",
+          "params": {}
+        },
+        {
+          "word": "noodgeval", "prop": "g6Hazard", "slot": "tower", "pin": [172, 124], "align": "center",
+          "label": "Een rood kastje met glas aan de toren: een hand drukt het glas in, een oranje zwaailicht",
+          "params": { "accessory": "callPoint" }
+        },
+        {
+          "word": "nooduitgang", "prop": "g6ExitSign", "slot": "towerDoor", "frame": [148, 144, 50, 44], "pin": [172, 194], "align": "center",
+          "label": "Een groen bordje boven de deur: een poppetje rent naar buiten",
+          "params": { "mount": "wall" }
+        },
+        {
+          "word": "brand", "prop": "g6Fire", "slot": "roof", "pin": [290, 122],
+          "label": "Het huis aan de overkant: vlammen uit de ramen en het dak, dikke rook",
+          "params": { "accessory": "blaze" }
+        },
+        {
+          "word": "redden", "prop": "g6Rescue", "slot": "ladder", "pin": [366, 240],
+          "label": "Een ladder tegen het huis; een man met een gele helm draagt een kind naar beneden",
+          "params": {}
+        },
+        {
+          "word": "uitbreken", "prop": "g6Fire", "slot": "groundWindow",
+          "label": "Een raam beneden springt kapot en de vlammen schieten naar buiten",
+          "params": { "accessory": "burst" }
+        },
+        {
+          "word": "hulpdienst", "prop": "g6Responders", "slot": "street",
+          "label": "Een politieauto, een gele ambulance en een rode auto, met blauwe zwaailichten",
+          "params": {}
+        },
+        {
+          "word": "brandbaar", "prop": "g6Hazard", "slot": "nearLeft",
+          "label": "Een rode jerrycan met een sticker: een zwarte vlam in een ruit",
+          "params": { "accessory": "flammable" }
+        },
+        {
+          "word": "levensgevaarlijk", "prop": "g6Hazard", "slot": "nearMid",
+          "label": "Een geel driehoekig bord met een doodshoofd en gekruiste botten",
+          "params": { "accessory": "skull" }
+        },
+        {
+          "word": "blussen", "prop": "g6Fire", "slot": "nearRight",
+          "label": "Een man met een gele helm spuit water op de vlammen in een vuilnisbak",
+          "params": { "accessory": "hose" }
+        }
+      ]
     }
   ]
 }
