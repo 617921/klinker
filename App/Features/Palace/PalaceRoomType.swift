@@ -18,6 +18,9 @@ enum PalaceRoomType: String, CaseIterable {
     case marketSquare
     case park
     case tramStop
+    case livingRoom
+    case brownCafe
+    case office
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -29,6 +32,9 @@ enum PalaceRoomType: String, CaseIterable {
         case .marketSquare: "omgeving"
         case .park: "omgeving"
         case .tramStop: "straat"
+        case .livingRoom: "kamer"
+        case .brownCafe: "kroeg"
+        case .office: "kantoortuin"
         }
     }
 
@@ -42,6 +48,9 @@ enum PalaceRoomType: String, CaseIterable {
         case .marketSquare: "De markt op het plein"
         case .park: "Het park"
         case .tramStop: "De tramhalte in de straat"
+        case .livingRoom: "De woonkamer van een grachtenhuis"
+        case .brownCafe: "Een bruin café met een terras"
+        case .office: "Een kantoortuin"
         }
     }
 
@@ -53,6 +62,9 @@ enum PalaceRoomType: String, CaseIterable {
         case .marketSquare: MarketSquare.noor
         case .park: CityPark.noor
         case .tramStop: TramStop.noor
+        case .livingRoom: LivingRoom.noor
+        case .brownCafe: BrownCafe.noor
+        case .office: OfficeFloor.noor
         }
     }
 
@@ -63,6 +75,9 @@ enum PalaceRoomType: String, CaseIterable {
         case .marketSquare: MarketSquare.slots
         case .park: CityPark.slots
         case .tramStop: TramStop.slots
+        case .livingRoom: LivingRoom.slots
+        case .brownCafe: BrownCafe.slots
+        case .office: OfficeFloor.slots
         }
     }
 }
@@ -78,6 +93,9 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .marketSquare: MarketSquareBackdrop()
         case .park: ParkBackdrop()
         case .tramStop: TramStopBackdrop()
+        case .livingRoom: LivingRoomBackdrop()
+        case .brownCafe: BrownCafeBackdrop()
+        case .office: OfficeBackdrop()
         }
     }
 }

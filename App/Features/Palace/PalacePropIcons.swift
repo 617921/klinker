@@ -6,6 +6,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case train, bus, arrow, link, warning, brokenTrack, walk, change, pass, check
     // Outdoor places (PalacePropsOutdoor.swift)
     case banknote, noCard, tram, detour, wheelchair, dogLeash, bike, allowed
+    // Home, café and office (drawn in PalacePropIconsLiving.swift)
+    case house, euro, townHall, company, handshake, thermometer, sun
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -57,6 +59,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             p.svgLine("M5 12.5L10 17.5L19.5 7", c, 3)
         case .banknote, .noCard, .tram, .detour, .wheelchair, .dogLeash, .bike, .allowed:
             PalaceOutdoorIcons.draw(self, p, c, d)
+        case .house, .euro, .townHall, .company, .handshake, .thermometer, .sun:
+            Self.drawLiving(self, p, c, d)
         }
     }
 
