@@ -56,11 +56,11 @@ enum G5Bike {
             tag.text(p.text ?? "", PropFont.heavy(8.5), 0xC8261B, at: CGPoint(x: 14, y: 15.5), maxWidth: 25)
         }
         if flat {
-            f.svgLine("M99 70L106 61", 0x5E6B73, 2)
-            f.svgLine("M103.5 58.5L108.5 63.5", 0x3E4C55, 2.6)
-            f.svgLine("M109 57Q115 52 111 46M113 61Q121 57 119 48", 0x6FA3C7, 1.6)
+            f.svgLine("M103 71L110 63", 0x8A8A82, 2.2)
+            f.svgLine("M107.5 60.5L112.5 65.5", 0x3E4C55, 3)
+            f.svgLine("M113 62Q119 58 116 52M116 66Q124 62 122 54", 0x6FA3C7, 1.8)
             if let text = p.text {
-                base.text(text, PropFont.heavy(9), 0x3E4C55, at: CGPoint(x: p.flip == true ? 12 : 112, y: 38), maxWidth: 24)
+                base.text(text, PropFont.heavy(10), 0x1F3A6B, at: CGPoint(x: p.flip == true ? 12 : 112, y: 44), maxWidth: 26)
             }
         }
     }
@@ -75,9 +75,12 @@ enum G5Bike {
         }
         f.stroke(spokes, 0x8A8A82, 0.6)
         f.ring(cx, cy, 18.4, steel, 1.6)
-        f.ring(cx, cy, 21, tyre, flat ? 2.6 : 4.2)
         if flat {
-            f.svg("M\(cx - 17) \(cy + 11)C\(cx - 14) \(cy + 21) \(cx - 19) \(cy + 23) \(cx - 23) \(cy + 24)H\(cx + 23)C\(cx + 19) \(cy + 23) \(cx + 14) \(cy + 21) \(cx + 17) \(cy + 11)C\(cx + 10) \(cy + 19) \(cx - 10) \(cy + 19) \(cx - 17) \(cy + 11)Z", tyre)
+            // The tyre sags: round on top, squashed wide and flat where it meets the ground.
+            f.svgLine("M\(cx + 15) \(cy + 14.5)A21 21 0 1 0 \(cx - 15) \(cy + 14.5)C\(cx - 22) \(cy + 20) \(cx - 24) \(cy + 22.5) \(cx - 18) \(cy + 22.5)H\(cx + 18)C\(cx + 24) \(cy + 22.5) \(cx + 22) \(cy + 20) \(cx + 15) \(cy + 14.5)Z", tyre, 4)
+            f.svgLine("M\(cx - 10) \(cy + 20.5)Q\(cx - 7) \(cy + 18.5) \(cx - 4) \(cy + 20.5)M\(cx + 3) \(cy + 20.5)Q\(cx + 6) \(cy + 18.5) \(cx + 9) \(cy + 20.5)", 0x5A544E, 0.9)
+        } else {
+            f.ring(cx, cy, 21, tyre, 4.2)
         }
         f.dot(cx, cy, 2.6, 0x5E6B73)
     }
