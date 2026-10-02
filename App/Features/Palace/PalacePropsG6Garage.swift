@@ -114,9 +114,8 @@ enum G6Garage {
         f.rect(2, 3, 118, 51, 0x1E1E1C, radius: 4, 0.15)
         f.rect(0, 0, 118, 50, 0x24533F, radius: 4)
         f.stroke(Path(roundedRect: CGRect(x: 3, y: 3, width: 112, height: 44), cornerRadius: 3), 0xFAC775, 1)
-        f.dot(25, 25, 17, 0xFFFDF6)
         if let icon = (p.icons ?? []).compactMap(PalaceIcon.init(rawValue:)).first {
-            icon.draw(f, in: CGRect(x: 12, y: 12, width: 26, height: 26), color: 0x24533F, detail: 0xFFFDF6)
+            icon.draw(f, in: CGRect(x: 8, y: 9, width: 32, height: 32), color: 0xFFFDF6, detail: 0x24533F)
         }
         let n = max(0, min(5, p.count ?? 5))
         for i in 0..<5 {
