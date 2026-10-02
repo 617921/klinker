@@ -230,6 +230,82 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 46,
+      "type": "g7Beach",
+      "noor": [],
+      "order": ["golf", "kwal", "strandtent", "reddingsbrigade", "zonnebrandcrème", "boulevard", "insmeren", "pootjebaden", "stroming", "verbrand", "beschut"],
+      "prompts": {
+        "insmeren": "Waar zie je iemand zich",
+        "pootjebaden": "Waar zie je iemand",
+        "verbrand": "Wie is er",
+        "beschut": "Waar zit je lekker"
+      },
+      "weg": [
+        { "target": "golf", "options": ["stroming", "golf", "kwal"] },
+        { "target": "insmeren", "options": ["insmeren", "zonnebrandcrème", "verbrand"] },
+        { "target": "reddingsbrigade", "options": ["strandtent", "reddingsbrigade", "boulevard"] },
+        { "target": "pootjebaden", "options": ["golf", "beschut", "pootjebaden"] },
+        { "target": "beschut", "options": ["beschut", "strandtent", "verbrand"] }
+      ],
+      "anchors": [
+        {
+          "word": "boulevard", "prop": "g7Promenade", "slot": "dune",
+          "label": "Een brede stenen wandelweg langs de zee met lantaarns, een wit hek en flats erachter",
+          "params": {}
+        },
+        {
+          "word": "strandtent", "prop": "g7BeachCafe", "slot": "duneFoot",
+          "label": "Een houten paviljoen op palen met grote ramen, een terras en parasols",
+          "params": {}
+        },
+        {
+          "word": "beschut", "prop": "g7Windscreen", "slot": "sheltered",
+          "label": "Achter een gestreept windscherm zit iemand rustig te lezen; de wind komt er niet door",
+          "params": {}
+        },
+        {
+          "word": "reddingsbrigade", "prop": "g7Lifeguard", "slot": "chair",
+          "label": "Een hoge witte stoel met een rood-gele vlag, een reddingsboei en iemand met een verrekijker",
+          "params": {}
+        },
+        {
+          "word": "stroming", "prop": "g7Current", "slot": "seaFar",
+          "label": "Grote donkere pijlen in de zee trekken een bal ver weg",
+          "params": {}
+        },
+        {
+          "word": "pootjebaden", "prop": "g7Beachgoer", "slot": "waterEdge",
+          "label": "Iemand met opgerolde broekspijpen staat met de voeten in het ondiepe water",
+          "params": { "accessory": "paddle", "variant": 2 }
+        },
+        {
+          "word": "golf", "prop": "g7Wave", "slot": "surf",
+          "label": "Hoog water dat omkrult, met wit schuim en spatten",
+          "params": {}
+        },
+        {
+          "word": "insmeren", "prop": "g7Beachgoer", "slot": "sandLeft",
+          "label": "Iemand in badpak wrijft witte crème op de arm; de fles staat in het zand",
+          "params": { "accessory": "cream", "variant": 3 }
+        },
+        {
+          "word": "zonnebrandcrème", "prop": "g7Sunscreen", "slot": "sandBottle",
+          "label": "Een oranje fles met een zon en factor 30",
+          "params": { "text": "30" }
+        },
+        {
+          "word": "verbrand", "prop": "g7Beachgoer", "slot": "sandMid",
+          "label": "Iemand ligt op een handdoek, helemaal rood van de felle zon",
+          "params": { "accessory": "burnt", "variant": 0 }
+        },
+        {
+          "word": "kwal", "prop": "g7Jellyfish", "slot": "wetSand",
+          "label": "Een doorzichtig, glibberig beestje met paarse ringen op het natte zand",
+          "params": {}
+        }
+      ]
     }
   ]
 }

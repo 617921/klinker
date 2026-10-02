@@ -46,7 +46,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g7Harbour: "haven"
         case .g7Mill: "polder"
         case .g7Farm: "boerderij"
-        case .g7Beach: "kust"
+        case .g7Beach: "badplaats"
         case .g7Camping: "camping"
         case .g7Airport: "vertrekhal"
         }
