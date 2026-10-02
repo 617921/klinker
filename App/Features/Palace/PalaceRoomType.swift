@@ -13,11 +13,17 @@ nonisolated struct PalaceSlot: Sendable {
 /// Raw values are the names used in anchors.json (`type`).
 enum PalaceRoomType: String, CaseIterable {
     case stationHall
+    case livingRoom
+    case brownCafe
+    case office
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
         switch self {
         case .stationHall: "hal"
+        case .livingRoom: "kamer"
+        case .brownCafe: "kroeg"
+        case .office: "kantoortuin"
         }
     }
 
@@ -25,6 +31,9 @@ enum PalaceRoomType: String, CaseIterable {
     var sceneLabel: String {
         switch self {
         case .stationHall: "De stationshal"
+        case .livingRoom: "De woonkamer van een grachtenhuis"
+        case .brownCafe: "Een bruin café met een terras"
+        case .office: "Een kantoortuin"
         }
     }
 
@@ -32,12 +41,18 @@ enum PalaceRoomType: String, CaseIterable {
     var noor: CGPoint? {
         switch self {
         case .stationHall: StationHall.noor
+        case .livingRoom: LivingRoom.noor
+        case .brownCafe: BrownCafe.noor
+        case .office: OfficeFloor.noor
         }
     }
 
     var slots: [String: PalaceSlot] {
         switch self {
         case .stationHall: StationHall.slots
+        case .livingRoom: LivingRoom.slots
+        case .brownCafe: BrownCafe.slots
+        case .office: OfficeFloor.slots
         }
     }
 }
@@ -49,6 +64,9 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
     var body: some View {
         switch type {
         case .stationHall: StationHallBackdrop()
+        case .livingRoom: LivingRoomBackdrop()
+        case .brownCafe: BrownCafeBackdrop()
+        case .office: OfficeBackdrop()
         }
     }
 }

@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 3,
+      "type": "livingRoom",
+      "noor": [],
+      "order": ["woning", "lekkage", "verhuurder", "huur", "overlast", "verhuizen", "gemeente", "gehorig", "huishouden", "inschrijven", "gemeubileerd"],
+      "prompts": {
+        "verhuurder": "Wie is de",
+        "gemeente": "Wat komt van de",
+        "huishouden": "Waarmee doe je het",
+        "verhuizen": "Wat hoort bij",
+        "inschrijven": "Waar kun je je"
+      },
+      "weg": [
+        { "target": "gehorig", "options": ["overlast", "gehorig", "lekkage"] },
+        { "target": "huur", "options": ["huur", "verhuurder", "inschrijven"] },
+        { "target": "gemeente", "options": ["inschrijven", "woning", "gemeente"] },
+        { "target": "verhuizen", "options": ["gemeubileerd", "verhuizen", "huishouden"] },
+        { "target": "overlast", "options": ["overlast", "lekkage", "gehorig"] }
+      ],
+      "anchors": [
+        {
+          "word": "woning", "prop": "floorPlan", "slot": "frameLeft",
+          "label": "Een lijstje met de plattegrond van een huis, 65 vierkante meter",
+          "params": { "text": "65 m²" }
+        },
+        {
+          "word": "gehorig", "prop": "thinWall", "slot": "frameRight",
+          "label": "Een open stuk muur: de muur is dun en je hoort de buren praten",
+          "params": { "text": "bla bla" }
+        },
+        {
+          "word": "lekkage", "prop": "ceilingLeak", "slot": "leakColumn",
+          "label": "Water druppelt uit een natte plek in het plafond in een emmer",
+          "params": { "count": 5 }
+        },
+        {
+          "word": "huur", "prop": "paperSheet", "slot": "paperLeft",
+          "label": "Een briefje aan de muur: elke maand 950 euro voor het huis",
+          "params": { "icons": ["house", "euro"], "tone": "red", "text": "€ 950", "caption": "per maand", "mount": "wall" }
+        },
+        {
+          "word": "inschrijven", "prop": "paperSheet", "slot": "paperRight",
+          "label": "Een formulier op een klembord: Noor schrijft haar naam en adres op",
+          "params": { "tone": "green", "lines": ["naam|Noor", "adres|Gracht 12"], "accessory": "pen", "mount": "clipboard" }
+        },
+        {
+          "word": "gemeubileerd", "prop": "furnitureSet", "slot": "sofa",
+          "label": "Een bank, een lamp en een tafeltje, met een kaartje: inclusief",
+          "params": { "text": "inclusief" }
+        },
+        {
+          "word": "verhuurder", "prop": "personHolding", "slot": "doorway",
+          "label": "Een man in de deur met de sleutels van het huis",
+          "params": { "variant": 4, "accessory": "keys" }
+        },
+        {
+          "word": "gemeente", "prop": "envelope", "slot": "doormat",
+          "label": "Een brief van het stadhuis op de deurmat",
+          "params": { "icons": ["townHall"], "tone": "blue", "lines": ["Noor", "Gracht 12"] }
+        },
+        {
+          "word": "verhuizen", "prop": "movingBoxes", "slot": "floorLeft",
+          "label": "Een hoge stapel dozen met een plant erin",
+          "params": { "count": 3, "labels": ["boeken", "keuken", ""] }
+        },
+        {
+          "word": "huishouden", "prop": "vacuum", "slot": "floorMid",
+          "label": "Een rode stofzuiger op de vloer",
+          "params": {}
+        },
+        {
+          "word": "overlast", "prop": "loudSpeaker", "slot": "floorRight",
+          "label": "Een grote box met harde muziek en iemand die boos haar oren dichthoudt",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 6,
+      "type": "brownCafe",
+      "noor": [],
+      "order": ["terras", "stamgast", "fooi", "sfeer", "bediening", "alcoholvrij", "afspreken", "borrel", "drankje", "afrekenen", "gezellig"],
+      "prompts": {
+        "stamgast": "Wie is de",
+        "sfeer": "Wat maakt de",
+        "afrekenen": "Waar kun je",
+        "afspreken": "Waar zie je mensen",
+        "gezellig": "Waar is het"
+      },
+      "weg": [
+        { "target": "alcoholvrij", "options": ["drankje", "alcoholvrij", "borrel"] },
+        { "target": "fooi", "options": ["afrekenen", "bediening", "fooi"] },
+        { "target": "gezellig", "options": ["gezellig", "sfeer", "borrel"] },
+        { "target": "stamgast", "options": ["bediening", "stamgast", "terras"] },
+        { "target": "afspreken", "options": ["afrekenen", "drankje", "afspreken"] }
+      ],
+      "anchors": [
+        {
+          "word": "terras", "prop": "terraceView", "slot": "window",
+          "label": "Het raam: buiten staan tafeltjes en parasols in de zon",
+          "params": {}
+        },
+        {
+          "word": "alcoholvrij", "prop": "bottleAndGlass", "slot": "shelfLeft",
+          "label": "Een fles bier met nul komma nul procent, en een vol glas",
+          "params": { "text": "0,0%", "tone": "green" }
+        },
+        {
+          "word": "sfeer", "prop": "gramophone", "slot": "shelfRight",
+          "label": "Een oude platenspeler speelt muziek onder een slinger lampjes",
+          "params": {}
+        },
+        {
+          "word": "stamgast", "prop": "personHolding", "slot": "barStool",
+          "label": "Een oude man op zijn vaste kruk aan de bar, met zijn eigen mok: Kees",
+          "params": { "variant": 4, "accessory": "stool", "text": "KEES" }
+        },
+        {
+          "word": "afrekenen", "prop": "payTerminal", "slot": "barLeft",
+          "label": "De rekening van 12 euro 50 en het pinapparaat met een pas",
+          "params": { "text": "€ 12,50" }
+        },
+        {
+          "word": "fooi", "prop": "tipJar", "slot": "barMid",
+          "label": "Een pot vol muntjes op de bar: dank je!",
+          "params": { "text": "dank je!", "count": 10 }
+        },
+        {
+          "word": "drankje", "prop": "drinkGlass", "slot": "barRight",
+          "label": "Een glas met ijs, een rietje en een schijfje citroen",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "gezellig", "prop": "candleTable", "slot": "tableLeft",
+          "label": "Twee vrienden proosten aan een tafeltje met een kaars",
+          "params": {}
+        },
+        {
+          "word": "borrel", "prop": "snackTable", "slot": "highTable",
+          "label": "Een statafel met bitterballen, mosterd en twee biertjes",
+          "params": {}
+        },
+        {
+          "word": "afspreken", "prop": "smartphone", "slot": "floorRight",
+          "label": "Een telefoon: morgen om vijf uur? Ja, goed!",
+          "params": { "lines": ["in|Morgen 5 uur?", "out|Ja, goed!"] }
+        },
+        {
+          "word": "bediening", "prop": "personHolding", "slot": "standing",
+          "label": "Een ober met een schort en een dienblad met glazen",
+          "params": { "variant": 1, "accessory": "tray" }
+        }
+      ]
+    },
+    {
+      "sheet": 7,
+      "type": "office",
+      "order": ["vergadering", "salaris", "verlof", "werkgever", "ziekmelden", "contract", "taak", "verantwoordelijk", "inleveren", "leidinggevende", "tijdelijk"],
+      "prompts": {
+        "werkgever": "Wie is je",
+        "leidinggevende": "Waar zie je de",
+        "verlof": "Waar zie je",
+        "ziekmelden": "Hoe kun je je",
+        "verantwoordelijk": "Wie is hier"
+      },
+      "weg": [
+        { "target": "werkgever", "options": ["leidinggevende", "werkgever", "salaris"] },
+        { "target": "contract", "options": ["contract", "tijdelijk", "salaris"] },
+        { "target": "verlof", "options": ["ziekmelden", "taak", "verlof"] },
+        { "target": "inleveren", "options": ["taak", "inleveren", "vergadering"] },
+        { "target": "leidinggevende", "options": ["verantwoordelijk", "leidinggevende", "vergadering"] }
+      ],
+      "anchors": [
+        {
+          "word": "verlof", "prop": "wallCalendar", "slot": "wallLeft",
+          "label": "Een kalender: in juli is een hele week vrij, met een zon",
+          "params": { "caption": "juli", "highlight": 2, "icons": ["sun"] }
+        },
+        {
+          "word": "werkgever", "prop": "sign", "slot": "wallMid",
+          "label": "Het naambord van het bedrijf: Smit BV",
+          "params": { "icons": ["company"], "text": "Smit BV", "tone": "blue", "mount": "wall" }
+        },
+        {
+          "word": "taak", "prop": "taskBoard", "slot": "wallRight",
+          "label": "Een bord met gele en roze briefjes om af te vinken",
+          "params": { "count": 2 }
+        },
+        {
+          "word": "vergadering", "prop": "meetingTable", "slot": "meeting",
+          "label": "Een glazen kamer: mensen aan tafel en iemand bij een flip-over",
+          "params": { "count": 3 }
+        },
+        {
+          "word": "leidinggevende", "prop": "orgChart", "slot": "boardLow",
+          "label": "Een schema van het team: één persoon met een stropdas staat bovenaan",
+          "params": {}
+        },
+        {
+          "word": "salaris", "prop": "paperSheet", "slot": "deskLeft",
+          "label": "Een loonstrook: 2450 euro netto",
+          "params": { "icons": ["euro"], "tone": "green", "text": "€ 2.450", "caption": "netto" }
+        },
+        {
+          "word": "contract", "prop": "paperSheet", "slot": "deskMid",
+          "label": "Een papier met een handdruk en twee handtekeningen",
+          "params": { "icons": ["handshake"], "tone": "blue", "accessory": "signature", "variant": 1 }
+        },
+        {
+          "word": "ziekmelden", "prop": "smartphone", "slot": "deskRight",
+          "label": "Een telefoon belt om half negen, met een thermometer op het scherm",
+          "params": { "icons": ["thermometer"], "time": "08:30" }
+        },
+        {
+          "word": "inleveren", "prop": "handIn", "slot": "frontLeft",
+          "label": "Een hand legt een rapport in het bakje",
+          "params": { "text": "rapport" }
+        },
+        {
+          "word": "tijdelijk", "prop": "hourglass", "slot": "frontRight",
+          "label": "Een zandloper met een kaartje: tot 31 december",
+          "params": { "text": "tot 31-12" }
+        },
+        {
+          "word": "verantwoordelijk", "prop": "personHolding", "slot": "standing",
+          "label": "Iemand met een ster op de badge en een grote sleutel in de hand",
+          "params": { "variant": 2, "accessory": "badge" }
+        }
+      ]
+    }
+  ]
+}

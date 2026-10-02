@@ -21,6 +21,61 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case reader
     /// A train window packed with heads. `count` heads.
     case crowdedWindow
+
+    // MARK: Home, café and office (drawn in PalacePropsLiving.swift and its siblings)
+
+    /// A sheet of paper. `icons` + `tone` (header band), `text` (big), `caption`,
+    /// `lines` "label|value" (filled-in fields), `accessory` "pen" | "signature", `mount` "wall" (pinned) |
+    /// "clipboard", `variant` 1 (the first icon drawn big as the sheet's picture).
+    case paperSheet
+    /// An envelope. `icons` (the sender's mark), `lines` (address).
+    case envelope
+    /// A phone in a hand. `lines` "in|…" / "out|…" chat bubbles, or a call: `icons`, `time`.
+    case smartphone
+    /// A wall calendar. `caption` (month), `highlight` (week row), `icons` (that week's picture).
+    case wallCalendar
+    /// A person holding something. `variant`, `accessory` "keys" | "tray" | "badge" | "stool" (seated, `text` on the mug).
+    case personHolding
+    /// A stain on the ceiling dripping into a bucket. `count` drops.
+    case ceilingLeak
+    /// Stacked moving boxes. `count` boxes, `labels` written on them.
+    case movingBoxes
+    /// A vacuum cleaner at work.
+    case vacuum
+    /// A sofa, lamp and side table with a tag. `text` on the tag.
+    case furnitureSet
+    /// A framed floor plan of a home. `text` (floor area).
+    case floorPlan
+    /// A loud speaker blasting at a person who holds their ears.
+    case loudSpeaker
+    /// A paper-thin wall: the neighbours' talk (`text`) comes through to an ear.
+    case thinWall
+    /// A sunny terrace with parasols, seen through a window.
+    case terraceView
+    /// A tip jar with coins. `text` (label), `count` coins.
+    case tipJar
+    /// A bottle and a full glass. `text` (label), `tone` "green" | "brown".
+    case bottleAndGlass
+    /// A glass with a straw on a coaster. `variant` (drink colour).
+    case drinkGlass
+    /// A high table with snacks and drinks.
+    case snackTable
+    /// A gramophone playing notes under a string of warm lights.
+    case gramophone
+    /// Two friends toasting at a table with a candle.
+    case candleTable
+    /// A card terminal with the bill. `text` (amount).
+    case payTerminal
+    /// People around a table with a flip chart. `count` people.
+    case meetingTable
+    /// An organisation chart with its top box highlighted.
+    case orgChart
+    /// A board of sticky task notes with tick boxes. `count` notes ticked.
+    case taskBoard
+    /// A hand putting a report into a tray. `text` (report title).
+    case handIn
+    /// An hourglass with a tag. `text` (tag).
+    case hourglass
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -73,6 +128,11 @@ struct PalacePropView: View, Equatable {
             case .clock: PalaceFigures.clock(pen, p)
             case .reader: PalaceFigures.reader(pen, p)
             case .crowdedWindow: PalaceFigures.crowdedWindow(pen, p)
+            case .paperSheet, .envelope, .smartphone, .wallCalendar, .personHolding, .ceilingLeak, .movingBoxes,
+                 .vacuum, .furnitureSet, .floorPlan, .loudSpeaker, .thinWall, .terraceView, .tipJar, .bottleAndGlass,
+                 .drinkGlass, .snackTable, .gramophone, .candleTable, .payTerminal, .meetingTable, .orgChart, .taskBoard,
+                 .handIn, .hourglass:
+                PalaceLivingProps.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
