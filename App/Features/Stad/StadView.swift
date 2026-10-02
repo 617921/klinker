@@ -43,6 +43,9 @@ struct StadView: View {
                 NowCard(onOpen: { picked = StadPlacePick(n: progress.currentSheetNumber) })
                     .padding(.horizontal, 16)
 
+                HouseCard()
+                    .padding(.horizontal, 16)
+
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Jouw straat")
                         .font(.system(size: 26, weight: .heavy))
