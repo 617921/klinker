@@ -269,6 +269,30 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g8Overtake
     /// A parked car with a slip under the wiper, shown big in a close-up with the amount `text`.
     case g8Fine
+
+    // Dike (PalacePropsG8Water.swift, PalacePropsG8Polder.swift)
+    /// A dark storm cloud with lightning and thick slanting rain.
+    case g8Storm
+    /// A farm and a tree standing in floodwater up to the windows.
+    case g8FloodedFarm
+    /// A water-level gauge in the water, its middle mark (`labels` +1, 0, -1) at the surface.
+    case g8Gauge
+    /// Old water levels as dashed lines with years (`labels`) and a big arrow up to the surface.
+    case g8RisingWater
+    /// A dike in cross-section: stones on the water side, a road with a cyclist on top, sheep.
+    case g8Dike
+    /// A pumping station with the water board's badge on its door and flag, a pipe carrying water away.
+    case g8PumpStation
+    /// A house far below a dashed water line, a double arrow with the depth `text`.
+    case g8LowLand
+    /// A rain gauge on a post under a raining cloud; `text` the amount on a tag.
+    case g8RainGauge
+    /// An information board on legs: `caption`, `icons`, `labels`, `text` as on a sign.
+    case g8InfoBoard
+    /// A grown-up holding an umbrella over a child in the rain. `variant`.
+    case g8Umbrella
+    /// Sandbags stopping water before a door, a hand laying the last one, a tick on the dry side.
+    case g8Sandbags
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -345,7 +369,9 @@ struct PalacePropView: View, Equatable {
             case .g8Shed, .g8Greenhouse, .g8Clubhouse, .g8Plot, .g8Weeds, .g8Gardener, .g8LayPath, .g8Sowing, .g8SoilCut,
                  .g8SeedPacket, .g8Fertile, .g8PollingStation, .g8ElectionBoard, .g8PartyStand, .g8March, .g8Cage, .g8Banner,
                  .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal, .g8TrafficLight, .g8TrafficSign, .g8ExitSign,
-                 .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine:
+                 .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine,
+                 .g8Storm, .g8FloodedFarm, .g8Gauge, .g8RisingWater, .g8Dike, .g8PumpStation, .g8LowLand, .g8RainGauge,
+                 .g8InfoBoard, .g8Umbrella, .g8Sandbags:
                 G8Props.draw(prop.kind, pen, p)
             }
         }

@@ -38,6 +38,17 @@ enum G8Props {
         case .g8GiveWay: G8Traffic.giveWay(pen, p)
         case .g8Overtake: G8Traffic.overtake(pen, p)
         case .g8Fine: G8Traffic.fine(pen, p)
+        case .g8Storm: G8Water.storm(pen, p)
+        case .g8FloodedFarm: G8Water.floodedFarm(pen, p)
+        case .g8Gauge: G8Water.gauge(pen, p)
+        case .g8RisingWater: G8Water.rising(pen, p)
+        case .g8Dike: G8Water.dike(pen, p)
+        case .g8PumpStation: G8Polder.pumpStation(pen, p)
+        case .g8LowLand: G8Polder.lowLand(pen, p)
+        case .g8RainGauge: G8Polder.rainGauge(pen, p)
+        case .g8InfoBoard: G8Polder.infoBoard(pen, p)
+        case .g8Umbrella: G8Polder.umbrella(pen, p)
+        case .g8Sandbags: G8Polder.sandbags(pen, p)
         default: break
         }
     }

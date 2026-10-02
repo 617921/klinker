@@ -232,6 +232,86 @@
           "params": { "text": "€ 95" }
         }
       ]
+    },
+    {
+      "sheet": 60,
+      "type": "g8Dike",
+      "order": ["dijk", "overstroming", "zeespiegel", "klimaat", "neerslag", "waterschap", "stijgen", "beschermen", "voorkomen", "laaggelegen", "hevig"],
+      "prompts": {
+        "hevig": "Waar is de regen",
+        "zeespiegel": "Waar zie je de",
+        "stijgen": "Waar zie je het water",
+        "neerslag": "Waar meet je de",
+        "laaggelegen": "Welk huis is",
+        "waterschap": "Waar werkt het",
+        "klimaat": "Waar zie je het",
+        "beschermen": "Waar zie je iemand een kind",
+        "voorkomen": "Waar kun je een overstroming"
+      },
+      "weg": [
+        { "target": "stijgen", "options": ["zeespiegel", "stijgen", "overstroming"] },
+        { "target": "hevig", "options": ["hevig", "neerslag", "klimaat"] },
+        { "target": "voorkomen", "options": ["beschermen", "voorkomen", "dijk"] },
+        { "target": "laaggelegen", "options": ["laaggelegen", "waterschap", "zeespiegel"] },
+        { "target": "neerslag", "options": ["neerslag", "hevig", "stijgen"] }
+      ],
+      "anchors": [
+        {
+          "word": "hevig", "prop": "g8Storm", "slot": "sky",
+          "label": "Een donkere wolk met een bliksemschicht en dikke, schuine regen",
+          "params": {}
+        },
+        {
+          "word": "overstroming", "prop": "g8FloodedFarm", "slot": "floodplain",
+          "label": "Een boerderij en een boom staan tot de ramen in het water",
+          "params": {}
+        },
+        {
+          "word": "zeespiegel", "prop": "g8Gauge", "slot": "gauge",
+          "label": "Een paal met een meetlat in het water; het water staat precies bij de rode 0",
+          "params": { "labels": ["+1", "0", "-1"] }
+        },
+        {
+          "word": "stijgen", "prop": "g8RisingWater", "slot": "water",
+          "label": "In het water oude waterlijnen met jaartallen, 1900, 1950 en 2000, en een grote blauwe pijl omhoog",
+          "params": { "labels": ["1900", "1950", "2000"] }
+        },
+        {
+          "word": "dijk", "prop": "g8Dike", "slot": "dike",
+          "label": "Een hoge, groene wal met stenen aan de kant van het water, een weg met een fietser erop en schapen",
+          "params": {}
+        },
+        {
+          "word": "neerslag", "prop": "g8RainGauge", "slot": "polderSky",
+          "label": "Een wolk laat druppels vallen in een buisje met streepjes op een paal: 12 mm",
+          "params": { "text": "12 mm" }
+        },
+        {
+          "word": "laaggelegen", "prop": "g8LowLand", "slot": "low",
+          "label": "Een huis ver onder een blauwe stippellijn op de hoogte van het water, met een pijl: 4 meter lager",
+          "params": { "text": "-4 m" }
+        },
+        {
+          "word": "waterschap", "prop": "g8PumpStation", "slot": "pump",
+          "label": "Een stenen gebouwtje met een blauw schild met een druppel; een buis pompt het water uit de sloot weg",
+          "params": {}
+        },
+        {
+          "word": "klimaat", "prop": "g8InfoBoard", "slot": "pathLeft",
+          "label": "Een bord met een wereldbol en een thermometer",
+          "params": { "icons": ["globe", "thermometer"] }
+        },
+        {
+          "word": "beschermen", "prop": "g8Umbrella", "slot": "pathMid",
+          "label": "Iemand houdt een grote rode paraplu boven een kind; om hen heen valt de regen",
+          "params": { "variant": 4 }
+        },
+        {
+          "word": "voorkomen", "prop": "g8Sandbags", "slot": "pathRight",
+          "label": "Zandzakken voor een deur; het water komt niet verder, een hand legt de laatste zak en bij de deur staat een groen vinkje",
+          "params": {}
+        }
+      ]
     }
   ]
 }
