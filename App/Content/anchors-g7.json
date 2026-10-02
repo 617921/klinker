@@ -76,6 +76,82 @@
           "params": { "count": 3, "accessory": "vest", "variant": 2, "text": "+2000 banen" }
         }
       ]
+    },
+    {
+      "sheet": 44,
+      "type": "g7Mill",
+      "noor": [],
+      "order": ["wiek", "molenaar", "graan", "malen", "waaien", "windstil", "erfgoed", "ambacht", "traditie", "behouden", "typisch"],
+      "prompts": {
+        "ambacht": "Waar zie je een oud",
+        "waaien": "Waar zie je het hard",
+        "windstil": "Waar is het",
+        "behouden": "Wat willen we"
+      },
+      "weg": [
+        { "target": "waaien", "options": ["windstil", "waaien", "wiek"] },
+        { "target": "erfgoed", "options": ["traditie", "erfgoed", "behouden"] },
+        { "target": "malen", "options": ["graan", "malen", "molenaar"] },
+        { "target": "ambacht", "options": ["ambacht", "typisch", "traditie"] },
+        { "target": "wiek", "options": ["wiek", "waaien", "malen"] }
+      ],
+      "anchors": [
+        {
+          "word": "wiek", "prop": "g7MillSails", "slot": "sails",
+          "label": "De vier lange armen van de molen, met houten latten",
+          "params": {}
+        },
+        {
+          "word": "waaien", "prop": "g7Wind", "slot": "skyRight",
+          "label": "Een boom buigt door, blaadjes vliegen weg en de windzak staat recht uit",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "windstil", "prop": "g7Wind", "slot": "fieldRight",
+          "label": "Een rechte boom spiegelt in glad water; de windzak hangt slap naar beneden",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "erfgoed", "prop": "g7Shield", "slot": "millWall",
+          "label": "Een blauw-wit schildje op de muur van de molen: monument uit 1756",
+          "params": { "caption": "monument", "text": "1756" }
+        },
+        {
+          "word": "graan", "prop": "g7Wheat", "slot": "fieldLeft",
+          "label": "Gouden bossen halmen met aren op een kaal veld",
+          "params": {}
+        },
+        {
+          "word": "behouden", "prop": "g7Hands", "slot": "nearMill",
+          "label": "Twee handen houden een klein molentje veilig vast, met een hartje erboven",
+          "params": {}
+        },
+        {
+          "word": "traditie", "prop": "g7Dancers", "slot": "frontRightHigh",
+          "label": "Een man en een vrouw in klederdracht dansen op klompen",
+          "params": {}
+        },
+        {
+          "word": "molenaar", "prop": "g7Worker", "slot": "door",
+          "label": "Een man in een wit, bestoven schort met een zak meel op zijn schouder",
+          "params": { "accessory": "miller", "variant": 0 }
+        },
+        {
+          "word": "ambacht", "prop": "g7Workbench", "slot": "frontLeft",
+          "label": "Een werkbank met een half gemaakt houten tandwiel, een hamer en een beitel",
+          "params": {}
+        },
+        {
+          "word": "malen", "prop": "g7Millstones", "slot": "frontMid",
+          "label": "Twee ronde stenen: korrels vallen erin, wit meel komt eruit in een zak",
+          "params": {}
+        },
+        {
+          "word": "typisch", "prop": "g7DutchSet", "slot": "frontRight",
+          "label": "Klompen, een kaas en tulpen bij elkaar",
+          "params": {}
+        }
+      ]
     }
   ]
 }

@@ -174,9 +174,10 @@ enum G7People {
             f.svgLine("M31 42C36 50 40 54 43 56", 0xC8261B, 6)
             f.dot(44, 56, 3.4, v.skin)
         case "miller":
-            f.svg("M24 26Q22 16 34 15L50 18Q58 20 56 30L52 40Q44 44 32 40Z", 0xEFEBE2)
-            f.svgLine("M48 18Q52 14 50 10", 0xC9A15B, 1.6)
-            f.svgLine("M34 22Q42 26 52 24", 0xD3D1C7, 1)
+            f.svg("M24 28Q22 18 34 16L50 18Q58 20 56 32L52 42Q44 46 32 42Z", 0xE2D6BC)
+            f.svg("M50 18L56 10L60 14L54 22Z", 0xD9C08F)
+            f.svgLine("M49 19L55 16", 0x9A6A42, 1.6)
+            f.text("MEEL", PropFont.heavy(7), 0x8C4A3A, at: CGPoint(x: 41, y: 31), maxWidth: 22)
             f.svgLine("M31 42C35 38 36 34 34 30", 0x8C6A4A, 6)
             f.dot(33.5, 29, 3.4, v.skin)
         default:
