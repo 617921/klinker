@@ -25,7 +25,7 @@ enum PalaceRoomType: String, CaseIterable {
     case doctorRoom
     case classroom
     // g3: care and learning places (G3*Backdrop.swift)
-    case g3Ward, g3Gym
+    case g3Ward, g3Gym, g3Salon
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -45,6 +45,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .classroom: "klas"
         case .g3Ward: "zaal"
         case .g3Gym: "sportschool"
+        case .g3Salon: "salon"
         }
     }
 
@@ -66,6 +67,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .classroom: "Het klaslokaal"
         case .g3Ward: "Een zaal in het ziekenhuis"
         case .g3Gym: "De sportschool"
+        case .g3Salon: "Een kapsalon met spiegels"
         }
     }
 
@@ -85,6 +87,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .classroom: Classroom.noor
         case .g3Ward: G3Ward.noor
         case .g3Gym: G3GymRoom.noor
+        case .g3Salon: G3SalonRoom.noor
         }
     }
 
@@ -103,6 +106,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .classroom: Classroom.slots
         case .g3Ward: G3Ward.slots
         case .g3Gym: G3GymRoom.slots
+        case .g3Salon: G3SalonRoom.slots
         }
     }
 }
@@ -126,6 +130,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .classroom: ClassroomBackdrop()
         case .g3Ward: G3WardBackdrop()
         case .g3Gym: G3GymBackdrop()
+        case .g3Salon: G3SalonBackdrop()
         }
     }
 }

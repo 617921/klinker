@@ -153,6 +153,84 @@
           "params": { "accessory": "scale", "text": "−10 kg", "variant": 0 }
         }
       ]
+    },
+    {
+      "sheet": 27,
+      "type": "g3Salon",
+      "order": ["kapper", "steil", "föhnen", "kapsel", "pony", "baard", "bijknippen", "scheiding", "krullend", "verven", "puntje"],
+      "prompts": {
+        "kapper": "Wie is de",
+        "baard": "Wie heeft een",
+        "föhnen": "Waar zie je iemand",
+        "bijknippen": "Waar zie je iemand",
+        "verven": "Waarmee kun je haar",
+        "steil": "Welk haar is",
+        "krullend": "Welk haar is"
+      },
+      "weg": [
+        { "target": "steil", "options": ["krullend", "steil", "pony"] },
+        { "target": "föhnen", "options": ["föhnen", "bijknippen", "verven"] },
+        { "target": "kapper", "options": ["kapper", "kapsel", "baard"] },
+        { "target": "scheiding", "options": ["pony", "scheiding", "puntje"] },
+        { "target": "bijknippen", "options": ["puntje", "kapper", "bijknippen"] }
+      ],
+      "anchors": [
+        {
+          "word": "kapsel", "prop": "g3StylePoster", "slot": "posterLeft",
+          "label": "Een poster met drie hoofden, elk met een ander model haar; één heeft een ster",
+          "params": { "highlight": 1 }
+        },
+        {
+          "word": "puntje", "prop": "g3HairLock", "slot": "posterMid",
+          "label": "Een lange lok haar; een vergrootglas laat de uiteinden zien, die zijn gesplitst",
+          "params": {  }
+        },
+        {
+          "word": "steil", "prop": "g3Head", "slot": "head1",
+          "label": "Een paspop met lang, glad haar dat recht naar beneden hangt",
+          "params": { "accessory": "straight", "variant": 3 }
+        },
+        {
+          "word": "krullend", "prop": "g3Head", "slot": "head2",
+          "label": "Een paspop met een grote bos rood haar vol kringetjes",
+          "params": { "accessory": "curly", "variant": 0 }
+        },
+        {
+          "word": "pony", "prop": "g3Head", "slot": "head3",
+          "label": "Een paspop met blond haar dat over haar ogen hangt",
+          "params": { "accessory": "fringe", "variant": 2 }
+        },
+        {
+          "word": "scheiding", "prop": "g3Head", "slot": "head4",
+          "label": "Een paspop met zwart haar; een kam trekt een witte lijn in het haar, links van het midden",
+          "params": { "accessory": "parting", "variant": 5 }
+        },
+        {
+          "word": "föhnen", "prop": "g3SalonChair", "slot": "chairLeft",
+          "label": "Een vrouw in de stoel; een hand blaast met een rood apparaat warme lucht door haar lange haar",
+          "params": { "accessory": "dry", "variant": 2 }
+        },
+        {
+          "word": "bijknippen", "prop": "g3SalonChair", "slot": "chairRight",
+          "label": "Een man in de stoel; achter zijn hoofd knipt een schaar een klein stukje haar weg, er vallen haartjes",
+          "params": { "accessory": "trim", "variant": 4 }
+        },
+        {
+          "word": "kapper", "prop": "g3Worker", "slot": "floor1",
+          "label": "Een man in een zwarte schort houdt een schaar omhoog, een kam in zijn zak",
+          "params": { "accessory": "hairdresser", "variant": 7 }
+        },
+        {
+          "word": "baard", "prop": "g3Worker", "slot": "floor2",
+          "label": "Een man met een dikke bruine snor en veel haar op zijn kin en wangen; hij aait erover",
+          "params": { "accessory": "beard", "variant": 0 }
+        },
+        {
+          "word": "verven", "prop": "g3DyeBowl", "slot": "floor3",
+          "label": "Een karretje met een bakje rode haarkleur, een kwastje erin en een waaier met kleuren haar",
+          "params": {  }
+        }
+      ]
     }
   ]
 }
