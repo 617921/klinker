@@ -6,7 +6,8 @@ import SwiftUI
 /// "login" (a lock, a name and a password of dots, a key), "compare" (columns `lines`
 /// "price|stars", the `highlight` one ticked), "ad" (a product with a starburst `text` and a
 /// price `caption`), "replay" (a paused video, a big turn-back arrow, `text` under it),
-/// "edit" (a video with a timeline of clips and scissors).
+/// "edit" (a video with a timeline of clips and scissors), "form" (a photo and filled-in fields
+/// `lines` "label|value"), "home" (a video call with someone working at home, a cat and a house badge).
 enum G2Screens {
     static func laptop(_ pen: PropPen, _ p: PalacePropParams) {
         let mount = p.mount ?? "laptop"
@@ -78,6 +79,12 @@ enum G2Screens {
             G2ScreenContent.replay(s, p)
         case "edit":
             G2ScreenContent.edit(s, p)
+        case "login":
+            G2ScreenForms.login(s, p)
+        case "form":
+            G2ScreenForms.form(s, p)
+        case "home":
+            G2ScreenForms.home(s, p)
         default:
             s.rect(0, 0, w, h, 0x232B3B)
         }

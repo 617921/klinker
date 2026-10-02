@@ -397,6 +397,84 @@
           "params": { "accessory": "host", "variant": 5 }
         }
       ]
+    },
+    {
+      "sheet": 58,
+      "type": "g2Loft",
+      "noor": [],
+      "order": ["ondernemer", "investering", "oplossing", "doel", "wachtwoord", "gegevens", "overleg", "ontwikkelen", "thuiswerken", "ambitieus", "zelfstandig"],
+      "prompts": {
+        "ondernemer": "Wie is de",
+        "gegevens": "Waar zijn de",
+        "ontwikkelen": "Waar kun je een app",
+        "thuiswerken": "Waar zie je iemand",
+        "ambitieus": "Wie is",
+        "zelfstandig": "Wie werkt"
+      },
+      "weg": [
+        { "target": "doel", "options": ["doel", "oplossing", "ambitieus"] },
+        { "target": "wachtwoord", "options": ["gegevens", "wachtwoord", "ontwikkelen"] },
+        { "target": "ondernemer", "options": ["zelfstandig", "ondernemer", "investering"] },
+        { "target": "overleg", "options": ["overleg", "thuiswerken", "zelfstandig"] },
+        { "target": "investering", "options": ["investering", "doel", "oplossing"] }
+      ],
+      "anchors": [
+        {
+          "word": "doel", "prop": "g2Target", "slot": "wallA",
+          "label": "Een dartbord met een pijltje precies in de roos",
+          "params": {  }
+        },
+        {
+          "word": "ambitieus", "prop": "g2Climb", "slot": "wallB",
+          "label": "Een hoge berg met een rode vlag op de top; iemand klimt bijna helemaal naar boven",
+          "params": {  }
+        },
+        {
+          "word": "oplossing", "prop": "g2Puzzle", "slot": "wallC",
+          "label": "Een puzzel: het laatste stukje past precies, met een groen vinkje",
+          "params": {  }
+        },
+        {
+          "word": "thuiswerken", "prop": "g2Laptop", "slot": "wallD",
+          "label": "Een videogesprek: een collega zit thuis aan de keukentafel, met een kat en een huisje in de hoek",
+          "params": { "mount": "tv", "accessory": "home" }
+        },
+        {
+          "word": "investering", "prop": "g2MoneyPlant", "slot": "tableA",
+          "label": "Een hand stopt een munt in een pot; er groeit een plant met munten als blaadjes, en een pijl omhoog",
+          "params": {  }
+        },
+        {
+          "word": "wachtwoord", "prop": "g2Laptop", "slot": "tableB",
+          "label": "Een laptop met een slot: de naam is ingevuld, de geheime code zie je als bolletjes, met een sleutel",
+          "params": { "accessory": "login", "text": "noor" }
+        },
+        {
+          "word": "gegevens", "prop": "g2Laptop", "slot": "tableC",
+          "label": "Een scherm met een foto en ingevulde vakjes: naam, e-mail en geboortedatum",
+          "params": { "mount": "monitor", "accessory": "form", "lines": ["naam|Noor Bakker", "e-mail|noor@mail.nl", "geboren|12-03-1998"] }
+        },
+        {
+          "word": "ontwikkelen", "prop": "g2Build", "slot": "tableD",
+          "label": "Een telefoon met een app die half af is, een tandwiel, een moersleutel en een balk op 60 procent",
+          "params": { "count": 60 }
+        },
+        {
+          "word": "overleg", "prop": "g2Talk", "slot": "floorA",
+          "label": "Twee collega's praten met elkaar aan een tafeltje met koffie",
+          "params": { "accessory": "coffee", "variant": 4 }
+        },
+        {
+          "word": "ondernemer", "prop": "g2Person", "slot": "floorB",
+          "label": "Iemand staat trots voor een eigen winkeltje en wijst naar het bordje OPEN",
+          "params": { "accessory": "founder", "text": "OPEN", "variant": 3 }
+        },
+        {
+          "word": "zelfstandig", "prop": "g2Person", "slot": "floorC", "frame": [250, 286, 116, 98],
+          "label": "Iemand werkt helemaal alleen met een laptop aan een hoge tafel: mijn eigen baas!",
+          "params": { "accessory": "solo", "text": "mijn eigen baas!", "variant": 7 }
+        }
+      ]
     }
   ]
 }

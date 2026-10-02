@@ -7,7 +7,9 @@ import SwiftUI
 /// note (`caption`) (84 × 114);
 /// "notary" — a grey-haired notary in a dark suit and glasses, seen from the waist up behind a desk (58 × 88);
 /// "host" — a presenter in a spotlight, a microphone at the mouth and the other arm open wide (76 × 118);
-/// "critic" — someone frowning through a magnifying glass, a notebook in hand, asking `text` (96 × 114).
+/// "critic" — someone frowning through a magnifying glass, a notebook in hand, asking `text` (96 × 114);
+/// "founder" — proud in front of a little shop of their own, pointing at the door sign `text` (110 × 114);
+/// "solo" — working alone at a high table with a laptop, saying `text` in a bubble (110 × 114).
 enum G2People {
     typealias Look = PalaceFigures.Look
 
@@ -18,6 +20,8 @@ enum G2People {
         case "notary": notary(pen, v)
         case "host": host(pen, v)
         case "critic": critic(pen, p, v)
+        case "founder": G2Founders.founder(pen, p, v)
+        case "solo": G2Founders.solo(pen, p, v)
         default: advisor(pen, p, v)
         }
     }

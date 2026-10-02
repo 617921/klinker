@@ -201,6 +201,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g2Meter, g2Instalments, g2Chart, g2Supply, g2Thermostat, g2EnergyLabel, g2SolarPanel
     case g2Scroll, g2Deed, g2Signing, g2LawBook, g2Record, g2Heirlooms, g2FamilyTree, g2Inherit, g2Together, g2Proxy
     case g2Talk, g2NewsDesk, g2Broadcast, g2Viewer, g2FilmStrip, g2IdeaBoard
+    case g2Target, g2Climb, g2Puzzle, g2MoneyPlant, g2Build
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -278,7 +279,8 @@ struct PalacePropView: View, Equatable {
                  .g2Shelter, .g2Tagged, .g2Damage, .g2HouseContents, .g2SmallPrint, .g2Handshake, .g2AddOn, .g2Liable,
                  .g2Meter, .g2Instalments, .g2Chart, .g2Supply, .g2Thermostat, .g2EnergyLabel, .g2SolarPanel,
                  .g2Scroll, .g2Deed, .g2Signing, .g2LawBook, .g2Record, .g2Heirlooms, .g2FamilyTree, .g2Inherit, .g2Together, .g2Proxy,
-                 .g2Talk, .g2NewsDesk, .g2Broadcast, .g2Viewer, .g2FilmStrip, .g2IdeaBoard:
+                 .g2Talk, .g2NewsDesk, .g2Broadcast, .g2Viewer, .g2FilmStrip, .g2IdeaBoard,
+                 .g2Target, .g2Climb, .g2Puzzle, .g2MoneyPlant, .g2Build:
                 G2Props.draw(prop.kind, pen, p)
             }
         }

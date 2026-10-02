@@ -45,6 +45,11 @@ enum G2Props {
         case .g2Viewer: G2StudioProps.viewer(pen, p)
         case .g2FilmStrip: G2StudioProps.filmStrip(pen, p)
         case .g2IdeaBoard: G2StudioProps.ideaBoard(pen, p)
+        case .g2Target: G2StartupProps.target(pen, p)
+        case .g2Climb: G2StartupProps.climb(pen, p)
+        case .g2Puzzle: G2StartupProps.puzzle(pen, p)
+        case .g2MoneyPlant: G2StartupProps.moneyPlant(pen, p)
+        case .g2Build: G2StartupProps.build(pen, p)
         default: break
         }
     }

@@ -28,6 +28,7 @@ enum PalaceRoomType: String, CaseIterable {
     case g2TaxOffice, g2Insurer, g2EnergyOffice
     case g2Notary
     case g2Studio
+    case g2Loft
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -48,6 +49,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: "balie"
         case .g2Notary: "werkkamer"
         case .g2Studio: "studio"
+        case .g2Loft: "werkplek"
         }
     }
 
@@ -72,6 +74,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2EnergyOffice: "De balie van het energiebedrijf"
         case .g2Notary: "De werkkamer van de notaris"
         case .g2Studio: "Een televisiestudio"
+        case .g2Loft: "Een startup in een oud pakhuis"
         }
     }
 
@@ -92,6 +95,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2Service.noor
         case .g2Notary: G2Notary.noor
         case .g2Studio: G2Studio.noor
+        case .g2Loft: G2Loft.noor
         }
     }
 
@@ -111,6 +115,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2Service.slots
         case .g2Notary: G2Notary.slots
         case .g2Studio: G2Studio.slots
+        case .g2Loft: G2Loft.slots
         }
     }
 }
@@ -135,6 +140,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2ServiceBackdrop(type: type)
         case .g2Notary: G2NotaryBackdrop()
         case .g2Studio: G2StudioBackdrop()
+        case .g2Loft: G2LoftBackdrop()
         }
     }
 }
