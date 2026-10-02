@@ -24,6 +24,8 @@ enum PalaceRoomType: String, CaseIterable {
     case library
     case doctorRoom
     case classroom
+    // g4 · care, community and hospitality: see G4Rooms.swift and G4*Backdrop.swift.
+    case g4Pool, g4Daycare, g4CommunityHall, g4HotelLobby, g4Restaurant
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -41,6 +43,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "bibliotheek"
         case .doctorRoom: "praktijk"
         case .classroom: "klas"
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.hall(self)
         }
     }
 
@@ -60,6 +63,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "De bibliotheek"
         case .doctorRoom: "De praktijk van de dokter"
         case .classroom: "Het klaslokaal"
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.sceneLabel(self)
         }
     }
 
@@ -77,6 +81,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.noor
         case .doctorRoom: DoctorRoom.noor
         case .classroom: Classroom.noor
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.noor(self)
         }
     }
 
@@ -93,6 +98,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.slots
         case .doctorRoom: DoctorRoom.slots
         case .classroom: Classroom.slots
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.slots(self)
         }
     }
 }
@@ -114,6 +120,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .library: LibraryBackdrop()
         case .doctorRoom: DoctorRoomBackdrop()
         case .classroom: ClassroomBackdrop()
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4RoomBackdrop(type: type)
         }
     }
 }

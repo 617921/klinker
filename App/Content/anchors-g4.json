@@ -1,0 +1,252 @@
+{
+ "version": 1,
+ "rooms": [
+  {
+   "sheet": 34,
+   "type": "doctorRoom",
+   "hall": "praktijk",
+   "noor": [],
+   "order": [
+    "dierenarts",
+    "huisdier",
+    "poot",
+    "voer",
+    "vlo",
+    "inenten",
+    "chip",
+    "vacht",
+    "verzorgen",
+    "zielig",
+    "besmettelijk"
+   ],
+   "prompts": {
+    "zielig": "Welk dier is",
+    "vlo": "Waar zie je een",
+    "inenten": "Waar laat je een dier",
+    "poot": "Waar zie je een zere",
+    "vacht": "Waar zie je een lange",
+    "verzorgen": "Wie gaat haar konijn",
+    "dierenarts": "Wie is de",
+    "besmettelijk": "Wat is",
+    "huisdier": "Waar zie je thuis een"
+   },
+   "weg": [
+    {
+     "target": "poot",
+     "options": [
+      "poot",
+      "vacht",
+      "vlo"
+     ]
+    },
+    {
+     "target": "zielig",
+     "options": [
+      "zielig",
+      "besmettelijk",
+      "huisdier"
+     ]
+    },
+    {
+     "target": "inenten",
+     "options": [
+      "chip",
+      "inenten",
+      "dierenarts"
+     ]
+    },
+    {
+     "target": "voer",
+     "options": [
+      "voer",
+      "verzorgen",
+      "huisdier"
+     ]
+    },
+    {
+     "target": "vacht",
+     "options": [
+      "vlo",
+      "vacht",
+      "verzorgen"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "huisdier",
+     "prop": "g4PetHouse",
+     "slot": "plaque",
+     "label": "Een schilderijtje: een huis met een hond, een kat en een goudvis erin"
+    },
+    {
+     "word": "besmettelijk",
+     "prop": "g4Contagion",
+     "slot": "card",
+     "label": "Een gele kaart: een zieke kat niest en de bacillen vliegen naar een hond"
+    },
+    {
+     "word": "zielig",
+     "prop": "g4Animal",
+     "slot": "door",
+     "label": "Een klein hondje zit alleen in een doos in de regen, met een traan",
+     "params": {
+      "variant": 0,
+      "accessory": "sad",
+      "mount": "box"
+     }
+    },
+    {
+     "word": "vlo",
+     "prop": "g4Animal",
+     "frame": [
+      100,
+      150,
+      82,
+      90
+     ],
+     "pin": [
+      106,
+      150
+     ],
+     "tilt": -1.5,
+     "label": "Een kat krabt zich; onder het vergrootglas zit een klein springend beestje",
+     "params": {
+      "variant": 1,
+      "accessory": "flea",
+      "tone": "brown"
+     }
+    },
+    {
+     "word": "inenten",
+     "prop": "g4AnimalCare",
+     "frame": [
+      184,
+      150,
+      102,
+      90
+     ],
+     "pin": [
+      236,
+      252
+     ],
+     "align": "center",
+     "tilt": 1,
+     "label": "Een kat op de tafel krijgt een prikje in de nek",
+     "params": {
+      "variant": 1,
+      "accessory": "syringe",
+      "tone": "grey"
+     }
+    },
+    {
+     "word": "voer",
+     "prop": "g4FoodBag",
+     "frame": [
+      176,
+      54,
+      60,
+      52
+     ],
+     "pin": [
+      206,
+      112
+     ],
+     "align": "center",
+     "tilt": -1.5,
+     "label": "Een plank met een zak brokjes en een volle bak",
+     "params": {
+      "variant": 0
+     }
+    },
+    {
+     "word": "chip",
+     "prop": "g4AnimalCare",
+     "slot": "cabinet",
+     "frame": [
+      286,
+      140,
+      82,
+      100
+     ],
+     "label": "Een hond; een apparaatje bij zijn nek leest een nummer, het vergrootglas toont iets piepkleins onder de huid",
+     "params": {
+      "variant": 0,
+      "accessory": "scanner",
+      "text": "528 1400"
+     }
+    },
+    {
+     "word": "poot",
+     "prop": "g4Animal",
+     "frame": [
+      0,
+      318,
+      72,
+      76
+     ],
+     "pin": [
+      4,
+      300
+     ],
+     "tilt": -1.5,
+     "label": "Een hond tilt zijn voet in een wit verband op; het doet pijn",
+     "params": {
+      "variant": 0,
+      "accessory": "paw"
+     }
+    },
+    {
+     "word": "vacht",
+     "prop": "g4Animal",
+     "frame": [
+      72,
+      318,
+      82,
+      72
+     ],
+     "pin": [
+      80,
+      296
+     ],
+     "tilt": 1.5,
+     "label": "Een pluizige kat met lang haar en een borstel vol haren",
+     "params": {
+      "variant": 1,
+      "accessory": "brush",
+      "tone": "gold"
+     }
+    },
+    {
+     "word": "verzorgen",
+     "prop": "g4PetCare",
+     "frame": [
+      150,
+      290,
+      76,
+      96
+     ],
+     "pin": [
+      188,
+      380
+     ],
+     "align": "center",
+     "tilt": -1,
+     "label": "Een meisje houdt een konijn op schoot en geeft het een wortel",
+     "params": {
+      "variant": 2
+     }
+    },
+    {
+     "word": "dierenarts",
+     "prop": "g4VetExam",
+     "slot": "couch",
+     "label": "Een vrouw in groene kleren luistert met een stethoscoop naar een hond op de tafel",
+     "params": {
+      "variant": 1
+     }
+    }
+   ]
+  }
+ ]
+}

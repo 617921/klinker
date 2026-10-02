@@ -194,6 +194,28 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case pupil
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
+
+    // MARK: g4 · care, community and hospitality (PalacePropsG4*.swift, dispatched by `G4Props`)
+
+    // Vet (PalacePropsG4Vet.swift, animals in PalacePropsG4Animals.swift)
+    /// A framed picture: a house with a dog, a cat and a goldfish bowl inside, a heart on the roof.
+    case g4PetHouse
+    /// Yellow-edged card: a sneezing cat sprays germs that fly over to a dog; a warning triangle.
+    case g4Contagion
+    /// An animal sitting (`variant` 0 dog, 1 cat, 2 rabbit; `tone` coat). `accessory` "sad" (alone,
+    /// a tear, a rain cloud), "flea" (magnifier with a flea), "paw" (bandaged paw held up), "brush"
+    /// (fluffy coat, a brush full of hair); `mount` "box" (in a cardboard box); `flip`.
+    case g4Animal
+    /// An animal on a table, a gloved hand with a tool at its neck: `accessory` "syringe" (and a vial)
+    /// or "scanner" (screen `text`, a lens showing the chip). `variant`, `tone` as `g4Animal`.
+    case g4AnimalCare
+    /// A bag of animal food tipped over a bowl, kibble pouring. `variant` 0 dog, 1 cat on the bag;
+    /// `mount` "shelf" (on a wall shelf).
+    case g4FoodBag
+    /// A girl kneeling with an animal in her arms, giving it a carrot; hearts. `variant` animal.
+    case g4PetCare
+    /// A vet in green scrubs with a paw badge listening to a dog on a steel table, a lamp.
+    case g4VetExam
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -267,6 +289,8 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
+            case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam:
+                G4Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
