@@ -15,71 +15,64 @@
         "onderhoud": "Hoeveel kost het"
       },
       "weg": [
-        { "target": "lek", "options": ["lek", "band", "plakken"] },
-        { "target": "ketting", "options": ["rem", "ketting", "slot"] },
-        { "target": "vervangen", "options": ["nakijken", "onderhoud", "vervangen"] },
-        { "target": "tweedehands", "options": ["verlichting", "lek", "tweedehands"] },
-        { "target": "plakken", "options": ["vervangen", "plakken", "band"] }
+        {"target": "lek", "options": ["lek", "band", "plakken"]},
+        {"target": "ketting", "options": ["rem", "ketting", "slot"]},
+        {"target": "vervangen", "options": ["nakijken", "onderhoud", "vervangen"]},
+        {"target": "tweedehands", "options": ["verlichting", "lek", "tweedehands"]},
+        {"target": "plakken", "options": ["vervangen", "plakken", "band"]}
       ],
       "anchors": [
-        {
-          "word": "onderhoud", "prop": "sign", "slot": "window",
-          "label": "Een bord op het raam: een fiets en een moersleutel, één keer per jaar voor 45 euro",
-          "params": { "caption": "1× per jaar", "icons": ["bike", "g5Wrench"], "text": "€ 45", "tone": "white", "mount": "wall" }
-        },
-        {
-          "word": "band", "prop": "g5BikePart", "slot": "shelfTopLeft",
-          "label": "Twee nieuwe zwarte rubberen ringen met profiel aan een haak, maat 28 inch",
-          "params": { "accessory": "tyre", "text": "28\"" }
-        },
-        {
-          "word": "verlichting", "prop": "g5BikePart", "slot": "shelfTopMid",
-          "label": "In het donker: een koplamp met een felle lichtbundel en een rood achterlampje",
-          "params": { "accessory": "lights" }
-        },
-        {
-          "word": "slot", "prop": "g5BikePart", "slot": "shelfTopRight",
-          "label": "Een dikke metalen beugel met een geel stuk en een sleutel erin",
-          "params": { "accessory": "lock" }
-        },
-        {
-          "word": "ketting", "prop": "g5BikePart", "slot": "shelfLeft",
-          "label": "Een groot en een klein tandwiel met schakels eromheen",
-          "params": { "accessory": "chain" }
-        },
-        {
-          "word": "rem", "prop": "g5BikePart", "slot": "shelfMid",
-          "label": "Een hand knijpt in de hendel aan het stuur; de kabel drukt rode blokjes tegen het wiel",
-          "params": { "accessory": "brake" }
-        },
-        {
-          "word": "plakken", "prop": "g5TubePatch", "slot": "counterLeft",
-          "label": "Een zwarte rubberen slang met een oranje lapje; een duim drukt het vast, ernaast een tube lijm",
-          "params": {}
-        },
-        {
-          "word": "vervangen", "prop": "g5Swap", "slot": "counterMid",
-          "label": "Een oud kapot zadel met een rood kruis, twee pijlen rond, en een nieuw zadel met een groen vinkje",
-          "params": {}
-        },
-        {
-          "word": "nakijken", "prop": "g5Checklist", "slot": "counterRight",
-          "label": "Een klembord met drie vinkjes, bij wiel, lamp en schakel, en een vergrootglas erboven",
-          "params": { "caption": "fiets 12", "icons": ["g5Tyre", "g5Bulb", "link"], "count": 3 }
-        },
-        {
-          "word": "lek", "prop": "g5Bike", "frame": [2, 294, 136, 86], "pin": [8, 378], "align": "leading", "tilt": -1.5,
-          "label": "Een fiets met een plat voorwiel: er zit een spijker in en de lucht sist eruit",
-          "params": { "accessory": "flat", "text": "psss", "tone": "blue" }
-        },
-        {
-          "word": "tweedehands", "prop": "g5Bike", "frame": [232, 294, 136, 86], "pin": [364, 378], "align": "trailing", "tilt": 1.5,
-          "label": "Een oude fiets met wat roest en tape op het zadel; op het kaartje: gebruikt, 95 euro",
-          "params": { "accessory": "tag", "text": "€ 95", "caption": "gebruikt", "tone": "green", "flip": true }
-        }
+        {"word": "onderhoud", "prop": "sign", "slot": "window", "label": "Een bord op het raam: een fiets en een moersleutel, één keer per jaar voor 45 euro", "params": {"caption": "1× per jaar", "icons": ["bike", "g5Wrench"], "text": "€ 45", "tone": "white", "mount": "wall"}},
+        {"word": "band", "prop": "g5BikePart", "slot": "shelfTopLeft", "label": "Twee nieuwe zwarte rubberen ringen met profiel aan een haak, maat 28 inch", "params": {"accessory": "tyre", "text": "28\""}},
+        {"word": "verlichting", "prop": "g5BikePart", "slot": "shelfTopMid", "label": "In het donker: een koplamp met een felle lichtbundel en een rood achterlampje", "params": {"accessory": "lights"}},
+        {"word": "slot", "prop": "g5BikePart", "slot": "shelfTopRight", "label": "Een dikke metalen beugel met een geel stuk en een sleutel erin", "params": {"accessory": "lock"}},
+        {"word": "ketting", "prop": "g5BikePart", "slot": "shelfLeft", "label": "Een groot en een klein tandwiel met schakels eromheen", "params": {"accessory": "chain"}},
+        {"word": "rem", "prop": "g5BikePart", "slot": "shelfMid", "label": "Een hand knijpt in de hendel aan het stuur; de kabel drukt rode blokjes tegen het wiel", "params": {"accessory": "brake"}},
+        {"word": "plakken", "prop": "g5TubePatch", "slot": "counterLeft", "label": "Een zwarte rubberen slang met een oranje lapje; een duim drukt het vast, ernaast een tube lijm", "params": {}},
+        {"word": "vervangen", "prop": "g5Swap", "slot": "counterMid", "label": "Een oud kapot zadel met een rood kruis, twee pijlen rond, en een nieuw zadel met een groen vinkje", "params": {}},
+        {"word": "nakijken", "prop": "g5Checklist", "slot": "counterRight", "label": "Een klembord met drie vinkjes, bij wiel, lamp en schakel, en een vergrootglas erboven", "params": {"caption": "fiets 12", "icons": ["g5Tyre", "g5Bulb", "link"], "count": 3}},
+        {"word": "lek", "prop": "g5Bike", "frame": [2, 294, 136, 86], "pin": [8, 378], "align": "leading", "tilt": -1.5, "label": "Een fiets met een plat voorwiel: er zit een spijker in en de lucht sist eruit", "params": {"accessory": "flat", "text": "psss", "tone": "blue"}},
+        {"word": "tweedehands", "prop": "g5Bike", "frame": [232, 294, 136, 86], "pin": [364, 378], "align": "trailing", "tilt": 1.5, "label": "Een oude fiets met wat roest en tape op het zadel; op het kaartje: gebruikt, 95 euro", "params": {"accessory": "tag", "text": "€ 95", "caption": "gebruikt", "tone": "green", "flip": true}}
       ],
       "decor": [
-        { "prop": "g5BikePart", "slot": "shelfRight", "params": { "accessory": "pump" } }
+        {"prop": "g5BikePart", "slot": "shelfRight", "params": {"accessory": "pump"}}
+      ]
+    },
+    {
+      "sheet": 37,
+      "type": "g5DiyStore",
+      "noor": [208, 292],
+      "order": ["boor", "verf", "schroef", "kwast", "spijker", "gereedschap", "stevig", "schilderen", "vastdraaien", "klussen", "handig"],
+      "prompts": {
+        "vastdraaien": "Waar kun je een schroef",
+        "schilderen": "Wie is aan het",
+        "klussen": "Wie gaat thuis",
+        "handig": "Wie is heel",
+        "stevig": "Welke plank is",
+        "gereedschap": "Waar zit het"
+      },
+      "weg": [
+        {"target": "schroef", "options": ["spijker", "schroef", "boor"]},
+        {"target": "kwast", "options": ["verf", "kwast", "schilderen"]},
+        {"target": "klussen", "options": ["handig", "klussen", "gereedschap"]},
+        {"target": "vastdraaien", "options": ["vastdraaien", "schroef", "stevig"]},
+        {"target": "spijker", "options": ["boor", "gereedschap", "spijker"]}
+      ],
+      "anchors": [
+        {"word": "boor", "prop": "g5Tool", "slot": "shelfTopLeft", "label": "Een oranje accumachine met een spiraal voorop, en een plankje met een vers gaatje", "params": {"accessory": "drill"}},
+        {"word": "schroef", "prop": "g5Tool", "slot": "shelfTopMid", "label": "Een grote metalen pin met een spiraalrand en een kruisje in de kop, en een doosje vol", "params": {"accessory": "screw"}},
+        {"word": "spijker", "prop": "g5Tool", "slot": "shelfTopRight", "label": "Een hamer slaat een dunne metalen pin met een platte kop in een plank", "params": {"accessory": "nail"}},
+        {"word": "verf", "prop": "g5Tool", "slot": "shelfLeft", "label": "Blikken met kleur, één open met een druppel langs de rand, en een waaier kleurkaartjes", "params": {"accessory": "paint", "tone": "green"}},
+        {"word": "kwast", "prop": "g5Tool", "slot": "shelfMid", "label": "Een pot met drie borstels met houten stelen, en voorop één met een natte punt", "params": {"accessory": "brushes", "tone": "blue"}},
+        {"word": "gereedschap", "prop": "g5Tool", "slot": "counterLeft", "label": "Een open rode kist vol: hamer, zaag, tang en moersleutel", "params": {"accessory": "toolbox"}},
+        {"word": "vastdraaien", "prop": "g5Tool", "slot": "counterMid", "label": "Een hand met een gele draaier aan een scharnier op een plank, en een groene pijl die rond gaat", "params": {"accessory": "tighten", "tone": "yellow"}},
+        {"word": "stevig", "prop": "g5Sturdy", "slot": "shelfRight", "label": "Een dikke plank op grote steunen houdt 50 kilo, met een vinkje; een dunne plank ernaast buigt door, met een kruis", "params": {"text": "50 kg"}},
+        {"word": "schilderen", "prop": "g5Maker", "slot": "floorLeft", "frame": [4, 262, 100, 136], "pin": [6, 374], "label": "Een man in een witte overall rolt lichtblauwe kleur op een muur, met een bak aan zijn voeten", "params": {"accessory": "roller", "variant": 1}},
+        {"word": "klussen", "prop": "g5Maker", "frame": [106, 292, 96, 110], "pin": [150, 376], "align": "center", "tilt": 1.5, "label": "Een man in een blauwe overall met een pet, een lange plank op zijn schouder en een rode kist", "params": {"accessory": "diy", "variant": 4}},
+        {"word": "handig", "prop": "g5Maker", "slot": "floorRight", "frame": [262, 278, 104, 126], "pin": [364, 376], "label": "Een vrouw met een duim omhoog en een draaier; naast haar een lamp, een stoel en een fiets, alle drie met een vinkje", "params": {"accessory": "handy", "variant": 3, "icons": ["g5Bulb", "g5Chair", "bike"]}}
+      ],
+      "decor": [
+
       ]
     }
   ]

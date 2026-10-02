@@ -1,7 +1,5 @@
 import SwiftUI
-enum G5Tools { static func tool(_ pen: PropPen, _ p: PalacePropParams) {}; static func sturdy(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G5People { static func fan(_ pen: PropPen, _ p: PalacePropParams) {}; static func seats(_ pen: PropPen, _ p: PalacePropParams) {} }
-enum G5Makers { static func maker(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G5Groups { static func group(_ pen: PropPen, _ p: PalacePropParams) {}; static func couple(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G5Stage { static func poster(_ pen: PropPen, _ p: PalacePropParams) {}; static func print(_ pen: PropPen, _ p: PalacePropParams) {}; static func cloakroom(_ pen: PropPen, _ p: PalacePropParams) {}; static func screen(_ pen: PropPen, _ p: PalacePropParams) {}; static func emblem(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G5Art { static func banner(_ pen: PropPen, _ p: PalacePropParams) {}; static func frame(_ pen: PropPen, _ p: PalacePropParams) {}; static func statue(_ pen: PropPen, _ p: PalacePropParams) {} }
