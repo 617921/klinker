@@ -120,51 +120,64 @@ enum G4Vet {
     /// An animal on a towel and a gloved hand from the right (110 × 80): a syringe with a vial,
     /// or a chip reader whose screen shows `text`, with a lens showing the chip under the skin.
     static func animalCare(_ pen: PropPen, _ p: PalacePropParams) {
-        let f = pen.fitted(CGSize(width: 110, height: 80))
         let kind = G4Animals.kind(p.variant ?? 1)
         let coat = PropColor.named(p.tone, G4Animals.defaultCoat(kind))
-        let scanner = p.accessory == "scanner"
+        if p.accessory == "scanner" { return scanner(pen.fitted(CGSize(width: 88, height: 92)), kind, coat, p.text) }
+        let f = pen.fitted(CGSize(width: 110, height: 80))
         f.rect(4, 70, 66, 8, 0x5DCAA5, radius: 2)
         f.svgLine("M8 72H66M8 75H66", 0xFFFDF6, 0.8)
-        let rect = CGRect(x: 6, y: 14, width: 58, height: 58)
-        G4Animals.sit(kind, f, in: rect, coat: coat, mood: scanner ? .calm : .pain, shadow: false)
+        let neck = sitOnTowel(kind, f, in: CGRect(x: 6, y: 14, width: 58, height: 58), coat: coat, mood: .pain)
+        f.svg("M110 30L92 34L94 50L110 48Z", 0x2F8F7A)
+        f.rect(84, 34, 12, 14, 0x8FB6CF, radius: 4)
+        let tip = CGPoint(x: neck.x + 3, y: neck.y - 2)
+        var g = f
+        g.ctx.translateBy(x: tip.x, y: tip.y)
+        g.ctx.rotate(by: .degrees(-18))
+        g.line(0, 0, 10, 0, 0x9A9890, 1)
+        g.rect(10, -3.5, 22, 7, 0xFFFDF6, radius: 1.5)
+        g.rect(12, -2.5, 13, 5, 0x8FB6CF)
+        g.svgLine("M14 -3.5V-1.5M18 -3.5V-1.5M22 -3.5V-1.5", 0x5E6B73, 0.6)
+        g.rect(32, -1, 8, 2, 0x5E6B73)
+        g.rect(40, -4, 2.4, 8, 0x5E6B73, radius: 1)
+        f.svgLine("M\(tip.x + 30) \(tip.y - 9)L86 38", 0x8FB6CF, 5)
+        // The vial on the table
+        f.rect(80, 58, 9, 16, 0xE4ECEE, radius: 2)
+        f.rect(80, 64, 9, 7, 0x8FB6CF)
+        f.rect(80.5, 55, 8, 4, 0x1F3A6B, radius: 1)
+    }
+
+    /// The animal sitting in `rect` without a shadow; returns its neck point in the pen's units.
+    private static func sitOnTowel(_ kind: Kind, _ f: PropPen, in rect: CGRect, coat: UInt32, mood: G4Animals.Mood) -> CGPoint {
+        G4Animals.sit(kind, f, in: rect, coat: coat, mood: mood, shadow: false)
         let d = G4Animals.design(kind)
         let s = min(rect.width / d.width, rect.height / d.height)
         let n = G4Animals.anchors(kind).neck
-        let neck = CGPoint(x: rect.midX - d.width * s / 2 + n.x * s, y: rect.maxY - d.height * s + n.y * s)
-        // Sleeve and glove
-        f.svg("M110 30L92 34L94 50L110 48Z", 0x2F8F7A)
-        f.rect(84, 34, 12, 14, 0x8FB6CF, radius: 4)
-        if scanner {
-            f.svgLine("M86 38L66 \(neck.y - 2)", 0x3E4C55, 5)
-            f.rect(54, neck.y - 14, 22, 16, 0xFAC775, radius: 4)
-            f.rect(57, neck.y - 11, 16, 8, 0x232B3B, radius: 1)
-            f.text(p.text ?? "", PropFont.mono(5.5), 0x5DCAA5, at: CGPoint(x: 65, y: neck.y - 6.6), maxWidth: 15)
-            f.svgLine("M77 \(neck.y - 18)Q80 \(neck.y - 21) 77 \(neck.y - 24)M80 \(neck.y - 16)Q85 \(neck.y - 21) 80 \(neck.y - 27)", 0x1E7A4C, 1.1)
-            let g = G4Draw.lens(f, 86, 64, 12, back: PalaceInk.shade(coat, 1.15))
-            g.svgLine("M74 58L80 70M84 54L90 74M94 56L98 70", PalaceInk.shade(coat, 0.85), 1)
-            g.rect(80, 61, 13, 5.5, 0xD3E0E6, radius: 2.7)
-            g.svgLine("M83 62V65.5M85 62V65.5M87 62V65.5", 0xC9A15B, 0.9)
-            g.rect(89, 62, 3, 3.5, 0x5E6B73, radius: 0.8)
-            G4Draw.lensRim(f, 86, 64, 12)
-            f.svgLine("M\(neck.x + 2) \(neck.y + 2)L75 56", 0x3E4C55, 0.8)
-        } else {
-            let tip = CGPoint(x: neck.x + 3, y: neck.y - 2)
-            var g = f
-            g.ctx.translateBy(x: tip.x, y: tip.y)
-            g.ctx.rotate(by: .degrees(-18))
-            g.line(0, 0, 10, 0, 0x9A9890, 1)
-            g.rect(10, -3.5, 22, 7, 0xFFFDF6, radius: 1.5)
-            g.rect(12, -2.5, 13, 5, 0x8FB6CF)
-            g.svgLine("M14 -3.5V-1.5M18 -3.5V-1.5M22 -3.5V-1.5", 0x5E6B73, 0.6)
-            g.rect(32, -1, 8, 2, 0x5E6B73)
-            g.rect(40, -4, 2.4, 8, 0x5E6B73, radius: 1)
-            f.svgLine("M\(tip.x + 30) \(tip.y - 9)L86 38", 0x8FB6CF, 5)
-            // The vial on the table
-            f.rect(80, 58, 9, 16, 0xE4ECEE, radius: 2)
-            f.rect(80, 64, 9, 7, 0x8FB6CF)
-            f.rect(80.5, 55, 8, 4, 0x1F3A6B, radius: 1)
-        }
+        return CGPoint(x: rect.midX - d.width * s / 2 + n.x * s, y: rect.maxY - d.height * s + n.y * s)
+    }
+
+    /// A chip reader (88 × 92): a gloved hand holds a yellow reader to the animal's neck, its screen
+    /// shows `text` with a beep; a lens shows the little chip under the skin.
+    private static func scanner(_ f: PropPen, _ kind: Kind, _ coat: UInt32, _ text: String?) {
+        f.rect(2, 84, 62, 8, 0x5DCAA5, radius: 2)
+        f.svgLine("M6 86H60M6 89H60", 0xFFFDF6, 0.8)
+        let neck = sitOnTowel(kind, f, in: CGRect(x: 0, y: 32, width: 60, height: 54), coat: coat, mood: .calm)
+        f.svg("M88 2L72 8L74 24L88 20Z", 0x2F8F7A)
+        f.rect(42, 4, 26, 40, 0xFAC775, radius: 5)
+        f.stroke(Path(roundedRect: CGRect(x: 42, y: 4, width: 26, height: 40), cornerRadius: 5), 0xE0A030, 1)
+        f.rect(45, 8, 20, 14, 0x232B3B, radius: 1.5)
+        f.text(text ?? "", PropFont.mono(6.5), 0x5DCAA5, at: CGPoint(x: 55, y: 15), maxWidth: 18)
+        f.dot(55, 30, 3, 0x1E7A4C)
+        f.ring(neck.x + 4, neck.y - 2, 6, 0x3E4C55, 2.4)
+        f.svgLine("M48 44L\(neck.x + 7) \(neck.y - 6)", 0x3E4C55, 3)
+        f.rect(64, 10, 12, 14, 0x8FB6CF, radius: 4)
+        f.svgLine("M38 10Q34 14 38 18M34 6Q28 14 34 22", 0x1E7A4C, 1.3)
+        let g = G4Draw.lens(f, 70, 70, 14, back: PalaceInk.shade(coat, 1.15))
+        g.svgLine("M58 62L64 78M68 58L74 82M78 60L82 76", PalaceInk.shade(coat, 0.85), 1)
+        g.rect(62, 67, 16, 6.5, 0xD3E0E6, radius: 3.2)
+        g.svgLine("M65.5 68.2V72M68 68.2V72M70.5 68.2V72", 0xC9A15B, 1)
+        g.rect(73, 68.2, 3.4, 4, 0x5E6B73, radius: 0.8)
+        G4Draw.lensRim(f, 70, 70, 14)
+        f.svgLine("M\(neck.x + 4) \(neck.y + 4)L58 64", 0x3E4C55, 0.8)
     }
 
     // MARK: Food
