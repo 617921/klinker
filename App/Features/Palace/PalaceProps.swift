@@ -194,6 +194,16 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case pupil
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
+    // MARK: Group g5 (workshops and culture), drawn by `G5Props` (PalacePropsG5*.swift),
+    // where each one's params are described.
+    // Bike shop and DIY store
+    case g5Bike, g5BikePart, g5TubePatch, g5Swap, g5Checklist, g5Tool, g5Sturdy
+    // People (audience moods, makers at work, groups)
+    case g5Fan, g5Seats, g5Maker, g5Group, g5Couple
+    // Cinema, theatre and museum
+    case g5Poster, g5Print, g5Cloakroom, g5DatePage, g5Screen, g5Emblem, g5Banner, g5Frame, g5Statue
+    // Church
+    case g5Memorial, g5Candles, g5Coffin, g5Cake
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -267,6 +277,10 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
+            case .g5Bike, .g5BikePart, .g5TubePatch, .g5Swap, .g5Checklist, .g5Tool, .g5Sturdy, .g5Fan, .g5Seats,
+                 .g5Maker, .g5Group, .g5Couple, .g5Poster, .g5Print, .g5Cloakroom, .g5DatePage, .g5Screen, .g5Emblem,
+                 .g5Banner, .g5Frame, .g5Statue, .g5Memorial, .g5Candles, .g5Coffin, .g5Cake:
+                G5Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

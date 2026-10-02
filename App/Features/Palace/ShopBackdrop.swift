@@ -43,6 +43,8 @@ nonisolated struct ShopLook: Sendable {
         switch type {
         case .supermarket: supermarket
         case .pharmacy: pharmacy
+        case .g5BikeShop: g5Bike
+        case .g5DiyStore: g5Diy
         default: bakery
         }
     }
@@ -96,11 +98,15 @@ struct ShopBackdrop: View, Equatable {
     private static let bakeryRoom = marks(.bakery)
     private static let supermarketRoom = marks(.supermarket)
     private static let pharmacyRoom = marks(.pharmacy)
+    private static let g5BikeRoom = marks(.g5Bike)
+    private static let g5DiyRoom = marks(.g5Diy)
 
     private static func room(_ type: PalaceRoomType) -> [PalaceMark] {
         switch type {
         case .supermarket: supermarketRoom
         case .pharmacy: pharmacyRoom
+        case .g5BikeShop: g5BikeRoom
+        case .g5DiyStore: g5DiyRoom
         default: bakeryRoom
         }
     }

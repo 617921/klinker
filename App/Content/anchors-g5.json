@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 19,
+      "type": "g5BikeShop",
+      "noor": [166, 290],
+      "order": ["band", "slot", "lek", "ketting", "verlichting", "plakken", "rem", "tweedehands", "nakijken", "onderhoud", "vervangen"],
+      "prompts": {
+        "plakken": "Waar kun je je band",
+        "nakijken": "Waar laat je je fiets",
+        "vervangen": "Wat moet je hier",
+        "lek": "Welke fiets is",
+        "tweedehands": "Welke fiets is",
+        "onderhoud": "Hoeveel kost het"
+      },
+      "weg": [
+        { "target": "lek", "options": ["lek", "band", "plakken"] },
+        { "target": "ketting", "options": ["rem", "ketting", "slot"] },
+        { "target": "vervangen", "options": ["nakijken", "onderhoud", "vervangen"] },
+        { "target": "tweedehands", "options": ["verlichting", "lek", "tweedehands"] },
+        { "target": "plakken", "options": ["vervangen", "plakken", "band"] }
+      ],
+      "anchors": [
+        {
+          "word": "onderhoud", "prop": "sign", "slot": "window",
+          "label": "Een bord op het raam: een fiets en een moersleutel, één keer per jaar voor 45 euro",
+          "params": { "caption": "1× per jaar", "icons": ["bike", "g5Wrench"], "text": "€ 45", "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "band", "prop": "g5BikePart", "slot": "shelfTopLeft",
+          "label": "Twee nieuwe zwarte rubberen ringen met profiel aan een haak, maat 28 inch",
+          "params": { "accessory": "tyre", "text": "28\"" }
+        },
+        {
+          "word": "verlichting", "prop": "g5BikePart", "slot": "shelfTopMid",
+          "label": "In het donker: een koplamp met een felle lichtbundel en een rood achterlampje",
+          "params": { "accessory": "lights" }
+        },
+        {
+          "word": "slot", "prop": "g5BikePart", "slot": "shelfTopRight",
+          "label": "Een dikke metalen beugel met een geel stuk en een sleutel erin",
+          "params": { "accessory": "lock" }
+        },
+        {
+          "word": "ketting", "prop": "g5BikePart", "slot": "shelfLeft",
+          "label": "Een groot en een klein tandwiel met schakels eromheen",
+          "params": { "accessory": "chain" }
+        },
+        {
+          "word": "rem", "prop": "g5BikePart", "slot": "shelfMid",
+          "label": "Een hand knijpt in de hendel aan het stuur; de kabel drukt rode blokjes tegen het wiel",
+          "params": { "accessory": "brake" }
+        },
+        {
+          "word": "plakken", "prop": "g5TubePatch", "slot": "counterLeft",
+          "label": "Een zwarte rubberen slang met een oranje lapje; een duim drukt het vast, ernaast een tube lijm",
+          "params": {}
+        },
+        {
+          "word": "vervangen", "prop": "g5Swap", "slot": "counterMid",
+          "label": "Een oud kapot zadel met een rood kruis, twee pijlen rond, en een nieuw zadel met een groen vinkje",
+          "params": {}
+        },
+        {
+          "word": "nakijken", "prop": "g5Checklist", "slot": "counterRight",
+          "label": "Een klembord met drie vinkjes, bij wiel, lamp en schakel, en een vergrootglas erboven",
+          "params": { "caption": "fiets 12", "icons": ["g5Tyre", "g5Bulb", "link"], "count": 3 }
+        },
+        {
+          "word": "lek", "prop": "g5Bike", "frame": [2, 294, 136, 86], "pin": [8, 378], "align": "leading", "tilt": -1.5,
+          "label": "Een fiets met een plat voorwiel: er zit een spijker in en de lucht sist eruit",
+          "params": { "accessory": "flat", "text": "psss", "tone": "blue" }
+        },
+        {
+          "word": "tweedehands", "prop": "g5Bike", "frame": [232, 294, 136, 86], "pin": [364, 378], "align": "trailing", "tilt": 1.5,
+          "label": "Een oude fiets met wat roest en tape op het zadel; op het kaartje: gebruikt, 95 euro",
+          "params": { "accessory": "tag", "text": "€ 95", "caption": "gebruikt", "tone": "green", "flip": true }
+        }
+      ],
+      "decor": [
+        { "prop": "g5BikePart", "slot": "shelfRight", "params": { "accessory": "pump" } }
+      ]
+    }
+  ]
+}
