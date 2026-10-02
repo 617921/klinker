@@ -4,6 +4,8 @@ import SwiftUI
 /// cut-out ("detail") colour. Raw values are the names used in `anchors.json` (`icons`).
 nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case train, bus, arrow, link, warning, brokenTrack, walk, change, pass, check
+    // Outdoor places (PalacePropsOutdoor.swift)
+    case banknote, noCard, tram, detour, wheelchair, dogLeash, bike, allowed
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -53,6 +55,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             p.svgLine("M12 12.2H19.5M12 15.2H17.5", d, 1.3)
         case .check:
             p.svgLine("M5 12.5L10 17.5L19.5 7", c, 3)
+        case .banknote, .noCard, .tram, .detour, .wheelchair, .dogLeash, .bike, .allowed:
+            PalaceOutdoorIcons.draw(self, p, c, d)
         }
     }
 

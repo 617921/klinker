@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 5,
+      "type": "marketSquare",
+      "order": ["kraam", "pond", "rijp", "contant", "bakje", "wisselgeld", "afdingen", "seizoen", "uitzoeken", "kwaliteit", "teruggeven"],
+      "prompts": {
+        "pond": "Waar weeg je een",
+        "seizoen": "Waar zie je het",
+        "kwaliteit": "Waar zie je goede",
+        "afdingen": "Waar zie je mensen",
+        "teruggeven": "Waar zie je iemand geld",
+        "uitzoeken": "Waar kun je de mooiste appel",
+        "contant": "Waar betaal je",
+        "rijp": "Welke tomaat is"
+      },
+      "weg": [
+        { "target": "wisselgeld", "options": ["contant", "wisselgeld", "teruggeven"] },
+        { "target": "pond", "options": ["pond", "bakje", "kwaliteit"] },
+        { "target": "afdingen", "options": ["uitzoeken", "afdingen", "teruggeven"] },
+        { "target": "rijp", "options": ["seizoen", "kwaliteit", "rijp"] },
+        { "target": "kraam", "options": ["kraam", "bakje", "seizoen"] }
+      ],
+      "anchors": [
+        {
+          "word": "kraam", "prop": "stall", "slot": "stallFar",
+          "label": "Een overdekte tafel met kazen onder een groen-wit gestreept dak",
+          "params": { "variant": 0, "accessory": "cheese" }
+        },
+        {
+          "word": "contant", "prop": "sign", "slot": "hangLeft",
+          "label": "Een bord: een geldbriefje wel, een pinpas met een rode streep niet",
+          "params": { "icons": ["banknote", "noCard"], "tone": "white" }
+        },
+        {
+          "word": "seizoen", "prop": "seasonWheel", "slot": "hangMid",
+          "label": "Een rond bord met lente, zomer, herfst en winter; de zomer is rood omlijnd",
+          "params": { "highlight": 1 }
+        },
+        {
+          "word": "kwaliteit", "prop": "rosette", "slot": "hangRight",
+          "label": "Een gouden rozet met drie sterren",
+          "params": { "count": 3 }
+        },
+        {
+          "word": "pond", "prop": "scale", "slot": "counter1",
+          "label": "Een weegschaal met kersen die 500 gram aanwijst",
+          "params": { "text": "500 g" }
+        },
+        {
+          "word": "bakje", "prop": "punnet", "slot": "counter2",
+          "label": "Een groen kartonnetje vol aardbeien",
+          "params": {}
+        },
+        {
+          "word": "rijp", "prop": "ripeness", "slot": "counter3",
+          "label": "Drie tomaten, groen, oranje en rood, met een vinkje bij de rode",
+          "params": {}
+        },
+        {
+          "word": "wisselgeld", "prop": "cashBox", "slot": "counter4",
+          "label": "Een open geldkistje vol kleine munten",
+          "params": {}
+        },
+        {
+          "word": "afdingen", "prop": "haggle", "slot": "talk",
+          "label": "Twee tekstballonnen: de verkoper vraagt vijf euro, de klant biedt drie",
+          "params": { "lines": ["€ 5", "€ 3?"] }
+        },
+        {
+          "word": "uitzoeken", "prop": "pickCrate", "slot": "floorLeft",
+          "label": "Een kist appels; een hand pakt de mooiste appel eruit",
+          "params": {}
+        },
+        {
+          "word": "teruggeven", "prop": "handover", "slot": "floorRight",
+          "label": "Een hand laat munten in een andere hand vallen",
+          "params": { "variant": 0 }
+        }
+      ]
+    },
+    {
+      "sheet": 11,
+      "type": "park",
+      "noor": [],
+      "order": ["vijver", "bankje", "speeltuin", "hardlopen", "zwerfafval", "grasveld", "uitlaten", "evenement", "aangelijnd", "wandeling", "toegestaan"],
+      "prompts": {
+        "wandeling": "Waar maken mensen een",
+        "zwerfafval": "Waar ligt",
+        "hardlopen": "Waar zie je iemand",
+        "uitlaten": "Waar zie je iemand de hond",
+        "aangelijnd": "Waar staat: honden"
+      },
+      "weg": [
+        { "target": "aangelijnd", "options": ["uitlaten", "aangelijnd", "toegestaan"] },
+        { "target": "vijver", "options": ["vijver", "grasveld", "speeltuin"] },
+        { "target": "hardlopen", "options": ["wandeling", "hardlopen", "uitlaten"] },
+        { "target": "bankje", "options": ["zwerfafval", "bankje", "evenement"] },
+        { "target": "toegestaan", "options": ["toegestaan", "aangelijnd", "grasveld"] }
+      ],
+      "anchors": [
+        {
+          "word": "evenement", "prop": "stage", "slot": "farLeft",
+          "label": "Een podium met een zanger, lampen, muzieknoten en vlaggetjes",
+          "params": { "text": "za 14 juli" }
+        },
+        {
+          "word": "vijver", "prop": "duckPond", "slot": "farMid",
+          "label": "Een plas water met twee eenden en riet",
+          "params": {}
+        },
+        {
+          "word": "speeltuin", "prop": "playground", "slot": "farRight",
+          "label": "Een glijbaan en een schommel in het zand",
+          "params": {}
+        },
+        {
+          "word": "grasveld", "prop": "lawn", "slot": "midLeft",
+          "label": "Een gemaaid stuk gras met een doeltje en een bal",
+          "params": {}
+        },
+        {
+          "word": "hardlopen", "prop": "runner", "slot": "path",
+          "label": "Iemand in sportkleren rent over het pad",
+          "params": { "variant": 6 }
+        },
+        {
+          "word": "aangelijnd", "prop": "roadSign", "slot": "signHigh",
+          "label": "Een rond blauw bord: een hond aan een riem met een hand",
+          "params": { "variant": 0, "tone": "blue", "icons": ["dogLeash"] }
+        },
+        {
+          "word": "bankje", "prop": "bench", "slot": "midRight",
+          "label": "Een houten zitbank in het gras",
+          "params": {}
+        },
+        {
+          "word": "uitlaten", "prop": "dogWalker", "slot": "nearLeft",
+          "label": "Iemand loopt met een hond aan een rode riem",
+          "params": { "variant": 3 }
+        },
+        {
+          "word": "wandeling", "prop": "strollers", "slot": "nearMid",
+          "label": "Twee oudere mensen lopen rustig arm in arm, één met een stok",
+          "params": { "variant": 2 }
+        },
+        {
+          "word": "toegestaan", "prop": "roadSign", "slot": "signLow",
+          "label": "Een wit bord met een fiets en een groen vinkje",
+          "params": { "variant": 1, "tone": "white", "icons": ["bike", "allowed"] }
+        },
+        {
+          "word": "zwerfafval", "prop": "litter", "slot": "nearRight",
+          "label": "Papier, een blikje en een fles op het gras naast een prullenbak",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 12,
+      "type": "tramStop",
+      "order": ["richting", "uitstappen", "saldo", "omleiding", "conducteur", "eindhalte", "opwaarderen", "stipt", "werkzaamheden", "toegankelijk", "dienstregeling"],
+      "prompts": {
+        "werkzaamheden": "Waar zijn de",
+        "richting": "Waar zie je de",
+        "uitstappen": "Waar kun je",
+        "toegankelijk": "Welke deur is",
+        "opwaarderen": "Waar kun je je kaart",
+        "saldo": "Waar zie je je"
+      },
+      "weg": [
+        { "target": "omleiding", "options": ["werkzaamheden", "omleiding", "richting"] },
+        { "target": "saldo", "options": ["opwaarderen", "saldo", "dienstregeling"] },
+        { "target": "uitstappen", "options": ["uitstappen", "toegankelijk", "eindhalte"] },
+        { "target": "stipt", "options": ["dienstregeling", "conducteur", "stipt"] },
+        { "target": "eindhalte", "options": ["richting", "eindhalte", "omleiding"] }
+      ],
+      "anchors": [
+        {
+          "word": "omleiding", "prop": "roadSign", "slot": "signLeft",
+          "label": "Een geel bord met een pijl die met een bocht om een afzetting heen gaat",
+          "params": { "variant": 1, "tone": "yellow", "icons": ["detour"] }
+        },
+        {
+          "word": "werkzaamheden", "prop": "roadworks", "slot": "streetLeft",
+          "label": "Een graafmachine achter een rood-wit hek met een lamp, zand en een pion",
+          "params": {}
+        },
+        {
+          "word": "richting", "prop": "lineDisplay", "slot": "tramDisplay",
+          "label": "Het scherm op de tram: lijn 2 naar Centraal, met een grote pijl",
+          "params": { "caption": "2", "text": "Centraal" }
+        },
+        {
+          "word": "uitstappen", "prop": "tramDoor", "slot": "doorFront",
+          "label": "Een open deur van de tram; iemand komt naar buiten, het perron op",
+          "params": { "accessory": "exit" }
+        },
+        {
+          "word": "toegankelijk", "prop": "tramDoor", "slot": "doorBack",
+          "label": "Een open deur met een plank naar het perron en iemand in een rolstoel",
+          "params": { "accessory": "ramp" }
+        },
+        {
+          "word": "stipt", "prop": "punctual", "slot": "clockRight",
+          "label": "Een klok precies op negen uur, eronder 9:00 met een groen vinkje",
+          "params": { "time": "9:00" }
+        },
+        {
+          "word": "eindhalte", "prop": "bufferStop", "slot": "trackEnd",
+          "label": "Het einde van het spoor: een rood-wit stootblok en een lijnkaartje met een grote laatste stop",
+          "params": {}
+        },
+        {
+          "word": "dienstregeling", "prop": "timetable", "slot": "platform1",
+          "label": "Een vel met vertrektijden per uur op een paal",
+          "params": { "caption": "lijn 2", "lines": ["7|05 20 35 50", "8|05 20 35 50", "9|00 15 30 45"] }
+        },
+        {
+          "word": "opwaarderen", "prop": "ticketMachine", "slot": "platform2",
+          "label": "Een blauwe automaat: een kaart, een pijl omhoog en plus twintig euro; een hand drukt op 20",
+          "params": { "text": "+ € 20" }
+        },
+        {
+          "word": "saldo", "prop": "cardReader", "slot": "platform3",
+          "label": "Een kaartlezer; op het scherm een pas en 2 euro 40",
+          "params": { "text": "€ 2,40" }
+        },
+        {
+          "word": "conducteur", "prop": "uniform", "slot": "platform4",
+          "label": "Een man in een blauw uniform met pet en een kaartjesapparaat",
+          "params": { "variant": 0 }
+        }
+      ]
+    }
+  ]
+}
