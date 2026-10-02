@@ -1,0 +1,237 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 8,
+      "type": "library",
+      "order": ["roman", "terugbrengen", "lid", "beschikbaar", "tijdschrift", "boete", "aanmelden", "onderwerp", "digitaal", "reserveren", "cursus"],
+      "prompts": {
+        "terugbrengen": "Waar kun je een boek",
+        "reserveren": "Waar kun je een boek",
+        "aanmelden": "Waar kun je je",
+        "beschikbaar": "Welk boek is",
+        "digitaal": "Waar lees je"
+      },
+      "weg": [
+        { "target": "reserveren", "options": ["reserveren", "beschikbaar", "roman"] },
+        { "target": "cursus", "options": ["aanmelden", "cursus", "onderwerp"] },
+        { "target": "boete", "options": ["lid", "terugbrengen", "boete"] },
+        { "target": "tijdschrift", "options": ["roman", "tijdschrift", "digitaal"] },
+        { "target": "beschikbaar", "options": ["digitaal", "reserveren", "beschikbaar"] }
+      ],
+      "anchors": [
+        {
+          "word": "onderwerp", "prop": "sign", "slot": "hangRight",
+          "label": "Het blauwe bord boven de kast: boeken over gezondheid, reizen en koken",
+          "params": { "caption": "boeken over", "icons": ["heart", "globe", "pan"] }
+        },
+        {
+          "word": "cursus", "prop": "sign", "slot": "hangLeft",
+          "label": "Het gele bord: Nederlands leren, acht lessen",
+          "params": { "caption": "Nederlands", "icons": ["lesson"], "text": "8 lessen", "tone": "yellow" }
+        },
+        {
+          "word": "tijdschrift", "prop": "magazines", "slot": "wallRight",
+          "label": "Het rek met drie dunne bladen met een glanzende voorkant",
+          "params": { "labels": ["STAD", "TUIN", "TAART"], "count": 3 }
+        },
+        {
+          "word": "terugbrengen", "prop": "returnSlot", "slot": "wallCenter",
+          "label": "De gleuf in de muur: een hand duwt een boek erin",
+          "params": {}
+        },
+        {
+          "word": "aanmelden", "prop": "clipboard", "slot": "wallLeft",
+          "label": "Het klembord met namen: iemand schrijft haar naam erbij",
+          "params": { "caption": "NT2 · di 19:00", "lines": ["1. Sanne", "2. Ali", "3. Mei", "4. No"] }
+        },
+        {
+          "word": "reserveren", "prop": "book", "slot": "shelf",
+          "label": "Een boek op de plank met een papiertje eromheen: Noor",
+          "params": { "accessory": "shelf", "text": "Noor", "caption": "t/m vr 14", "tone": "green" }
+        },
+        {
+          "word": "beschikbaar", "prop": "catalog", "slot": "deskLeft",
+          "label": "Het scherm op de balie: het kookboek heeft een groene stip, de atlas een rode",
+          "params": { "lines": ["Kookboek|ok", "Atlas|no"], "highlight": 0 }
+        },
+        {
+          "word": "lid", "prop": "card", "slot": "deskMid",
+          "label": "Een pasje van de bieb met een foto en een streepjescode",
+          "params": { "caption": "BIEB", "variant": 3 }
+        },
+        {
+          "word": "boete", "prop": "dueSlip", "slot": "deskRight",
+          "label": "Het briefje met een rode datum, te laat, en een munt van vijftig cent",
+          "params": { "lines": ["2 mrt", "23 mrt", "14 apr"], "highlight": 2, "caption": "te laat", "text": "€ 0,50" }
+        },
+        {
+          "word": "roman", "prop": "book", "slot": "floorLeft",
+          "label": "Een dik boek met een verhaal, op een standaard",
+          "params": { "accessory": "stand", "text": "De nacht", "caption": "A. de Wit", "tone": "blue" }
+        },
+        {
+          "word": "digitaal", "prop": "tablet", "slot": "floorMid",
+          "label": "Een tablet met een boek op het scherm",
+          "params": { "text": "e-boek" }
+        }
+      ]
+    },
+    {
+      "sheet": 9,
+      "type": "doctorRoom",
+      "noor": [],
+      "order": ["huisarts", "hoesten", "spreekuur", "recept", "duizelig", "koorts", "verwijzing", "misselijk", "voorschrijven", "klacht", "onderzoek"],
+      "prompts": {
+        "hoesten": "Wie moet er",
+        "voorschrijven": "Waar zie je de dokter iets",
+        "duizelig": "Wie is er",
+        "misselijk": "Wie is er",
+        "klacht": "Wie vertelt over een",
+        "koorts": "Waar zie je",
+        "spreekuur": "Wanneer is het"
+      },
+      "weg": [
+        { "target": "recept", "options": ["voorschrijven", "recept", "verwijzing"] },
+        { "target": "misselijk", "options": ["duizelig", "misselijk", "hoesten"] },
+        { "target": "klacht", "options": ["klacht", "koorts", "onderzoek"] },
+        { "target": "spreekuur", "options": ["huisarts", "verwijzing", "spreekuur"] },
+        { "target": "duizelig", "options": ["misselijk", "duizelig", "klacht"] }
+      ],
+      "anchors": [
+        {
+          "word": "spreekuur", "prop": "sign", "slot": "plaque",
+          "label": "Het bordje bij de deur: praten met de dokter, van acht tot tien uur",
+          "params": { "caption": "ma t/m vr", "icons": ["talk", "clock"], "text": "8:00 – 10:00", "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "koorts", "prop": "thermometer", "slot": "card",
+          "label": "De kaart met een thermometer hoog in het rood en een warm, rood hoofd",
+          "params": { "text": "39,5°" }
+        },
+        {
+          "word": "duizelig", "prop": "patient", "slot": "door",
+          "label": "Een man in de deur met sterretjes en kringetjes rond zijn hoofd",
+          "params": { "mount": "stand", "accessory": "dizzy", "variant": 7 }
+        },
+        {
+          "word": "recept", "prop": "letter", "slot": "deskLeft",
+          "label": "Het briefje voor de apotheek met een doosje pillen",
+          "params": { "accessory": "pills", "icons": ["pill"], "tone": "green" }
+        },
+        {
+          "word": "huisarts", "prop": "doctor", "slot": "deskChair",
+          "label": "De dokter in een witte jas met een stethoscoop, achter het bureau",
+          "params": { "mount": "desk", "flip": true, "variant": 4 }
+        },
+        {
+          "word": "voorschrijven", "prop": "writingPad", "slot": "deskMid",
+          "label": "De hand van de dokter schrijft pillen op een blokje",
+          "params": { "icons": ["pill"] }
+        },
+        {
+          "word": "verwijzing", "prop": "letter", "slot": "cabinet",
+          "label": "Een brief uit de printer: van de dokter naar het ziekenhuis",
+          "params": { "accessory": "printer", "icons": ["practice", "arrow", "hospital"], "caption": "ziekenhuis" }
+        },
+        {
+          "word": "hoesten", "prop": "patient", "slot": "chair1",
+          "label": "Een man houdt zijn elleboog voor zijn mond; er komen wolkjes uit",
+          "params": { "accessory": "cough", "variant": 0 }
+        },
+        {
+          "word": "misselijk", "prop": "patient", "slot": "chair2",
+          "label": "Een vrouw met een groen gezicht en een hand op haar buik",
+          "params": { "accessory": "nauseous", "variant": 3 }
+        },
+        {
+          "word": "klacht", "prop": "patient", "slot": "chair3",
+          "label": "Een vrouw wijst naar haar knie die pijn doet en zegt: al een week",
+          "params": { "accessory": "pain", "text": "al een week…", "variant": 5 }
+        },
+        {
+          "word": "onderzoek", "prop": "examCouch", "slot": "couch",
+          "label": "De behandeltafel: een man met een band om zijn arm, een scherm meet de bloeddruk",
+          "params": { "text": "120/80", "variant": 6 }
+        }
+      ]
+    },
+    {
+      "sheet": 13,
+      "type": "classroom",
+      "order": ["diploma", "streng", "basisschool", "toets", "slagen", "ouderavond", "vak", "zakken", "rapport", "leerplichtig", "opleiding"],
+      "prompts": {
+        "slagen": "Waar zie je iemand",
+        "zakken": "Waar zie je iemand",
+        "streng": "Wie is er",
+        "leerplichtig": "Wie is er",
+        "vak": "Waar zie je elk",
+        "opleiding": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "slagen", "options": ["zakken", "slagen", "diploma"] },
+        { "target": "rapport", "options": ["rapport", "toets", "vak"] },
+        { "target": "basisschool", "options": ["leerplichtig", "opleiding", "basisschool"] },
+        { "target": "ouderavond", "options": ["ouderavond", "streng", "rapport"] },
+        { "target": "zakken", "options": ["toets", "zakken", "slagen"] }
+      ],
+      "anchors": [
+        {
+          "word": "basisschool", "prop": "sign", "slot": "signLeft",
+          "label": "Het bord met een schoolgebouw en twee kinderen: groep 1 tot 8",
+          "params": { "icons": ["school", "children"], "text": "groep 1 – 8" }
+        },
+        {
+          "word": "vak", "prop": "timetable", "slot": "board",
+          "label": "Het rooster op het bord: taal, rekenen, muziek, gym en tekenen; bij gym een hartje",
+          "params": { "mount": "board", "labels": ["ma", "di", "wo", "do", "vr"], "icons": ["abc", "math", "music", "ball", "paint", "math", "abc", "globe", "paint", "music"], "highlight": 3 }
+        },
+        {
+          "word": "ouderavond", "prop": "meeting", "slot": "window",
+          "label": "Buiten is het donker: een vader en een moeder op kleine stoeltjes praten met de juf",
+          "params": { "mount": "night", "count": 2 }
+        },
+        {
+          "word": "diploma", "prop": "certificate", "slot": "wallLeft",
+          "label": "Een papier in een gouden lijst met een rood zegel",
+          "params": { "caption": "Staatsexamen NT2", "text": "B1" }
+        },
+        {
+          "word": "opleiding", "prop": "sign", "slot": "wallMid",
+          "label": "Het gele bord: van een boek naar een afstudeerhoed, drie jaar",
+          "params": { "caption": "3 jaar", "icons": ["book", "arrow", "cap"], "tone": "yellow", "mount": "wall" }
+        },
+        {
+          "word": "streng", "prop": "teacher", "slot": "teacher",
+          "label": "Een juf met een boos gezicht en een opgestoken vinger",
+          "params": { "variant": 5, "flip": true }
+        },
+        {
+          "word": "toets", "prop": "testPaper", "slot": "desk1",
+          "label": "Een blad met sommen op een tafeltje, een potlood en een zandloper",
+          "params": { "mount": "desk", "accessory": "timer", "lines": ["1. 4 + 3 =", "2. 9 – 5 =", "3. 6 x 2 =", "4. 8 : 4 ="] }
+        },
+        {
+          "word": "zakken", "prop": "pupil", "slot": "desk2",
+          "label": "Een kind met het hoofd op tafel en een papier met een groot rood kruis",
+          "params": { "accessory": "slump", "variant": 0 }
+        },
+        {
+          "word": "rapport", "prop": "reportCard", "slot": "desk3",
+          "label": "Een open boekje met cijfers en een ster",
+          "params": { "mount": "desk", "caption": "groep 3", "lines": ["taal|8", "rekenen|7", "lezen|9", "gym|8"] }
+        },
+        {
+          "word": "leerplichtig", "prop": "pupil", "slot": "floorLeft",
+          "label": "Een kind met een schooltas en een rond plaatje: 5 tot 16 jaar",
+          "params": { "accessory": "bag", "text": "5–16", "variant": 3 }
+        },
+        {
+          "word": "slagen", "prop": "pupil", "slot": "floorRight",
+          "label": "Een kind springt blij met een papier met een groen vinkje",
+          "params": { "accessory": "cheer", "variant": 6 }
+        }
+      ]
+    }
+  ]
+}

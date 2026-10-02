@@ -21,6 +21,52 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case reader
     /// A train window packed with heads. `count` heads.
     case crowdedWindow
+    /// Pass card with a photo. `caption` header, `text` name, `tone`, `variant` face, `accessory` "hand".
+    case card
+    /// Date slip with stamped `lines` (`highlight` red), a red `caption` stamp, a coin with `text`.
+    case dueSlip
+    /// A book. `accessory` "stand" (novel on an easel: `text` title, `caption` author) or "shelf"
+    /// (between other books, a paper band with `text` name and `caption` date). `tone` cover.
+    case book
+    /// Wall rack of `count` magazines with mastheads `labels`.
+    case magazines
+    /// Slot in the wall with a book (or `accessory` "letter") going in and an arrow.
+    case returnSlot
+    /// Clipboard with `caption` and numbered names `lines`; a hand writes the last one.
+    case clipboard
+    /// Catalogue screen: rows "title|ok" / "title|no" (green or red dot), `highlight`, `mount` "hang".
+    case catalog
+    /// Tablet on a little table with an e-book page (`text` on top), wifi and bits.
+    case tablet
+    /// GP in a white coat with a stethoscope. `mount` "desk" (cut at the desk top) or standing; `flip`.
+    case doctor
+    /// Patient on a chair (`mount` "stand": standing) with `accessory` "cough" | "nauseous" | "dizzy" |
+    /// "pain" | "fever"; `text` a speech bubble; `variant`, `flip`.
+    case patient
+    /// Wall card with a thermometer high in the red, the reading `text` and a hot face.
+    case thermometer
+    /// Letter with header `tone`/`caption`, `icons`, lines and a signature. `accessory` "printer" |
+    /// "pills" | "envelope" (else pinned).
+    case letter
+    /// A hand writing on a pad; the pad shows the first of `icons`; sleeve `tone`.
+    case writingPad
+    /// Examination couch with a patient in a blood-pressure cuff, a monitor with `text`, a lamp.
+    case examCouch
+    /// Meeting at a low table under a window (`mount` "night" | "day"), teacher and `count` parents
+    /// on tiny chairs.
+    case meeting
+    /// Open report booklet: `caption`, grades `lines` "subject|grade", a star. `mount` "desk".
+    case reportCard
+    /// Test sheet with questions `lines`, answer boxes, a pencil, `accessory` "timer". `mount` "desk".
+    case testPaper
+    /// Framed certificate: `caption`, big `text`, a red seal with ribbons.
+    case certificate
+    /// Timetable: day `labels`, subject `icons` per cell, `highlight` cell with a heart; `mount` "board".
+    case timetable
+    /// School child: `accessory` "bag" (badge `text`), "cheer" (green tick), "slump" (red cross); `variant`.
+    case pupil
+    /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
+    case teacher
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -39,6 +85,8 @@ nonisolated struct PalacePropParams: Codable, Hashable, Sendable {
     var count: Int?
     /// How a panel is fixed: "hang" (rods from the ceiling), "wall" (flat on the wall).
     var mount: String?
+    /// Mirrors a figure so it faces left (its lettering stays readable).
+    var flip: Bool?
 }
 
 /// One prop with its settings.
@@ -73,6 +121,10 @@ struct PalacePropView: View, Equatable {
             case .clock: PalaceFigures.clock(pen, p)
             case .reader: PalaceFigures.reader(pen, p)
             case .crowdedWindow: PalaceFigures.crowdedWindow(pen, p)
+            case .card, .dueSlip, .book, .magazines, .returnSlot, .clipboard, .catalog, .tablet,
+                 .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
+                 .meeting, .reportCard, .testPaper, .certificate, .timetable, .pupil, .teacher:
+                PalaceLearningProps.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
