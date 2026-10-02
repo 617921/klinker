@@ -299,6 +299,106 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g6ExpoPoster
     /// An open book on a stand with hearts and handwritten `lines`.
     case g6Guestbook
+    // MARK: g1 — bank, post office, housing office, police, temp agency, court (PalacePropsG1*.swift)
+
+    /// A person (64 × 114, `variant` look, `flip`) whose `accessory` tells who they are; see
+    /// `G1People.person` for the list ("clerk", "courier", "tenant", "witness", "officer", "judge" …).
+    case g1Person
+    /// Cash machine in the wall: `text` on its screen, notes coming out into a hand.
+    case g1Atm
+    /// Piggy bank with a coin dropping in.
+    case g1PiggyBank
+    /// Bank card held up in a hand: chip, contactless waves, `text` number, `tone` colour.
+    case g1BankCard
+    /// Note-counting machine with notes going through, the total `text` on its display.
+    case g1MoneyCounter
+    /// Banking screen. `accessory` "account": `caption` account number, rows `lines` "label|+12,50";
+    /// "transfer": `lines` [from, to] with a coin (`text`) going along an arrow. `mount` "hang" | "stand".
+    case g1BankApp
+    /// Twelve little month pages, each with the same coin on its first day; `caption` the year.
+    case g1MonthStrip
+    /// Poster: a bundle of money (`text`) from the bank to a car (`accessory` "house"), coins paid back.
+    case g1Loan
+    /// Wall chart with a pie chart, bars, a calculator and coins.
+    case g1Finance
+    /// Standing poster: coin stacks growing along an arrow, big `text` ("2,5 %") and `caption`.
+    case g1Growth
+    /// A worried person on a chair beside a pile of bills with red stamps; the top one `text` in red.
+    case g1Bills
+    /// A parcel. `accessory` "label" (address `lines`, barcode), "fragile" (cracked-glass label,
+    /// `text`), "return" (open, shoes inside, a U-turn arrow, `text` on a tag).
+    case g1Parcel
+    /// A parcel on a flat post scale, the weight `text` on its display.
+    case g1PostScale
+    /// A sheet of six stamps with a tulip and value `text`, one peeling off.
+    case g1Stamps
+    /// Back of an envelope: the sender's house and name/street `lines` on the flap, ringed.
+    case g1EnvelopeBack
+    /// Price list: a van and `caption` on top, rows `lines` "letter|€ 1,15" ("box", "bigBox").
+    case g1RateBoard
+    /// A letter with a yellow "R" sticker and barcode, a hand signing on a scanner.
+    case g1Registered
+    /// A hand holds something out to an open hand, an arrow over them. `accessory` "parcel" | "letter" | "key".
+    case g1GiveAcross
+    /// A letter box in the wall: a hand pushes a letter in, another letter flies off on a dotted line.
+    case g1MailSlot
+    /// A window with its right half swung open, blue air streaming in and out.
+    case g1OpenWindow
+    /// A tiled corner with a damp stain and black and green spots.
+    case g1Mould
+    /// A sink with a dripping pipe, a wrench on the nut, a toolbox.
+    case g1Repair
+    /// Screen with a home for rent (`lines`), a hand pointer clicks the green tick button (`text`).
+    /// `accessory` "compare": two homes, the dear one (`lines[0]`) crossed out, the cheap one ticked.
+    case g1HomeAd
+    /// A decision letter with a red line (`text`) and a hand raised against it, bubble `caption`.
+    case g1Objection
+    /// Poster: four neighbours holding hands under one roof, a heart in the gable.
+    case g1Community
+    /// Hanging screen: a long queue of little people, a clock and the waiting time `text`.
+    case g1QueueScreen
+    /// Poster: at night a masked burglar climbs through a broken window with a crowbar.
+    case g1BreakIn
+    /// A hand with a megaphone shouting a bubble: a warning sign and `text`.
+    case g1Megaphone
+    /// Sign: a spray can crossed out in a red ring, an arrow, handcuffs.
+    case g1Forbidden
+    /// Photo on a cork board: a bike rack, a dashed outline where a bike stood, a cut chain lock.
+    case g1CutLock
+    /// Hanging camera screen: a hooded figure peering round a corner at night, question marks, `caption`.
+    case g1Cctv
+    /// An open handbag, a black-gloved hand sneaking a wallet out.
+    case g1Pickpocket
+    /// Glass room: an interviewer holds up a résumé and asks, a candidate in a tie answers.
+    case g1Interview
+    /// A résumé page: a photo, a name bar, a briefcase and a cap with lines.
+    case g1Resume
+    /// Years of work: three past jobs along an arrow from `labels[0]` to `labels[1]`, a star, `text` ("5 jaar").
+    case g1Timeline
+    /// Cork board with three job cards: a red band (`caption`, "Gezocht"), a picture and lines.
+    case g1JobBoard
+    /// Two month pages marked 1 and 2 under a magnifier, a tick and a cross: will it work out?
+    case g1TrialMonths
+    /// A laptop sending a letter with a résumé; a paper plane flies to a company.
+    case g1Apply
+    /// A card on the desk: a big handshake, `text` ("Welkom!"), confetti.
+    case g1Welcome
+    /// A puzzle with one gap and the last piece sliding in, a green tick.
+    case g1Puzzle
+    /// Gold scales on a wooden plaque, both pans level, a green tick.
+    case g1Scales
+    /// A gavel striking its block with bang lines over a stamped sheet.
+    case g1Gavel
+    /// Two thick books, a big § on the front one.
+    case g1LawBook
+    /// A small table with a sealed bag (knife, tag `text`) and a fingerprint under a magnifier.
+    case g1Evidence
+    /// Framed picture: a prisoner in stripes behind bars, tally marks on the wall.
+    case g1Bars
+    /// A thick file on a lectern: two faces glaring across a lightning bolt, names `lines`.
+    case g1CaseFile
+    /// A photo on an easel: a traffic light on red, a cyclist riding past it.
+    case g1RedLight
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -379,6 +479,13 @@ struct PalacePropView: View, Equatable {
                  .g6Ticket, .g6Crowd, .g6Score, .g6Bust, .g6Podium, .g6Painting, .g6Styles, .g6Standout, .g6Choose,
                  .g6Ribbon, .g6ExpoPoster, .g6Guestbook:
                 G6Props.draw(prop.kind, pen, p)
+            case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
+                 .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
+                 .g1Registered, .g1GiveAcross, .g1MailSlot, .g1OpenWindow, .g1Mould, .g1Repair, .g1HomeAd, .g1Objection,
+                 .g1Community, .g1QueueScreen, .g1BreakIn, .g1Megaphone, .g1Forbidden, .g1CutLock, .g1Cctv, .g1Pickpocket,
+                 .g1Interview, .g1Resume, .g1Timeline, .g1JobBoard, .g1TrialMonths, .g1Apply, .g1Welcome, .g1Puzzle,
+                 .g1Scales, .g1Gavel, .g1LawBook, .g1Evidence, .g1Bars, .g1CaseFile, .g1RedLight:
+                G1Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
