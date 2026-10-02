@@ -1,0 +1,2031 @@
+{
+ "suspects": [
+  {
+   "id": "henk",
+   "name": "Buurman Henk",
+   "role": "je buurman",
+   "bio": "Bromt veel, ziet alles. Leest elke ochtend de krant.",
+   "style": 4
+  },
+  {
+   "id": "ria",
+   "name": "Ria de postbode",
+   "role": "de postbode",
+   "bio": "Kent elk adres in de stad. Altijd op haar oranje fiets.",
+   "style": 6
+  },
+  {
+   "id": "sanne",
+   "name": "Sanne",
+   "role": "je collega",
+   "bio": "Kent jouw agenda beter dan jij.",
+   "style": 2
+  },
+  {
+   "id": "loket4",
+   "name": "De man van loket 4",
+   "role": "werkt bij de gemeente",
+   "bio": "Zag jouw formulier.",
+   "style": 3
+  }
+ ],
+ "letters": [
+  {
+   "number": 1,
+   "place": "Station",
+   "postmark": "UTRECHT · 1 OKT",
+   "text": "Noor. Welkom in de stad. Je bent net aangekomen. Ik weet hoe dat voelt: ik stond hier ook ooit, met één koffer. Een paar tips. Neem een {abonnement|abonnement}. Reis niet in het {spitsuur|spitsuur}: dan is de trein {overvol|overvol}. Heeft je trein {vertraging|vertraging}? Kijk dan naar het bord op het {perron|perron}. Wie ik ben? Dat zeg ik nog niet.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor niet in het spitsuur reizen?",
+     "options": [
+      "Dan is de trein duurder",
+      "Dan is de trein overvol",
+      "Dan rijdt er geen trein"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat weet Noor na deze brief over X?",
+     "options": [
+      "X stond hier ook ooit, met één koffer",
+      "X werkt op het station",
+      "X heeft vertraging"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "De brief ligt al op de mat als Noor binnenkomt. Op haar allereerste dag.",
+    "suspect": "ria",
+    "kind": "tijd"
+   },
+   "teaser": "Er komen meer brieven."
+  },
+  {
+   "number": 2,
+   "place": "Bakker",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Ga naar de bakker op de hoek. Het brood is daar warm en {knapperig|knapperig}. Op je eerste werkdag moet je {trakteren|trakteren}: dat is hier normaal. Plaats vandaag een {bestelling|bestelling} voor {gebak|gebak} en haal het maandag {op|ophalen}. Heb je een {allergie|allergie}? Vraag dan naar de {ingrediënten|ingrediënt}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor op haar eerste werkdag doen?",
+     "options": [
+      "Brood bakken",
+      "Vrij nemen",
+      "Trakteren"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wanneer moet Noor naar de ingrediënten vragen?",
+     "options": [
+      "Als het brood koud is",
+      "Als ze een allergie heeft",
+      "Als de bakker dicht is"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "In de envelop zit een zoete kruimel. Hij ruikt naar kaneel.",
+    "suspect": null,
+    "kind": "geur"
+   }
+  },
+  {
+   "number": 3,
+   "place": "Jouw huis",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je bent net {verhuisd|verhuizen}. Nu moet je je binnen vijf dagen {inschrijven|inschrijven} bij de {gemeente|gemeente}. Zie je een {lekkage|lekkage}? Bel dan meteen je {verhuurder|verhuurder}. En let op: het huis is oud en {gehorig|gehorig}. De buren horen alles.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor binnen vijf dagen doen?",
+     "options": [
+      "Zich inschrijven bij de gemeente",
+      "Een nieuwe woning zoeken",
+      "De huur betalen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wie moet Noor bellen bij een lekkage?",
+     "options": [
+      "Haar verhuurder",
+      "De buren",
+      "De gemeente"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Naast de brief ligt een pepermuntje. Buurman Henk eet ze de hele dag.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 4,
+   "place": "Supermarkt",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Lees de folder van de supermarkt: elke week zijn er {aanbiedingen|aanbieding}. Kijk bij je {boodschappen|boodschappen} goed naar de {houdbaarheidsdatum|houdbaarheidsdatum}. Breng lege flessen terug, dan krijg je je {statiegeld|statiegeld} terug. Bewaar je {kassabon|kassabon}. En neem je eigen tas mee: een plastic tas kost geld.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar vindt Noor de aanbiedingen van de week?",
+     "options": [
+      "Op de kassabon",
+      "In de folder",
+      "Bij de bakker"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat krijgt Noor terug voor lege flessen?",
+     "options": [
+      "Een nieuwe tas",
+      "Korting op brood",
+      "Haar statiegeld"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "De brief zit tussen de reclamefolders. Ria bezorgt die folders elke week.",
+    "suspect": "ria",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 5,
+   "place": "Markt",
+   "postmark": "UTRECHT · 5 OKT",
+   "text": "Noor. Zaterdag is er markt. Neem {contant|contant} geld mee: niet elke {kraam|kraam} heeft een pinapparaat. Koop groente van het {seizoen|seizoen}. Wil je een {pond|pond} tomaten? Pak ze niet zelf. De verkoper zoekt ze voor je {uit|uitzoeken}. En tel altijd je {wisselgeld|wisselgeld}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor contant geld meenemen?",
+     "options": [
+      "Contant is goedkoper",
+      "Dan kan ze afdingen",
+      "Niet elke kraam heeft een pinapparaat"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wie zoekt de tomaten uit?",
+     "options": [
+      "Noor zelf",
+      "De verkoper",
+      "X"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "De letters zijn heel netjes geknipt, met een kleine, scherpe schaar.",
+    "suspect": null,
+    "kind": "letters"
+   }
+  },
+  {
+   "number": 6,
+   "place": "Café",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Vrijdag is er een {borrel|borrel} met je nieuwe collega's. Sanne gaat ook. Drink je geen alcohol? Bestel dan een {alcoholvrij|alcoholvrij} biertje. Dat is ook {gezellig|gezellig}. Wil je {afrekenen|afrekenen}? Vraag dan om de rekening. Een {fooi|fooi} is niet verplicht, maar wel aardig.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wie gaat ook naar de borrel?",
+     "options": [
+      "Sanne",
+      "Henk",
+      "Ria"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat zegt X over een fooi?",
+     "options": [
+      "Je geeft altijd tien procent",
+      "Een fooi is verplicht",
+      "Een fooi is niet verplicht, maar wel aardig"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Aan de envelop hangt een klein groen wolletje.",
+    "suspect": null,
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 7,
+   "place": "Kantoor",
+   "postmark": "UTRECHT · 7 OKT",
+   "text": "Noor. Je {contract|contract} is {tijdelijk|tijdelijk}. Lees het goed voordat je tekent. Maandag om negen uur is er een {vergadering|vergadering}. Wees op tijd. Moet je je {ziekmelden|ziekmelden}? Bel dan voor negen uur je {leidinggevende|leidinggevende}. En lever je uren op vrijdag {in|inleveren}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wanneer is de vergadering?",
+     "options": [
+      "Maandag om negen uur",
+      "Vrijdag om negen uur",
+      "Maandag om vijf uur"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat moet Noor doen als ze ziek is?",
+     "options": [
+      "Voor negen uur haar leidinggevende bellen",
+      "Een mail sturen na de vergadering",
+      "Haar uren inleveren"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "X weet van de vergadering op maandag. Sanne maakt de agenda voor het hele team.",
+    "suspect": "sanne",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 8,
+   "place": "Bibliotheek",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Word {lid|lid} van de bibliotheek. Dat is niet duur. Er is een gratis {cursus|cursus} Nederlands op woensdag. Meld je snel {aan|aanmelden}. Lees ook een makkelijke {roman|roman}. Breng je boeken op tijd {terug|terugbrengen}, anders krijg je een {boete|boete}. In de leeszaal liggen alle kranten.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat is er op woensdag in de bibliotheek?",
+     "options": [
+      "Een boekenmarkt",
+      "Een lezing over kranten",
+      "Een gratis cursus Nederlands"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wanneer krijgt Noor een boete?",
+     "options": [
+      "Als ze geen lid is",
+      "Als ze haar boeken te laat terugbrengt",
+      "Als ze een roman leest"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Alle knipsels staan op één rechte lijn. Onder elke letter staat een dun potloodstreepje.",
+    "suspect": null,
+    "kind": "letters"
+   }
+  },
+  {
+   "number": 9,
+   "place": "Huisarts",
+   "postmark": "UTRECHT · 9 OKT",
+   "text": "Noor. Je {hoest|hoesten} al een week. Bel de {huisarts|huisarts}, 's ochtends om acht uur. Vertel al je {klachten|klacht}. Heb je ook {koorts|koorts}? Zeg het meteen. Moet je naar het ziekenhuis? Dan heb je eerst een {verwijzing|verwijzing} nodig. En drink thee met honing.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor de huisarts bellen?",
+     "options": [
+      "Ze is duizelig",
+      "Ze hoest al een week",
+      "Ze heeft een nieuwe bril nodig"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat heeft Noor nodig voor het ziekenhuis?",
+     "options": [
+      "Een verwijzing",
+      "Een recept",
+      "Een pinpas"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Om de envelop zit een oranje elastiekje, net als bij de post.",
+    "suspect": "ria",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 10,
+   "place": "Apotheek",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Haal je {medicijn|medicijn} op bij de apotheek. Lees eerst de {bijsluiter|bijsluiter}. Let op de {dosering|dosering}: twee keer per dag, niet meer. Neem het niet {nuchter|nuchter} {in|innemen}, maar eet eerst iets. Je {zorgverzekering|zorgverzekering} {vergoedt|vergoeden} het meestal.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor eerst lezen?",
+     "options": [
+      "De bijsluiter",
+      "De krant",
+      "Het recept van de huisarts"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat moet Noor doen voordat ze het medicijn inneemt?",
+     "options": [
+      "Eerst slapen",
+      "Eerst de huisarts bellen",
+      "Eerst iets eten"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Om zes uur 's ochtends klappert de brievenbus. Meteen daarna gaat bij de buren een deur dicht.",
+    "suspect": "henk",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 11,
+   "place": "Park",
+   "postmark": "UTRECHT · 11 OKT",
+   "text": "Noor. Je werkt te hard. Maak zondag een {wandeling|wandeling} in het park. Ga zitten op het {bankje|bankje} bij de {vijver|vijver}. Honden moeten daar {aangelijnd|aangelijnd} zijn. Wil je barbecueën op het {grasveld|grasveld}? Dat is niet overal {toegestaan|toegestaan}. Kijk eerst op het bord.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar moet Noor gaan zitten?",
+     "options": [
+      "Op het grasveld",
+      "Op het bankje bij de vijver",
+      "In de speeltuin"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat zegt X over barbecueën?",
+     "options": [
+      "Het is niet overal toegestaan",
+      "Het mag alleen bij de vijver",
+      "Het is overal verboden"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne wandelt ook in het park. Ze draagt een groene wollen sjaal.",
+    "suspect": "sanne",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 12,
+   "place": "Tramhalte",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Er zijn {werkzaamheden|werkzaamheden} in het centrum. De tram rijdt deze week een {omleiding|omleiding}. Kijk op de nieuwe {dienstregeling|dienstregeling}. Is je {saldo|saldo} te laag? Dan moet je je kaart eerst {opwaarderen|opwaarderen}. De tram vertrekt {stipt|stipt} op tijd. Hij wacht niet op jou.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom rijdt de tram een omleiding?",
+     "options": [
+      "De conducteur is ziek",
+      "Het is zondag",
+      "Er zijn werkzaamheden in het centrum"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat moet Noor doen als haar saldo te laag is?",
+     "options": [
+      "Een nieuwe kaart kopen",
+      "Haar kaart opwaarderen",
+      "Bij de eindhalte uitstappen"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Sanne neemt elke dag deze tram. Ze kent de dienstregeling uit haar hoofd.",
+    "suspect": "sanne",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 13,
+   "place": "School",
+   "postmark": "UTRECHT · 13 OKT",
+   "text": "Noor. De {basisschool|basisschool} in je straat zoekt vrijwilligers. Je leest daar voor aan kinderen. Zo leer jij ook. Ben je bang? Dat hoeft niet. De juf is niet {streng|streng}. Er is geen {toets|toets}, dus je kunt niet {zakken|zakken}. Het belangrijkste {vak|vak} is hier geduld.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat zoekt de basisschool?",
+     "options": [
+      "Vrijwilligers",
+      "Een nieuwe juf",
+      "Kinderen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Waarom hoeft Noor niet bang te zijn?",
+     "options": [
+      "Ze heeft een diploma",
+      "De school is dicht",
+      "Er is geen toets"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Sanne maakt het personeelsblad. Op haar bureau liggen een schaar en een pot lijm.",
+    "suspect": "sanne",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 14,
+   "place": "Gemeentehuis",
+   "postmark": "UTRECHT · 14 OKT",
+   "text": "Noor. Ik weet van je {afspraak|afspraak}. Dinsdag, {loket|loket} 4. Je {formulier|formulier} was niet {geldig|geldig}. Zeg de afspraak niet {af|afzeggen}. Kijk onder je {handtekening|handtekening}. Neem een pen mee.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wanneer is de afspraak van Noor?",
+     "options": [
+      "Op maandag",
+      "Op dinsdag",
+      "Op zaterdag"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat moet Noor volgens X niet doen?",
+     "options": [
+      "De afspraak afzeggen",
+      "Naar loket 4 gaan",
+      "Onder haar handtekening kijken"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Het papier ruikt naar koffie van het gemeentehuis.",
+    "suspect": "loket4",
+    "kind": "geur"
+   },
+   "teaser": "Volgende brief: als vel 15 op je muur hangt."
+  },
+  {
+   "number": 15,
+   "place": "Bank",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Open een {rekening|rekening} bij een Nederlandse bank. Dan krijg je ook een {pinpas|pinpas}. Daar komt je {salaris|salaris} op. Zet {maandelijks|maandelijks} een klein {bedrag|bedrag} apart. Zo {spaar|sparen} je vanzelf. Geef je pincode nooit aan iemand. Ook niet aan mij.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat krijgt Noor als ze een rekening opent?",
+     "options": [
+      "Een lening",
+      "Een pinpas",
+      "Een salaris"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Aan wie mag Noor haar pincode geven?",
+     "options": [
+      "Aan de bank",
+      "Aan X",
+      "Aan niemand"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "In de envelop zit een paperclip met het logo van de gemeente.",
+    "suspect": "loket4",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 16,
+   "place": "Postkantoor",
+   "postmark": "UTRECHT · 16 OKT",
+   "text": "Noor. Wil je een {pakket|pakket} naar je familie {versturen|versturen}? Ga naar het postkantoor. Het {gewicht|gewicht} bepaalt de prijs. Zijn je spullen {breekbaar|breekbaar}? Zeg het dan. Belangrijke papieren stuur je {aangetekend|aangetekend}. En schrijf altijd je {afzender|afzender} op de achterkant. Ik doe dat nooit.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Hoe stuurt Noor belangrijke papieren?",
+     "options": [
+      "Aangetekend",
+      "Zonder postzegel",
+      "In een pakket"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat schrijft X nooit op de envelop?",
+     "options": [
+      "De naam van Noor",
+      "De afzender",
+      "Het gewicht"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Deze brief heeft wel een postzegel. Ria heeft altijd postzegels in haar tas.",
+    "suspect": "ria",
+    "kind": "papier"
+   }
+  },
+  {
+   "number": 17,
+   "place": "Ziekenhuis",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Sanne ligt in het ziekenhuis. Een kleine {operatie|operatie} aan haar knie, niets {ernstigs|ernstig}. Ga op bezoek. Het {bezoekuur|bezoekuur} is van drie tot vijf. Vraag bij de ingang naar de juiste {afdeling|afdeling}. Neem een {tijdschrift|tijdschrift} mee. Ze {herstelt|herstellen} snel.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom ligt Sanne in het ziekenhuis?",
+     "options": [
+      "Ze heeft een kleine operatie aan haar knie",
+      "Ze heeft hoge koorts",
+      "Ze werkt daar"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wanneer is het bezoekuur?",
+     "options": [
+      "Van drie tot vijf",
+      "Van negen tot elf",
+      "De hele dag"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne ligt in het ziekenhuis. Toch komt er een brief, en de lijm is nog nat.",
+    "suspect": "sanne",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 18,
+   "place": "Sportschool",
+   "postmark": "UTRECHT · 18 OKT",
+   "text": "Noor. Je {conditie|conditie} kan beter. Neem een {lidmaatschap|lidmaatschap} bij de sportschool. Lees eerst hoe je het kunt {opzeggen|opzeggen}. Begin rustig, niet te {intensief|intensief}. Anders krijg je een {blessure|blessure}. {Spierpijn|spierpijn} in de eerste week is normaal. Gewoon {volhouden|volhouden}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor eerst lezen?",
+     "options": [
+      "Hoe ze kan afvallen",
+      "Hoe laat de sportschool opengaat",
+      "Hoe ze het lidmaatschap kan opzeggen"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat is volgens X normaal in de eerste week?",
+     "options": [
+      "Een blessure",
+      "Spierpijn",
+      "Een kluisje"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Op de envelop staat NOOR in hoofdletters. De lijnen trillen een beetje.",
+    "suspect": null,
+    "kind": "handschrift"
+   }
+  },
+  {
+   "number": 19,
+   "place": "Fietsenmaker",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. De {band|band} van je fiets is {lek|lek}. Ik zag het vanochtend. De fietsenmaker kan hem {plakken|plakken}. Laat ook je {remmen|rem} {nakijken|nakijken}. Je {verlichting|verlichting} doet het niet: in het donker krijg je dan een boete. En koop een goed {slot|slot}. Hier worden veel fietsen gestolen.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat is er mis met de fiets van Noor?",
+     "options": [
+      "De ketting is kapot",
+      "De band is lek",
+      "Het slot is weg"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Waarom moet Noor een goed slot kopen?",
+     "options": [
+      "Het oude slot is lek",
+      "De fietsenmaker wil het",
+      "Hier worden veel fietsen gestolen"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Henk pompt elke ochtend zijn fietsband op. Hij draagt een groene pet van wol.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 20,
+   "place": "Woningcorporatie",
+   "postmark": "UTRECHT · 20 OKT",
+   "text": "Noor. Er zit {schimmel|schimmel} in je badkamer. {Ventileer|ventileren} elke dag: zet een raam open. {Meld|melden} het ook bij de woningcorporatie. Als {huurder|huurder} heb je recht op {reparatie|reparatie}. En kijk of je {huurtoeslag|huurtoeslag} kunt krijgen. Dat scheelt geld.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor elke dag doen tegen de schimmel?",
+     "options": [
+      "Ventileren",
+      "De verhuurder bellen",
+      "Schoonmaken met water"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Waar heeft Noor als huurder recht op?",
+     "options": [
+      "Een nieuwe woning",
+      "Gratis huur",
+      "Reparatie"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "De envelop is een oude envelop van de gemeente, binnenstebuiten gekeerd.",
+    "suspect": "loket4",
+    "kind": "papier"
+   },
+   "teaser": "De volgende brief ziet er anders uit."
+  },
+  {
+   "number": 21,
+   "place": "Politiebureau",
+   "postmark": "UTRECHT · 21 OKT",
+   "text": "Noor. Je fiets is {gestolen|stelen}, ondanks het goede {slot|slot}. Wat rot voor je. Doe {aangifte|aangifte} van de {diefstal|diefstal} op het politiebureau. Neem je {legitimatiebewijs|legitimatiebewijs} mee. En nee, ik ben niet {verdacht|verdacht}. Ik schrijf alleen brieven.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat is er met de fiets van Noor gebeurd?",
+     "options": [
+      "Hij is lek",
+      "Hij is gestolen",
+      "Hij staat bij de fietsenmaker"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat moet Noor meenemen naar het politiebureau?",
+     "options": [
+      "Haar fietsslot",
+      "Een getuige",
+      "Haar legitimatiebewijs"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Deze knipsels komen uit een andere krant. Op de achterkant staan woorden in het Fries.",
+    "suspect": null,
+    "kind": "papier"
+   },
+   "teaser": "Waarom ineens een andere krant?"
+  },
+  {
+   "number": 22,
+   "place": "Museum",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Koop een {museumkaart|museumkaart}. Dan kun je een jaar lang naar heel veel musea. Begin hier. Er is een nieuwe {tentoonstelling|tentoonstelling} over drukkunst uit de vorige {eeuw|eeuw}. Heel {indrukwekkend|indrukwekkend}. Doe op zondag de {rondleiding|rondleiding}. En niets {aanraken|aanraken}, hè.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarover gaat de nieuwe tentoonstelling?",
+     "options": [
+      "Over beroemde schilderijen",
+      "Over drukkunst",
+      "Over de haven"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat kan Noor met een museumkaart?",
+     "options": [
+      "Een jaar lang naar heel veel musea",
+      "Elke dag een gratis rondleiding",
+      "Alles aanraken"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "In de Utrechtse krant staat: 'Vanaf deze week drukken wij met een nieuw lettertype.' Precies toen koos X een andere krant.",
+    "suspect": null,
+    "kind": "letters"
+   }
+  },
+  {
+   "number": 23,
+   "place": "Bioscoop",
+   "postmark": "UTRECHT · 23 OKT",
+   "text": "Noor. Ga vanavond naar de film. Kies een Nederlandse film met Nederlandse {ondertiteling|ondertiteling}: zo lees en luister je tegelijk. Ik kan {zaal|zaal} 3 {aanraden|aanraden}. De {recensie|recensie} in de krant was goed. De film is {spannend|spannend}, maar ook {ontroerend|ontroerend}. Neem zakdoekjes mee.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor een film met ondertiteling kiezen?",
+     "options": [
+      "Dan is het goedkoper",
+      "Dan is de zaal leeg",
+      "Dan leest en luistert ze tegelijk"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Waarom moet Noor zakdoekjes meenemen?",
+     "options": [
+      "De film is ontroerend",
+      "Het is koud in de zaal",
+      "Ze is verkouden"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Op de achterkant van een knipsel staat een puzzel, half ingevuld. De man van loket 4 doet in elke pauze de puzzel.",
+    "suspect": "loket4",
+    "kind": "papier"
+   }
+  },
+  {
+   "number": 24,
+   "place": "Haven",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Loop zaterdag naar de {kade|kade}. Daar liggen grote {schepen|schip}. Ze {vervoeren|vervoeren} {goederen|goederen} uit de hele wereld. De haven geeft veel {werkgelegenheid|werkgelegenheid}. Je {contract|contract} is {tijdelijk|tijdelijk}, toch? Bij het havenkantoor hangen lijsten met banen. Kijk er eens.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat vervoeren de schepen?",
+     "options": [
+      "Goederen uit de hele wereld",
+      "Post voor Noor",
+      "Toeristen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Waar hangen lijsten met banen?",
+     "options": [
+      "Bij het havenkantoor",
+      "Op de kade",
+      "Op het schip"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne vertelt: 'Ik zeil elke zomer in Friesland. Daar lees ik altijd de Friese krant.'",
+    "suspect": "sanne",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 25,
+   "place": "Kerk",
+   "postmark": "UTRECHT · 25 OKT",
+   "text": "Noor. Je hoeft niet {gelovig|gelovig} te zijn om hier te komen. Elke donderdag zingt het {koor|koor}. Iedereen mag luisteren, en het is gratis. Na afloop is er koffie. Zo vind je een warme {gemeenschap|gemeenschap}. Op 4 mei {herdenken|herdenken} we de oorlog. Dan is het hier stil en {plechtig|plechtig}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Moet Noor gelovig zijn om naar de kerk te gaan?",
+     "options": [
+      "Ja, altijd",
+      "Nee, dat hoeft niet",
+      "Alleen op zondag"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat gebeurt er op 4 mei?",
+     "options": [
+      "Er is een bruiloft",
+      "Het koor zingt",
+      "We herdenken de oorlog"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Buurman Henk zingt in het koor. Na afloop neuriet hij een lied in een vreemde taal.",
+    "suspect": "henk",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 26,
+   "place": "Theater",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Zaterdag is er {cabaret|cabaret} in het theater. Nederlandse humor is moeilijk, maar probeer het. Kijk eerst in het {programma|programma}. Hang je jas in de {garderobe|garderobe}. Na de {voorstelling|voorstelling} staat het {publiek|publiek} op voor het {applaus|applaus}. Dat doen we hier bijna altijd.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat doet het publiek na de voorstelling?",
+     "options": [
+      "Het staat op voor het applaus",
+      "Het gaat meteen naar huis",
+      "Het zingt mee"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Waar hangt Noor haar jas?",
+     "options": [
+      "Op het toneel",
+      "In de garderobe",
+      "Bij de kassa"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "In de pauze vertelt Henk: 'Veertig jaar werkte ik 's nachts, bij de drukkerij van de krant.'",
+    "suspect": "henk",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 27,
+   "place": "Kapper",
+   "postmark": "UTRECHT · 27 OKT",
+   "text": "Noor. Je haar wordt lang. Ga naar de {kapper|kapper}, maar maak eerst een {afspraak|afspraak}. Wil je alleen de {puntjes|puntje} laten {bijknippen|bijknippen}? Zeg het duidelijk. Anders krijg je een heel nieuw {kapsel|kapsel}. En zeg nee tegen een {pony|pony}. Echt.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor eerst doen?",
+     "options": [
+      "Een afspraak maken",
+      "Haar haar verven",
+      "Een foto meenemen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat vindt X van een pony voor Noor?",
+     "options": [
+      "Een goed idee",
+      "Alleen in de zomer",
+      "Geen goed idee"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "De brief ruikt naar lavendel. Sanne draagt parfum met lavendel.",
+    "suspect": "sanne",
+    "kind": "geur"
+   }
+  },
+  {
+   "number": 28,
+   "place": "Restaurant",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je hebt je eerste salaris. Ga uit eten met Sanne. {Reserveer|reserveren} een {tafeltje|tafeltje} voor twee. Vraag de {ober|ober} om de {menukaart|menukaart}. Het {hoofdgerecht|hoofdgerecht} is groot, dus deel samen een {nagerecht|nagerecht}. Is het eten koud? Dan mag je {klagen|klagen}. Wel beleefd.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom gaat Noor uit eten?",
+     "options": [
+      "Ze heeft haar eerste salaris",
+      "Het is haar verjaardag",
+      "Sanne is jarig"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wanneer mag Noor klagen?",
+     "options": [
+      "Als de ober langzaam is",
+      "Als het nagerecht klein is",
+      "Als het eten koud is"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Weer een kruimel met kaneel. Henk koopt elke zaterdag suikerbrood bij de bakker.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 29,
+   "place": "Universiteit",
+   "postmark": "UTRECHT · 29 OKT",
+   "text": "Noor. Wil je later verder studeren? Kom eerst eens kijken. Op de universiteit is elke week een open {college|college}. Iedereen mag {aanwezig|aanwezig} zijn, en het is gratis. Vraag ook naar het {collegegeld|collegegeld}. Veel studenten hebben een {bijbaan|bijbaan}. Een {tentamen|tentamen} niet gehaald? Dan kun je {herkansen|herkansen}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat kan Noor gratis doen op de universiteit?",
+     "options": [
+      "Een tentamen maken",
+      "Een scriptie schrijven",
+      "Een open college volgen"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat kun je doen als je een tentamen niet hebt gehaald?",
+     "options": [
+      "Afstuderen",
+      "Herkansen",
+      "Een bijbaan zoeken"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Ria geeft kinderen op haar ronde een pepermuntje. Bij brief 3 lag er ook een.",
+    "suspect": "ria",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 30,
+   "place": "Taalschool",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je {woordenschat|woordenschat} groeit snel. Ik hoor het. Nu je {uitspraak|uitspraak}: lees elke brief hardop. De 'ui' is moeilijk, dus oefen 'huis' en 'uit'. Meld je in het voorjaar {aan|aanmelden} voor het {examen|examen}. {Herhaal|herhalen} elke dag tien woorden. Dan word je {vloeiend|vloeiend}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Hoe kan Noor haar uitspraak oefenen?",
+     "options": [
+      "Naar de radio luisteren",
+      "Elke brief hardop lezen",
+      "Een cursus Engels doen"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Welke klank is volgens X moeilijk?",
+     "options": [
+      "De 'g'",
+      "De 'r'",
+      "De 'ui'"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Onder een knipsel staat in potlood: 'moai'. Dat is Fries voor 'mooi'.",
+    "suspect": null,
+    "kind": "handschrift"
+   }
+  },
+  {
+   "number": 31,
+   "place": "Uitzendbureau",
+   "postmark": "UTRECHT · 31 OKT",
+   "text": "Noor. Je {contract|contract} stopt bijna. Ga naar het uitzendbureau. Neem je {cv|cv} mee, in het Nederlands. Schrijf al je {ervaring|ervaring} op, ook uit je eigen land. In de krant staat een {vacature|vacature} die bij je past. Bij het {sollicitatiegesprek|sollicitatiegesprek}: kijk ze aan en zeg dat je {gemotiveerd|gemotiveerd} bent. Dat ben je ook.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor meenemen naar het uitzendbureau?",
+     "options": [
+      "Haar contract",
+      "Haar diploma",
+      "Haar cv"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Waar vond X de vacature?",
+     "options": [
+      "In de krant",
+      "Op internet",
+      "Bij het uitzendbureau"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne werkte vroeger bij dit uitzendbureau. Ze weet dat jouw contract bijna stopt.",
+    "suspect": "sanne",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 32,
+   "place": "Rechtbank",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Een {zitting|zitting} in de rechtbank is meestal openbaar. Je mag gewoon gaan kijken. Neem je {legitimatiebewijs|legitimatiebewijs} mee. Kijk hoe een {rechter|rechter} werkt. Iedereen heeft recht op een {advocaat|advocaat}: dat staat in de {wet|wet}. Denk je dat ik {schuldig|schuldig} ben? Je hebt nog geen {bewijs|bewijs}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Mag Noor naar een zitting gaan kijken?",
+     "options": [
+      "Nee, dat is verboden",
+      "Ja, een zitting is meestal openbaar",
+      "Alleen met een advocaat"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat heeft Noor volgens X nog niet?",
+     "options": [
+      "Een advocaat",
+      "Een legitimatiebewijs",
+      "Bewijs"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Op het naambordje van loket 4 staat: J. de Vries. 'De Vries' betekent 'de Fries'.",
+    "suspect": "loket4",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 33,
+   "place": "Tandarts",
+   "postmark": "UTRECHT · 2 NOV",
+   "text": "Noor. Ga twee keer per jaar naar de tandarts voor een {controle|controle}. Doet je {kies|kies} pijn? Misschien is het een {gaatje|gaatje}. Dan krijg je een {vulling|vulling}. Geen paniek: je wordt eerst {verdoofd|verdoofd}. {Poets|poetsen} twee keer per dag. Let op: je {zorgverzekering|zorgverzekering} betaalt de tandarts niet altijd.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Hoe vaak moet Noor naar de tandarts voor een controle?",
+     "options": [
+      "Eén keer per jaar",
+      "Twee keer per jaar",
+      "Elke maand"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat krijgt Noor als ze een gaatje heeft?",
+     "options": [
+      "Een vulling",
+      "Een beugel",
+      "Een nieuwe kies"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "De man van loket 4 zit ook in de wachtkamer. Hij knipt iets uit de krant.",
+    "suspect": "loket4",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 34,
+   "place": "Dierenarts",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je past deze week op de kat van de buurvrouw. {Verzorg|verzorgen} hem goed: vers {voer|voer} en schoon water. Krabt hij veel? Misschien heeft hij {vlooien|vlo}. Ga dan naar de {dierenarts|dierenarts}. Daar kan hij meteen ook worden {ingeënt|inenten}. Zijn boekje ligt in de keuken.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Op wie past Noor deze week?",
+     "options": [
+      "Op de hond van Henk",
+      "Op de kat van de buurvrouw",
+      "Op de peuter van Sanne"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat kan de dierenarts ook meteen doen?",
+     "options": [
+      "De kat inenten",
+      "De kat wassen",
+      "De kat verkopen"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Ria weet dat de buurvrouw op vakantie is. Ze bewaart haar post.",
+    "suspect": "ria",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 35,
+   "place": "Zwembad",
+   "postmark": "UTRECHT · 4 NOV",
+   "text": "Noor. Kun je niet zo goed zwemmen? Dat is niet erg. Maar in dit land is overal water. Neem {zwemles|zwemles} voor volwassenen. Het bad is {verwarmd|verwarmd}. Begin in het {ondiepe|ondiep} deel. De {badmeester|badmeester} let goed op. Zwem elke week tien {baantjes|baantje}. En vergeet je {badpak|badpak} niet.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor zwemles nemen?",
+     "options": [
+      "Ze wil badmeester worden",
+      "Het zwembad is gratis",
+      "In dit land is overal water"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Waar moet Noor beginnen?",
+     "options": [
+      "In het ondiepe deel",
+      "Op de duikplank",
+      "Op de glijbaan"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Bij het zwembad schrijft Henk zijn naam op een lijst. Zijn letters trillen een beetje.",
+    "suspect": "henk",
+    "kind": "handschrift"
+   }
+  },
+  {
+   "number": 36,
+   "place": "Kinderopvang",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Sanne zoekt een {oppas|oppas} voor zaterdag. Haar {peuter|peuter} Mila is twee. Doordeweeks gaat ze naar de {kinderopvang|kinderopvang}. Om één uur doet ze een {dutje|dutje}. Ze is nog niet {zindelijk|zindelijk}, dus {verschoon|verschonen} op tijd haar {luier|luier}. Zeg ja. Sanne heeft hulp nodig.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat zoekt Sanne?",
+     "options": [
+      "Een nieuwe kinderopvang",
+      "Een oppas voor zaterdag",
+      "Speelgoed voor Mila"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wanneer doet Mila een dutje?",
+     "options": [
+      "Om één uur",
+      "Om zes uur",
+      "Na de kinderopvang"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Ria is vandaag ziek thuis. Toch ligt er om zes uur een brief op de mat.",
+    "suspect": "ria",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 37,
+   "place": "Bouwmarkt",
+   "postmark": "UTRECHT · 6 NOV",
+   "text": "Noor. Je kast staat scheef. Ga naar de bouwmarkt en koop {schroeven|schroef}. Je moet ze goed {vastdraaien|vastdraaien}. Heb je geen {boor|boor}? Leen er een van de buren. Die hebben alles. Wil je je kamer {schilderen|schilderen}? Koop dan goede {verf|verf} en een brede {kwast|kwast}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor naar de bouwmarkt?",
+     "options": [
+      "Ze wil een nieuwe kast",
+      "Haar fiets is kapot",
+      "Haar kast staat scheef"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Van wie kan Noor een boor lenen?",
+     "options": [
+      "Van de bouwmarkt",
+      "Van de buren",
+      "Van Sanne"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Ria heeft altijd een schaar in haar posttas.",
+    "suspect": "ria",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 38,
+   "place": "Kringloopwinkel",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je huis is nog een beetje leeg. Ga naar de {kringloopwinkel|kringloopwinkel}. Daar vind je een {meubel|meubel} voor weinig geld. Kijk goed naar de {staat|staat}. Is het {beschadigd|beschadigd}? Dan kun je het zelf {opknappen|opknappen}. En een {ouderwets|ouderwets} kopje is altijd een {koopje|koopje}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar moet Noor goed naar kijken?",
+     "options": [
+      "Naar de staat van het meubel",
+      "Naar de prijs van de verf",
+      "Naar de openingstijden"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat kan Noor doen met een beschadigd meubel?",
+     "options": [
+      "Het terugbrengen",
+      "Het weggooien",
+      "Het zelf opknappen"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "In de kringloopwinkel staat een oude letterkast. 'Een oude zetter wil hem kopen,' zegt de verkoper.",
+    "suspect": null,
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 39,
+   "place": "Belastingdienst",
+   "postmark": "UTRECHT · 8 NOV",
+   "text": "Noor. Krijg je een {toeslag|toeslag}? Geef dan elke verandering in je {inkomen|inkomen} meteen door. Anders moet je later veel {terugbetalen|terugbetalen}. In het voorjaar doe je je {belastingaangifte|belastingaangifte}. Misschien krijg je een {teruggave|teruggave}. Ben je het niet eens met een {aanslag|aanslag}? Stuur dan een {bezwaarschrift|bezwaarschrift}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor meteen doorgeven als ze een toeslag krijgt?",
+     "options": [
+      "Haar nieuwe adres",
+      "Haar bankrekening",
+      "Elke verandering in haar inkomen"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat doet Noor als ze het niet eens is met een aanslag?",
+     "options": [
+      "Ze betaalt twee keer",
+      "Ze stuurt een bezwaarschrift",
+      "Ze wacht tot het voorjaar"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "De man van loket 4 helpt elke donderdag mensen met toeslagen. Hij kent jouw papieren.",
+    "suspect": "loket4",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 40,
+   "place": "Notaris",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Ga je ooit samenwonen? Leg dan alles {vast|vastleggen} in een {samenlevingscontract|samenlevingscontract}. Zonder {testament|testament} {erft|erven} je partner niet automatisch. Dat is de {wettelijke|wettelijk} regel. Lees elke {akte|akte} goed voordat je {ondertekent|ondertekenen}. Vraag de notaris om uitleg in gewoon Nederlands.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat gebeurt er zonder testament?",
+     "options": [
+      "De notaris erft alles",
+      "Je partner erft niet automatisch",
+      "Je krijgt een boete"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat moet Noor doen voordat ze ondertekent?",
+     "options": [
+      "De akte goed lezen",
+      "De notaris betalen",
+      "Een getuige meenemen"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne neemt volgende week twee dagen vrij. Waar gaat ze heen? Dat zegt ze niet.",
+    "suspect": "sanne",
+    "kind": "tijd"
+   },
+   "teaser": "Let goed op de volgende brief."
+  },
+  {
+   "number": 41,
+   "place": "Verzekeraar",
+   "postmark": "UTRECHT · 10 NOV",
+   "text": "Noor! Heb je al een {verzekering|verzekering} voor je {inboedel|inboedel}? Nee? Regel het nu! {Vergelijk|vergelijken} eerst drie {polissen|polis}. Kijk naar de {premie|premie} en lees de {voorwaarden|voorwaarde}! Bij {schade|schade}: maak meteen foto's. Succes en groetjes!",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor eerst doen?",
+     "options": [
+      "Drie polissen vergelijken",
+      "Foto's maken",
+      "De verzekeraar bellen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat is anders aan deze brief?",
+     "options": [
+      "Hij is heel kort",
+      "Er staat geen naam in",
+      "Er staan veel uitroeptekens in"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Geen krantenpapier: deze letters komen uit reclamefolders. Om de envelop zit een oranje elastiekje.",
+    "suspect": "ria",
+    "kind": "papier"
+   },
+   "teaser": "Is dit wel een brief van X?"
+  },
+  {
+   "number": 42,
+   "place": "Energiebedrijf",
+   "postmark": "LEEUWARDEN · 11 NOV",
+   "text": "Noor. Brief 41 was niet van mij. Iemand anders kent ons geheim. {Spannend|spannend}. Maar eerst dit: geef je {meterstand|meterstand} op tijd {door|doorgeven}. Is je {voorschot|voorschot} te laag? Dan moet je bij de {jaarafrekening|jaarafrekening} veel {bijbetalen|bijbetalen}. Wil je {besparen|besparen}? Douche dan korter.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat zegt X over brief 41?",
+     "options": [
+      "Die kwam te laat",
+      "Die was niet van X",
+      "Die was voor Sanne"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat gebeurt er als het voorschot te laag is?",
+     "options": [
+      "Noor moet veel bijbetalen",
+      "Noor krijgt geld terug",
+      "Noor krijgt zonnepanelen"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Het poststempel komt uit Leeuwarden, in Friesland. En Sanne is deze week vrij.",
+    "suspect": "sanne",
+    "kind": "plek"
+   },
+   "teaser": "Twee schrijvers?"
+  },
+  {
+   "number": 43,
+   "place": "Garage",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Wil je een auto kopen? Neem geen {occasion|occasion} zonder papieren. Vraag naar de laatste {APK|apk}. Oudere auto's moeten elk jaar worden {gekeurd|keuren}. Laat eerst een {monteur|monteur} kijken. Vraag bij reparaties altijd een {offerte|offerte}. Kies een {betrouwbare|betrouwbaar} garage. Of blijf gewoon fietsen.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar moet Noor naar vragen bij een occasion?",
+     "options": [
+      "Naar de kleur",
+      "Naar de radio",
+      "Naar de laatste APK"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat is het laatste advies van X?",
+     "options": [
+      "Koop een nieuwe auto",
+      "Blijf gewoon fietsen",
+      "Word monteur"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Henks gordijnen waren twee dagen dicht. Vandaag zijn ze weer open.",
+    "suspect": "henk",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 44,
+   "place": "Molen",
+   "postmark": "UTRECHT · 13 NOV",
+   "text": "Noor. Zaterdag is de molen open. De {molenaar|molenaar} laat zien hoe hij {graan|graan} {maalt|malen}. Het is een oud {ambacht|ambacht}. Het moet wel {waaien|waaien}, anders draaien de {wieken|wiek} niet. Vraag of je mag helpen. Oude ambachten moeten we {behouden|behouden}. Ook het mijne.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wanneer draaien de wieken niet?",
+     "options": [
+      "Als het niet waait",
+      "Als het regent",
+      "Als de molenaar slaapt"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat zegt X over zichzelf?",
+     "options": [
+      "X heeft ook een oud ambacht",
+      "X is molenaar",
+      "X houdt niet van molens"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Uit de envelop valt een kleine loden letter: een N. Zo'n letter gebruikt een zetter in de drukkerij.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 45,
+   "place": "Boerderij",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Ga eens naar het {platteland|platteland}. Neem de bus: na een half uur ben je er al. Op de boerderij zie je hoe de {boer|boer} de koeien {melkt|melken}. In het winkeltje verkopen ze {zuivel|zuivel} en andere {streekproducten|streekproduct}. Koop de kaas. Ik kom zelf ook van een boerderij, in het noorden.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat kan Noor in het winkeltje kopen?",
+     "options": [
+      "Koeien",
+      "Brood van de bakker",
+      "Zuivel en streekproducten"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Waar komt X vandaan?",
+     "options": [
+      "Van een boerderij in het noorden",
+      "Uit de stad",
+      "Van een schip"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Op de boerderij eten ze suikerbrood met kaneel. 'Typisch Fries,' zegt de boer.",
+    "suspect": null,
+    "kind": "geur"
+   }
+  },
+  {
+   "number": 46,
+   "place": "Strand",
+   "postmark": "UTRECHT · 15 NOV",
+   "text": "Noor. Ook in november is het strand mooi. Neem de trein naar zee en loop over de {boulevard|boulevard}. Ga even {pootjebaden|pootjebaden}: koud, maar gezond. Pas op voor de {stroming|stroming}. Drink daarna warme chocolademelk in een {strandtent|strandtent}. Zoek een {beschutte|beschut} plek uit de wind.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor in de strandtent drinken?",
+     "options": [
+      "Koffie",
+      "Warme chocolademelk",
+      "Koud water"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Waarvoor moet Noor oppassen?",
+     "options": [
+      "Voor de kwallen",
+      "Voor de zon",
+      "Voor de stroming"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Er zit zand in de envelop. Ria vertelt dat ze gisteren aan zee was.",
+    "suspect": "ria",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 47,
+   "place": "Camping",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Volgend jaar ga je kamperen, dat weet ik zeker. Oefen nu alvast. Zet je tent in de tuin {op|opzetten}. Vergeet de {haringen|haring} niet. Is je tent {waterdicht|waterdicht}? Neem een warme {slaapzak|slaapzak} en een goed {luchtbed|luchtbed}. Op de camping begint om tien uur de {nachtrust|nachtrust}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar moet Noor oefenen met haar tent?",
+     "options": [
+      "Op de camping",
+      "In de tuin",
+      "In het park"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat begint er op de camping om tien uur?",
+     "options": [
+      "Het kampvuur",
+      "Het ontbijt",
+      "De nachtrust"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Aan Henks fiets hangt een vlaggetje met rode hartjes. Dat is de vlag van Friesland.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 48,
+   "place": "Vliegveld",
+   "postmark": "UTRECHT · 17 NOV",
+   "text": "Noor. Ga je in december naar je familie? Boek je {vlucht|vlucht} nu, dan is hij goedkoper. Neem alleen {handbagage|handbagage} mee: dat scheelt geld. Zet je {instapkaart|instapkaart} op je telefoon. Bij de {beveiliging|beveiliging} gaan je jas en tas door de scanner. Is je vlucht {vertraagd|vertraagd} of {geannuleerd|geannuleerd}? Soms krijg je dan geld terug.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor alleen handbagage meenemen?",
+     "options": [
+      "Dat scheelt geld",
+      "Dat is verplicht",
+      "Haar koffer is kapot"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wanneer krijgt Noor soms geld terug?",
+     "options": [
+      "Als haar vlucht vertraagd of geannuleerd is",
+      "Als ze te laat is",
+      "Als ze geen instapkaart heeft"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne is terug van haar vrije dagen. 'Ik was in Friesland,' zegt ze. 'Bij een vriendin.'",
+    "suspect": "sanne",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 49,
+   "place": "Hotel",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Komen er in het voorjaar vrienden op bezoek? {Boek|boeken} dan op tijd een {tweepersoonskamer|tweepersoonskamer}: rond Pasen is alles snel {volgeboekt|volgeboekt}. Vraag of het ontbijt {inbegrepen|inbegrepen} is. De {toeristenbelasting|toeristenbelasting} betaal je vaak apart. Bewaar de {bevestiging|bevestiging}. En doe ze de groeten. Of nee, toch maar niet.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarom moet Noor op tijd boeken?",
+     "options": [
+      "Dan is het ontbijt gratis",
+      "De receptie gaat dicht",
+      "Rond Pasen is alles snel volgeboekt"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat betaal je vaak apart?",
+     "options": [
+      "Het ontbijt",
+      "De toeristenbelasting",
+      "De kamer"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Sanne schrijft Noor een kaartje. Haar letters zijn rond en netjes. Ze trillen niet.",
+    "suspect": "sanne",
+    "kind": "handschrift"
+   }
+  },
+  {
+   "number": 50,
+   "place": "Krantenkiosk",
+   "postmark": "UTRECHT · 19 NOV",
+   "text": "Noor. Lees elke dag een {artikel|artikel} in een {dagblad|dagblad}. Begin met de {voorpagina|voorpagina}. Een goede krant is {onafhankelijk|onafhankelijk}. Op internet staat veel {nepnieuws|nepnieuws}: kijk altijd wie het schrijft. De kioskvrouw kent mij goed. Vraag haar maar niets. Ze zegt het toch niet.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waarmee moet Noor beginnen?",
+     "options": [
+      "Met de puzzel",
+      "Met het weer",
+      "Met de voorpagina"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wie kent X goed?",
+     "options": [
+      "De journalist",
+      "De kioskvrouw",
+      "De buurvrouw"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "De kioskvrouw zegt toch iets: 'Iemand met een pet koopt hier elke ochtend om zes uur álle kranten.'",
+    "suspect": "ria",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 51,
+   "place": "Buurthuis",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Donderdag is er een {bijeenkomst|bijeenkomst} in het {buurthuis|buurthuis}. Alle {buurtbewoners|buurtbewoner} zijn welkom, en er is soep. Doe {mee|meedoen} met een {activiteit|activiteit} of word {vrijwilliger|vrijwilliger}. Veel oude mensen zijn {eenzaam|eenzaam}. Ook als ze dat niet zeggen. Ook als ze brommen.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wie zijn welkom in het buurthuis?",
+     "options": [
+      "Alle buurtbewoners",
+      "Alleen vrijwilligers",
+      "Alleen oude mensen"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat zegt X over oude mensen?",
+     "options": [
+      "Veel oude mensen zijn eenzaam",
+      "Oude mensen brommen nooit",
+      "Oude mensen willen geen soep"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "De man van loket 4 is vrijwilliger in het buurthuis. Hij knipt daar letters uit tijdschriften, met de kinderen.",
+    "suspect": "loket4",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 52,
+   "place": "Volkstuin",
+   "postmark": "UTRECHT · 21 NOV",
+   "text": "Noor. Word lid van de {vereniging|vereniging} van de {volkstuin|volkstuin}. Er is nog een stukje grond vrij, naast het mijne. De {bodem|bodem} is daar {vruchtbaar|vruchtbaar}. In het voorjaar kun je {zaaien|zaaien}. Trek elke week het {onkruid|onkruid} weg. {Zelfgekweekte|zelfgekweekt} tomaten zijn het lekkerst.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat kan Noor in het voorjaar doen?",
+     "options": [
+      "Onkruid kopen",
+      "Zaaien",
+      "Een schuur bouwen"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Waar ligt het vrije stukje grond?",
+     "options": [
+      "Naast het stukje van X",
+      "Bij de kas van de vereniging",
+      "Achter het huis van Noor"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "In Henks volkstuin groeit lavendel. Het ruikt net als brief 27.",
+    "suspect": "henk",
+    "kind": "geur"
+   }
+  },
+  {
+   "number": 53,
+   "place": "Brandweer",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Heb je een {rookmelder|rookmelder} in huis? Hang er een op elke verdieping: dat is {verplicht|verplicht}. Bij een {noodgeval|noodgeval} bel je 112. Dat is het {alarmnummer|alarmnummer}. Probeer een grote {brand|brand} niet zelf te {blussen|blussen}. Ga naar buiten. Papier is erg {brandbaar|brandbaar}. Ik kan het weten.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Welk nummer bel je bij een noodgeval?",
+     "options": [
+      "911",
+      "112",
+      "0800"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat moet Noor doen bij een grote brand?",
+     "options": [
+      "Naar buiten gaan",
+      "Zelf blussen",
+      "De rookmelder testen"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "De brandweer komt langs bij Henk. 'Meneer, wat een hoop oud papier,' zeggen ze.",
+    "suspect": "henk",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 54,
+   "place": "Stadhuisplein",
+   "postmark": "UTRECHT · 23 NOV",
+   "text": "Noor. Op het plein is een {demonstratie|demonstratie}, rustig en {vreedzaam|vreedzaam}. Dat is hier normaal: we hebben de {vrijheid|vrijheid} om te zeggen wat we denken. Woon je hier vijf jaar? Dan mag je {stemmen|stemmen} bij de {verkiezingen|verkiezing} voor de gemeenteraad. Je {stempas|stempas} komt dan vanzelf in de bus.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Hoe is de demonstratie op het plein?",
+     "options": [
+      "Hard en gevaarlijk",
+      "Verboden",
+      "Rustig en vreedzaam"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wanneer mag Noor stemmen voor de gemeenteraad?",
+     "options": [
+      "Nu meteen",
+      "Als ze hier vijf jaar woont",
+      "Als ze een stempas koopt"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "De man van loket 4 staat op het plein. 'Friesland? Daar ben ik nog nooit geweest,' zegt hij.",
+    "suspect": "loket4",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 55,
+   "place": "Concertzaal",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Hou je van muziek? Op zondagochtend speelt het {orkest|orkest} hier gratis. {Klassieke|klassiek} muziek, een uur lang. Kijk naar de {dirigent|dirigent}: hij danst bijna. Wil je naar een groot concert? Koop je kaartje in de {voorverkoop|voorverkoop}. Klap niet tussen de delen. Wacht op de {toegift|toegift}.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wanneer speelt het orkest gratis?",
+     "options": [
+      "Op zondagochtend",
+      "Elke avond",
+      "Op zaterdagnacht"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat moet Noor niet doen?",
+     "options": [
+      "Klappen tussen de delen",
+      "Op de toegift wachten",
+      "Naar de dirigent kijken"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Sanne speelt viool in een orkest. Ze repeteert elke ochtend vroeg, voor het werk.",
+    "suspect": "sanne",
+    "kind": "tijd"
+   }
+  },
+  {
+   "number": 56,
+   "place": "Galerie",
+   "postmark": "UTRECHT · 25 NOV",
+   "text": "Noor. Vrijdag is de {opening|opening} van een nieuwe {expositie|expositie}. De wijn is gratis. Welk werk maakt de meeste {indruk|indruk} op je? Probeer het in het Nederlands te {beschrijven|beschrijven}. Ook bij {abstracte|abstract} kunst. Kijk goed naar het {opvallende|opvallend} {portret|portret} bij de deur.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat is gratis bij de opening?",
+     "options": [
+      "De schilderijen",
+      "De lijsten",
+      "De wijn"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat moet Noor in het Nederlands proberen?",
+     "options": [
+      "Een portret kopen",
+      "Een werk beschrijven",
+      "Een lijst maken"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Het portret bij de deur is een collage van folders en postzegels. Eronder staat: Ria.",
+    "suspect": "ria",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 57,
+   "place": "Studio",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Kijk elke avond het {journaal|journaal}. Te snel? Er is ook een journaal in makkelijk Nederlands, voor kinderen. Niet gezien? Elke {aflevering|aflevering} kun je online {terugkijken|terugkijken}. Zet de {ondertiteling|ondertiteling} aan. En blijf {kritisch|kritisch}: niet alles op tv is waar. Zeker de {reclame|reclame} niet.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Hoe kan Noor een gemiste aflevering zien?",
+     "options": [
+      "Naar de studio gaan",
+      "Online terugkijken",
+      "De krant lezen"
+     ],
+     "answer": 1
+    },
+    {
+     "q": "Wat zegt X over reclame?",
+     "options": [
+      "Reclame is altijd waar",
+      "Reclame is goed voor je Nederlands",
+      "Niet alles in de reclame is waar"
+     ],
+     "answer": 2
+    }
+   ],
+   "clue": {
+    "text": "Op tv: een interview met oude zetters. Eén man draagt een groene pet. Hij lijkt op Henk.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  },
+  {
+   "number": 58,
+   "place": "Startup",
+   "postmark": "UTRECHT · 27 NOV",
+   "text": "Noor. Je nieuwe baan begint maandag. Ik ben blij voor je. Bij een startup gaat alles snel en iedereen is {ambitieus|ambitieus}. Soms mag je {thuiswerken|thuiswerken}. Deel nooit je {wachtwoord|wachtwoord}, ook niet in een {overleg|overleg}. Stel jezelf een {doel|doel} voor de eerste maand. Je kunt het.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wanneer begint de nieuwe baan van Noor?",
+     "options": [
+      "Vandaag",
+      "Volgend jaar",
+      "Maandag"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Wat mag Noor nooit delen?",
+     "options": [
+      "Haar wachtwoord",
+      "Haar doel",
+      "Haar bureau"
+     ],
+     "answer": 0
+    }
+   ],
+   "clue": {
+    "text": "Henk zet zijn oud papier buiten. Uit de doos steken kranten vol kleine gaatjes.",
+    "suspect": "henk",
+    "kind": "papier"
+   }
+  },
+  {
+   "number": 59,
+   "place": "Rotonde",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je fietst nu als een echte Utrechter. Op de rotonde hebben fietsers vaak {voorrang|voorrang}, maar niet altijd. Let op de haaientanden. Laat een {voetganger|voetganger} op het {zebrapad|zebrapad} altijd {oversteken|oversteken}. Rood {verkeerslicht|verkeerslicht}? Stop, anders krijg je een {bekeuring|bekeuring}. Neem morgen de tweede {afslag|afslag}, naar het water.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wat moet Noor doen bij een voetganger op het zebrapad?",
+     "options": [
+      "Bellen en doorrijden",
+      "Snel inhalen",
+      "Hem laten oversteken"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Welke afslag moet Noor morgen nemen?",
+     "options": [
+      "De eerste",
+      "De tweede",
+      "De derde"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Ria fietst langs. 'Brief 41? Daar weet ik niets van,' zegt ze. Maar ze wordt rood.",
+    "suspect": "ria",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 60,
+   "place": "Dijk",
+   "postmark": "UTRECHT · 29 NOV",
+   "text": "Noor. Loop vandaag over de {dijk|dijk}. Links ligt het water, rechts liggen de huizen. Die huizen liggen lager dan het water. Een groot deel van Nederland is {laaggelegen|laaggelegen}. Het {waterschap|waterschap} {beschermt|beschermen} ons tegen een {overstroming|overstroming}. De {zeespiegel|zeespiegel} {stijgt|stijgen}. Dus moeten we samenwerken. Zoals jij en ik.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Wie beschermt ons tegen een overstroming?",
+     "options": [
+      "Het waterschap",
+      "De brandweer",
+      "De burgemeester"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat doet de zeespiegel?",
+     "options": [
+      "Hij daalt",
+      "Hij stijgt",
+      "Hij blijft gelijk"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Op de dijk loopt de man van loket 4. Onder zijn arm: een krant vol gaatjes.",
+    "suspect": "loket4",
+    "kind": "plek"
+   }
+  },
+  {
+   "number": 61,
+   "place": "Veerpont",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Dit is mijn laatste brief als X. Neem zaterdag de {veerpont|veerpont}. De {overtocht|overtocht} duurt vijf minuten. Aan de {overkant|overkant} staat de uitkijktoren. Het {tijdstip|tijdstip}: tien uur. Niet {uitstellen|uitstellen}, en neem geen {omweg|omweg}. Klim naar boven. Dan weet je wie ik ben.",
+   "signature": "— X",
+   "questions": [
+    {
+     "q": "Waar staat de uitkijktoren?",
+     "options": [
+      "Bij het station",
+      "Op de dijk",
+      "Aan de overkant"
+     ],
+     "answer": 2
+    },
+    {
+     "q": "Hoe laat moet Noor bij de toren zijn?",
+     "options": [
+      "Om negen uur",
+      "Om tien uur",
+      "Om twaalf uur"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "In de envelop zit een oude foto: een jongen met één koffer op het station, 1968. Hij draagt een pet.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   },
+   "teaser": "Zaterdag, tien uur. Boven."
+  },
+  {
+   "number": 62,
+   "place": "Uitkijktoren",
+   "postmark": "GEEN POSTZEGEL",
+   "text": "Noor. Je bent boven. Kijk naar het {uitzicht|uitzicht}. Daar ligt het station, je eerste plek. Dat is nu {verleden|verleden}. Je hebt zoveel {bereikt|bereiken}: 62 plekken in één stad. Ik ben {trots|trots} op je. De {toekomst|toekomst} is van jou. Had je mij {verwacht|verwachten}? Draai je maar om.",
+   "signature": "— Henk",
+   "questions": [
+    {
+     "q": "Wat ziet Noor vanaf de toren?",
+     "options": [
+      "Het station, haar eerste plek",
+      "Alleen de zee",
+      "Het huis van Sanne"
+     ],
+     "answer": 0
+    },
+    {
+     "q": "Wat moet Noor aan het eind doen?",
+     "options": [
+      "Naar beneden gaan",
+      "Zich omdraaien",
+      "Een brief terugschrijven"
+     ],
+     "answer": 1
+    }
+   ],
+   "clue": {
+    "text": "Achter Noor staat buurman Henk, met zijn groene pet. In zijn jaszak: een schaar en een pepermuntje.",
+    "suspect": "henk",
+    "kind": "voorwerp"
+   }
+  }
+ ],
+ "reveal": {
+  "sender": "henk",
+  "title": "X is buurman Henk",
+  "text": "Ja, Noor, ik ben het: Henk, je buurman. Ik ben niet goed met woorden, maar wel met letters. Veertig jaar was ik zetter bij de krant. In 1968 kwam ik uit Friesland naar Utrecht, met één koffer. Ik kende niemand. De vrouw van de kiosk hielp me toen, elke dag met een briefje. Toen jij kwam, was het mijn beurt. Dus knipte ik elke ochtend om zes uur letters uit de krant. Vanaf brief 21 knipte ik uit de Friese krant van mijn zus, want de Utrechtse kreeg een lelijk nieuw lettertype. Brief 41 maakte Ria, toen ik in Leeuwarden was. Zij wist het al lang. En waarom X? Die letter gebruik je in het Nederlands bijna nooit. Ik had er nog genoeg. Kom, de koffie staat klaar. Met suikerbrood."
+ }
+}
