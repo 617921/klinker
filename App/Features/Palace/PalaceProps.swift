@@ -21,6 +21,71 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case reader
     /// A train window packed with heads. `count` heads.
     case crowdedWindow
+
+    // Outdoor props, drawn by `PalaceOutdoorProps` (PalacePropsOutdoor.swift).
+    // Market (PalacePropsMarket.swift, PalacePropsMarketTrade.swift)
+    /// A whole market stall. `variant` awning colour, `accessory` "cheese" | "flowers".
+    case stall
+    /// A shop scale with cherries in the dish; `text` on its display ("500 g").
+    case scale
+    /// Round sign with the four seasons; `highlight` 0 spring … 3 winter.
+    case seasonWheel
+    /// Prize rosette with `count` stars (1–3).
+    case rosette
+    /// A green punnet heaped with strawberries.
+    case punnet
+    /// Three tomatoes from green to red, a tick over the red one.
+    case ripeness
+    /// A crate of apples, a hand lifting the best one out.
+    case pickCrate
+    /// An open cash box with trays of coins.
+    case cashBox
+    /// A hand dropping coins into another hand, with an arrow. `variant` giver's sleeve.
+    case handover
+    /// Two speech bubbles bargaining. `lines` [seller, buyer], `highlight` strikes one.
+    case haggle
+
+    // Park (PalacePropsPark.swift, PalacePropsParkPeople.swift)
+    /// An oval pond with ducks, a lily pad and reeds.
+    case duckPond
+    /// A park bench, wooden slats on an iron frame.
+    case bench
+    /// A mown lawn in stripes with a little goal and a ball.
+    case lawn
+    /// A slide and a swing on a patch of sand.
+    case playground
+    /// An open-air stage with a singer, lights and bunting; `text` on its banner.
+    case stage
+    /// Litter on the grass next to a bin.
+    case litter
+    /// A road sign: `variant` 0 round, 1 square; `tone` blue | white | yellow; `icons`; `mount` "pole" | "none".
+    case roadSign
+    /// A runner mid-stride. `variant` look.
+    case runner
+    /// Someone walking a dog on a lead. `variant` look.
+    case dogWalker
+    /// Two people strolling arm in arm. `variant` look.
+    case strollers
+
+    // Tram stop (PalacePropsTram.swift, PalacePropsTramStop.swift)
+    /// A destination display: line `caption`, destination `text`, a big arrow.
+    case lineDisplay
+    /// An open tram door. `accessory` "exit" (someone stepping out) | "ramp" (wheelchair on a ramp).
+    case tramDoor
+    /// The buffer stop at the end of the rails, with a line map whose last stop is big.
+    case bufferStop
+    /// A clock right on `time` with a small display: the same time and a green tick.
+    case punctual
+    /// Road works: a digger behind a striped barrier, sand and a cone.
+    case roadworks
+    /// A printed timetable on a post: `caption` line, `lines` "7|05 20 35 50".
+    case timetable
+    /// A ticket machine: card, arrow up and `text` ("+ € 20") on screen, a hand on a button.
+    case ticketMachine
+    /// A card reader on a pole whose screen shows a card and `text` ("€ 2,40").
+    case cardReader
+    /// A person in uniform with a peaked cap and a ticket printer. `variant` 0 navy, 1 green, 2 grey.
+    case uniform
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -73,6 +138,10 @@ struct PalacePropView: View, Equatable {
             case .clock: PalaceFigures.clock(pen, p)
             case .reader: PalaceFigures.reader(pen, p)
             case .crowdedWindow: PalaceFigures.crowdedWindow(pen, p)
+            case .stall, .scale, .seasonWheel, .rosette, .punnet, .ripeness, .pickCrate, .cashBox, .handover, .haggle,
+                 .duckPond, .bench, .lawn, .playground, .stage, .litter, .roadSign, .runner, .dogWalker, .strollers,
+                 .lineDisplay, .tramDoor, .bufferStop, .punctual, .roadworks, .timetable, .ticketMachine, .cardReader, .uniform:
+                PalaceOutdoorProps.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
