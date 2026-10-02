@@ -77,35 +77,42 @@ struct RoundResultsView: View {
         return changes.isEmpty ? streak : "\(streak) · je stad groeit weer"
     }
 
+    /// Only the games that were played this round get a tile.
     private var statTiles: some View {
         HStack(spacing: 8) {
-            RoundStatTile(
-                value: round.pairs.map(String.init) ?? "–",
-                caption: "paren",
-                valueColor: Color(hex: 0x412402),
-                background: Color(hex: 0xFAC775),
-                foreground: Color(hex: 0x412402),
-                tilt: -1,
-                valueSize: 26
-            )
-            RoundStatTile(
-                value: round.balloons.map { "\($0.right)/\($0.total)" } ?? "–",
-                caption: "ballonnen",
-                valueColor: Color(hex: 0x4B1528),
-                background: Color(hex: 0xF4C0D1),
-                foreground: Color(hex: 0x4B1528),
-                tilt: 1,
-                valueSize: 26
-            )
-            RoundStatTile(
-                value: round.sentenceScore.map { "\($0.right)/\($0.total)" } ?? "–",
-                caption: "zinnen geplakt",
-                valueColor: Color(hex: 0x04342C),
-                background: Color(hex: 0xC9E6E2),
-                foreground: Color(hex: 0x04342C),
-                tilt: -0.5,
-                valueSize: 26
-            )
+            if let pairs = round.pairs {
+                RoundStatTile(
+                    value: "\(pairs)",
+                    caption: pairs == 1 ? "paar" : "paren",
+                    valueColor: Color(hex: 0x412402),
+                    background: Color(hex: 0xFAC775),
+                    foreground: Color(hex: 0x412402),
+                    tilt: -1,
+                    valueSize: 26
+                )
+            }
+            if let balloons = round.balloons {
+                RoundStatTile(
+                    value: "\(balloons.right)/\(balloons.total)",
+                    caption: "ballonnen",
+                    valueColor: Color(hex: 0x4B1528),
+                    background: Color(hex: 0xF4C0D1),
+                    foreground: Color(hex: 0x4B1528),
+                    tilt: 1,
+                    valueSize: 26
+                )
+            }
+            if let sentences = round.sentenceScore {
+                RoundStatTile(
+                    value: "\(sentences.right)/\(sentences.total)",
+                    caption: "zinnen geplakt",
+                    valueColor: Color(hex: 0x04342C),
+                    background: Color(hex: 0xC9E6E2),
+                    foreground: Color(hex: 0x04342C),
+                    tilt: -0.5,
+                    valueSize: 26
+                )
+            }
         }
         .offset(y: shown ? 0 : 24)
         .opacity(shown ? 1 : 0)
@@ -134,6 +141,22 @@ struct RoundChangeRow: View {
     @State private var settled = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    private func note(_ stage: String) -> String {
+        switch change.outcome {
+        case .stronger: "sterker · \(stage)"
+        case .seen: "gezien · oefen nog"
+        case .weaker: "zwakker · oefen nog"
+        }
+    }
+
+    private var noteColor: Color {
+        switch change.outcome {
+        case .stronger: Theme.okLine
+        case .seen: Theme.muted
+        case .weaker: Theme.orangeText
+        }
+    }
+
     var body: some View {
         let newSize = (WallScale.size(level: change.to, word: change.word.nl) * 0.85).rounded()
         let oldSize = (WallScale.size(level: change.from, word: change.word.nl) * 0.85).rounded()
@@ -145,9 +168,9 @@ struct RoundChangeRow: View {
                 .opacity(WallScale.opacity(level: settled ? change.to : change.from))
                 .rotationEffect(.degrees(-1.5))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(change.smaller ? "sterker · \(stage)" : "zwakker · oefen nog")
+            Text(note(stage))
                 .font(.system(size: 13, weight: .heavy))
-                .foregroundStyle(change.smaller ? Theme.okLine : Theme.orangeText)
+                .foregroundStyle(noteColor)
                 .multilineTextAlignment(.trailing)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -156,7 +179,7 @@ struct RoundChangeRow: View {
         .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(change.word.spoken)
-        .accessibilityValue(change.smaller ? "sterker, \(stage)" : "zwakker, oefen nog")
+        .accessibilityValue(note(stage))
         .onAppear {
             guard !settled else { return }
             if reduceMotion {

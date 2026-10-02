@@ -142,6 +142,8 @@ struct RansomView: View {
                     withAnimation(move) { game.glue(tile) }
                 } label: {
                     RansomTileView(tile: tile)
+                        // A darker shadow lifts every strip off the green mat, including green ones.
+                        .shadow(color: .black.opacity(0.35), radius: 2, x: 1, y: 2)
                         .matchedGeometryEffect(id: tile.id, in: strips)
                         .frame(minHeight: 44)
                         .contentShape(Rectangle())
@@ -152,9 +154,11 @@ struct RansomView: View {
                 .accessibilityHint("Tik om te plakken")
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 4)
-        .opacity(game.answer == nil ? 1 : 0.4)
+        .frame(maxWidth: .infinity, minHeight: 250)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 22)
+        .background { RansomCuttingMat() }
+        .opacity(game.answer == nil ? 1 : 0.45)
     }
 
     @ViewBuilder

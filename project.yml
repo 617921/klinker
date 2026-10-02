@@ -23,7 +23,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.klinker.app
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Klinker
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_FILE: App/Info.plist
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         TARGETED_DEVICE_FAMILY: "1"

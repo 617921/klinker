@@ -23,7 +23,6 @@ struct MatchRushView: View {
                     .foregroundStyle(Theme.muted)
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity)
-                Spacer(minLength: 0)
             }
             .padding(.horizontal, 20)
             .padding(.top, 16)
@@ -81,7 +80,7 @@ struct MatchRushView: View {
 
     private var board: some View {
         HStack(alignment: .top, spacing: 12) {
-            VStack(spacing: 12) {
+            VStack(spacing: 14) {
                 ForEach(Array(game.left.enumerated()), id: \.element.id) { index, slot in
                     Button {
                         withAnimation(.spring(response: 0.25, dampingFraction: 0.7)) { game.pick(.dutch, index) }
@@ -95,7 +94,8 @@ struct MatchRushView: View {
                     .accessibilityAddTraits(game.selectedLeft == index ? .isSelected : [])
                 }
             }
-            VStack(spacing: 12) {
+            .frame(maxHeight: .infinity)
+            VStack(spacing: 14) {
                 ForEach(Array(game.right.enumerated()), id: \.element.id) { index, slot in
                     Button {
                         withAnimation(.spring(response: 0.25, dampingFraction: 0.7)) { game.pick(.english, index) }
@@ -109,7 +109,10 @@ struct MatchRushView: View {
                     .accessibilityAddTraits(game.selectedRight == index ? .isSelected : [])
                 }
             }
+            .frame(maxHeight: .infinity)
         }
+        // The cards grow to fill the screen, so the board never leaves half of it empty.
+        .frame(maxHeight: .infinity)
         .disabled(game.phase != .playing)
     }
 
@@ -146,14 +149,14 @@ struct MatchDutchCard: View {
     var body: some View {
         let style = StripStyle.at(word.style)
         Text(style.uppercase ? word.nl.uppercased() : word.nl)
-            .font(.custom(style.fontName, size: word.nl.count > 12 ? 14 : 18))
+            .font(.custom(style.fontName, size: word.nl.count > 12 ? 17 : 23))
             .tracking(style.tracking)
             .foregroundStyle(style.foreground)
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .minimumScaleFactor(0.55)
             .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64)
+            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 112)
             .background(style.background)
             .overlay {
                 if style.edge { Rectangle().stroke(Color(hex: 0xD3D1C7), lineWidth: 1) }
@@ -186,13 +189,13 @@ struct MatchMeaningCard: View {
 
     var body: some View {
         Text(text)
-            .font(.system(size: 16, weight: .bold))
+            .font(.system(size: 18, weight: .bold))
             .foregroundStyle(foreground)
             .multilineTextAlignment(.center)
             .lineLimit(3)
             .minimumScaleFactor(0.65)
             .padding(.horizontal, 8)
-            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 64)
+            .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 112)
             .background(background, in: RoundedRectangle(cornerRadius: 3))
             .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder(border, lineWidth: 2))
             .scaleEffect(look == .selected ? 1.03 : look == .right ? 0.94 : 1)

@@ -24,13 +24,23 @@ final class RoundModel {
         var total = 0
     }
 
-    /// A word whose wall level changed during this round.
+    /// A word whose memory level changed during this round.
     struct Change: Identifiable {
+        enum Outcome { case stronger, seen, weaker }
+
         let word: Word
         let from: Int
         let to: Int
+        /// Answered wrong at least once this round.
+        let missed: Bool
         var id: String { word.id }
-        var smaller: Bool { to > from }
+
+        /// A brand-new word answered wrong is "seen", not "stronger".
+        var outcome: Outcome {
+            if to < from { return .weaker }
+            if from == 0 && missed { return .seen }
+            return .stronger
+        }
     }
 
     let kind: RoundKind
@@ -51,6 +61,7 @@ final class RoundModel {
     /// Wall level of every word at the moment it entered the round.
     @ObservationIgnored private var startLevels: [String: Int] = [:]
     @ObservationIgnored private var order: [String] = []
+    @ObservationIgnored private var missed: Set<String> = []
     @ObservationIgnored private lazy var styleByToken: [String: Int] = {
         var map: [String: Int] = [:]
         for word in progress.content.allWords where map[word.nl.lowercased()] == nil {
@@ -108,6 +119,7 @@ final class RoundModel {
     func record(_ id: String, _ rating: Rating) {
         guard progress.content.word(id) != nil else { return }
         snapshot(id)
+        if rating == .again { missed.insert(id) }
         progress.record(id, rating)
     }
 
@@ -122,7 +134,7 @@ final class RoundModel {
         order.compactMap { id in
             guard let from = startLevels[id], let word = progress.content.word(id) else { return nil }
             let to = progress.level(id)
-            return to == from ? nil : Change(word: word, from: from, to: to)
+            return to == from ? nil : Change(word: word, from: from, to: to, missed: missed.contains(id))
         }
     }
 
