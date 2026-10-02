@@ -198,7 +198,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     // MARK: g1 — bank, post office, housing office, police, temp agency, court (PalacePropsG1*.swift)
 
     /// A person (64 × 114, `variant` look, `flip`) whose `accessory` tells who they are; see
-    /// `G1People.person` for the list ("clerk", "courier", "worried", "witness", "judge" …).
+    /// `G1People.person` for the list ("clerk", "courier", "tenant", "witness", "officer", "judge" …).
     case g1Person
     /// Cash machine in the wall: `text` on its screen, notes coming out into a hand.
     case g1Atm

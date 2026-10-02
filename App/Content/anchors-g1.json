@@ -4,19 +4,7 @@
     {
       "sheet": 15,
       "type": "g1Bank",
-      "order": [
-        "pinpas",
-        "opnemen",
-        "sparen",
-        "rekening",
-        "overmaken",
-        "bedrag",
-        "rente",
-        "lening",
-        "schuld",
-        "maandelijks",
-        "financieel"
-      ],
+      "order": ["pinpas", "opnemen", "sparen", "rekening", "overmaken", "bedrag", "rente", "lening", "schuld", "maandelijks", "financieel"],
       "prompts": {
         "rekening": "Waar zie je je",
         "overmaken": "Waar kun je geld",
@@ -28,170 +16,74 @@
         "maandelijks": "Wat gebeurt"
       },
       "weg": [
-        {
-          "target": "overmaken",
-          "options": [
-            "overmaken",
-            "opnemen",
-            "sparen"
-          ]
-        },
-        {
-          "target": "rekening",
-          "options": [
-            "bedrag",
-            "rekening",
-            "pinpas"
-          ]
-        },
-        {
-          "target": "rente",
-          "options": [
-            "lening",
-            "schuld",
-            "rente"
-          ]
-        },
-        {
-          "target": "maandelijks",
-          "options": [
-            "financieel",
-            "maandelijks",
-            "rente"
-          ]
-        },
-        {
-          "target": "schuld",
-          "options": [
-            "schuld",
-            "lening",
-            "bedrag"
-          ]
-        }
+        { "target": "overmaken", "options": ["overmaken", "opnemen", "sparen"] },
+        { "target": "rekening", "options": ["bedrag", "rekening", "pinpas"] },
+        { "target": "rente", "options": ["lening", "schuld", "rente"] },
+        { "target": "maandelijks", "options": ["financieel", "maandelijks", "rente"] },
+        { "target": "schuld", "options": ["schuld", "lening", "bedrag"] }
       ],
       "anchors": [
         {
-          "word": "financieel",
-          "prop": "g1Finance",
-          "slot": "highLeft",
+          "word": "financieel", "prop": "g1Finance", "slot": "highLeft",
           "label": "Een bord met een taartgrafiek met een euroteken, staafjes en een rekenmachine",
           "params": {}
         },
         {
-          "word": "maandelijks",
-          "prop": "g1MonthStrip",
-          "slot": "highMid",
+          "word": "maandelijks", "prop": "g1MonthStrip", "slot": "highMid",
           "label": "Twaalf kalenderblaadjes, op elk blaadje een muntje op de eerste dag",
           "params": {}
         },
         {
-          "word": "lening",
-          "prop": "g1Loan",
-          "slot": "highRight",
+          "word": "lening", "prop": "g1Loan", "slot": "highRight",
           "label": "Een poster: veel geld gaat van de bank naar een auto, en kleine muntjes gaan terug",
-          "params": {
-            "text": "€ 15.000"
-          }
+          "params": { "text": "€ 15.000" }
         },
         {
-          "word": "opnemen",
-          "prop": "g1Atm",
-          "slot": "side",
+          "word": "opnemen", "prop": "g1Atm", "slot": "side",
           "label": "Een geldautomaat in de muur: er komen briefjes uit en een hand pakt ze",
-          "params": {
-            "text": "€ 50"
-          }
+          "params": { "text": "€ 50" }
         },
         {
-          "word": "rekening",
-          "prop": "g1BankApp",
-          "slot": "glassLeft",
+          "word": "rekening", "prop": "g1BankApp", "slot": "glassLeft",
           "label": "Een scherm met een nummer met NL ervoor, en wat erbij en eraf ging",
-          "params": {
-            "accessory": "account",
-            "caption": "NL12 BANK 0345 67",
-            "lines": [
-              "salaris|+ 2.150",
-              "huur|– 950"
-            ]
-          }
+          "params": { "accessory": "account", "caption": "NL12 BANK 0345 67", "lines": ["salaris|+ 2.150", "huur|– 950"] }
         },
         {
-          "word": "overmaken",
-          "prop": "g1BankApp",
-          "slot": "glassRight",
+          "word": "overmaken", "prop": "g1BankApp", "slot": "glassRight",
           "label": "Een scherm: een muntje gaat met een pijl van Noor naar Sam",
-          "params": {
-            "accessory": "transfer",
-            "lines": [
-              "Noor",
-              "Sam"
-            ],
-            "text": "€ 50"
-          }
+          "params": { "accessory": "transfer", "lines": ["Noor", "Sam"], "text": "€ 50" }
         },
         {
-          "word": "pinpas",
-          "prop": "g1BankCard",
-          "slot": "counterLeft",
+          "word": "pinpas", "prop": "g1BankCard", "slot": "counterLeft",
           "label": "Een hand houdt een blauw kaartje met een chip omhoog",
-          "params": {
-            "text": "•••• 4821"
-          }
+          "params": { "text": "•••• 4821" }
         },
         {
-          "word": "bedrag",
-          "prop": "g1MoneyCounter",
-          "slot": "counterMid",
+          "word": "bedrag", "prop": "g1MoneyCounter", "slot": "counterMid",
           "label": "Een telmachine met briefjes, op het schermpje staat 500 euro",
-          "params": {
-            "text": "€ 500"
-          }
+          "params": { "text": "€ 500" }
         },
         {
-          "word": "schuld",
-          "prop": "g1Bills",
-          "slot": "floorLeft",
+          "word": "schuld", "prop": "g1Bills", "slot": "floorLeft",
           "label": "Iemand zit met zijn handen op zijn hoofd naast een stapel brieven met rode stempels: min 3200 euro",
-          "params": {
-            "text": "– € 3.200"
-          }
+          "params": { "text": "– € 3.200" }
         },
         {
-          "word": "sparen",
-          "prop": "g1PiggyBank",
-          "slot": "floorMid",
+          "word": "sparen", "prop": "g1PiggyBank", "slot": "floorMid",
           "label": "Een roze spaarvarken, er valt een muntje in",
           "params": {}
         },
         {
-          "word": "rente",
-          "prop": "g1Growth",
-          "slot": "floorRight",
+          "word": "rente", "prop": "g1Growth", "slot": "floorRight",
           "label": "Een bord met stapeltjes munten die groter worden: 2,5 procent per jaar",
-          "params": {
-            "text": "2,5 %",
-            "caption": "per jaar"
-          }
+          "params": { "text": "2,5 %", "caption": "per jaar" }
         }
       ]
     },
     {
       "sheet": 16,
       "type": "g1PostOffice",
-      "order": [
-        "pakket",
-        "postzegel",
-        "bezorger",
-        "gewicht",
-        "versturen",
-        "afzender",
-        "breekbaar",
-        "verzendkosten",
-        "afgeven",
-        "terugsturen",
-        "aangetekend"
-      ],
+      "order": ["pakket", "postzegel", "bezorger", "gewicht", "versturen", "afzender", "breekbaar", "verzendkosten", "afgeven", "terugsturen", "aangetekend"],
       "prompts": {
         "versturen": "Waar kun je een brief",
         "bezorger": "Wie is de",
@@ -200,204 +92,80 @@
         "verzendkosten": "Waar staan de"
       },
       "weg": [
-        {
-          "target": "afzender",
-          "options": [
-            "afzender",
-            "bezorger",
-            "aangetekend"
-          ]
-        },
-        {
-          "target": "pakket",
-          "options": [
-            "breekbaar",
-            "pakket",
-            "terugsturen"
-          ]
-        },
-        {
-          "target": "versturen",
-          "options": [
-            "afgeven",
-            "terugsturen",
-            "versturen"
-          ]
-        },
-        {
-          "target": "gewicht",
-          "options": [
-            "gewicht",
-            "verzendkosten",
-            "postzegel"
-          ]
-        },
-        {
-          "target": "aangetekend",
-          "options": [
-            "postzegel",
-            "aangetekend",
-            "afzender"
-          ]
-        }
+        { "target": "afzender", "options": ["afzender", "bezorger", "aangetekend"] },
+        { "target": "pakket", "options": ["breekbaar", "pakket", "terugsturen"] },
+        { "target": "versturen", "options": ["afgeven", "terugsturen", "versturen"] },
+        { "target": "gewicht", "options": ["gewicht", "verzendkosten", "postzegel"] },
+        { "target": "aangetekend", "options": ["postzegel", "aangetekend", "afzender"] }
       ],
       "anchors": [
         {
-          "word": "verzendkosten",
-          "prop": "g1RateBoard",
-          "slot": "highLeft",
-          "pin": [
-            8,
-            96
-          ],
+          "word": "verzendkosten", "prop": "g1RateBoard", "slot": "highLeft", "pin": [8, 96],
           "label": "Een prijslijst met een busje: een brief 1,15 euro, een kleine doos 4,95, een grote doos 13,25",
-          "params": {
-            "caption": "naar NL",
-            "lines": [
-              "letter|€ 1,15",
-              "box|€ 4,95",
-              "bigBox|€ 13,25"
-            ]
-          }
+          "params": { "caption": "naar NL", "lines": ["letter|€ 1,15", "box|€ 4,95", "bigBox|€ 13,25"] }
         },
         {
-          "word": "postzegel",
-          "prop": "g1Stamps",
-          "slot": "highMid",
+          "word": "postzegel", "prop": "g1Stamps", "slot": "highMid",
           "label": "Een vel met zes kleine plaatjes met een tulp en een 1, eentje komt los",
-          "params": {
-            "text": "1"
-          }
+          "params": { "text": "1" }
         },
         {
-          "word": "afzender",
-          "prop": "g1EnvelopeBack",
-          "slot": "highRight",
+          "word": "afzender", "prop": "g1EnvelopeBack", "slot": "highRight",
           "label": "De achterkant van een envelop: op de klep staan de naam en de straat van Noor, met een oranje rondje erom",
-          "params": {
-            "lines": [
-              "Noor",
-              "Gracht 12"
-            ]
-          }
+          "params": { "lines": ["Noor", "Gracht 12"] }
         },
         {
-          "word": "versturen",
-          "prop": "g1MailSlot",
-          "slot": "sideTop",
+          "word": "versturen", "prop": "g1MailSlot", "slot": "sideTop",
           "label": "Een brievenbus in de muur: een hand duwt er een brief in, een andere brief vliegt weg",
           "params": {}
         },
         {
-          "word": "pakket",
-          "prop": "g1Parcel",
-          "slot": "sideLow",
+          "word": "pakket", "prop": "g1Parcel", "slot": "sideLow",
           "label": "Een bruine doos met tape en een adreslabel",
-          "params": {
-            "accessory": "label",
-            "lines": [
-              "S. de Vries",
-              "Kade 4"
-            ]
-          }
+          "params": { "accessory": "label", "lines": ["S. de Vries", "Kade 4"] }
         },
         {
-          "word": "gewicht",
-          "prop": "g1PostScale",
-          "slot": "counterLeft",
+          "word": "gewicht", "prop": "g1PostScale", "slot": "counterLeft",
           "label": "Een doos op een weegschaal: 2,4 kilo",
-          "params": {
-            "text": "2,4 kg"
-          }
+          "params": { "text": "2,4 kg" }
         },
         {
-          "word": "afgeven",
-          "prop": "g1GiveAcross",
-          "slot": "counterMid",
+          "word": "afgeven", "prop": "g1GiveAcross", "slot": "counterMid",
           "label": "Een hand geeft een doos over de balie aan een andere hand",
-          "params": {
-            "accessory": "parcel"
-          }
+          "params": { "accessory": "parcel" }
         },
         {
-          "word": "aangetekend",
-          "prop": "g1Registered",
-          "slot": "counterRight",
-          "pin": [
-            366,
-            262
-          ],
+          "word": "aangetekend", "prop": "g1Registered", "slot": "counterRight", "pin": [366, 262],
           "label": "Een brief met een geel plakkertje met een R, iemand zet een krabbel op een scanner",
           "params": {}
         },
         {
-          "word": "bezorger",
-          "prop": "g1Person",
-          "slot": "floorLeft",
+          "word": "bezorger", "prop": "g1Person", "slot": "floorLeft",
           "label": "Een man met een pet en een stapel dozen in zijn armen",
-          "params": {
-            "accessory": "courier",
-            "variant": 1
-          }
+          "params": { "accessory": "courier", "variant": 1 }
         },
         {
-          "word": "terugsturen",
-          "prop": "g1Parcel",
-          "slot": "floorMid",
+          "word": "terugsturen", "prop": "g1Parcel", "slot": "floorMid",
           "label": "Een open doos met schoenen en een grote oranje pijl die teruggaat",
-          "params": {
-            "accessory": "return",
-            "text": "retour"
-          }
+          "params": { "accessory": "return", "text": "retour" }
         },
         {
-          "word": "breekbaar",
-          "prop": "g1Parcel",
-          "slot": "floorRight",
-          "pin": [
-            366,
-            306
-          ],
+          "word": "breekbaar", "prop": "g1Parcel", "slot": "floorRight", "pin": [366, 306],
           "label": "Een doos met een groot etiket: een glas met een barst",
-          "params": {
-            "accessory": "fragile",
-            "text": "voorzichtig"
-          }
+          "params": { "accessory": "fragile", "text": "voorzichtig" }
         }
       ],
       "decor": [
         {
-          "prop": "g1Person",
-          "frame": [
-            282,
-            138,
-            64,
-            84
-          ],
-          "params": {
-            "accessory": "clerk",
-            "variant": 2,
-            "tone": "red"
-          }
+          "prop": "g1Person", "frame": [282, 138, 64, 84],
+          "params": { "accessory": "clerk", "variant": 2, "tone": "red" }
         }
       ]
     },
     {
       "sheet": 20,
       "type": "g1HousingDesk",
-      "order": [
-        "huurder",
-        "schimmel",
-        "ventileren",
-        "reparatie",
-        "melden",
-        "huurtoeslag",
-        "wachttijd",
-        "reageren",
-        "bezwaar",
-        "betaalbaar",
-        "sociaal"
-      ],
+      "order": ["huurder", "schimmel", "ventileren", "reparatie", "melden", "huurtoeslag", "wachttijd", "reageren", "bezwaar", "betaalbaar", "sociaal"],
       "prompts": {
         "huurder": "Wie is de",
         "ventileren": "Waar kun je",
@@ -410,212 +178,80 @@
         "bezwaar": "Waar maakt iemand"
       },
       "weg": [
-        {
-          "target": "schimmel",
-          "options": [
-            "ventileren",
-            "schimmel",
-            "reparatie"
-          ]
-        },
-        {
-          "target": "huurtoeslag",
-          "options": [
-            "huurtoeslag",
-            "betaalbaar",
-            "huurder"
-          ]
-        },
-        {
-          "target": "melden",
-          "options": [
-            "reageren",
-            "bezwaar",
-            "melden"
-          ]
-        },
-        {
-          "target": "wachttijd",
-          "options": [
-            "sociaal",
-            "wachttijd",
-            "betaalbaar"
-          ]
-        },
-        {
-          "target": "huurder",
-          "options": [
-            "huurder",
-            "melden",
-            "reageren"
-          ]
-        }
+        { "target": "schimmel", "options": ["ventileren", "schimmel", "reparatie"] },
+        { "target": "huurtoeslag", "options": ["huurtoeslag", "betaalbaar", "huurder"] },
+        { "target": "melden", "options": ["reageren", "bezwaar", "melden"] },
+        { "target": "wachttijd", "options": ["sociaal", "wachttijd", "betaalbaar"] },
+        { "target": "huurder", "options": ["huurder", "melden", "reageren"] }
       ],
       "anchors": [
         {
-          "word": "sociaal",
-          "prop": "g1Community",
-          "slot": "highLeft",
+          "word": "sociaal", "prop": "g1Community", "slot": "highLeft",
           "label": "Een poster: vier verschillende buren houden elkaars hand vast onder één dak met een hart",
           "params": {}
         },
         {
-          "word": "betaalbaar",
-          "prop": "g1HomeAd",
-          "slot": "highMid",
+          "word": "betaalbaar", "prop": "g1HomeAd", "slot": "highMid",
           "label": "Twee huizen: het dure huis van 1850 euro is doorgestreept, het huis van 640 euro krijgt een vinkje",
-          "params": {
-            "accessory": "compare",
-            "lines": [
-              "€ 1.850",
-              "€ 640"
-            ]
-          }
+          "params": { "accessory": "compare", "lines": ["€ 1.850", "€ 640"] }
         },
         {
-          "word": "wachttijd",
-          "prop": "g1QueueScreen",
-          "slot": "highRight",
+          "word": "wachttijd", "prop": "g1QueueScreen", "slot": "highRight",
           "label": "Een scherm met een lange rij mensjes, een klok en: ongeveer 8 jaar",
-          "params": {
-            "text": "± 8 jaar"
-          }
+          "params": { "text": "± 8 jaar" }
         },
         {
-          "word": "ventileren",
-          "prop": "g1OpenWindow",
-          "slot": "sideTop",
+          "word": "ventileren", "prop": "g1OpenWindow", "slot": "sideTop",
           "label": "Een raam staat open, blauwe lucht stroomt naar binnen",
           "params": {}
         },
         {
-          "word": "schimmel",
-          "prop": "g1Mould",
-          "slot": "sideLow",
+          "word": "schimmel", "prop": "g1Mould", "slot": "sideLow",
           "label": "Een hoek met tegels vol zwarte en groene vlekjes",
           "params": {}
         },
         {
-          "word": "reageren",
-          "prop": "g1HomeAd",
-          "slot": "glassLeft",
-          "pin": [
-            126,
-            166
-          ],
+          "word": "reageren", "prop": "g1HomeAd", "slot": "glassLeft", "pin": [126, 166],
           "label": "Een scherm met een huis te huur, een handje klikt op de groene knop met een vinkje",
-          "params": {
-            "lines": [
-              "3 kamers",
-              "€ 640"
-            ],
-            "text": "Ja!"
-          }
+          "params": { "lines": ["3 kamers", "€ 640"], "text": "Ja!" }
         },
         {
-          "word": "huurtoeslag",
-          "prop": "paperSheet",
-          "slot": "counterLeft",
-          "frame": [
-            116,
-            190,
-            80,
-            48
-          ],
-          "pin": [
-            116,
-            238
-          ],
+          "word": "huurtoeslag", "prop": "paperSheet", "slot": "counterLeft", "frame": [116, 190, 80, 48], "pin": [116, 238],
           "label": "Een brief van de overheid met een huisje: elke maand 210 euro erbij",
-          "params": {
-            "icons": [
-              "townHall",
-              "house"
-            ],
-            "tone": "green",
-            "text": "+ € 210",
-            "caption": "elke maand"
-          }
+          "params": { "icons": ["townHall", "house"], "tone": "green", "text": "+ € 210", "caption": "elke maand" }
         },
         {
-          "word": "bezwaar",
-          "prop": "g1Objection",
-          "slot": "counterMid",
+          "word": "bezwaar", "prop": "g1Objection", "slot": "counterMid",
           "label": "Een brief met een rode regel, en een hand gaat omhoog: niet eens!",
-          "params": {
-            "text": "+ 6 %",
-            "caption": "Niet eens!"
-          }
+          "params": { "text": "+ 6 %", "caption": "Niet eens!" }
         },
         {
-          "word": "huurder",
-          "prop": "g1Person",
-          "slot": "floorLeft",
+          "word": "huurder", "prop": "g1Person", "slot": "floorLeft",
           "label": "Iemand voor de eigen voordeur met de sleutel omhoog; op de deur een briefje van 640 euro",
-          "params": {
-            "accessory": "tenant",
-            "text": "12B",
-            "caption": "€ 640"
-          }
+          "params": { "accessory": "tenant", "text": "12B", "caption": "€ 640" }
         },
         {
-          "word": "reparatie",
-          "prop": "g1Repair",
-          "slot": "floorMid",
+          "word": "reparatie", "prop": "g1Repair", "slot": "floorMid",
           "label": "Een gootsteen met een lekkende buis, een moersleutel draait de moer vast, en een gereedschapskist",
           "params": {}
         },
         {
-          "word": "melden",
-          "prop": "g1Person",
-          "slot": "floorRight",
-          "frame": [
-            270,
-            272,
-            96,
-            130
-          ],
+          "word": "melden", "prop": "g1Person", "slot": "floorRight", "frame": [270, 272, 96, 130],
           "label": "Iemand belt en zegt: de kraan lekt!",
-          "params": {
-            "accessory": "caller",
-            "variant": 3,
-            "text": "Kraan lekt!"
-          }
+          "params": { "accessory": "caller", "variant": 3, "text": "Kraan lekt!" }
         }
       ],
       "decor": [
         {
-          "prop": "g1Person",
-          "frame": [
-            282,
-            138,
-            64,
-            84
-          ],
-          "params": {
-            "accessory": "clerk",
-            "variant": 5,
-            "tone": "green"
-          }
+          "prop": "g1Person", "frame": [282, 138, 64, 84],
+          "params": { "accessory": "clerk", "variant": 5, "tone": "green" }
         }
       ]
     },
     {
       "sheet": 21,
       "type": "g1PoliceDesk",
-      "order": [
-        "wijkagent",
-        "aangifte",
-        "legitimatiebewijs",
-        "diefstal",
-        "stelen",
-        "getuige",
-        "slachtoffer",
-        "inbreken",
-        "verdacht",
-        "waarschuwen",
-        "strafbaar"
-      ],
+      "order": ["wijkagent", "aangifte", "legitimatiebewijs", "diefstal", "stelen", "getuige", "slachtoffer", "inbreken", "verdacht", "waarschuwen", "strafbaar"],
       "prompts": {
         "aangifte": "Waar doe je",
         "diefstal": "Waar zie je de",
@@ -628,199 +264,73 @@
         "verdacht": "Wie is hier"
       },
       "weg": [
-        {
-          "target": "stelen",
-          "options": [
-            "inbreken",
-            "stelen",
-            "diefstal"
-          ]
-        },
-        {
-          "target": "getuige",
-          "options": [
-            "getuige",
-            "slachtoffer",
-            "wijkagent"
-          ]
-        },
-        {
-          "target": "aangifte",
-          "options": [
-            "legitimatiebewijs",
-            "aangifte",
-            "waarschuwen"
-          ]
-        },
-        {
-          "target": "verdacht",
-          "options": [
-            "strafbaar",
-            "verdacht",
-            "inbreken"
-          ]
-        },
-        {
-          "target": "slachtoffer",
-          "options": [
-            "diefstal",
-            "verdacht",
-            "slachtoffer"
-          ]
-        }
+        { "target": "stelen", "options": ["inbreken", "stelen", "diefstal"] },
+        { "target": "getuige", "options": ["getuige", "slachtoffer", "wijkagent"] },
+        { "target": "aangifte", "options": ["legitimatiebewijs", "aangifte", "waarschuwen"] },
+        { "target": "verdacht", "options": ["strafbaar", "verdacht", "inbreken"] },
+        { "target": "slachtoffer", "options": ["diefstal", "verdacht", "slachtoffer"] }
       ],
       "anchors": [
         {
-          "word": "inbreken",
-          "prop": "g1BreakIn",
-          "slot": "highLeft",
+          "word": "inbreken", "prop": "g1BreakIn", "slot": "highLeft",
           "label": "Een poster: 's nachts klimt een man met een masker en een breekijzer door een kapot raam",
           "params": {}
         },
         {
-          "word": "waarschuwen",
-          "prop": "g1Megaphone",
-          "slot": "highMid",
+          "word": "waarschuwen", "prop": "g1Megaphone", "slot": "highMid",
           "label": "Een geel bord: een hand met een megafoon roept: pas op!",
-          "params": {
-            "text": "Pas op!"
-          }
+          "params": { "text": "Pas op!" }
         },
         {
-          "word": "strafbaar",
-          "prop": "g1Forbidden",
-          "slot": "highRight",
+          "word": "strafbaar", "prop": "g1Forbidden", "slot": "highRight",
           "label": "Een bord: een spuitbus in een rode cirkel met een streep erdoor, een pijl en handboeien",
           "params": {}
         },
         {
-          "word": "diefstal",
-          "prop": "g1CutLock",
-          "slot": "sideTop",
+          "word": "diefstal", "prop": "g1CutLock", "slot": "sideTop",
           "label": "Een foto op een prikbord: een fietsenrek, waar een fiets stond is alleen een stippellijn, en een doorgeknipt slot",
           "params": {}
         },
         {
-          "word": "verdacht",
-          "prop": "g1Cctv",
-          "slot": "glassRight",
-          "pin": [
-            364,
-            158
-          ],
+          "word": "verdacht", "prop": "g1Cctv", "slot": "glassRight", "pin": [364, 158],
           "label": "Een camerabeeld: iemand met een capuchon kijkt 's nachts stiekem om de hoek",
-          "params": {
-            "caption": "CAM 2"
-          }
+          "params": { "caption": "CAM 2" }
         },
         {
-          "word": "legitimatiebewijs",
-          "prop": "card",
-          "slot": "counterLeft",
-          "pin": [
-            116,
-            262
-          ],
+          "word": "legitimatiebewijs", "prop": "card", "slot": "counterLeft", "pin": [116, 262],
           "label": "Een hand houdt een kaart met een pasfoto en een naam omhoog",
-          "params": {
-            "caption": "ID-KAART",
-            "tone": "blue",
-            "text": "N. Bakker",
-            "accessory": "hand",
-            "variant": 3
-          }
+          "params": { "caption": "ID-KAART", "tone": "blue", "text": "N. Bakker", "accessory": "hand", "variant": 3 }
         },
         {
-          "word": "aangifte",
-          "prop": "paperSheet",
-          "slot": "counterMid",
+          "word": "aangifte", "prop": "paperSheet", "slot": "counterMid",
           "label": "Een formulier van de politie op een klembord: wat is er gebeurd en waar; een pen schrijft",
-          "params": {
-            "icons": [
-              "g1Badge"
-            ],
-            "tone": "blue",
-            "lines": [
-              "wat|fiets weg"
-            ],
-            "accessory": "pen",
-            "mount": "clipboard"
-          }
+          "params": { "icons": ["g1Badge"], "tone": "blue", "lines": ["wat|fiets weg"], "accessory": "pen", "mount": "clipboard" }
         },
         {
-          "word": "stelen",
-          "prop": "g1Pickpocket",
-          "slot": "counterRight",
-          "frame": [
-            288,
-            186,
-            78,
-            50
-          ],
+          "word": "stelen", "prop": "g1Pickpocket", "slot": "counterRight", "frame": [288, 186, 78, 50],
           "label": "Een hand in een zwarte handschoen haalt stiekem een portemonnee uit een tas",
           "params": {}
         },
         {
-          "word": "wijkagent",
-          "prop": "g1Person",
-          "slot": "floorLeft",
-          "frame": [
-            2,
-            268,
-            104,
-            134
-          ],
+          "word": "wijkagent", "prop": "g1Person", "slot": "floorLeft", "frame": [2, 268, 104, 134],
           "label": "Een agent op de fiets die naar de buurt zwaait",
-          "params": {
-            "accessory": "officer",
-            "mount": "bike",
-            "variant": 1
-          }
+          "params": { "accessory": "officer", "mount": "bike", "variant": 1 }
         },
         {
-          "word": "getuige",
-          "prop": "g1Person",
-          "slot": "floorMid",
-          "frame": [
-            104,
-            290,
-            100,
-            112
-          ],
+          "word": "getuige", "prop": "g1Person", "slot": "floorMid", "frame": [104, 290, 100, 112],
           "label": "Iemand wijst en zegt: ik zag het!",
-          "params": {
-            "accessory": "witness",
-            "variant": 7,
-            "text": "Ik zag het!"
-          }
+          "params": { "accessory": "witness", "variant": 7, "text": "Ik zag het!" }
         },
         {
-          "word": "slachtoffer",
-          "prop": "g1Person",
-          "slot": "floorRight",
+          "word": "slachtoffer", "prop": "g1Person", "slot": "floorRight",
           "label": "Iemand met een verband om het hoofd en een arm in een mitella, verdrietig",
-          "params": {
-            "accessory": "victim",
-            "variant": 2,
-            "flip": true
-          }
+          "params": { "accessory": "victim", "variant": 2, "flip": true }
         }
       ],
       "decor": [
         {
-          "prop": "g1Person",
-          "frame": [
-            150,
-            138,
-            64,
-            84
-          ],
-          "params": {
-            "accessory": "clerk",
-            "variant": 4,
-            "tone": "blue",
-            "mount": "cap"
-          }
+          "prop": "g1Person", "frame": [150, 138, 64, 84],
+          "params": { "accessory": "clerk", "variant": 4, "tone": "blue", "mount": "cap" }
         }
       ]
     },
@@ -828,19 +338,7 @@
       "sheet": 31,
       "type": "office",
       "noor": [],
-      "order": [
-        "vacature",
-        "cv",
-        "sollicitatiegesprek",
-        "uurloon",
-        "solliciteren",
-        "uitzendkracht",
-        "ervaring",
-        "aannemen",
-        "proeftijd",
-        "geschikt",
-        "gemotiveerd"
-      ],
+      "order": ["vacature", "cv", "sollicitatiegesprek", "uurloon", "solliciteren", "uitzendkracht", "ervaring", "aannemen", "proeftijd", "geschikt", "gemotiveerd"],
       "prompts": {
         "vacature": "Waar zie je een",
         "ervaring": "Waar zie je",
@@ -852,195 +350,74 @@
         "gemotiveerd": "Wie is hier"
       },
       "weg": [
-        {
-          "target": "cv",
-          "options": [
-            "vacature",
-            "cv",
-            "ervaring"
-          ]
-        },
-        {
-          "target": "uurloon",
-          "options": [
-            "uurloon",
-            "proeftijd",
-            "ervaring"
-          ]
-        },
-        {
-          "target": "solliciteren",
-          "options": [
-            "aannemen",
-            "solliciteren",
-            "sollicitatiegesprek"
-          ]
-        },
-        {
-          "target": "gemotiveerd",
-          "options": [
-            "geschikt",
-            "uitzendkracht",
-            "gemotiveerd"
-          ]
-        },
-        {
-          "target": "proeftijd",
-          "options": [
-            "proeftijd",
-            "aannemen",
-            "vacature"
-          ]
-        }
+        { "target": "cv", "options": ["vacature", "cv", "ervaring"] },
+        { "target": "uurloon", "options": ["uurloon", "proeftijd", "ervaring"] },
+        { "target": "solliciteren", "options": ["aannemen", "solliciteren", "sollicitatiegesprek"] },
+        { "target": "gemotiveerd", "options": ["geschikt", "uitzendkracht", "gemotiveerd"] },
+        { "target": "proeftijd", "options": ["proeftijd", "aannemen", "vacature"] }
       ],
       "anchors": [
         {
-          "word": "uurloon",
-          "prop": "sign",
-          "slot": "wallLeft",
+          "word": "uurloon", "prop": "sign", "slot": "wallLeft",
           "label": "Een bordje met een klok en een euroteken: 14,40 euro per uur",
-          "params": {
-            "caption": "per uur",
-            "icons": [
-              "clock",
-              "euro"
-            ],
-            "text": "€ 14,40",
-            "tone": "white",
-            "mount": "wall"
-          }
+          "params": { "caption": "per uur", "icons": ["clock", "euro"], "text": "€ 14,40", "tone": "white", "mount": "wall" }
         },
         {
-          "word": "ervaring",
-          "prop": "g1Timeline",
-          "slot": "wallMid",
+          "word": "ervaring", "prop": "g1Timeline", "slot": "wallMid",
           "label": "Een tijdlijn met drie oude banen en een ster aan het eind: 5 jaar",
-          "params": {
-            "labels": [
-              "2019",
-              "2024"
-            ],
-            "text": "5 jaar"
-          }
+          "params": { "labels": ["2019", "2024"], "text": "5 jaar" }
         },
         {
-          "word": "proeftijd",
-          "prop": "g1TrialMonths",
-          "slot": "wallRight",
+          "word": "proeftijd", "prop": "g1TrialMonths", "slot": "wallRight",
           "label": "Twee maanden, 1 en 2, onder een vergrootglas, met een vinkje en een kruisje",
           "params": {}
         },
         {
-          "word": "sollicitatiegesprek",
-          "prop": "g1Interview",
-          "slot": "meeting",
+          "word": "sollicitatiegesprek", "prop": "g1Interview", "slot": "meeting",
           "label": "In de glazen kamer: iemand stelt vragen met een papier met een foto in de hand, de ander in pak antwoordt",
           "params": {}
         },
         {
-          "word": "vacature",
-          "prop": "g1JobBoard",
-          "slot": "boardLow",
+          "word": "vacature", "prop": "g1JobBoard", "slot": "boardLow",
           "label": "Een prikbord met drie kaartjes: gezocht, met een busje, een bezem en een krat",
-          "params": {
-            "caption": "Gezocht"
-          }
+          "params": { "caption": "Gezocht" }
         },
         {
-          "word": "cv",
-          "prop": "g1Resume",
-          "slot": "deskLeft",
+          "word": "cv", "prop": "g1Resume", "slot": "deskLeft",
           "label": "Een papier met een pasfoto, een koffertje en een afstudeerhoedje",
           "params": {}
         },
         {
-          "word": "solliciteren",
-          "prop": "g1Apply",
-          "slot": "deskMid",
-          "frame": [
-            152,
-            104,
-            104,
-            74
-          ],
-          "pin": [
-            204,
-            186
-          ],
-          "align": "center",
+          "word": "solliciteren", "prop": "g1Apply", "slot": "deskMid", "frame": [152, 104, 104, 74], "pin": [204, 186], "align": "center",
           "label": "Een laptop stuurt een brief met een papier met een foto erbij; een papieren vliegtuigje vliegt naar een bedrijf",
           "params": {}
         },
         {
-          "word": "aannemen",
-          "prop": "g1Welcome",
-          "slot": "frontLeft",
+          "word": "aannemen", "prop": "g1Welcome", "slot": "frontLeft",
           "label": "Een kaart met twee handen die elkaar schudden: welkom!",
-          "params": {
-            "text": "Welkom!"
-          }
+          "params": { "text": "Welkom!" }
         },
         {
-          "word": "geschikt",
-          "prop": "g1Puzzle",
-          "slot": "frontRight",
+          "word": "geschikt", "prop": "g1Puzzle", "slot": "frontRight",
           "label": "Een puzzel: het laatste stukje past precies, met een vinkje",
           "params": {}
         },
         {
-          "word": "gemotiveerd",
-          "prop": "g1Person",
-          "frame": [
-            188,
-            286,
-            100,
-            116
-          ],
+          "word": "gemotiveerd", "prop": "g1Person", "frame": [188, 286, 100, 116],
           "label": "Iemand juicht met twee vuisten omhoog: ik wil graag!",
-          "params": {
-            "accessory": "eager",
-            "variant": 6,
-            "text": "Ik wil graag!"
-          }
+          "params": { "accessory": "eager", "variant": 6, "text": "Ik wil graag!" }
         },
         {
-          "word": "uitzendkracht",
-          "prop": "g1Person",
-          "slot": "standing",
-          "frame": [
-            290,
-            262,
-            76,
-            140
-          ],
-          "pin": [
-            366,
-            236
-          ],
+          "word": "uitzendkracht", "prop": "g1Person", "slot": "standing", "frame": [290, 262, 76, 140], "pin": [366, 236],
           "label": "Een werker met een helm, een fel hesje en een krat; boven zijn hoofd twee bedrijven met pijlen heen en weer",
-          "params": {
-            "accessory": "temp",
-            "variant": 1
-          }
+          "params": { "accessory": "temp", "variant": 1 }
         }
       ]
     },
     {
       "sheet": 32,
       "type": "g1Courtroom",
-      "order": [
-        "rechter",
-        "advocaat",
-        "zitting",
-        "schuldig",
-        "bewijs",
-        "wet",
-        "straf",
-        "veroordelen",
-        "rechtszaak",
-        "overtreden",
-        "eerlijk"
-      ],
+      "order": ["rechter", "advocaat", "zitting", "schuldig", "bewijs", "wet", "straf", "veroordelen", "rechtszaak", "overtreden", "eerlijk"],
       "prompts": {
         "rechter": "Wie is de",
         "advocaat": "Wie is de",
@@ -1053,157 +430,65 @@
         "schuldig": "Wie is hier"
       },
       "weg": [
-        {
-          "target": "advocaat",
-          "options": [
-            "rechter",
-            "advocaat",
-            "schuldig"
-          ]
-        },
-        {
-          "target": "straf",
-          "options": [
-            "straf",
-            "veroordelen",
-            "bewijs"
-          ]
-        },
-        {
-          "target": "wet",
-          "options": [
-            "overtreden",
-            "wet",
-            "rechtszaak"
-          ]
-        },
-        {
-          "target": "zitting",
-          "options": [
-            "rechtszaak",
-            "eerlijk",
-            "zitting"
-          ]
-        },
-        {
-          "target": "bewijs",
-          "options": [
-            "bewijs",
-            "schuldig",
-            "straf"
-          ]
-        }
+        { "target": "advocaat", "options": ["rechter", "advocaat", "schuldig"] },
+        { "target": "straf", "options": ["straf", "veroordelen", "bewijs"] },
+        { "target": "wet", "options": ["overtreden", "wet", "rechtszaak"] },
+        { "target": "zitting", "options": ["rechtszaak", "eerlijk", "zitting"] },
+        { "target": "bewijs", "options": ["bewijs", "schuldig", "straf"] }
       ],
       "anchors": [
         {
-          "word": "zitting",
-          "prop": "board",
-          "slot": "wallLeft",
+          "word": "zitting", "prop": "board", "slot": "wallLeft",
           "label": "Een bord met tijden en zalen: om tien uur in zaal 3, nu",
-          "params": {
-            "lines": [
-              "09:30|Zaal 1|",
-              "10:00|Zaal 3|nu",
-              "11:15|Zaal 2|"
-            ],
-            "highlight": 1,
-            "mount": "wall"
-          }
+          "params": { "lines": ["09:30|Zaal 1|", "10:00|Zaal 3|nu", "11:15|Zaal 2|"], "highlight": 1, "mount": "wall" }
         },
         {
-          "word": "eerlijk",
-          "prop": "g1Scales",
-          "slot": "crest",
+          "word": "eerlijk", "prop": "g1Scales", "slot": "crest",
           "label": "Een gouden weegschaal: de twee schalen hangen precies even hoog, met een vinkje",
           "params": {}
         },
         {
-          "word": "straf",
-          "prop": "g1Bars",
-          "slot": "wallRight",
+          "word": "straf", "prop": "g1Bars", "slot": "wallRight",
           "label": "Een plaatje: een man in een gestreept pak achter tralies, streepjes op de muur",
           "params": {}
         },
         {
-          "word": "rechter",
-          "prop": "g1Person",
-          "slot": "judge",
-          "frame": [
-            146,
-            104,
-            78,
-            92
-          ],
+          "word": "rechter", "prop": "g1Person", "slot": "judge", "frame": [146, 104, 78, 92],
           "label": "Achter de hoge tafel zit iemand met grijs haar en een bril, in een zwarte toga met een witte bef",
-          "params": {
-            "accessory": "judge",
-            "variant": 2
-          }
+          "params": { "accessory": "judge", "variant": 2 }
         },
         {
-          "word": "wet",
-          "prop": "g1LawBook",
-          "slot": "benchLeft",
+          "word": "wet", "prop": "g1LawBook", "slot": "benchLeft",
           "label": "Twee dikke boeken, op de voorkant een groot paragraafteken",
           "params": {}
         },
         {
-          "word": "veroordelen",
-          "prop": "g1Gavel",
-          "slot": "benchRight",
-          "pin": [
-            366,
-            124
-          ],
+          "word": "veroordelen", "prop": "g1Gavel", "slot": "benchRight", "pin": [366, 124],
           "label": "Een houten hamer slaat boem op een blokje, op een papier met een rode stempel",
           "params": {}
         },
         {
-          "word": "advocaat",
-          "prop": "g1Person",
-          "slot": "lawyer",
+          "word": "advocaat", "prop": "g1Person", "slot": "lawyer",
           "label": "Iemand in een zwarte toga met een witte bef staat achter een tafel met een dikke map en praat",
-          "params": {
-            "accessory": "lawyer",
-            "variant": 1
-          }
+          "params": { "accessory": "lawyer", "variant": 1 }
         },
         {
-          "word": "schuldig",
-          "prop": "g1Person",
-          "slot": "dock",
+          "word": "schuldig", "prop": "g1Person", "slot": "dock",
           "label": "In het houten hok staat een man met zijn hoofd naar beneden: ik heb het gedaan",
-          "params": {
-            "accessory": "guilty",
-            "variant": 0,
-            "text": "Ik heb het gedaan…"
-          }
+          "params": { "accessory": "guilty", "variant": 0, "text": "Ik heb het gedaan…" }
         },
         {
-          "word": "rechtszaak",
-          "prop": "g1CaseFile",
-          "slot": "lectern",
+          "word": "rechtszaak", "prop": "g1CaseFile", "slot": "lectern",
           "label": "Een dikke map: twee boze gezichten tegenover elkaar met een bliksem ertussen, Smit en Jansen",
-          "params": {
-            "lines": [
-              "Smit",
-              "Jansen"
-            ]
-          }
+          "params": { "lines": ["Smit", "Jansen"] }
         },
         {
-          "word": "bewijs",
-          "prop": "g1Evidence",
-          "slot": "floorLeft",
+          "word": "bewijs", "prop": "g1Evidence", "slot": "floorLeft",
           "label": "Een tafeltje met een zakje met een mes en een kaart met een vingerafdruk onder een vergrootglas",
-          "params": {
-            "text": "A12"
-          }
+          "params": { "text": "A12" }
         },
         {
-          "word": "overtreden",
-          "prop": "g1RedLight",
-          "slot": "floorRight",
+          "word": "overtreden", "prop": "g1RedLight", "slot": "floorRight",
           "label": "Een foto op een ezel: het stoplicht staat op rood, maar een fietser rijdt door",
           "params": {}
         }
