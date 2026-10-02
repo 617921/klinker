@@ -382,6 +382,84 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 48,
+      "type": "g7Airport",
+      "noor": [],
+      "order": ["vlucht", "instapkaart", "handbagage", "paspoortcontrole", "beveiliging", "gangpad", "opstijgen", "landen", "bestemming", "vertraagd", "geannuleerd"],
+      "prompts": {
+        "vlucht": "Waar staat je",
+        "bestemming": "Wat is je",
+        "landen": "Waar zie je een vliegtuig",
+        "opstijgen": "Waar zie je een vliegtuig",
+        "vertraagd": "Welke vlucht is",
+        "geannuleerd": "Welke vlucht is"
+      },
+      "weg": [
+        { "target": "vertraagd", "options": ["vertraagd", "geannuleerd", "vlucht"] },
+        { "target": "landen", "options": ["opstijgen", "landen", "bestemming"] },
+        { "target": "beveiliging", "options": ["paspoortcontrole", "beveiliging", "handbagage"] },
+        { "target": "instapkaart", "options": ["instapkaart", "vlucht", "gangpad"] },
+        { "target": "gangpad", "options": ["handbagage", "gangpad", "instapkaart"] }
+      ],
+      "anchors": [
+        {
+          "word": "landen", "prop": "g7Plane", "slot": "windowLeft",
+          "label": "Een vliegtuig komt met de wielen uit naar beneden; een blauwe pijl omlaag",
+          "params": { "accessory": "down" }
+        },
+        {
+          "word": "opstijgen", "prop": "g7Plane", "slot": "windowRight",
+          "label": "Een vliegtuig gaat met de neus omhoog de lucht in; een groene pijl omhoog",
+          "params": { "accessory": "up" }
+        },
+        {
+          "word": "vertraagd", "prop": "board", "slot": "hangLeft",
+          "label": "Een bord met vertrektijden; bij Madrid staat in rood +45",
+          "params": { "lines": ["07:10|Istanbul|", "07:25|Madrid|+45", "07:40|Parijs|"], "highlight": 1, "mount": "hang" }
+        },
+        {
+          "word": "geannuleerd", "prop": "g7FlightScreen", "slot": "hangRight",
+          "label": "Een rood scherm: het vliegtuigje is doorgestreept met een groot kruis en de tijd is doorgehaald",
+          "params": { "caption": "D7", "text": "07:40 Parijs", "accessory": "cancel", "mount": "hang" }
+        },
+        {
+          "word": "paspoortcontrole", "prop": "g7PassportBooth", "slot": "floorBackLeft",
+          "label": "Een glazen hokje: een beambte met een pet stempelt een paspoort",
+          "params": {}
+        },
+        {
+          "word": "beveiliging", "prop": "g7SecurityArch", "slot": "floorBackMid",
+          "label": "Een poortje om door te lopen en een band met een bakje: tas, sleutels en telefoon",
+          "params": {}
+        },
+        {
+          "word": "gangpad", "prop": "g7Aisle", "slot": "floorBackRight",
+          "label": "Door de open deur van het vliegtuig zie je rijen stoelen met een smal looppad ertussen",
+          "params": {}
+        },
+        {
+          "word": "instapkaart", "prop": "g7BoardingPass", "slot": "floorFront1",
+          "label": "Een kaartje in een hand met een vliegtuigje, stoel 12A en een streepjescode",
+          "params": { "text": "12A", "caption": "D4" }
+        },
+        {
+          "word": "handbagage", "prop": "g7CabinCase", "slot": "floorFront2",
+          "label": "Een klein rolkoffertje past precies in een rek van 55 bij 40 bij 20",
+          "params": { "text": "55 × 40 × 20" }
+        },
+        {
+          "word": "vlucht", "prop": "g7FlightScreen", "slot": "floorFront3",
+          "label": "Een scherm bij de gate: een vliegtuig, 7:10 naar Istanbul",
+          "params": { "caption": "D4", "text": "07:10 Istanbul" }
+        },
+        {
+          "word": "bestemming", "prop": "g7Destination", "slot": "floorFront4",
+          "label": "Een poster: een zonnige stad aan zee met een grote rode speld erboven",
+          "params": { "text": "Lissabon" }
+        }
+      ]
     }
   ]
 }
