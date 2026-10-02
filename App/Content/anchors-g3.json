@@ -306,6 +306,83 @@
           "params": { "accessory": "graduate", "variant": 1 }
         }
       ]
+    },
+    {
+      "sheet": 30,
+      "type": "classroom",
+      "noor": [],
+      "order": ["uitspraak", "niveau", "woordenschat", "examen", "moedertaal", "uitspreken", "ingewikkeld", "herhalen", "vloeiend", "voorbereiden", "inburgering"],
+      "prompts": {
+        "uitspreken": "Waar zie je iemand een woord",
+        "voorbereiden": "Waar kun je je",
+        "vloeiend": "Wie praat er",
+        "moedertaal": "Waar spreekt iemand haar",
+        "niveau": "Waar zie je het"
+      },
+      "weg": [
+        { "target": "uitspraak", "options": ["uitspreken", "uitspraak", "herhalen"] },
+        { "target": "examen", "options": ["voorbereiden", "examen", "niveau"] },
+        { "target": "vloeiend", "options": ["vloeiend", "ingewikkeld", "moedertaal"] },
+        { "target": "woordenschat", "options": ["woordenschat", "uitspraak", "inburgering"] },
+        { "target": "herhalen", "options": ["herhalen", "voorbereiden", "uitspreken"] }
+      ],
+      "anchors": [
+        {
+          "word": "niveau", "prop": "g3Levels", "slot": "signLeft", "frame": [8, 14, 100, 66], "pin": [10, 84],
+          "label": "Een trap met vijf treden: A1, A2, B1, B2 en C1; een vrouw met een vlaggetje staat op B1",
+          "params": { "labels": ["A1", "A2", "B1", "B2", "C1"], "highlight": 2 }
+        },
+        {
+          "word": "ingewikkeld", "prop": "g3Tangle", "slot": "board",
+          "label": "Het bord vol losse woordjes met pijlen die kris-kras door elkaar lopen, en grote vraagtekens",
+          "params": { "labels": ["ik", "heb", "ge-", "-d", "zijn", "er"] }
+        },
+        {
+          "word": "inburgering", "prop": "sign", "slot": "window", "frame": [264, 18, 100, 78], "pin": [366, 96],
+          "label": "Een geel bord: van de wereldbol naar een huis hier, met taal, werk en wonen",
+          "params": { "caption": "nieuw in NL", "icons": ["globe", "arrow", "house"], "text": "taal · werk · wonen", "tone": "yellow", "mount": "wall" }
+        },
+        {
+          "word": "uitspraak", "prop": "g3MouthChart", "slot": "wallLeft", "frame": [12, 112, 92, 66], "pin": [8, 178],
+          "label": "Een plaat met drie monden: wijd open, rond en klein, met ui, eu en oe eronder",
+          "params": { "labels": ["ui", "eu", "oe"] }
+        },
+        {
+          "word": "herhalen", "prop": "screen", "slot": "wallMid",
+          "label": "Een scherm met een koptelefoon en twee ronde pijlen: nog drie keer",
+          "params": { "icons": ["g3Headphones", "g3Repeat"], "text": "3×", "mount": "wall" }
+        },
+        {
+          "word": "uitspreken", "prop": "g3Speaker", "slot": "teacher", "frame": [192, 104, 92, 136],
+          "label": "De docent wijst naar zijn open mond en zegt heel langzaam: h-ui-s",
+          "params": { "accessory": "slow", "text": "h – ui – s", "variant": 5 }
+        },
+        {
+          "word": "examen", "prop": "testPaper", "slot": "desk1",
+          "label": "Op een tafeltje een blad met vier delen: lezen, luisteren, schrijven, spreken; ernaast een zandloper",
+          "params": { "mount": "desk", "accessory": "timer", "lines": ["1. Lezen", "2. Luisteren", "3. Schrijven", "4. Spreken"] }
+        },
+        {
+          "word": "voorbereiden", "prop": "g3Countdown", "slot": "desk3", "frame": [268, 184, 92, 90], "pin": [366, 258],
+          "label": "Op een tafeltje een kalender: de dagen zijn doorgestreept tot een rode cirkel met een ster; een geel briefje: nog 3 dagen",
+          "params": { "caption": "juni", "count": 17, "text": "nog 3 dagen", "mount": "desk" }
+        },
+        {
+          "word": "woordenschat", "prop": "g3Chest", "slot": "floorLeft", "frame": [4, 300, 100, 96], "pin": [6, 378],
+          "label": "Een open kist met goud en kaartjes: huis, fiets, kaas, werk",
+          "params": { "labels": ["huis", "fiets", "kaas", "werk"] }
+        },
+        {
+          "word": "moedertaal", "prop": "g3Speaker", "slot": "floorRight", "frame": [108, 286, 96, 112], "pin": [156, 378], "align": "center",
+          "label": "Een moeder met haar kind aan de hand zegt: Merhaba! Er is een hartje",
+          "params": { "accessory": "home", "text": "Merhaba!", "variant": 3 }
+        },
+        {
+          "word": "vloeiend", "prop": "g3Speaker", "slot": "floorRight", "frame": [226, 290, 104, 110], "pin": [278, 378], "align": "center",
+          "label": "Een man praat ontspannen; zijn woorden stromen als één lange golf, met een groen vinkje",
+          "params": { "accessory": "flow", "variant": 7 }
+        }
+      ]
     }
   ]
 }

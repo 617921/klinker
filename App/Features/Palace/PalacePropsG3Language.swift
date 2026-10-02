@@ -98,8 +98,9 @@ enum G3Language {
 
     /// A calendar (92 × 82): `caption` month, the days crossed off one by one up to a red ring
     /// round the big day (`count`, default 17) with a star; a note says `text` ("nog 3 dagen").
+    /// `mount` "desk" stands it on a desk.
     static func countdown(_ pen: PropPen, _ p: PalacePropParams) {
-        let f = pen.fitted(CGSize(width: 92, height: 82))
+        let f = onDesk(pen, p, CGSize(width: 92, height: 82))
         f.rect(2, 3, 84, 76, 0x1E1E1C, radius: 2, 0.14)
         f.rect(0, 0, 84, 74, 0xFFFDF6, radius: 2)
         f.rect(0, 0, 84, 13, 0xC8261B, radius: 2)
@@ -132,12 +133,24 @@ enum G3Language {
         }
     }
 
+    /// A small desk under a drawing that is `size` big (`mount` "desk"); returns the pen to draw on it.
+    private static func onDesk(_ pen: PropPen, _ p: PalacePropParams, _ size: CGSize) -> PropPen {
+        guard p.mount == "desk" else { return pen.fitted(size) }
+        let total = CGSize(width: size.width, height: size.height + 30)
+        let f = pen.fitted(total)
+        f.oval(4, total.height - 5, size.width - 8, 5, 0x1E1E1C, 0.14)
+        f.svgLine("M10 \(size.height + 2)V\(total.height - 2)M\(size.width - 10) \(size.height + 2)V\(total.height - 2)", 0x5E6B73, 2.6)
+        f.rect(0, size.height - 4, size.width, 6, 0xC9965F, radius: 1.5)
+        f.rect(0, size.height + 2, size.width, 2, 0x9A6A42)
+        return f
+    }
+
     // MARK: Speaker
 
     /// Someone talking (88 × 124, facing right). `accessory` "slow": a teacher points at her wide
     /// open mouth, the bubble spells out `text` with sound waves. "flow": the words pour out as one
-    /// smooth wave ending in a green tick. "home": a mother holds her child's hand under a roof and
-    /// says `text`, with a heart. "hand": a student puts a hand up and says `text`. `variant` look.
+    /// smooth wave ending in a green tick. "home": a mother holds her child's hand and says `text`,
+    /// with a heart. "hand": a student puts a hand up and says `text`. `variant` look.
     static func speaker(_ pen: PropPen, _ p: PalacePropParams) {
         let base = pen.fitted(CGSize(width: 88, height: 124))
         let f = base.within(CGRect(x: 0, y: 10, width: 64, height: 114))
@@ -181,9 +194,8 @@ enum G3Language {
         }
     }
 
-    /// A mother and her child hand in hand under the outline of a roof.
+    /// A mother and her child hand in hand.
     private static func home(_ base: PropPen, _ f: PropPen, _ v: Look, _ text: String?) {
-        base.svgLine("M2 40L36 16L70 40M58 31V20H64V35", 0x7A5230, 2.2)
         G3Body.torso(f, v.coat)
         f.svgLine("M13 42C10 52 10 62 12 70", PalaceInk.shade(v.coat, 0.78), 6)
         f.dot(12.5, 72, 3.1, v.skin)
@@ -204,6 +216,6 @@ enum G3Language {
         k.dot(19, 21, 1.6, 0x2E2117)
         k.svgLine("M17 27Q19.5 29 22 27", 0x8C5A3C, 1.4)
         if let text { G3Body.bubble(base, CGRect(x: 30, y: 0, width: 56, height: 18), text, tail: CGPoint(x: 30, y: 30), size: 9.5) }
-        PalaceIcon.heart.draw(base, in: CGRect(x: 72, y: 20, width: 12, height: 12), color: 0xC8261B, detail: 0xC8261B)
+        PalaceIcon.heart.draw(base, in: CGRect(x: 62, y: 40, width: 13, height: 13), color: 0xC8261B, detail: 0xC8261B)
     }
 }
