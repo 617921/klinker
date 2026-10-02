@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Draws the g7 props (harbour, windmill, farm, beach, campsite, airport), so `PalacePropView`
-/// needs one line for them. Each prop is described at its case in `PalacePropKind`.
+/// needs one line for them. Each prop and its params are described at its drawing function.
 enum G7Props {
     static func draw(_ kind: PalacePropKind, _ pen: PropPen, _ p: PalacePropParams) {
         switch kind {

@@ -195,128 +195,28 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
 
-    // MARK: g7 · outdoors, water and travel (drawn by `G7Props`, PalacePropsG7*.swift)
-
-    // Harbour
-    /// A moored ship: hull, white bridge, funnel, mast, anchor. `variant` hull colour.
-    case g7Ship
-    /// Lock gates between two stone walls, higher water behind, a red and green light.
-    case g7Lock
-    /// A small sailing boat under way with its wake. `variant` sail colour.
-    case g7Sailboat
-    /// A little boat tossing on waves, a green-faced passenger over the rail.
-    case g7SeasickBoat
-    /// The stone quay edge with a bollard and a mooring rope running up to the right.
-    case g7Bollard
-    /// Workers standing side by side: `count` 1–3, `accessory` "sailor" | "vest" | "farmer" | "miller";
-    /// `text` on a small board they hold up; `variant` first look.
-    case g7Worker
-    /// An officer with a peaked cap and a torch, a sniffer dog at an open suitcase.
-    case g7Customs
-    /// A truck carrying a container, speed lines and an arrow. `variant` container colour.
-    case g7Truck
-    /// A finger post: `lines` "place|distance" per arm (up to 4, alternately left and right);
-    /// `mount` "road" puts it by a long lane to a lone house.
-    case g7Signpost
-    /// Crates, sacks and barrels stacked on a pallet.
-    case g7Goods
-    // Windmill
-    /// The four lattice sails of a windmill on its cap (placed over the mill in the backdrop).
-    case g7MillSails
-    /// Sheaves of ripe grain on a stubble field, a few loose ears.
-    case g7Wheat
-    /// A blue and white shield plaque with `caption` (small) and `text` (a year).
-    case g7Shield
-    /// A couple in traditional costume dancing to an accordion.
-    case g7Dancers
-    /// A workbench with old tools and a wooden cogwheel being carved.
-    case g7Workbench
-    /// Two millstones: grain pours in from a hopper, flour runs out into a sack.
-    case g7Millstones
-    /// Wind: `variant` 0 a tree bending and a windsock straight out with gusts, 1 no wind at all
-    /// (limp windsock, upright tree mirrored in still water).
-    case g7Wind
-    /// Two cupped hands holding a small windmill safe under a heart.
-    case g7Hands
-    /// Clogs, a cheese and tulips together.
-    case g7DutchSet
-    // Farm
-    /// A barn with open doors, cows' heads looking out over the hay.
-    case g7Barn
-    /// A cow, a sheep and a goat together.
-    case g7Livestock
-    /// A fenced green field with a gate, daisies and a ditch.
-    case g7Meadow
-    /// Wide fields in rows to the horizon, hay bales and a row of trees.
-    case g7Fields
-    /// Someone on a stool milking a cow into a bucket.
-    case g7Milking
-    /// A child holding out a bottle and hay to a goat.
-    case g7Feeding
-    /// Milk churn, a cheese, butter and a yoghurt pot.
-    case g7Dairy
-    /// A farm-gate stall with eggs, honey and potatoes; `text` on its sign.
-    case g7FarmStall
-    /// A tractor on a muddy lane with a hen crossing.
-    case g7Tractor
-    // Beach
-    /// A big curling wave with foam.
-    case g7Wave
-    /// A sun cream bottle with a sun and `text` (a factor).
-    case g7Sunscreen
-    /// A wooden beach pavilion on posts with a terrace and parasols.
-    case g7BeachCafe
-    /// A lifeguard chair with a red and yellow flag, a lifebuoy and a lifeguard.
-    case g7Lifeguard
-    /// Sea with big curved arrows pulling a ball away.
-    case g7Current
-    /// A jellyfish on the wet sand.
-    case g7Jellyfish
-    /// A seafront promenade: railing, lamps, a bench and a strolling couple.
-    case g7Promenade
-    /// A beachgoer: `accessory` "cream" (rubbing cream into an arm), "paddle" (trousers rolled up,
-    /// feet in the sea) or "burnt" (lying on a towel, red as a lobster); `variant` look.
-    case g7Beachgoer
-    /// A striped windbreak, wind lines stopped by it, someone sitting snug behind.
-    case g7Windscreen
-    // Camping
-    /// A numbered pitch: a lawn edged by hedges with a post and a number plate (`text`).
-    case g7Pitch
-    /// A wash block with toilet and shower pictograms.
-    case g7Washblock
-    /// A mummy sleeping bag lying open on a mat.
-    case g7SleepingBag
-    /// A tent peg hammered into the ground with a mallet, the guy line taut.
-    case g7TentPeg
-    /// A campfire in a ring of stones with sparks and a marshmallow stick.
-    case g7Campfire
-    /// A notice board on two posts: `caption`, `icons` (with `labels`), `text`; `tone` like `sign`.
-    case g7PostBoard
-    /// An air mattress with a foot pump.
-    case g7AirBed
-    /// A dome tent: `accessory` "up" (someone raising it, arrow up), "down" (taking it down, arrow
-    /// down, packed bag) or "rain" (rain bouncing off, a dry camper inside with a tick).
-    case g7Tent
-    /// A wooden outhouse with a heart in the door and an old hand pump.
-    case g7Outhouse
-    // Airport
-    /// A gate screen: `caption` (gate), `text` (time and city), a plane; `accessory` "cancel" turns it red
-    /// with the plane crossed out and the time struck through.
-    case g7FlightScreen
-    /// A boarding pass in a hand: `text` (seat), `caption` (gate), a barcode.
-    case g7BoardingPass
-    /// A small wheelie case inside a size frame with `text` ("55 × 40 × 20").
-    case g7CabinCase
-    /// A glass booth with an officer stamping a passport.
-    case g7PassportBooth
-    /// A walk-through scanner arch with a tray of things on a belt.
-    case g7SecurityArch
-    /// A poster with a sunny city under a big red map pin at the end of a dotted line; `text` city.
-    case g7Destination
-    /// An open plane door: the view down the aisle between the rows of seats.
-    case g7Aisle
-    /// A plane over a runway: `accessory` "up" (climbing, arrow up) or "down" (wheels out, arrow down).
-    case g7Plane
+    // MARK: g7 · outdoors, water and travel
+    // Drawn by `G7Props` (PalacePropsG7*.swift), where each one's params are described.
+    // Harbour: ship, lock gates, sailing boat, seasick boat, bollard on the quay edge, workers in a
+    // row (sailors, port workers, farmer, miller), customs officer with a dog, container truck,
+    // finger post ("place|distance" arms; `mount` "road"), goods on a pallet.
+    case g7Ship, g7Lock, g7Sailboat, g7SeasickBoat, g7Bollard, g7Worker, g7Customs, g7Truck, g7Signpost, g7Goods
+    // Windmill: sails, sheaves of grain, monument shield, folk dancers, workbench, millstones,
+    // wind (`variant` 1: no wind), hands holding a mill safe, clogs-cheese-tulips.
+    case g7MillSails, g7Wheat, g7Shield, g7Dancers, g7Workbench, g7Millstones, g7Wind, g7Hands, g7DutchSet
+    // Farm: barn with cows, cow-sheep-goat, fenced meadow, fields to the horizon, milking, feeding
+    // a goat, dairy, farm-gate stall (`text` sign), tractor with a hen.
+    case g7Barn, g7Livestock, g7Meadow, g7Fields, g7Milking, g7Feeding, g7Dairy, g7FarmStall, g7Tractor
+    // Beach: wave, sun cream, beach pavilion, lifeguard chair, rip current, jellyfish, promenade,
+    // beachgoer (`accessory` "cream" | "paddle" | "burnt"), windbreak with someone snug behind it.
+    case g7Wave, g7Sunscreen, g7BeachCafe, g7Lifeguard, g7Current, g7Jellyfish, g7Promenade, g7Beachgoer, g7Windscreen
+    // Campsite: numbered pitch, wash block, sleeping bag, tent peg and mallet, campfire, notice board
+    // on posts (like `sign`), air bed with pump, tent (`accessory` "up" | "down" | "rain"), outhouse.
+    case g7Pitch, g7Washblock, g7SleepingBag, g7TentPeg, g7Campfire, g7PostBoard, g7AirBed, g7Tent, g7Outhouse
+    // Airport: gate screen (`accessory` "cancel"), boarding pass, cabin case in its size frame,
+    // passport booth, security arch, destination poster, aisle through a plane door, plane
+    // (`accessory` "up" | "down").
+    case g7FlightScreen, g7BoardingPass, g7CabinCase, g7PassportBooth, g7SecurityArch, g7Destination, g7Aisle, g7Plane
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
