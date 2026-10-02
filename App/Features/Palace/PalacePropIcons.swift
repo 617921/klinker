@@ -13,6 +13,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case abc, math, music, ball, paint
     // g1 places (PalacePropIconsG1.swift)
     case g1Badge
+    // g7: outdoors, water and travel (PalacePropIconsG7.swift)
+    case g7Plane, g7Moon, g7NoMusic, g7Toilet, g7Shower
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -71,6 +73,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             PalaceLearningIcons.draw(self, p, c, d)
         case .g1Badge:
             G1Icons.draw(self, p, c, d)
+        case .g7Plane, .g7Moon, .g7NoMusic, .g7Toilet, .g7Shower:
+            G7Icons.draw(self, p, c, d)
         }
     }
 

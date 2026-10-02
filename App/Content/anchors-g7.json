@@ -1,0 +1,465 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 24,
+      "type": "g7Harbour",
+      "noor": [],
+      "order": ["schip", "kade", "sluis", "goederen", "bemanning", "douane", "varen", "vervoeren", "werkgelegenheid", "internationaal", "zeeziek"],
+      "prompts": {
+        "goederen": "Waar liggen de",
+        "varen": "Waar zie je een bootje",
+        "vervoeren": "Waarmee kun je containers",
+        "zeeziek": "Wie is er"
+      },
+      "weg": [
+        { "target": "schip", "options": ["schip", "varen", "zeeziek"] },
+        { "target": "bemanning", "options": ["werkgelegenheid", "bemanning", "douane"] },
+        { "target": "vervoeren", "options": ["goederen", "internationaal", "vervoeren"] },
+        { "target": "kade", "options": ["kade", "sluis", "schip"] },
+        { "target": "zeeziek", "options": ["varen", "zeeziek", "bemanning"] }
+      ],
+      "anchors": [
+        {
+          "word": "sluis", "prop": "g7Lock", "slot": "waterLeft",
+          "label": "Twee houten deuren in het water tussen stenen muren, met witte balken en een rood licht; een bootje wacht",
+          "params": {}
+        },
+        {
+          "word": "schip", "prop": "g7Ship", "slot": "waterMid",
+          "label": "Een grote boot met een witte brug, een schoorsteen en een anker aan de voorkant",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "varen", "prop": "g7Sailboat", "slot": "waterFar",
+          "label": "Een zeilbootje met een wit en een rood zeil gaat over het water",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "zeeziek", "prop": "g7SeasickBoat", "slot": "waterNear",
+          "label": "Een klein bootje op hoge golven; iemand met een groen gezicht hangt over de rand",
+          "params": {}
+        },
+        {
+          "word": "internationaal", "prop": "g7Signpost", "slot": "quayBackLeft",
+          "label": "Een wegwijzer met een wereldbol: pijlen naar steden over de hele wereld",
+          "params": { "icons": ["globe"], "lines": ["Shanghai|9000 km", "New York|5900 km", "Lagos|5000 km"] }
+        },
+        {
+          "word": "bemanning", "prop": "g7Worker", "slot": "quayBackMid",
+          "label": "Drie zeelui in streepjestruien met witte petjes",
+          "params": { "count": 3, "accessory": "sailor", "variant": 1 }
+        },
+        {
+          "word": "kade", "prop": "g7Bollard", "slot": "edge",
+          "label": "De stenen rand langs het water met een ijzeren paal en een dik touw",
+          "params": {}
+        },
+        {
+          "word": "vervoeren", "prop": "g7Truck", "slot": "quayBackRight",
+          "label": "Een vrachtwagen rijdt weg met een container; een pijl wijst vooruit",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "goederen", "prop": "g7Goods", "slot": "quayFrontLeft",
+          "label": "Dozen, zakken en vaten op een houten pallet",
+          "params": {}
+        },
+        {
+          "word": "douane", "prop": "g7Customs", "slot": "quayFrontMid",
+          "label": "Een beambte met een pet en een zaklamp; een hond snuffelt aan een open koffer",
+          "params": {}
+        },
+        {
+          "word": "werkgelegenheid", "prop": "g7Worker", "slot": "quayFrontRight",
+          "label": "Havenwerkers met helmen en oranje hesjes; een bordje: 2000 banen",
+          "params": { "count": 3, "accessory": "vest", "variant": 2, "text": "+2000 banen" }
+        }
+      ]
+    },
+    {
+      "sheet": 44,
+      "type": "g7Mill",
+      "noor": [],
+      "order": ["wiek", "molenaar", "graan", "malen", "waaien", "windstil", "erfgoed", "ambacht", "traditie", "behouden", "typisch"],
+      "prompts": {
+        "ambacht": "Waar zie je een oud",
+        "waaien": "Waar zie je het hard",
+        "windstil": "Waar is het",
+        "behouden": "Wat willen we"
+      },
+      "weg": [
+        { "target": "waaien", "options": ["windstil", "waaien", "wiek"] },
+        { "target": "erfgoed", "options": ["traditie", "erfgoed", "behouden"] },
+        { "target": "malen", "options": ["graan", "malen", "molenaar"] },
+        { "target": "ambacht", "options": ["ambacht", "typisch", "traditie"] },
+        { "target": "wiek", "options": ["wiek", "waaien", "malen"] }
+      ],
+      "anchors": [
+        {
+          "word": "wiek", "prop": "g7MillSails", "slot": "sails",
+          "label": "De vier lange armen van de molen, met houten latten",
+          "params": {}
+        },
+        {
+          "word": "waaien", "prop": "g7Wind", "slot": "skyRight",
+          "label": "Een boom buigt door, blaadjes vliegen weg en de windzak staat recht uit",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "windstil", "prop": "g7Wind", "slot": "fieldRight",
+          "label": "Een rechte boom spiegelt in glad water; de windzak hangt slap naar beneden",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "erfgoed", "prop": "g7Shield", "slot": "millWall",
+          "label": "Een blauw-wit schildje op de muur van de molen: monument uit 1756",
+          "params": { "caption": "monument", "text": "1756" }
+        },
+        {
+          "word": "graan", "prop": "g7Wheat", "slot": "fieldLeft",
+          "label": "Gouden bossen halmen met aren op een kaal veld",
+          "params": {}
+        },
+        {
+          "word": "behouden", "prop": "g7Hands", "slot": "nearMill",
+          "label": "Twee handen houden een klein molentje veilig vast, met een hartje erboven",
+          "params": {}
+        },
+        {
+          "word": "traditie", "prop": "g7Dancers", "slot": "frontRightHigh",
+          "label": "Een man en een vrouw in klederdracht dansen op klompen",
+          "params": {}
+        },
+        {
+          "word": "molenaar", "prop": "g7Worker", "slot": "door",
+          "label": "Een man in een wit, bestoven schort met een zak meel op zijn schouder",
+          "params": { "accessory": "miller", "variant": 0 }
+        },
+        {
+          "word": "ambacht", "prop": "g7Workbench", "slot": "frontLeft",
+          "label": "Een werkbank met een half gemaakt houten tandwiel, een hamer en een beitel",
+          "params": {}
+        },
+        {
+          "word": "malen", "prop": "g7Millstones", "slot": "frontMid",
+          "label": "Twee ronde stenen: korrels vallen erin, wit meel komt eruit in een zak",
+          "params": {}
+        },
+        {
+          "word": "typisch", "prop": "g7DutchSet", "slot": "frontRight",
+          "label": "Klompen, een kaas en tulpen bij elkaar",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 45,
+      "type": "g7Farm",
+      "noor": [],
+      "order": ["boer", "stal", "vee", "weiland", "melken", "voeren", "zuivel", "streekproduct", "platteland", "landelijk", "afgelegen"],
+      "prompts": {
+        "vee": "Waar staat het",
+        "platteland": "Waar zie je het",
+        "melken": "Waar kun je een koe",
+        "voeren": "Waar kun je de geit",
+        "landelijk": "Waar is het",
+        "afgelegen": "Wat ligt"
+      },
+      "weg": [
+        { "target": "vee", "options": ["vee", "boer", "stal"] },
+        { "target": "melken", "options": ["voeren", "melken", "zuivel"] },
+        { "target": "platteland", "options": ["platteland", "landelijk", "afgelegen"] },
+        { "target": "weiland", "options": ["stal", "weiland", "platteland"] },
+        { "target": "streekproduct", "options": ["zuivel", "landelijk", "streekproduct"] }
+      ],
+      "anchors": [
+        {
+          "word": "afgelegen", "prop": "g7Signpost", "slot": "farLeft",
+          "label": "Een wegwijzer: het dorp is 14 kilometer ver; een lange weg naar één huisje",
+          "params": { "mount": "road", "lines": ["Dorp|14 km", "Stad|38 km"] }
+        },
+        {
+          "word": "stal", "prop": "g7Barn", "slot": "barn",
+          "label": "Een rode schuur met open deuren; koeien kijken naar buiten over het hooi",
+          "params": {}
+        },
+        {
+          "word": "platteland", "prop": "g7Fields", "slot": "farRight",
+          "label": "Akkers en hooibalen tot aan de horizon, met een rij bomen en een kerktorentje",
+          "params": {}
+        },
+        {
+          "word": "weiland", "prop": "g7Meadow", "slot": "midLeft",
+          "label": "Een groen stuk gras met een houten hek, een poort en madeliefjes",
+          "params": {}
+        },
+        {
+          "word": "streekproduct", "prop": "g7FarmStall", "slot": "midStall",
+          "label": "Een kastje langs de weg met eieren, honing en aardappels uit de buurt; een bordje: van hier",
+          "params": { "text": "van hier" }
+        },
+        {
+          "word": "landelijk", "prop": "g7Tractor", "slot": "midLane",
+          "label": "Een groene trekker op een modderig zandpad; een kip steekt over",
+          "params": {}
+        },
+        {
+          "word": "vee", "prop": "g7Livestock", "slot": "midRight",
+          "label": "Een koe, een schaap en een geit bij elkaar",
+          "params": {}
+        },
+        {
+          "word": "boer", "prop": "g7Worker", "slot": "frontLeft",
+          "label": "Een man in een blauwe tuinbroek met een pet en een hooivork",
+          "params": { "accessory": "farmer", "variant": 0 }
+        },
+        {
+          "word": "melken", "prop": "g7Milking", "slot": "frontMid",
+          "label": "Iemand op een krukje bij een koe; witte stralen gaan in een emmer",
+          "params": {}
+        },
+        {
+          "word": "voeren", "prop": "g7Feeding", "slot": "frontMidRight",
+          "label": "Een kind houdt een flesje en wat hooi bij een geit",
+          "params": { "variant": 3 }
+        },
+        {
+          "word": "zuivel", "prop": "g7Dairy", "slot": "frontRight",
+          "label": "Een melkbus, een fles melk, een kaas, boter en yoghurt",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 46,
+      "type": "g7Beach",
+      "noor": [],
+      "order": ["golf", "kwal", "strandtent", "reddingsbrigade", "zonnebrandcrème", "boulevard", "insmeren", "pootjebaden", "stroming", "verbrand", "beschut"],
+      "prompts": {
+        "insmeren": "Waar zie je iemand zich",
+        "pootjebaden": "Waar zie je iemand",
+        "verbrand": "Wie is er",
+        "beschut": "Waar zit je lekker"
+      },
+      "weg": [
+        { "target": "golf", "options": ["stroming", "golf", "kwal"] },
+        { "target": "insmeren", "options": ["insmeren", "zonnebrandcrème", "verbrand"] },
+        { "target": "reddingsbrigade", "options": ["strandtent", "reddingsbrigade", "boulevard"] },
+        { "target": "pootjebaden", "options": ["golf", "beschut", "pootjebaden"] },
+        { "target": "beschut", "options": ["beschut", "strandtent", "verbrand"] }
+      ],
+      "anchors": [
+        {
+          "word": "boulevard", "prop": "g7Promenade", "slot": "dune",
+          "label": "Een brede stenen wandelweg langs de zee met lantaarns, een wit hek en flats erachter",
+          "params": {}
+        },
+        {
+          "word": "strandtent", "prop": "g7BeachCafe", "slot": "duneFoot",
+          "label": "Een houten paviljoen op palen met grote ramen, een terras en parasols",
+          "params": {}
+        },
+        {
+          "word": "beschut", "prop": "g7Windscreen", "slot": "sheltered",
+          "label": "Achter een gestreept windscherm zit iemand rustig te lezen; de wind komt er niet door",
+          "params": {}
+        },
+        {
+          "word": "reddingsbrigade", "prop": "g7Lifeguard", "slot": "chair",
+          "label": "Een hoge witte stoel met een rood-gele vlag, een reddingsboei en iemand met een verrekijker",
+          "params": {}
+        },
+        {
+          "word": "stroming", "prop": "g7Current", "slot": "seaFar",
+          "label": "Grote donkere pijlen in de zee trekken een bal ver weg",
+          "params": {}
+        },
+        {
+          "word": "pootjebaden", "prop": "g7Beachgoer", "slot": "waterEdge",
+          "label": "Iemand met opgerolde broekspijpen staat met de voeten in het ondiepe water",
+          "params": { "accessory": "paddle", "variant": 2 }
+        },
+        {
+          "word": "golf", "prop": "g7Wave", "slot": "surf",
+          "label": "Hoog water dat omkrult, met wit schuim en spatten",
+          "params": {}
+        },
+        {
+          "word": "insmeren", "prop": "g7Beachgoer", "slot": "sandLeft",
+          "label": "Iemand in badpak wrijft witte crème op de arm; de fles staat in het zand",
+          "params": { "accessory": "cream", "variant": 3 }
+        },
+        {
+          "word": "zonnebrandcrème", "prop": "g7Sunscreen", "slot": "sandBottle",
+          "label": "Een oranje fles met een zon en factor 30",
+          "params": { "text": "30" }
+        },
+        {
+          "word": "verbrand", "prop": "g7Beachgoer", "slot": "sandMid",
+          "label": "Iemand ligt op een handdoek, helemaal rood van de felle zon",
+          "params": { "accessory": "burnt", "variant": 0 }
+        },
+        {
+          "word": "kwal", "prop": "g7Jellyfish", "slot": "wetSand",
+          "label": "Een doorzichtig, glibberig beestje met paarse ringen op het natte zand",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 47,
+      "type": "g7Camping",
+      "noor": [],
+      "order": ["staanplaats", "slaapzak", "kampvuur", "sanitair", "luchtbed", "haring", "opzetten", "afbreken", "nachtrust", "waterdicht", "primitief"],
+      "prompts": {
+        "nachtrust": "Waar lees je over de",
+        "opzetten": "Waar zie je iemand een tent",
+        "afbreken": "Waar zie je iemand de tent",
+        "waterdicht": "Welke tent is"
+      },
+      "weg": [
+        { "target": "opzetten", "options": ["afbreken", "opzetten", "haring"] },
+        { "target": "sanitair", "options": ["sanitair", "primitief", "staanplaats"] },
+        { "target": "luchtbed", "options": ["slaapzak", "luchtbed", "nachtrust"] },
+        { "target": "waterdicht", "options": ["waterdicht", "opzetten", "primitief"] },
+        { "target": "kampvuur", "options": ["nachtrust", "haring", "kampvuur"] }
+      ],
+      "anchors": [
+        {
+          "word": "primitief", "prop": "g7Outhouse", "slot": "backLeft",
+          "label": "Een houten wc-hokje met een hartje in de deur en een oude waterpomp met een emmer",
+          "params": {}
+        },
+        {
+          "word": "waterdicht", "prop": "g7Tent", "slot": "backMid",
+          "label": "Het regent op een blauwe tent, maar binnen zit iemand droog; een groen vinkje",
+          "params": { "accessory": "rain" }
+        },
+        {
+          "word": "nachtrust", "prop": "g7PostBoard", "slot": "backSign",
+          "label": "Een bord met een maan en een doorgestreepte muzieknoot: van 23 tot 7 uur stil",
+          "params": { "caption": "23:00 – 07:00", "icons": ["g7Moon", "g7NoMusic"] }
+        },
+        {
+          "word": "sanitair", "prop": "g7Washblock", "slot": "backRight",
+          "label": "Een gebouwtje met twee deuren: een wc en een douche",
+          "params": {}
+        },
+        {
+          "word": "staanplaats", "prop": "g7Pitch", "slot": "midLeft",
+          "label": "Een leeg grasveldje tussen lage heggen, met een paaltje en het nummer 12",
+          "params": { "text": "12" }
+        },
+        {
+          "word": "opzetten", "prop": "g7Tent", "slot": "midMid",
+          "label": "Iemand duwt een stok omhoog en de tent gaat staan; een groene pijl omhoog",
+          "params": { "accessory": "up", "variant": 1 }
+        },
+        {
+          "word": "afbreken", "prop": "g7Tent", "slot": "midRight",
+          "label": "De tent zakt in, de stokken liggen eruit en de zak is ingepakt; een rode pijl omlaag",
+          "params": { "accessory": "down", "variant": 6 }
+        },
+        {
+          "word": "luchtbed", "prop": "g7AirBed", "slot": "frontLeft",
+          "label": "Een opblaasmatras met een voetpomp ernaast",
+          "params": {}
+        },
+        {
+          "word": "kampvuur", "prop": "g7Campfire", "slot": "frontFire",
+          "label": "Een vuurtje in een kring van stenen, met een marshmallow aan een stokje",
+          "params": {}
+        },
+        {
+          "word": "haring", "prop": "g7TentPeg", "slot": "frontPeg",
+          "label": "Een metalen pen wordt met een hamer in de grond geslagen; er zit een touw aan",
+          "params": {}
+        },
+        {
+          "word": "slaapzak", "prop": "g7SleepingBag", "slot": "frontRight",
+          "label": "Een blauwe, gewatteerde zak met een kap om in te slapen, op een matje",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "sheet": 48,
+      "type": "g7Airport",
+      "noor": [],
+      "order": ["vlucht", "instapkaart", "handbagage", "paspoortcontrole", "beveiliging", "gangpad", "opstijgen", "landen", "bestemming", "vertraagd", "geannuleerd"],
+      "prompts": {
+        "vlucht": "Waar staat je",
+        "bestemming": "Wat is je",
+        "landen": "Waar zie je een vliegtuig",
+        "opstijgen": "Waar zie je een vliegtuig",
+        "vertraagd": "Welke vlucht is",
+        "geannuleerd": "Welke vlucht is"
+      },
+      "weg": [
+        { "target": "vertraagd", "options": ["vertraagd", "geannuleerd", "vlucht"] },
+        { "target": "landen", "options": ["opstijgen", "landen", "bestemming"] },
+        { "target": "beveiliging", "options": ["paspoortcontrole", "beveiliging", "handbagage"] },
+        { "target": "instapkaart", "options": ["instapkaart", "vlucht", "gangpad"] },
+        { "target": "gangpad", "options": ["handbagage", "gangpad", "instapkaart"] }
+      ],
+      "anchors": [
+        {
+          "word": "landen", "prop": "g7Plane", "slot": "windowLeft",
+          "label": "Een vliegtuig komt met de wielen uit naar beneden; een blauwe pijl omlaag",
+          "params": { "accessory": "down" }
+        },
+        {
+          "word": "opstijgen", "prop": "g7Plane", "slot": "windowRight",
+          "label": "Een vliegtuig gaat met de neus omhoog de lucht in; een groene pijl omhoog",
+          "params": { "accessory": "up" }
+        },
+        {
+          "word": "vertraagd", "prop": "board", "slot": "hangLeft",
+          "label": "Een bord met vertrektijden; bij Madrid staat in rood +45",
+          "params": { "lines": ["07:10|Istanbul|", "07:25|Madrid|+45", "07:40|Parijs|"], "highlight": 1, "mount": "hang" }
+        },
+        {
+          "word": "geannuleerd", "prop": "g7FlightScreen", "slot": "hangRight",
+          "label": "Een rood scherm: het vliegtuigje is doorgestreept met een groot kruis en de tijd is doorgehaald",
+          "params": { "caption": "D7", "text": "07:40 Parijs", "accessory": "cancel", "mount": "hang" }
+        },
+        {
+          "word": "paspoortcontrole", "prop": "g7PassportBooth", "slot": "floorBackLeft",
+          "label": "Een glazen hokje: een beambte met een pet stempelt een paspoort",
+          "params": {}
+        },
+        {
+          "word": "beveiliging", "prop": "g7SecurityArch", "slot": "floorBackMid",
+          "label": "Een poortje om door te lopen en een band met een bakje: tas, sleutels en telefoon",
+          "params": {}
+        },
+        {
+          "word": "gangpad", "prop": "g7Aisle", "slot": "floorBackRight",
+          "label": "Door de open deur van het vliegtuig zie je rijen stoelen met een smal looppad ertussen",
+          "params": {}
+        },
+        {
+          "word": "instapkaart", "prop": "g7BoardingPass", "slot": "floorFront1",
+          "label": "Een kaartje in een hand met een vliegtuigje, stoel 12A en een streepjescode",
+          "params": { "text": "12A", "caption": "D4" }
+        },
+        {
+          "word": "handbagage", "prop": "g7CabinCase", "slot": "floorFront2",
+          "label": "Een klein rolkoffertje past precies in een rek van 55 bij 40 bij 20",
+          "params": { "text": "55 × 40 × 20" }
+        },
+        {
+          "word": "vlucht", "prop": "g7FlightScreen", "slot": "floorFront3",
+          "label": "Een scherm bij de gate: een vliegtuig, 7:10 naar Istanbul",
+          "params": { "caption": "D4", "text": "07:10 Istanbul" }
+        },
+        {
+          "word": "bestemming", "prop": "g7Destination", "slot": "floorFront4",
+          "label": "Een poster: een zonnige stad aan zee met een grote rode speld erboven",
+          "params": { "text": "Lissabon" }
+        }
+      ]
+    }
+  ]
+}

@@ -399,6 +399,28 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1CaseFile
     /// A photo on an easel: a traffic light on red, a cyclist riding past it.
     case g1RedLight
+    // MARK: g7 · outdoors, water and travel
+    // Drawn by `G7Props` (PalacePropsG7*.swift), where each one's params are described.
+    // Harbour: ship, lock gates, sailing boat, seasick boat, bollard on the quay edge, workers in a
+    // row (sailors, port workers, farmer, miller), customs officer with a dog, container truck,
+    // finger post ("place|distance" arms; `mount` "road"), goods on a pallet.
+    case g7Ship, g7Lock, g7Sailboat, g7SeasickBoat, g7Bollard, g7Worker, g7Customs, g7Truck, g7Signpost, g7Goods
+    // Windmill: sails, sheaves of grain, monument shield, folk dancers, workbench, millstones,
+    // wind (`variant` 1: no wind), hands holding a mill safe, clogs-cheese-tulips.
+    case g7MillSails, g7Wheat, g7Shield, g7Dancers, g7Workbench, g7Millstones, g7Wind, g7Hands, g7DutchSet
+    // Farm: barn with cows, cow-sheep-goat, fenced meadow, fields to the horizon, milking, feeding
+    // a goat, dairy, farm-gate stall (`text` sign), tractor with a hen.
+    case g7Barn, g7Livestock, g7Meadow, g7Fields, g7Milking, g7Feeding, g7Dairy, g7FarmStall, g7Tractor
+    // Beach: wave, sun cream, beach pavilion, lifeguard chair, rip current, jellyfish, promenade,
+    // beachgoer (`accessory` "cream" | "paddle" | "burnt"), windbreak with someone snug behind it.
+    case g7Wave, g7Sunscreen, g7BeachCafe, g7Lifeguard, g7Current, g7Jellyfish, g7Promenade, g7Beachgoer, g7Windscreen
+    // Campsite: numbered pitch, wash block, sleeping bag, tent peg and mallet, campfire, notice board
+    // on posts (like `sign`), air bed with pump, tent (`accessory` "up" | "down" | "rain"), outhouse.
+    case g7Pitch, g7Washblock, g7SleepingBag, g7TentPeg, g7Campfire, g7PostBoard, g7AirBed, g7Tent, g7Outhouse
+    // Airport: gate screen (`accessory` "cancel"), boarding pass, cabin case in its size frame,
+    // passport booth, security arch, destination poster, aisle through a plane door, plane
+    // (`accessory` "up" | "down").
+    case g7FlightScreen, g7BoardingPass, g7CabinCase, g7PassportBooth, g7SecurityArch, g7Destination, g7Aisle, g7Plane
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -486,6 +508,14 @@ struct PalacePropView: View, Equatable {
                  .g1Interview, .g1Resume, .g1Timeline, .g1JobBoard, .g1TrialMonths, .g1Apply, .g1Welcome, .g1Puzzle,
                  .g1Scales, .g1Gavel, .g1LawBook, .g1Evidence, .g1Bars, .g1CaseFile, .g1RedLight:
                 G1Props.draw(prop.kind, pen, p)
+            case .g7Ship, .g7Lock, .g7Sailboat, .g7SeasickBoat, .g7Bollard, .g7Worker, .g7Customs, .g7Truck, .g7Signpost,
+                 .g7Goods, .g7MillSails, .g7Wheat, .g7Shield, .g7Dancers, .g7Workbench, .g7Millstones, .g7Wind, .g7Hands,
+                 .g7DutchSet, .g7Barn, .g7Livestock, .g7Meadow, .g7Fields, .g7Milking, .g7Feeding, .g7Dairy, .g7FarmStall,
+                 .g7Tractor, .g7Wave, .g7Sunscreen, .g7BeachCafe, .g7Lifeguard, .g7Current, .g7Jellyfish, .g7Promenade,
+                 .g7Beachgoer, .g7Windscreen, .g7Pitch, .g7Washblock, .g7SleepingBag, .g7TentPeg, .g7Campfire, .g7PostBoard,
+                 .g7AirBed, .g7Tent, .g7Outhouse, .g7FlightScreen, .g7BoardingPass, .g7CabinCase, .g7PassportBooth,
+                 .g7SecurityArch, .g7Destination, .g7Aisle, .g7Plane:
+                G7Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
