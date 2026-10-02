@@ -84,6 +84,88 @@
         { "prop": "shelfGoods", "slot": "shelfMid", "params": { "accessory": "jars", "variant": 4 } },
         { "prop": "shelfGoods", "slot": "counterLeft", "params": { "accessory": "boxes", "variant": 1 } }
       ]
+    },
+    {
+      "sheet": 50,
+      "type": "g6Kiosk",
+      "order": ["dagblad", "voorpagina", "artikel", "journalist", "omroep", "nepnieuws", "berichten", "verspreiden", "verschijnen", "actueel", "onafhankelijk"],
+      "prompts": {
+        "artikel": "Waar zie je een",
+        "journalist": "Wie is de",
+        "nepnieuws": "Waar zie je",
+        "verschijnen": "Wat gaat vandaag",
+        "berichten": "Wie gaat over een ongeluk",
+        "verspreiden": "Waar gaat nieuws zich",
+        "actueel": "Wat is heel",
+        "onafhankelijk": "Welke krant is"
+      },
+      "weg": [
+        { "target": "voorpagina", "options": ["artikel", "voorpagina", "dagblad"] },
+        { "target": "nepnieuws", "options": ["nepnieuws", "verspreiden", "actueel"] },
+        { "target": "omroep", "options": ["berichten", "omroep", "journalist"] },
+        { "target": "verschijnen", "options": ["dagblad", "verschijnen", "onafhankelijk"] },
+        { "target": "actueel", "options": ["onafhankelijk", "berichten", "actueel"] }
+      ],
+      "anchors": [
+        {
+          "word": "voorpagina", "prop": "g6Paper", "slot": "window",
+          "label": "Een grote krant op het raam: bovenaan een rode één, een dikke kop en een foto van een brug",
+          "params": { "accessory": "front", "text": "Brug open!", "caption": "maandag 5 oktober" }
+        },
+        {
+          "word": "dagblad", "prop": "g6Paper", "slot": "shelfTopLeft",
+          "label": "Een stapel kranten met een touwtje, een kaartje: elke dag, en een opkomende zon",
+          "params": { "accessory": "stack", "text": "elke dag" }
+        },
+        {
+          "word": "omroep", "prop": "g6Broadcast", "slot": "shelfTopMid",
+          "label": "Een zendmast met golven naar een televisie en een radio",
+          "params": {}
+        },
+        {
+          "word": "actueel", "prop": "g6Ticker", "slot": "shelfTopRight",
+          "label": "Een donker scherm met een rode stip: net binnen, met tijden van vandaag",
+          "params": { "caption": "net binnen", "lines": ["10:42|Trein rijdt weer", "10:35|Zon tot vrijdag", "10:21|Markt gaat door"] }
+        },
+        {
+          "word": "verschijnen", "prop": "g6Paper", "slot": "shelfLeft",
+          "label": "Een nieuw tijdschrift springt uit een doos, met een gele ster: nieuw",
+          "params": { "accessory": "fresh", "text": "nieuw!" }
+        },
+        {
+          "word": "berichten", "prop": "g6NewsTV", "slot": "shelfRight",
+          "label": "Een televisie: een vrouw van het nieuws praat, met een plaatje van een ongeluk ernaast",
+          "params": { "icons": ["warning"], "caption": "live" }
+        },
+        {
+          "word": "artikel", "prop": "g6Paper", "slot": "counterLeft",
+          "label": "Een open krant: één stuk met een titel en een foto is rood omcirkeld",
+          "params": { "accessory": "article", "text": "Nieuwe brug" }
+        },
+        {
+          "word": "nepnieuws", "prop": "g6Hoax", "slot": "counterMid",
+          "label": "Een telefoon met een gek bericht: de maan is van kaas, met een lange neus en een rood vraagteken",
+          "params": { "text": "Maan is van kaas!" }
+        },
+        {
+          "word": "verspreiden", "prop": "g6Spread", "slot": "counterRight", "pin": [366, 238],
+          "label": "Eén telefoon stuurt pijlen naar vijf andere telefoons",
+          "params": {}
+        },
+        {
+          "word": "journalist", "prop": "g6Figure", "slot": "floorLeft", "frame": [14, 272, 72, 122],
+          "label": "Een man met een notitieboekje, een pen en een perskaart, en een vraagteken",
+          "params": { "accessory": "press", "text": "?", "variant": 4 }
+        },
+        {
+          "word": "onafhankelijk", "prop": "g6Paper", "slot": "floorMid", "frame": [108, 278, 90, 100], "pin": [153, 381],
+          "label": "Een krant op eigen benen; de touwtjes van de poppenspeler zijn doorgeknipt",
+          "params": { "accessory": "strings" }
+        }
+      ],
+      "decor": [
+        { "prop": "magazines", "slot": "shelfMid", "params": { "labels": ["TUIN", "AUTO", "REIS"], "count": 3 } }
+      ]
     }
   ]
 }

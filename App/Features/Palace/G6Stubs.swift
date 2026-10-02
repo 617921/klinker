@@ -7,12 +7,6 @@ enum G6Garage {
     static func verdict(_ pen: PropPen, _ p: PalacePropParams) {}; static func rating(_ pen: PropPen, _ p: PalacePropParams) {}
     static func badge(_ pen: PropPen, _ p: PalacePropParams) {}
 }
-enum G6Papers { static func paper(_ pen: PropPen, _ p: PalacePropParams) {} }
-enum G6Screens {
-    static func hoax(_ pen: PropPen, _ p: PalacePropParams) {}; static func broadcast(_ pen: PropPen, _ p: PalacePropParams) {}
-    static func newsTV(_ pen: PropPen, _ p: PalacePropParams) {}; static func spread(_ pen: PropPen, _ p: PalacePropParams) {}
-    static func ticker(_ pen: PropPen, _ p: PalacePropParams) {}
-}
 enum G6Fire { static func fire(_ pen: PropPen, _ p: PalacePropParams) {}; static func rescue(_ pen: PropPen, _ p: PalacePropParams) {} }
 enum G6Safety {
     static func hazard(_ pen: PropPen, _ p: PalacePropParams) {}; static func smokeAlarm(_ pen: PropPen, _ p: PalacePropParams) {}
