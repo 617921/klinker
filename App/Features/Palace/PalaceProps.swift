@@ -428,6 +428,16 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g2Scroll, g2Deed, g2Signing, g2LawBook, g2Record, g2Heirlooms, g2FamilyTree, g2Inherit, g2Together, g2Proxy
     case g2Talk, g2NewsDesk, g2Broadcast, g2Viewer, g2FilmStrip, g2IdeaBoard
     case g2Target, g2Climb, g2Puzzle, g2MoneyPlant, g2Build
+    // MARK: Group g5 (workshops and culture), drawn by `G5Props` (PalacePropsG5*.swift),
+    // where each one's params are described.
+    // Bike shop and DIY store
+    case g5Bike, g5BikePart, g5TubePatch, g5Swap, g5Checklist, g5Tool, g5Sturdy
+    // People (audience moods, makers at work, groups)
+    case g5Fan, g5Seats, g5Maker, g5Group, g5Couple
+    // Cinema, theatre and museum
+    case g5Poster, g5Print, g5Cloakroom, g5DatePage, g5Screen, g5Emblem, g5Banner, g5Frame, g5Statue
+    // Church
+    case g5Memorial, g5Candles, g5Coffin, g5Cake
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -530,6 +540,10 @@ struct PalacePropView: View, Equatable {
                  .g2Talk, .g2NewsDesk, .g2Broadcast, .g2Viewer, .g2FilmStrip, .g2IdeaBoard,
                  .g2Target, .g2Climb, .g2Puzzle, .g2MoneyPlant, .g2Build:
                 G2Props.draw(prop.kind, pen, p)
+            case .g5Bike, .g5BikePart, .g5TubePatch, .g5Swap, .g5Checklist, .g5Tool, .g5Sturdy, .g5Fan, .g5Seats,
+                 .g5Maker, .g5Group, .g5Couple, .g5Poster, .g5Print, .g5Cloakroom, .g5DatePage, .g5Screen, .g5Emblem,
+                 .g5Banner, .g5Frame, .g5Statue, .g5Memorial, .g5Candles, .g5Coffin, .g5Cake:
+                G5Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

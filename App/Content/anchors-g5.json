@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 19,
+      "type": "g5BikeShop",
+      "noor": [166, 290],
+      "order": ["band", "slot", "lek", "ketting", "verlichting", "plakken", "rem", "tweedehands", "nakijken", "onderhoud", "vervangen"],
+      "prompts": {
+        "plakken": "Waar kun je je band",
+        "nakijken": "Waar laat je je fiets",
+        "vervangen": "Wat moet je hier",
+        "lek": "Welke fiets is",
+        "tweedehands": "Welke fiets is",
+        "onderhoud": "Hoeveel kost het"
+      },
+      "weg": [
+        {"target": "lek", "options": ["lek", "band", "plakken"]},
+        {"target": "ketting", "options": ["rem", "ketting", "slot"]},
+        {"target": "vervangen", "options": ["nakijken", "onderhoud", "vervangen"]},
+        {"target": "tweedehands", "options": ["verlichting", "lek", "tweedehands"]},
+        {"target": "plakken", "options": ["vervangen", "plakken", "band"]}
+      ],
+      "anchors": [
+        {"word": "onderhoud", "prop": "sign", "slot": "window", "label": "Een bord op het raam: een fiets en een moersleutel, één keer per jaar voor 45 euro", "params": {"caption": "1× per jaar", "icons": ["bike", "g5Wrench"], "text": "€ 45", "tone": "white", "mount": "wall"}},
+        {"word": "band", "prop": "g5BikePart", "slot": "shelfTopLeft", "label": "Twee nieuwe zwarte rubberen ringen met profiel aan een haak, maat 28 inch", "params": {"accessory": "tyre", "text": "28\""}},
+        {"word": "verlichting", "prop": "g5BikePart", "slot": "shelfTopMid", "label": "In het donker: een koplamp met een felle lichtbundel en een rood achterlampje", "params": {"accessory": "lights"}},
+        {"word": "slot", "prop": "g5BikePart", "slot": "shelfTopRight", "label": "Een dikke metalen beugel met een geel stuk en een sleutel erin", "params": {"accessory": "lock"}},
+        {"word": "ketting", "prop": "g5BikePart", "slot": "shelfLeft", "label": "Een groot en een klein tandwiel met schakels eromheen", "params": {"accessory": "chain"}},
+        {"word": "rem", "prop": "g5BikePart", "slot": "shelfMid", "label": "Een hand knijpt in de hendel aan het stuur; de kabel drukt rode blokjes tegen het wiel", "params": {"accessory": "brake"}},
+        {"word": "plakken", "prop": "g5TubePatch", "slot": "counterLeft", "label": "Een zwarte rubberen slang met een oranje lapje; een duim drukt het vast, ernaast een tube lijm", "params": {}},
+        {"word": "vervangen", "prop": "g5Swap", "slot": "counterMid", "label": "Een oud kapot zadel met een rood kruis, twee pijlen rond, en een nieuw zadel met een groen vinkje", "params": {}},
+        {"word": "nakijken", "prop": "g5Checklist", "slot": "counterRight", "label": "Een klembord met drie vinkjes, bij wiel, lamp en schakel, en een vergrootglas erboven", "params": {"caption": "fiets 12", "icons": ["g5Tyre", "g5Bulb", "link"], "count": 3}},
+        {"word": "lek", "prop": "g5Bike", "frame": [2, 294, 136, 86], "pin": [8, 378], "align": "leading", "tilt": -1.5, "label": "Een fiets met een plat voorwiel: er zit een spijker in en de lucht sist eruit", "params": {"accessory": "flat", "text": "psss", "tone": "blue"}},
+        {"word": "tweedehands", "prop": "g5Bike", "frame": [232, 294, 136, 86], "pin": [364, 378], "align": "trailing", "tilt": 1.5, "label": "Een oude fiets met wat roest en tape op het zadel; op het kaartje: gebruikt, 95 euro", "params": {"accessory": "tag", "text": "€ 95", "caption": "gebruikt", "tone": "green", "flip": true}}
+      ],
+      "decor": [
+        {"prop": "g5BikePart", "slot": "shelfRight", "params": {"accessory": "pump"}}
+      ]
+    },
+    {
+      "sheet": 22,
+      "type": "g5Museum",
+      "noor": [],
+      "order": ["schilderij", "beeld", "kunstenaar", "rondleiding", "tentoonstelling", "museumkaart", "eeuw", "aanraken", "beroemd", "bewonderen", "indrukwekkend"],
+      "prompts": {
+        "aanraken": "Wat mag je niet",
+        "bewonderen": "Wie staat iets te",
+        "beroemd": "Welk portret is",
+        "indrukwekkend": "Wat is heel",
+        "eeuw": "Waar zie je een hele",
+        "rondleiding": "Wie geeft een",
+        "kunstenaar": "Waar werkt de",
+        "museumkaart": "Waar is je",
+        "tentoonstelling": "Waar zie je de nieuwe"
+      },
+      "weg": [
+        {"target": "beeld", "options": ["schilderij", "beeld", "aanraken"]},
+        {"target": "beroemd", "options": ["beroemd", "indrukwekkend", "bewonderen"]},
+        {"target": "rondleiding", "options": ["tentoonstelling", "kunstenaar", "rondleiding"]},
+        {"target": "eeuw", "options": ["eeuw", "museumkaart", "tentoonstelling"]},
+        {"target": "kunstenaar", "options": ["bewonderen", "kunstenaar", "schilderij"]}
+      ],
+      "anchors": [
+        {"word": "tentoonstelling", "prop": "g5Banner", "slot": "banner", "label": "Een rode banier aan het plafond met een klein landschap in een gouden lijst: Hollandse meesters, van 12 maart tot 30 juni", "params": {"lines": ["Hollandse", "meesters"], "caption": "12/3 – 30/6", "tone": "red"}},
+        {"word": "schilderij", "prop": "g5Frame", "slot": "paintingLeft", "label": "Een landschap met een molen en een sloot in een gouden lijst", "params": {"accessory": "landscape"}},
+        {"word": "eeuw", "prop": "sign", "slot": "plaque", "label": "Een bordje aan de muur: van 1600 tot 1700, honderd jaar", "params": {"caption": "1600 – 1700", "text": "100 jaar", "tone": "white", "mount": "wall"}},
+        {"word": "indrukwekkend", "prop": "g5Frame", "slot": "paintingBig", "label": "Een enorm donker doek met een groep mannen met hoeden en een lans; een piepklein mensje staat ervoor", "params": {"accessory": "group", "variant": 1}},
+        {"word": "beroemd", "prop": "g5Frame", "slot": "paintingRight", "label": "Een klein portret van een meisje met een parel; ervoor een drukte van mensen die foto's maken met flitsen", "params": {"accessory": "portrait", "count": 3}},
+        {"word": "beeld", "prop": "g5Statue", "slot": "plinthLeft", "label": "Een witte marmeren figuur op een sokkel", "params": {"accessory": "statue"}},
+        {"word": "aanraken", "prop": "g5Statue", "slot": "niche", "label": "Een blauw-witte vaas op een sokkel; een kleine hand komt er tegenaan, en een rond bordje met een doorgestreepte hand", "params": {"accessory": "vase", "variant": 1}},
+        {"word": "museumkaart", "prop": "card", "slot": "floorLeft", "label": "Een hand houdt een pasje met een foto omhoog: een jaarkaart", "params": {"accessory": "hand", "caption": "jaarkaart", "text": "N. Bakker", "tone": "red", "variant": 2}, "pin": [4, 384], "align": "leading", "frame": [2, 300, 66, 82]},
+        {"word": "bewonderen", "prop": "g5Fan", "slot": "floorMid", "label": "Een vrouw met haar handen gevouwen en hartjes boven haar hoofd, ze kijkt verliefd omhoog", "params": {"accessory": "admire", "mount": "stand", "variant": 3}, "pin": [108, 384], "align": "leading"},
+        {"word": "kunstenaar", "prop": "g5Maker", "slot": "floorCenter", "label": "Een man met een rode baret en een palet werkt met een penseel aan een doek op een ezel", "params": {"accessory": "painter", "variant": 7}, "pin": [250, 352], "align": "trailing"},
+        {"word": "rondleiding", "prop": "g5Group", "slot": "floorRight", "label": "Een gids met een oranje vlaggetje praat, en een groepje mensen loopt achter haar aan", "params": {"accessory": "tour", "text": "Hier ziet u…", "variant": 6}, "pin": [366, 384], "align": "trailing"}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
+      "sheet": 23,
+      "type": "g5Cinema",
+      "noor": [],
+      "order": ["zaal", "rij", "hoofdrol", "ondertiteling", "regisseur", "spannend", "recensie", "ontroerend", "aanraden", "afspelen", "uitkijken"],
+      "prompts": {
+        "aanraden": "Wie wil je deze film",
+        "uitkijken": "Naar welke dag kun je",
+        "afspelen": "Waar kan een verhaal zich",
+        "spannend": "Wie vindt de film",
+        "ontroerend": "Wie vindt de film",
+        "rij": "Waar is de vijfde",
+        "zaal": "Waar zie je het nummer van de",
+        "recensie": "Waar lees je een",
+        "hoofdrol": "Wie speelt de"
+      },
+      "weg": [
+        {"target": "spannend", "options": ["ontroerend", "spannend", "uitkijken"]},
+        {"target": "recensie", "options": ["recensie", "aanraden", "hoofdrol"]},
+        {"target": "ondertiteling", "options": ["afspelen", "ondertiteling", "zaal"]},
+        {"target": "rij", "options": ["zaal", "regisseur", "rij"]},
+        {"target": "afspelen", "options": ["hoofdrol", "afspelen", "recensie"]}
+      ],
+      "anchors": [
+        {"word": "zaal", "prop": "g5Emblem", "slot": "crest", "label": "Een verlicht bordje boven het scherm: een filmstrook en een grote 3", "params": {"tone": "dark", "icons": ["g5Film"], "text": "3"}, "pin": [226, 34], "align": "leading"},
+        {"word": "ondertiteling", "prop": "g5Screen", "slot": "screen", "label": "Het filmdoek: twee mensen bij de gracht in de nacht, en onderaan witte letters: Ik blijf bij je.", "params": {"text": "Ik blijf bij je."}, "pin": [80, 42], "align": "leading"},
+        {"word": "hoofdrol", "prop": "g5Poster", "slot": "wallLeft", "label": "Een filmposter met één groot gezicht en een gouden ster, en twee kleine gezichtjes onderaan", "params": {"accessory": "lead", "text": "De Brug", "caption": "Sara Bos", "tone": "purple"}},
+        {"word": "afspelen", "prop": "g5Poster", "slot": "wallRight", "label": "Een filmposter: grachtenhuizen met een rode speld erboven, Amsterdam 1944", "params": {"accessory": "city", "text": "Amsterdam", "caption": "1944", "tone": "blue"}},
+        {"word": "uitkijken", "prop": "g5DatePage", "slot": "boxLeft", "frame": [8, 112, 58, 70], "label": "Een kalender: dag na dag doorgestreept, en een dag met een filmstrook in een rode cirkel; nog drie dagen", "params": {"accessory": "countdown", "caption": "nog 3 dagen!", "icons": ["g5Film"]}},
+        {"word": "recensie", "prop": "g5Print", "slot": "boxRight", "frame": [306, 112, 58, 72], "label": "Een krant met vier gouden sterren boven een stuk over de film", "params": {"accessory": "news", "caption": "De Stad", "text": "De Brug", "count": 4}},
+        {"word": "rij", "prop": "g5Seats", "slot": "seats", "label": "Stoelen achter elkaar vol hoofden; de middelste reeks licht geel op, met een bordje 5", "params": {"highlight": 1, "text": "5"}},
+        {"word": "spannend", "prop": "g5Fan", "slot": "floorLeft", "label": "Een man in een rode stoel met grote ogen en zijn haren rechtop; zijn popcorn vliegt de lucht in", "params": {"accessory": "scared", "variant": 1}},
+        {"word": "ontroerend", "prop": "g5Fan", "slot": "floorMid", "label": "Een vrouw in een rode stoel veegt een traan weg met een zakdoek; er zweeft een hartje", "params": {"accessory": "crying", "variant": 3}},
+        {"word": "aanraden", "prop": "smartphone", "frame": [180, 300, 94, 78], "pin": [227, 378], "align": "center", "tilt": 1, "label": "Een telefoon met berichtjes van een vriend: Je moet De Brug zien! Echt heel goed!", "params": {"lines": ["in|Je moet De Brug zien!", "in|Echt heel goed!", "out|Oké, morgen!"]}},
+        {"word": "regisseur", "prop": "g5Maker", "slot": "floorRight", "label": "Een man met een baret in een stoel van canvas, met een megafoon en een klapbord", "params": {"accessory": "director", "variant": 4}}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
+      "sheet": 25,
+      "type": "g5Church",
+      "noor": [],
+      "order": ["koor", "bruiloft", "begrafenis", "trouwen", "feestdag", "gemeenschap", "godsdienst", "geloof", "herdenken", "gelovig", "plechtig"],
+      "prompts": {
+        "trouwen": "Wie gaan er",
+        "herdenken": "Waar kun je de doden",
+        "gelovig": "Wie is heel",
+        "plechtig": "Wie is er heel",
+        "feestdag": "Waar zie je een",
+        "koor": "Wie zingen er in het",
+        "gemeenschap": "Waar zie je de",
+        "bruiloft": "Wat eet je op de",
+        "begrafenis": "Waar zie je een",
+        "godsdienst": "Waar zie je meer dan één",
+        "geloof": "Waar zie je iets van"
+      },
+      "weg": [
+        {"target": "trouwen", "options": ["bruiloft", "trouwen", "feestdag"]},
+        {"target": "begrafenis", "options": ["herdenken", "begrafenis", "plechtig"]},
+        {"target": "geloof", "options": ["geloof", "gelovig", "godsdienst"]},
+        {"target": "koor", "options": ["gemeenschap", "koor", "plechtig"]},
+        {"target": "herdenken", "options": ["begrafenis", "feestdag", "herdenken"]}
+      ],
+      "anchors": [
+        {"word": "feestdag", "prop": "g5DatePage", "slot": "board", "label": "Een scheurkalender: 25 december in rood, met een kerstboompje", "params": {"accessory": "tearoff", "caption": "december", "text": "25", "icons": ["g5Tree"]}},
+        {"word": "koor", "prop": "g5Group", "slot": "gallery", "label": "Op de galerij voor het orgel zingen zeven mensen in rode gewaden uit zwarte mapjes", "params": {"accessory": "choir", "tone": "red"}},
+        {"word": "godsdienst", "prop": "sign", "slot": "signRight", "label": "Een bord met de tekens van vier religies naast elkaar: een kruis, een maan met een ster, een davidster en een wiel", "params": {"icons": ["g5Cross", "g5Crescent", "g5David", "g5Dharma"], "tone": "white", "mount": "wall"}},
+        {"word": "plechtig", "prop": "g5Maker", "slot": "pulpit", "label": "Hoog op de houten preekstoel staat een dominee in een zwarte toga met een witte bef, stil met een hand omhoog, tussen twee kaarsen", "params": {"accessory": "minister", "variant": 0}},
+        {"word": "trouwen", "prop": "g5Couple", "slot": "front", "label": "Een man in pak schuift een gouden ring om de vinger van een vrouw in een witte jurk met sluier", "params": {"variant": 1}},
+        {"word": "herdenken", "prop": "g5Memorial", "slot": "plaque", "label": "Een stenen plaat met 1940 – 1945, eronder een krans van rode en witte bloemen met een lint, 4 mei, en twee kaarsjes", "params": {"lines": ["1940 – 1945"], "caption": "4 mei"}},
+        {"word": "gemeenschap", "prop": "g5Group", "slot": "aisle", "label": "Jong en oud houden elkaar bij de hand onder een groot hart", "params": {"accessory": "circle"}},
+        {"word": "gelovig", "prop": "g5Fan", "slot": "floorLeft", "label": "Een oude vrouw met grijs haar zit in een kerkbank met gevouwen handen en gesloten ogen, een boekje op schoot", "params": {"accessory": "pray", "mount": "pew", "variant": 5}},
+        {"word": "geloof", "prop": "g5Candles", "slot": "floorMid", "label": "Een ijzeren rek vol brandende kaarsjes; een hand steekt er nog een aan", "params": {}},
+        {"word": "begrafenis", "prop": "g5Coffin", "slot": "floorCenter", "label": "Een houten kist met witte bloemen erop, een foto op een standaard en een kaars", "params": {}},
+        {"word": "bruiloft", "prop": "g5Cake", "slot": "floorRight", "label": "Een witte taart van drie lagen met een bruidspaartje erop, twee glazen die proosten en confetti", "params": {}}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
+      "sheet": 26,
+      "type": "g5Theater",
+      "noor": [228, 292],
+      "order": ["toneel", "publiek", "optreden", "garderobe", "applaus", "voorstelling", "genieten", "programma", "cabaret", "enthousiast", "teleurgesteld"],
+      "prompts": {
+        "genieten": "Wie zit te",
+        "enthousiast": "Wie is heel",
+        "teleurgesteld": "Wie is",
+        "optreden": "Wie gaat er",
+        "applaus": "Waar hoor je",
+        "cabaret": "Waar zie je",
+        "garderobe": "Waar hang je je jas in de",
+        "programma": "Wat staat er op het",
+        "voorstelling": "Hoe laat begint de"
+      },
+      "weg": [
+        {"target": "applaus", "options": ["enthousiast", "applaus", "publiek"]},
+        {"target": "cabaret", "options": ["cabaret", "voorstelling", "optreden"]},
+        {"target": "teleurgesteld", "options": ["genieten", "teleurgesteld", "enthousiast"]},
+        {"target": "garderobe", "options": ["programma", "toneel", "garderobe"]},
+        {"target": "optreden", "options": ["toneel", "optreden", "applaus"]}
+      ],
+      "anchors": [
+        {"word": "toneel", "prop": "g5Emblem", "slot": "crest", "label": "Een gouden schild boven het podium met een lachend en een huilend masker", "params": {"icons": ["g5Masks"]}},
+        {"word": "optreden", "prop": "g5Maker", "slot": "stage", "label": "Een zangeres in een glinsterende jurk zingt in een microfoon, in het licht van een spot", "params": {"accessory": "singer", "variant": 1, "tone": "pink"}},
+        {"word": "voorstelling", "prop": "g5Poster", "slot": "wallLeft", "label": "Een affiche: een koning en een dame tussen rode gordijnen, vanavond om acht uur", "params": {"accessory": "play", "text": "vanavond", "caption": "20:00", "tone": "blue"}},
+        {"word": "cabaret", "prop": "g5Poster", "slot": "wallRight", "label": "Een affiche: een man op een kruk met een microfoon, en overal haha", "params": {"accessory": "comedian", "text": "Kees Lach", "caption": "vr 21:00", "tone": "orange"}},
+        {"word": "genieten", "prop": "g5Fan", "slot": "boxLeft", "label": "In de loge links: een vrouw met haar ogen dicht en een glimlach, een hand op haar hart, muzieknootjes", "params": {"accessory": "bliss", "mount": "box", "variant": 5}},
+        {"word": "enthousiast", "prop": "g5Fan", "slot": "boxRight", "label": "In de loge rechts: een man met beide armen omhoog die bravo roept", "params": {"accessory": "cheer", "mount": "box", "variant": 1, "flip": true, "text": "bravo!"}},
+        {"word": "publiek", "prop": "g5Seats", "slot": "seats", "label": "Drie rijen rode stoelen vol mensen die naar het podium kijken", "params": {}},
+        {"word": "garderobe", "prop": "g5Cloakroom", "slot": "floorLeft", "label": "Een balie met jassen aan hangers met nummertjes; een hand legt een penning met 17 neer", "params": {"text": "17"}},
+        {"word": "programma", "prop": "g5Print", "frame": [92, 312, 50, 76], "pin": [117, 300], "align": "center", "tilt": -1.5, "label": "Een boekje op een standaard met data en titels: vrijdag Hamlet, zaterdag Carmen, zondag jazz", "params": {"accessory": "booklet", "mount": "stand", "caption": "oktober", "lines": ["vr 3|Hamlet", "za 4|Carmen", "zo 5|Jazz"]}},
+        {"word": "applaus", "prop": "g5Fan", "frame": [140, 284, 88, 118], "pin": [188, 382], "align": "center", "tilt": 1.5, "label": "Twee mensen klappen blij in hun handen", "params": {"accessory": "clap", "count": 2, "variant": 2, "text": "klap! klap!"}},
+        {"word": "teleurgesteld", "prop": "g5Fan", "slot": "floorRight", "label": "Een man met een frons en zijn duim omlaag, onder een grijs wolkje: jammer", "params": {"accessory": "down", "variant": 0, "flip": true, "text": "jammer…"}}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
+      "sheet": 37,
+      "type": "g5DiyStore",
+      "noor": [208, 292],
+      "order": ["boor", "verf", "schroef", "kwast", "spijker", "gereedschap", "stevig", "schilderen", "vastdraaien", "klussen", "handig"],
+      "prompts": {
+        "vastdraaien": "Waar kun je een schroef",
+        "schilderen": "Wie is aan het",
+        "klussen": "Wie gaat thuis",
+        "handig": "Wie is heel",
+        "stevig": "Welke plank is",
+        "gereedschap": "Waar zit het"
+      },
+      "weg": [
+        {"target": "schroef", "options": ["spijker", "schroef", "boor"]},
+        {"target": "kwast", "options": ["verf", "kwast", "schilderen"]},
+        {"target": "klussen", "options": ["handig", "klussen", "gereedschap"]},
+        {"target": "vastdraaien", "options": ["vastdraaien", "schroef", "stevig"]},
+        {"target": "spijker", "options": ["boor", "gereedschap", "spijker"]}
+      ],
+      "anchors": [
+        {"word": "boor", "prop": "g5Tool", "slot": "shelfTopLeft", "label": "Een oranje accumachine met een spiraal voorop, en een plankje met een vers gaatje", "params": {"accessory": "drill"}},
+        {"word": "schroef", "prop": "g5Tool", "slot": "shelfTopMid", "label": "Een grote metalen pin met een spiraalrand en een kruisje in de kop, en een doosje vol", "params": {"accessory": "screw"}},
+        {"word": "spijker", "prop": "g5Tool", "slot": "shelfTopRight", "label": "Een hamer slaat een dunne metalen pin met een platte kop in een plank", "params": {"accessory": "nail"}},
+        {"word": "verf", "prop": "g5Tool", "slot": "shelfLeft", "label": "Blikken met kleur, één open met een druppel langs de rand, en een waaier kleurkaartjes", "params": {"accessory": "paint", "tone": "green"}},
+        {"word": "kwast", "prop": "g5Tool", "slot": "shelfMid", "label": "Een pot met drie borstels met houten stelen, en voorop één met een natte punt", "params": {"accessory": "brushes", "tone": "blue"}},
+        {"word": "gereedschap", "prop": "g5Tool", "slot": "counterLeft", "label": "Een open rode kist vol: hamer, zaag, tang en moersleutel", "params": {"accessory": "toolbox"}},
+        {"word": "vastdraaien", "prop": "g5Tool", "slot": "counterMid", "label": "Een hand met een gele draaier aan een scharnier op een plank, en een groene pijl die rond gaat", "params": {"accessory": "tighten", "tone": "yellow"}},
+        {"word": "stevig", "prop": "g5Sturdy", "slot": "shelfRight", "label": "Een dikke plank op grote steunen houdt 50 kilo, met een vinkje; een dunne plank ernaast buigt door, met een kruis", "params": {"text": "50 kg"}},
+        {"word": "schilderen", "prop": "g5Maker", "slot": "floorLeft", "frame": [4, 262, 100, 136], "pin": [6, 374], "label": "Een man in een witte overall rolt lichtblauwe kleur op een muur, met een bak aan zijn voeten", "params": {"accessory": "roller", "variant": 1}},
+        {"word": "klussen", "prop": "g5Maker", "frame": [106, 292, 96, 110], "pin": [150, 376], "align": "center", "tilt": 1.5, "label": "Een man in een blauwe overall met een pet, een lange plank op zijn schouder en een rode kist", "params": {"accessory": "diy", "variant": 4}},
+        {"word": "handig", "prop": "g5Maker", "slot": "floorRight", "frame": [262, 278, 104, 126], "pin": [364, 376], "label": "Een vrouw met een duim omhoog en een draaier; naast haar een lamp, een stoel en een fiets, alle drie met een vinkje", "params": {"accessory": "handy", "variant": 3, "icons": ["g5Bulb", "g5Chair", "bike"]}}
+      ],
+      "decor": [
+
+      ]
+    }
+  ]
+}

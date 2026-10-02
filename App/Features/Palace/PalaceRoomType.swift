@@ -36,6 +36,8 @@ enum PalaceRoomType: String, CaseIterable {
     case g2Notary
     case g2Studio
     case g2Loft
+    // Group g5 (workshops and culture): see G5Rooms.swift.
+    case g5BikeShop, g5DiyStore, g5Cinema, g5Theater, g5Museum, g5Church
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -72,6 +74,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Notary: "werkkamer"
         case .g2Studio: "studio"
         case .g2Loft: "werkplek"
+        case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Hall
         }
     }
 
@@ -114,6 +117,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Notary: "De werkkamer van de notaris"
         case .g2Studio: "Een televisiestudio"
         case .g2Loft: "Een startup in een oud pakhuis"
+        case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5SceneLabel
         }
     }
 
@@ -148,6 +152,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Notary: G2Notary.noor
         case .g2Studio: G2Studio.noor
         case .g2Loft: G2Loft.noor
+        case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Noor
         }
     }
 
@@ -181,6 +186,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Notary: G2Notary.slots
         case .g2Studio: G2Studio.slots
         case .g2Loft: G2Loft.slots
+        case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Slots
         }
     }
 }
@@ -219,6 +225,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g2Notary: G2NotaryBackdrop()
         case .g2Studio: G2StudioBackdrop()
         case .g2Loft: G2LoftBackdrop()
+        case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: G5RoomBackdrop(type: type)
         }
     }
 }
