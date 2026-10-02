@@ -1,28 +1,27 @@
 import SwiftUI
 
-/// One word on the collage sheet: its own strip, sized and faded by memory level.
-/// Words you're forgetting look sun-bleached and flicker softly.
+/// One word of a place: a calm paper strip, with five dots for how well you know it.
+/// Words you're forgetting look a little sun-bleached and get a "bijna weg" tag.
 struct LevelStrip: View {
     let word: Word
     let index: Int
     let look: WordLook
     let action: () -> Void
 
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
     var body: some View {
         Button(action: action) {
-            WordStrip(word: word, size: WallScale.size(level: look.level, word: word.nl))
-                .contentTransition(.interpolate)
-                .modifier(SunBleach(amount: look.bleach))
-                .modifier(FadeFlicker(active: look.fading && !reduceMotion, seed: index))
-                .overlay(alignment: .topTrailing) {
-                    if look.fading { FadingTag().offset(x: 10, y: -12) }
-                }
-                .opacity(WallScale.opacity(level: look.level))
-                .rotationEffect(.degrees(Tilt.at(index)))
-                .frame(minWidth: 44, minHeight: 44)
-                .contentShape(Rectangle())
+            VStack(spacing: 6) {
+                WordStrip(word: word, size: 19)
+                    .modifier(SunBleach(amount: look.bleach))
+                    .overlay(alignment: .topTrailing) {
+                        if look.fading { FadingTag().offset(x: 10, y: -12) }
+                    }
+                    .rotationEffect(.degrees(Tilt.at(index) * 0.4))
+                LevelDots(level: look.level, dot: 5)
+                    .animation(.spring(response: 0.4, dampingFraction: 0.7), value: look.level)
+            }
+            .frame(minWidth: 44, minHeight: 44)
+            .contentShape(Rectangle())
         }
         .buttonStyle(PressStyle())
         .accessibilityLabel(accessibilityText)

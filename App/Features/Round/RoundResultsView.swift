@@ -158,16 +158,15 @@ struct RoundChangeRow: View {
     }
 
     var body: some View {
-        let newSize = (WallScale.size(level: change.to, word: change.word.nl) * 0.85).rounded()
-        let oldSize = (WallScale.size(level: change.from, word: change.word.nl) * 0.85).rounded()
         let stage = WallScale.stageNames[max(0, min(4, change.to))]
         HStack(spacing: 12) {
-            // Drawn at the new size; starts at the old size and springs into place.
-            WordStrip(word: change.word, size: newSize)
-                .scaleEffect(settled ? 1 : oldSize / newSize, anchor: .leading)
-                .opacity(WallScale.opacity(level: settled ? change.to : change.from))
-                .rotationEffect(.degrees(-1.5))
-                .frame(maxWidth: .infinity, alignment: .leading)
+            // The dots start at the old level and spring to the new one.
+            VStack(alignment: .leading, spacing: 7) {
+                WordStrip(word: change.word, size: 19)
+                    .rotationEffect(.degrees(-1))
+                LevelDots(level: settled ? change.to : change.from)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             Text(note(stage))
                 .font(.system(size: 13, weight: .heavy))
                 .foregroundStyle(noteColor)

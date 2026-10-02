@@ -172,6 +172,7 @@ private struct StadHeader: View {
     private func color(_ status: SheetStatus) -> Color {
         switch status {
         case .built: Theme.ink
+        case .growing: Theme.orange.opacity(0.45)
         case .current: Theme.orange
         case .fading: Theme.tapeOther
         case .locked: Theme.hairline
@@ -189,7 +190,9 @@ private struct NowCard: View {
         let n = progress.currentSheetNumber
         let sheet = progress.content.sheet(n)
         let total = sheet?.words.count ?? 11
-        let learned = min(total, progress.learnedCount(inSheet: n))
+        let met = min(total, progress.metCount(inSheet: n))
+        let left = total - met
+        let next = n < ContentStore.totalSheets ? PlaceCatalog.name(n + 1) : nil
         VStack(alignment: .leading, spacing: 16) {
             Button(action: onOpen) {
                 HStack(alignment: .center, spacing: 14) {
@@ -203,13 +206,13 @@ private struct NowCard: View {
                     .rotationEffect(.degrees(-3))
                     .accessibilityHidden(true)
                     VStack(alignment: .leading, spacing: 3) {
-                        CourierLabel(text: "Nu in aanbouw · vel \(n)")
+                        CourierLabel(text: "Nu bezig · vel \(n)")
                         Text(sheet?.title ?? PlaceCatalog.name(n))
                             .font(.system(size: 22, weight: .heavy))
                             .tracking(-0.4)
                             .foregroundStyle(Theme.ink)
                             .multilineTextAlignment(.leading)
-                        Text("\(learned) van \(total) woorden zitten vast · bekijk ze")
+                        Text(next.map { "Nog \(left) \(left == 1 ? "woord" : "woorden") goed, dan gaat \($0) open" } ?? "Nog \(left) \(left == 1 ? "woord" : "woorden") te gaan")
                             .font(Fonts.body(14))
                             .foregroundStyle(Theme.muted)
                     }
@@ -227,7 +230,7 @@ private struct NowCard: View {
             HStack(spacing: 4) {
                 ForEach(0..<total, id: \.self) { i in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(i < learned ? Theme.orange : Theme.hairline)
+                        .fill(i < met ? Theme.orange : Theme.hairline)
                 }
             }
             .frame(height: 10)

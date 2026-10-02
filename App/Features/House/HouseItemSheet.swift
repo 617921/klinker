@@ -36,7 +36,7 @@ struct HouseWordCard: View {
                     .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
                     .rotationEffect(.degrees(-2))
                 VStack(alignment: .leading, spacing: 8) {
-                    StripView(text: item.word, style: item.style, size: 26, tape: item.article)
+                    PaperStrip(text: item.word, size: 26, tape: item.article)
                         .rotationEffect(.degrees(-2))
                         .accessibilityLabel(item.spoken)
                     Text(item.en)

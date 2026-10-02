@@ -85,15 +85,65 @@ struct StripView: View {
     }
 }
 
-/// A word's own strip (its fixed style, with article tape).
+/// The calm look for every vocabulary word: one readable font, the word spelled exactly as
+/// written (no capitals), on a cream paper strip. Only the tape colour varies (de / het / other).
+/// The mixed magazine styles (`StripView`) are kept for the anonymous letters only.
+struct PaperStrip: View {
+    let text: String
+    var size: CGFloat = 20
+    var tape: Article? = nil
+
+    static let paper = Color(hex: 0xFBF6EA)
+    static let fontName = "AvenirNext-DemiBold"
+
+    var body: some View {
+        Text(text)
+            .font(.custom(Self.fontName, size: size))
+            .foregroundStyle(Theme.ink)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .padding(.horizontal, (size * 0.45 + 4).rounded())
+            .padding(.vertical, (size * 0.16 + 2).rounded())
+            .background(Self.paper)
+            .overlay(Rectangle().stroke(Color(hex: 0xE2DACA), lineWidth: 1))
+            .shadow(color: Theme.ink.opacity(0.10), radius: 1.5, x: 0.5, y: 1.5)
+            .overlay(alignment: .topLeading) {
+                if let tape {
+                    Tape(article: tape, width: max(18, (size * 0.9 + 6).rounded()))
+                        .offset(x: 8, y: -7)
+                }
+            }
+    }
+}
+
+/// A vocabulary word as a paper strip with its article tape.
 struct WordStrip: View {
     let word: Word
     var size: CGFloat = 20
     var showTape = true
 
     var body: some View {
-        StripView(text: word.nl, style: word.style, size: size, tape: showTape ? word.article : nil)
+        PaperStrip(text: word.nl, size: size, tape: showTape ? word.article : nil)
             .accessibilityLabel(word.spoken)
+    }
+}
+
+/// How well a word is known: four dots, empty for a new word, full when mastered
+/// (Gezien, Herkennen, Onthouden, Beheerst).
+struct LevelDots: View {
+    let level: Int
+    var dot: CGFloat = 6
+
+    var body: some View {
+        HStack(spacing: 3) {
+            ForEach(0..<4, id: \.self) { i in
+                Circle()
+                    .fill(i < max(0, min(4, level)) ? Theme.ink : Color(hex: 0xD9D4C7))
+                    .frame(width: dot, height: dot)
+            }
+        }
+        .accessibilityElement()
+        .accessibilityLabel(WallScale.stageNames[max(0, min(4, level))])
     }
 }
 

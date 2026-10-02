@@ -30,7 +30,7 @@ struct PalaceWordStrip: View {
     var tilt: Double = 0
 
     var body: some View {
-        StripView(text: word.nl, style: word.style, size: size, tape: word.article)
+        WordStrip(word: word, size: size)
             .fixedSize()
             .rotationEffect(.degrees(tilt))
             .accessibilityLabel(word.spoken)

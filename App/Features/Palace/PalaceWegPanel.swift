@@ -83,7 +83,7 @@ struct PalaceWegPanel: View {
         return Button {
             game.pickWeg(k, progress: progress)
         } label: {
-            StripView(text: word.nl, style: word.style, size: PalaceWordStrip.size(for: word, normal: 20, long: 16), tape: word.article)
+            WordStrip(word: word, size: PalaceWordStrip.size(for: word, normal: 20, long: 16))
                 .fixedSize()
                 .frame(minHeight: 46)
                 .overlay(Rectangle().stroke(outline, lineWidth: 3).padding(-3))

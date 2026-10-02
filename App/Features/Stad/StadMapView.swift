@@ -16,7 +16,8 @@ enum StadPlaces {
     static func statusWord(_ status: SheetStatus) -> String {
         switch status {
         case .built: "gebouwd"
-        case .current: "in aanbouw"
+        case .growing: "in aanbouw"
+        case .current: "nu bezig"
         case .fading: "verbleekt"
         case .locked: "op slot"
         }
@@ -314,10 +315,13 @@ private struct KaartLegend: View {
         Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 5) {
             GridRow {
                 item(.built, "Gebouwd")
-                item(.current, "In aanbouw")
+                item(.growing, "In aanbouw")
             }
             GridRow {
+                item(.current, "Nu bezig")
                 item(.fading, "Verbleekt")
+            }
+            GridRow {
                 item(.locked, "Op slot")
             }
         }
@@ -332,7 +336,7 @@ private struct KaartLegend: View {
         .shadow(color: Theme.ink.opacity(0.18), radius: 4, y: 2)
         .allowsHitTesting(false)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Legenda: gebouwd, in aanbouw, verbleekt, op slot")
+        .accessibilityLabel("Legenda: gebouwd, in aanbouw, nu bezig, verbleekt, op slot")
     }
 
     private func item(_ status: SheetStatus, _ text: String) -> some View {
@@ -351,6 +355,7 @@ private struct KaartLegendIcon: View {
 
     private static let house = StadSVG.path("M2 13V6l5-4 5 4v7z")
     private static let window = StadSVG.path("M5.5 8h3v3h-3z")
+    private static let scaffold = StadSVG.path("M1 5v9M13 5v9M1 8h12M1 11h12")
 
     var body: some View {
         switch status {
@@ -363,6 +368,11 @@ private struct KaartLegendIcon: View {
             Ellipse()
                 .strokeBorder(Theme.orange, lineWidth: 2.5)
                 .frame(width: 14, height: 9)
+        case .growing:
+            ZStack {
+                Self.house.fill(StadInk.hex(0x9A5238))
+                Self.scaffold.stroke(Theme.orange, lineWidth: 1.2)
+            }
         case .fading:
             ZStack(alignment: .topTrailing) {
                 Self.house.fill(Theme.tapeOther)

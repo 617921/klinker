@@ -75,4 +75,28 @@ final class FSRSTests: XCTestCase {
         XCTAssertEqual(progress.status(ofSheet: 1, now: t), .built)
         XCTAssertEqual(progress.status(ofSheet: 1, now: t.addingTimeInterval(400 * 86_400)), .fading)
     }
+
+    func testNextPlaceOpensAfterEveryWordIsRightOnce() {
+        let words = (0..<3).map { Word(id: "u\($0)", nl: "woord\($0)", article: .de, pos: .noun, en: "word", forms: "", partners: "", example: "", style: $0) }
+        let other = Word(id: "v", nl: "v", article: .het, pos: .noun, en: "v", forms: "", partners: "", example: "", style: 1)
+        let content = ContentStore(sheets: [
+            Sheet(number: 1, title: "Een", place: "Station", words: words, sentences: []),
+            Sheet(number: 2, title: "Twee", place: "Bakker", words: [other], sentences: []),
+        ])
+        let defaults = UserDefaults(suiteName: "682.tests.\(UUID().uuidString)")!
+        let progress = ProgressStore(context: nil, content: content, defaults: defaults)
+
+        // A wrong answer doesn't count as met.
+        progress.record("u0", .again, now: start)
+        XCTAssertFalse(progress.isMet("u0"))
+        XCTAssertEqual(progress.currentSheetNumber, 1)
+
+        // One right answer for every word, all on day one: the next place opens.
+        for w in words { progress.record(w.id, .good, now: start.addingTimeInterval(60)) }
+        XCTAssertEqual(progress.metCount(inSheet: 1), 3)
+        XCTAssertEqual(progress.currentSheetNumber, 2)
+        XCTAssertEqual(progress.status(ofSheet: 1, now: start), .growing)
+        XCTAssertEqual(progress.status(ofSheet: 2, now: start), .current)
+        XCTAssertEqual(progress.wordsOnWall, 4)
+    }
 }

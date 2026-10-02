@@ -96,7 +96,7 @@ struct PalacePin: View {
     }
 
     var body: some View {
-        StripView(text: word.nl, style: word.style, size: word.nl.count > 14 ? 11.5 : 13)
+        PaperStrip(text: word.nl, size: word.nl.count > 14 ? 11.5 : 13)
             .fixedSize()
             .shadow(color: Theme.ink.opacity(0.18), radius: 0, x: 0, y: 2)
             .overlay(alignment: .topLeading) {

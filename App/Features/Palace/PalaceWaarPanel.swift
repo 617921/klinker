@@ -33,13 +33,14 @@ struct PalaceWaarPanel: View {
     private func question(_ word: Word) -> some View {
         HStack(alignment: .center, spacing: 10) {
             PalaceFlow(spacing: 6, lineSpacing: 10) {
-                StripView(text: game.room.promptLead(for: word), style: 0, size: 16)
+                Text(game.room.promptLead(for: word))
+                    .font(.system(size: 20, weight: .heavy))
+                    .foregroundStyle(Theme.ink)
                     .fixedSize()
-                    .rotationEffect(.degrees(-1.5))
                 PalaceWordStrip(word: word, size: PalaceWordStrip.size(for: word, normal: 24, long: 19), tilt: 1.5)
-                StripView(text: "?", style: 7, size: 22)
-                    .fixedSize()
-                    .rotationEffect(.degrees(4))
+                Text("?")
+                    .font(.system(size: 22, weight: .heavy))
+                    .foregroundStyle(Theme.ink)
             }
             .padding(.top, 4)
             .accessibilityElement(children: .ignore)

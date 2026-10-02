@@ -189,7 +189,7 @@ private struct StraatInfoCard: View {
         let type = spec.type
         let stone = spec.stoneWord
         HStack(alignment: .center, spacing: 10) {
-            StripView(text: type.word, style: 1, size: 26, tape: .de)
+            PaperStrip(text: type.word, size: 26, tape: .de)
                 .rotationEffect(.degrees(-1.5))
                 .accessibilityLabel("de \(type.word)")
             Spacer(minLength: 0)

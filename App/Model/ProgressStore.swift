@@ -3,11 +3,14 @@ import Observation
 import SwiftData
 
 enum SheetStatus: Equatable {
-    /// All words learned (level 3+), memory fresh.
+    /// All words firmly remembered (level 3+), memory fresh. Scaffolding is off.
     case built
-    /// Learned, but 3+ words are slipping (retrievability under 85%).
+    /// Built, but 3+ words are slipping (retrievability under 85%).
     case fading
-    /// The sheet you're on now.
+    /// Every word answered right at least once, but not yet firmly remembered.
+    /// The next place is open; this one keeps its scaffolding until reviews make it stick.
+    case growing
+    /// The sheet you're on now: not every word answered right yet.
     case current
     /// Not reached yet, or no content yet.
     case locked
@@ -60,6 +63,12 @@ final class ProgressStore {
         return s.retrievability(at: now)
     }
 
+    /// Answered right at least once (every answer that wasn't "again").
+    func isMet(_ id: String) -> Bool {
+        guard let s = states[id] else { return false }
+        return s.reps - s.lapses >= 1
+    }
+
     func isFading(_ id: String, now: Date = .now) -> Bool {
         guard let r = retrievability(id, now: now) else { return false }
         return r < Self.fadingThreshold
@@ -85,8 +94,14 @@ final class ProgressStore {
 
     // MARK: - Sheets
 
+    /// Firmly remembered: every word at level 3+ ("Onthouden"). Takes the scaffolding off.
     func isLearned(_ sheet: Sheet) -> Bool {
         !sheet.words.isEmpty && sheet.words.allSatisfy { level($0.id) >= 3 }
+    }
+
+    /// Every word answered right at least once. Opens the next place.
+    func isIntroduced(_ sheet: Sheet) -> Bool {
+        !sheet.words.isEmpty && sheet.words.allSatisfy { isMet($0.id) }
     }
 
     private func updateCompletedSheets() {
@@ -98,9 +113,10 @@ final class ProgressStore {
         if changed { defaults.set(Array(completedSheets), forKey: Keys.completed) }
     }
 
-    /// The first sheet that isn't finished yet.
+    /// The first sheet whose words haven't all been answered right yet.
+    /// Places open one a day or so; firm memory comes later through reviews.
     var currentSheetNumber: Int {
-        content.sheets.first { !completedSheets.contains($0.number) }?.number
+        content.sheets.first { !completedSheets.contains($0.number) && !isIntroduced($0) }?.number
             ?? min(ContentStore.totalSheets, (content.sheets.last?.number ?? 0) + 1)
     }
 
@@ -111,7 +127,9 @@ final class ProgressStore {
             let fading = sheet.words.filter { isFading($0.id, now: now) }.count
             return fading >= 3 ? .fading : .built
         }
-        if number == currentSheetNumber, content.sheet(number) != nil { return .current }
+        let current = currentSheetNumber
+        if number == current, content.sheet(number) != nil { return .current }
+        if number < current, content.sheet(number) != nil { return .growing }
         return .locked
     }
 
@@ -125,9 +143,10 @@ final class ProgressStore {
 
     // MARK: - Counts
 
-    /// Words on the wall: every word of finished sheets plus the current sheet.
+    /// Words you've reached: every word of open places (up to and including the current one).
     var wordsOnWall: Int {
-        content.sheets.filter { completedSheets.contains($0.number) || $0.number == currentSheetNumber }
+        let current = currentSheetNumber
+        return content.sheets.filter { completedSheets.contains($0.number) || $0.number <= current }
             .reduce(0) { $0 + $1.words.count }
     }
 
@@ -135,6 +154,11 @@ final class ProgressStore {
 
     func learnedCount(inSheet number: Int) -> Int {
         content.sheet(number)?.words.filter { level($0.id) >= 3 }.count ?? 0
+    }
+
+    /// Words of a sheet answered right at least once.
+    func metCount(inSheet number: Int) -> Int {
+        content.sheet(number)?.words.filter { isMet($0.id) }.count ?? 0
     }
 
     // MARK: - Rounds

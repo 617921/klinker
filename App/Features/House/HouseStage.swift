@@ -121,7 +121,7 @@ struct HouseToastCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            StripView(text: toast.label, style: toast.style, size: 18, tape: toast.article)
+            PaperStrip(text: toast.label, size: 18, tape: toast.article)
                 .rotationEffect(.degrees(-2))
             Text(toast.line)
                 .font(.system(size: 14, weight: .heavy))

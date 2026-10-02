@@ -43,7 +43,7 @@ struct HouseTrayCard: View {
                     .frame(width: 60, height: 45)
                     .opacity(slot != nil || flying ? 0.45 : 1)
                 if unlocked {
-                    StripView(text: item.word, style: item.style, size: 12, tape: item.article)
+                    PaperStrip(text: item.word, size: 12, tape: item.article)
                         .frame(maxWidth: 88)
                         .padding(.top, 3)
                 }

@@ -241,7 +241,7 @@ struct KaartHouseCanvas: View, Equatable {
         let geo = KaartData.house(n)
         let pad = Self.pad
         let fading = status == .fading
-        let scaffold = status == .current ? geo.scaffoldFull : fading ? geo.scaffoldPart : nil
+        let scaffold = status == .current ? geo.scaffoldFull : (fading || status == .growing) ? geo.scaffoldPart : nil
         let f = night ? 0.62 : 1
         let trim: UInt32 = night ? 0xB9B4A8 : 0xEFEBE2
         let glass: UInt32 = night ? 0x232B3B : 0x3E4C55

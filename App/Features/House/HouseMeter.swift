@@ -35,7 +35,7 @@ struct HouseMeter: View {
         .rotationEffect(.degrees(-0.4))
         .overlay(alignment: .topTrailing) {
             if pct >= 100 {
-                StripView(text: "gezellig", style: 9, size: 15, tape: Article.none)
+                PaperStrip(text: "gezellig", size: 15, tape: Article.none)
                     .rotationEffect(.degrees(4))
                     .offset(x: -14, y: -24)
                     .transition(.scale(scale: 0.6).combined(with: .opacity))

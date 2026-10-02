@@ -18,19 +18,23 @@ struct StadPlaceSheet: View {
         let status = progress.status(ofSheet: n)
         let total = max(1, progress.content.sheet(n)?.words.count ?? 11)
         let learned = min(total, progress.learnedCount(inSheet: n))
+        let met = min(total, progress.metCount(inSheet: n))
         let fading = status == .fading ? progress.fadingWords(inSheet: n) : []
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header(status)
                 HStack(spacing: 10) {
-                    statusChip(status, learned: learned, total: total, fading: fading.count)
+                    statusChip(status, learned: status == .current ? met : learned, total: total, fading: fading.count)
                     Spacer(minLength: 0)
                     CircleIconButton(systemName: "speaker.wave.2.fill", label: "Luister: \(StadPlaces.spoken(n))", dark: true) {
                         Speech.shared.say(StadPlaces.spoken(n))
                     }
                 }
-                if status == .built || status == .current {
-                    cells(filled: status == .built ? total : learned, total: total, color: status == .built ? Theme.ink : Theme.orange)
+                switch status {
+                case .built: cells(filled: total, total: total, color: Theme.ink)
+                case .growing: cells(filled: learned, total: total, color: Theme.ink)
+                case .current: cells(filled: met, total: total, color: Theme.orange)
+                default: EmptyView()
                 }
                 if status != .locked, let words = progress.content.sheet(n)?.words, !words.isEmpty {
                     PlaceWords(words: words) { word in
@@ -39,7 +43,7 @@ struct StadPlaceSheet: View {
                     }
                     .padding(.top, 4)
                 }
-                Text(message(status, learned: learned, total: total))
+                Text(message(status, learned: status == .current ? met : learned, total: total))
                     .font(Fonts.body(15))
                     .foregroundStyle(Theme.ink)
                     .fixedSize(horizontal: false, vertical: true)
@@ -87,6 +91,7 @@ struct StadPlaceSheet: View {
         let (fill, fg): (Color, Color) = switch status {
         case .built: (Theme.ink, Theme.onInk)
         case .current: (Theme.orange, Theme.ink)
+        case .growing: (StadInk.hex(0xFCE3CF), Theme.ink)
         case .fading: (StadInk.hex(0xD9D6CC), Theme.ink)
         case .locked: (Color.white, Theme.muted)
         }
@@ -118,13 +123,16 @@ struct StadPlaceSheet: View {
             text = "Gebouwd · \(learned) \(learned == 1 ? "woord" : "woorden") beheerst"
             (fill, fg, line, dot) = (Theme.okBg, Theme.okText, Theme.okLine, Theme.okLine)
         case .current:
-            text = "In aanbouw · \(learned) van \(total)"
+            text = "Nu bezig · \(learned) van \(total) goed"
             (fill, fg, line, dot) = (StadInk.hex(0xFCE3CF), Theme.orangeText, Theme.orange, Theme.orange)
+        case .growing:
+            text = "In aanbouw · \(learned) van \(total) vast"
+            (fill, fg, line, dot) = (Color.white, Theme.ink, Theme.orange, Theme.orange)
         case .fading:
             text = "Verbleekt · \(fading) \(fading == 1 ? "woord" : "woorden") bijna vergeten"
             (fill, fg, line, dot) = (StadInk.hex(0xECEAE4), Theme.muted, Theme.tapeOther, Theme.tapeOther)
         case .locked:
-            text = n > 1 ? "Op slot · na vel \(n - 1)" : "Op slot"
+            text = n > 1 ? "Op slot · na \(PlaceCatalog.name(n - 1))" : "Op slot"
             (fill, fg, line, dot) = (Color.clear, Theme.muted, Theme.dashed, Theme.dashed)
             dashed = true
         }
@@ -170,13 +178,18 @@ struct StadPlaceSheet: View {
             return night ? base + " De lichten zijn aan." : base
         case .current:
             let left = max(1, total - learned)
-            return "Nog \(left) \(left == 1 ? "woord" : "woorden"), dan gaat de steiger eraf."
+            let next = n < ContentStore.totalSheets ? PlaceCatalog.name(n + 1) : nil
+            let words = "Beantwoord nog \(left) \(left == 1 ? "woord" : "woorden") goed"
+            return next.map { "\(words), dan gaat \($0) open." } ?? "\(words), dan is je stad compleet."
+        case .growing:
+            let left = max(1, total - learned)
+            return "Je kent alle woorden van deze plek. Nog \(left) moeten echt vast gaan zitten: herhaal ze de komende dagen, dan gaat de steiger eraf."
         case .fading:
             return "Deze woorden zakken weg. Herhaal ze, dan komt de kleur terug."
         case .locked:
             return progress.content.sheet(n) == nil && n <= progress.currentSheetNumber
                 ? "Deze plek is nog in de maak. De woorden komen binnenkort."
-                : "Hier komt later een nieuwe plek met \(total) woorden."
+                : "Deze plek gaat open als je de woorden van \(PlaceCatalog.name(max(1, n - 1))) kent."
         }
     }
 
@@ -199,7 +212,7 @@ struct StadPlaceSheet: View {
             HStack(spacing: 10) {
                 Image(systemName: "lock.fill")
                     .accessibilityHidden(true)
-                Text(n > 1 ? "Eerst vel \(n - 1) leren. Dan bouw je hier verder." : "Speel je eerste ronde om te beginnen.")
+                Text(n > 1 ? "Op slot. Leer eerst \(PlaceCatalog.name(n - 1)) (vel \(n - 1))." : "Speel je eerste ronde om te beginnen.")
                     .fixedSize(horizontal: false, vertical: true)
             }
             .font(Fonts.body(14))
@@ -208,7 +221,7 @@ struct StadPlaceSheet: View {
             .padding(.vertical, 12)
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder(Theme.dashed, style: StrokeStyle(lineWidth: 2, dash: [6, 4])))
-        case .built:
+        case .built, .growing:
             EmptyView()
         }
     }

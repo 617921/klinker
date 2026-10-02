@@ -141,26 +141,22 @@ enum MatchCardLook: Equatable {
     }
 }
 
-/// A Dutch word as a full-width collage strip with its article tape.
+/// A Dutch word as a full-width paper card with its article tape.
 struct MatchDutchCard: View {
     let word: Word
     let look: MatchCardLook
 
     var body: some View {
-        let style = StripStyle.at(word.style)
-        Text(style.uppercase ? word.nl.uppercased() : word.nl)
-            .font(.custom(style.fontName, size: word.nl.count > 12 ? 17 : 23))
-            .tracking(style.tracking)
-            .foregroundStyle(style.foreground)
+        Text(word.nl)
+            .font(.custom(PaperStrip.fontName, size: word.nl.count > 12 ? 18 : 23))
+            .foregroundStyle(Theme.ink)
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .minimumScaleFactor(0.55)
             .padding(.horizontal, 8)
             .frame(maxWidth: .infinity, minHeight: 64, maxHeight: 112)
-            .background(style.background)
-            .overlay {
-                if style.edge { Rectangle().stroke(Color(hex: 0xD3D1C7), lineWidth: 1) }
-            }
+            .background(PaperStrip.paper)
+            .overlay { Rectangle().stroke(Color(hex: 0xE2DACA), lineWidth: 1) }
             .overlay(alignment: .topLeading) {
                 Tape(article: word.article, width: 26).offset(x: 8, y: -7)
             }

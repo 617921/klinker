@@ -67,7 +67,7 @@ struct RansomTileView: View {
     let tile: RansomGame.Tile
 
     var body: some View {
-        StripView(text: tile.text, style: tile.style, size: 25)
+        PaperStrip(text: tile.text, size: 25)
             .rotationEffect(.degrees(tile.tilt))
             .shadow(color: Theme.ink.opacity(0.12), radius: 1.5, x: 0.5, y: 1.5)
     }
