@@ -317,6 +317,30 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g8Postpone
     /// A phone held sideways whose screen shows `icons`, `labels` and `text` like a sign.
     case g8HandPhone
+
+    // Lookout tower (PalacePropsG8Tower.swift, PalacePropsG8TowerPeople.swift)
+    /// Coin binoculars on a post with the two round windows of the view they show above them.
+    case g8Binoculars
+    /// An old sepia photo of canal houses and a horse and cart on a stand; `text` the year.
+    case g8OldPhoto
+    /// A board with a progress bar filled `count` percent from `labels`[0] to `labels`[1], stars rising.
+    case g8ProgressBoard
+    /// A board asking `text` with three pinned speech bubbles: thumb up, thumb down, heart.
+    case g8OpinionBoard
+    /// A wooden signpost: a big arrow pointing ahead with `text` (a year to come), a rising sun.
+    case g8Signpost
+    /// A thought bubble trailing down to the person under it: a diploma (`text`) and a tick.
+    case g8ThoughtBubble
+    /// A rainbow behind a grey cloud and a smiling sun breaking out over it.
+    case g8Sunrise
+    /// Someone on their way who looks back along a dotted road past pins with `icons`. `variant`.
+    case g8LookBack
+    /// A notebook on a lectern: `caption` (a date) with a firework, a list of plans (`icons`) with empty boxes.
+    case g8Resolutions
+    /// Someone proud: chin up, hands on hips, a gold medal, sparkles. `variant`.
+    case g8Proud
+    /// Stairs climbing up to a flag planted on the top step, little stars round it.
+    case g8Summit
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -396,7 +420,9 @@ struct PalacePropView: View, Equatable {
                  .g8Pedestrian, .g8KerbCross, .g8Zebra, .g8Overview, .g8RingTraffic, .g8GiveWay, .g8Overtake, .g8Fine,
                  .g8Storm, .g8FloodedFarm, .g8Gauge, .g8RisingWater, .g8Dike, .g8PumpStation, .g8LowLand, .g8RainGauge,
                  .g8InfoBoard, .g8Umbrella, .g8Sandbags, .g8FerryBoat, .g8FarBank, .g8TransportSign, .g8CrossingSign,
-                 .g8Arrived, .g8Moment, .g8Depends, .g8DetourMap, .g8Agenda, .g8Postpone, .g8HandPhone:
+                 .g8Arrived, .g8Moment, .g8Depends, .g8DetourMap, .g8Agenda, .g8Postpone, .g8HandPhone, .g8Binoculars,
+                 .g8OldPhoto, .g8ProgressBoard, .g8OpinionBoard, .g8Signpost, .g8ThoughtBubble, .g8Sunrise, .g8LookBack,
+                 .g8Resolutions, .g8Proud, .g8Summit:
                 G8Props.draw(prop.kind, pen, p)
             }
         }

@@ -60,6 +60,17 @@ enum G8Props {
         case .g8Agenda: G8FerryPlan.agenda(pen, p)
         case .g8Postpone: G8FerryPlan.postpone(pen, p)
         case .g8HandPhone: G8FerryPlan.handPhone(pen, p)
+        case .g8Binoculars: G8Tower.binoculars(pen, p)
+        case .g8OldPhoto: G8Tower.oldPhoto(pen, p)
+        case .g8ProgressBoard: G8Tower.progressBoard(pen, p)
+        case .g8OpinionBoard: G8Tower.opinionBoard(pen, p)
+        case .g8Signpost: G8Tower.signpost(pen, p)
+        case .g8ThoughtBubble: G8TowerPeople.thoughtBubble(pen, p)
+        case .g8Sunrise: G8TowerPeople.sunrise(pen, p)
+        case .g8LookBack: G8TowerPeople.lookBack(pen, p)
+        case .g8Resolutions: G8TowerPeople.resolutions(pen, p)
+        case .g8Proud: G8TowerPeople.proud(pen, p)
+        case .g8Summit: G8TowerPeople.summit(pen, p)
         default: break
         }
     }

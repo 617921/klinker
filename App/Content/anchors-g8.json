@@ -390,6 +390,86 @@
           "params": { "labels": ["A", "B"] }
         }
       ]
+    },
+    {
+      "sheet": 62,
+      "type": "g8Lookout",
+      "order": ["uitzicht", "verleden", "toekomst", "mening", "vooruitgang", "voornemen", "bereiken", "trots", "terugblikken", "verwachten", "optimistisch"],
+      "prompts": {
+        "uitzicht": "Waar heb je het mooiste",
+        "verleden": "Waar zie je het",
+        "vooruitgang": "Waar zie je je",
+        "mening": "Waar geef je je",
+        "terugblikken": "Waar zie je iemand",
+        "voornemen": "Waar staat je",
+        "trots": "Wie is hier",
+        "bereiken": "Waar kun je de top",
+        "toekomst": "Waar wijst de pijl naar de"
+      },
+      "weg": [
+        { "target": "vooruitgang", "options": ["vooruitgang", "bereiken", "toekomst"] },
+        { "target": "verleden", "options": ["verleden", "terugblikken", "uitzicht"] },
+        { "target": "trots", "options": ["trots", "optimistisch", "mening"] },
+        { "target": "verwachten", "options": ["voornemen", "verwachten", "toekomst"] },
+        { "target": "mening", "options": ["mening", "voornemen", "uitzicht"] }
+      ],
+      "anchors": [
+        {
+          "word": "verwachten", "prop": "g8ThoughtBubble", "slot": "skyLeft",
+          "label": "Een denkwolkje boven Noor met een diploma B1 en een groen vinkje",
+          "params": { "text": "B1" }
+        },
+        {
+          "word": "optimistisch", "prop": "g8Sunrise", "slot": "skyRight",
+          "label": "Een lachende zon komt achter een grijze wolk vandaan, met een regenboog erachter",
+          "params": {}
+        },
+        {
+          "word": "uitzicht", "prop": "g8Binoculars", "slot": "railFarLeft",
+          "label": "Een verrekijker op een paal; erboven twee ronde kijkgaten met daken, een toren en de zon",
+          "params": {}
+        },
+        {
+          "word": "verleden", "prop": "g8OldPhoto", "slot": "railLeft",
+          "label": "Een oude bruine foto van grachtenhuizen en een paard met wagen, met 1900 eronder",
+          "params": { "text": "1900" }
+        },
+        {
+          "word": "vooruitgang", "prop": "g8ProgressBoard", "slot": "railRight",
+          "label": "Een bord met een groene balk die bijna vol is, van A2 naar B1, en sterren die steeds hoger staan",
+          "params": { "labels": ["A2", "B1"], "count": 85 }
+        },
+        {
+          "word": "mening", "prop": "g8OpinionBoard", "slot": "railFarRight",
+          "label": "Een bord met de vraag Wat vind jij? en drie tekstballonnen: een duim omhoog, een duim omlaag en een hart",
+          "params": { "text": "Wat vind jij?" }
+        },
+        {
+          "word": "terugblikken", "prop": "g8LookBack", "slot": "deckLeft",
+          "label": "Iemand loopt verder maar kijkt om, naar een stippelweg met speldjes van een station, een huis en een boek",
+          "params": { "variant": 5, "icons": ["train", "house", "book"] }
+        },
+        {
+          "word": "voornemen", "prop": "g8Resolutions", "slot": "deckMidLeft",
+          "label": "Een schrift op een standaard: 1 jan, een vuurwerkje en een lijstje met lege vakjes bij een boek, een fiets en een praatwolkje",
+          "params": { "caption": "1 jan", "icons": ["book", "bike", "talk"] }
+        },
+        {
+          "word": "trots", "prop": "g8Proud", "slot": "deckMid",
+          "label": "Iemand met de kin omhoog, de handen in de zij en een gouden medaille om",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "bereiken", "prop": "g8Summit", "slot": "deckMidRight",
+          "label": "Een trap naar boven met een rode vlag op de hoogste tree en sterretjes eromheen",
+          "params": {}
+        },
+        {
+          "word": "toekomst", "prop": "g8Signpost", "slot": "deckRight",
+          "label": "Een houten wegwijzer met een pijl naar voren, 2040, en een opkomende zon",
+          "params": { "text": "2040" }
+        }
+      ]
     }
   ]
 }
