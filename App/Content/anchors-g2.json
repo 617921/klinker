@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 39,
+      "type": "g2TaxOffice",
+      "order": ["belastingaangifte", "aanslag", "teruggave", "toeslag", "inkomen", "bruto", "bezwaarschrift", "indienen", "opgeven", "terugbetalen", "voorlopig"],
+      "prompts": {
+        "belastingaangifte": "Waar doe je je",
+        "toeslag": "Waar krijg je",
+        "bezwaarschrift": "Wie schrijft een",
+        "opgeven": "Waar kun je je spaargeld",
+        "terugbetalen": "Waar moet je geld",
+        "indienen": "Waar kun je een formulier",
+        "voorlopig": "Wat is nog",
+        "bruto": "Wat verdien je"
+      },
+      "weg": [
+        { "target": "aanslag", "options": ["aanslag", "teruggave", "terugbetalen"] },
+        { "target": "inkomen", "options": ["bruto", "inkomen", "toeslag"] },
+        { "target": "indienen", "options": ["opgeven", "indienen", "belastingaangifte"] },
+        { "target": "voorlopig", "options": ["voorlopig", "aanslag", "bezwaarschrift"] },
+        { "target": "toeslag", "options": ["terugbetalen", "teruggave", "toeslag"] }
+      ],
+      "anchors": [
+        {
+          "word": "inkomen", "prop": "g2MoneyFlow", "slot": "wallA",
+          "label": "Een kaart: geld gaat van het werk naar je portemonnee, 2800 euro per maand",
+          "params": { "icons": ["company", "g2Wallet"], "tone": "teal", "text": "€ 2.800", "caption": "elke maand" }
+        },
+        {
+          "word": "bruto", "prop": "g2Gross", "slot": "wallB",
+          "label": "Een grote geldzak van 3000 euro met een cirkel erom, en een kleine zak van 2300 euro na de belasting",
+          "params": { "lines": ["€ 3.000", "€ 2.300"], "caption": "−23%" }
+        },
+        {
+          "word": "voorlopig", "prop": "g2Bill", "slot": "wallC",
+          "label": "Een papier met een stippellijn: het bedrag in potlood, een vraagteken en een gum",
+          "params": { "accessory": "draft", "text": "≈ € 900", "caption": "nog niet definitief" }
+        },
+        {
+          "word": "terugbetalen", "prop": "g2MoneyFlow", "slot": "wallD",
+          "label": "Een kaart: geld gaat uit je portemonnee terug naar de overheid, want je kreeg te veel",
+          "params": { "icons": ["g2Wallet", "townHall"], "tone": "red", "text": "€ 150", "caption": "te veel gekregen" }
+        },
+        {
+          "word": "belastingaangifte", "prop": "g2TaxReturn", "slot": "counterA",
+          "label": "Een lang formulier over het jaar 2025, een rekenmachine en een geel briefje: vóór 1 mei",
+          "params": { "text": "2025", "caption": "vóór 1 mei" }
+        },
+        {
+          "word": "aanslag", "prop": "g2Bill", "slot": "counterB",
+          "label": "Een brief uit een blauwe envelop: je moet 1240 euro betalen",
+          "params": { "accessory": "envelope", "tone": "blue", "icons": ["townHall"], "caption": "te betalen", "text": "€ 1.240" }
+        },
+        {
+          "word": "teruggave", "prop": "g2Refund", "slot": "counterC",
+          "label": "Een blauwe envelop waar geld uit springt, met een pijl terug: plus 200 euro",
+          "params": { "tone": "blue", "text": "+ € 200" }
+        },
+        {
+          "word": "opgeven", "prop": "paperSheet", "slot": "counterD",
+          "label": "Een formulier op een klembord met een spaarvarken: je schrijft je spaargeld op, 8000 euro",
+          "params": { "icons": ["g2Piggy"], "variant": 1, "tone": "red", "lines": ["spaargeld|€ 8.000"], "accessory": "pen", "mount": "clipboard" }
+        },
+        {
+          "word": "toeslag", "prop": "g2TopUp", "slot": "frontLeft",
+          "label": "Een hand van de overheid stopt een groene munt met een plus in een spaarhuisje: hulp bij de huur",
+          "params": { "text": "huur" }
+        },
+        {
+          "word": "indienen", "prop": "g2Laptop", "slot": "frontMid",
+          "label": "Een laptop op een tafeltje: de muis klikt op de groene knop verzenden",
+          "params": { "mount": "table", "accessory": "send", "text": "verzenden" }
+        },
+        {
+          "word": "bezwaarschrift", "prop": "g2Person", "slot": "standing", "frame": [274, 260, 92, 142],
+          "label": "Iemand houdt boos een brief omhoog: het bedrag is doorgestreept, niet mee eens!",
+          "params": { "accessory": "objection", "variant": 1, "text": "€ 1.240", "caption": "niet eens!" }
+        }
+      ],
+      "decor": [
+        {"prop": "g2Person", "slot": "advisor", "params": {"accessory": "advisor", "variant": 2, "tone": "blue"}}
+      ]
+    },
+    {
+      "sheet": 40,
+      "type": "g2Notary",
+      "order": ["testament", "erfenis", "erfgenaam", "akte", "ondertekenen", "samenlevingscontract", "volmacht", "erven", "vastleggen", "wettelijk", "gezamenlijk"],
+      "prompts": {
+        "erfgenaam": "Wie is de",
+        "volmacht": "Wie heeft een",
+        "erven": "Waar zie je iemand iets",
+        "vastleggen": "Waar kun je afspraken",
+        "gezamenlijk": "Wie hebben het huis"
+      },
+      "weg": [
+        { "target": "testament", "options": ["testament", "akte", "volmacht"] },
+        { "target": "erfgenaam", "options": ["erfenis", "erfgenaam", "erven"] },
+        { "target": "ondertekenen", "options": ["ondertekenen", "vastleggen", "samenlevingscontract"] },
+        { "target": "erven", "options": ["gezamenlijk", "erfenis", "erven"] },
+        { "target": "wettelijk", "options": ["akte", "wettelijk", "testament"] }
+      ],
+      "anchors": [
+        {
+          "word": "erfgenaam", "prop": "g2FamilyTree", "slot": "wallA",
+          "label": "Een stamboom: oma bovenaan met een zwart lintje, en twee kleinkinderen met een gouden ster",
+          "params": { "count": 2 }
+        },
+        {
+          "word": "testament", "prop": "g2Scroll", "slot": "wallB",
+          "label": "Een perkamentrol met een rood lakzegel en een veer: Mijn laatste wil",
+          "params": { "text": "Mijn laatste wil" }
+        },
+        {
+          "word": "erven", "prop": "g2Inherit", "slot": "wallC",
+          "label": "Een oude hand laat de sleutel van het huis in een jonge hand vallen",
+          "params": {  }
+        },
+        {
+          "word": "vastleggen", "prop": "g2Record", "slot": "wallD",
+          "label": "Twee tekstballonnen met pijlen naar een papier dat wordt opgeschreven en vastgeprikt",
+          "params": {  }
+        },
+        {
+          "word": "wettelijk", "prop": "g2LawBook", "slot": "shelf",
+          "label": "Een dik wetboek met een gouden paragraafteken, en een weegschaal",
+          "params": {  }
+        },
+        {
+          "word": "akte", "prop": "g2Deed", "slot": "deskC", "pin": [366, 230],
+          "label": "Een officieel papier met een huis, een zegel en twee handtekeningen: koper en verkoper",
+          "params": { "icons": ["house"], "labels": ["koper", "verkoper"], "accessory": "seal" }
+        },
+        {
+          "word": "ondertekenen", "prop": "g2Signing", "slot": "deskB",
+          "label": "Een hand zet met een vulpen een handtekening op de lijn",
+          "params": {  }
+        },
+        {
+          "word": "samenlevingscontract", "prop": "g2Deed", "slot": "deskA", "pin": [98, 230], "align": "leading",
+          "label": "Een papier met twee mensen onder één dak en een hartje, getekend door Sanne en Ali",
+          "params": { "icons": ["g2Couple"], "labels": ["Sanne", "Ali"], "tone": "pink" }
+        },
+        {
+          "word": "erfenis", "prop": "g2Heirlooms", "slot": "frontLeft",
+          "label": "Een oude kist vol goud, parels en een zakhorloge, met een kaartje: van oma",
+          "params": { "text": "van oma" }
+        },
+        {
+          "word": "volmacht", "prop": "g2Proxy", "slot": "frontMid",
+          "label": "Iemand op krukken geeft een papier aan een ander, die voor haar tekent: namens Anna",
+          "params": { "text": "namens Anna", "variant": 3 }
+        },
+        {
+          "word": "gezamenlijk", "prop": "g2Together", "slot": "standing", "frame": [262, 282, 104, 98],
+          "label": "Twee mensen tillen samen één huisje op",
+          "params": { "variant": 1 }
+        }
+      ],
+      "decor": [
+        {"prop": "g2Person", "slot": "notary", "params": {"accessory": "notary", "variant": 0}}
+      ]
+    },
+    {
+      "sheet": 41,
+      "type": "g2Insurer",
+      "noor": [212, 292],
+      "order": ["verzekering", "polis", "premie", "schade", "inboedel", "voorwaarde", "afsluiten", "vergelijken", "uitkeren", "aanvullend", "aansprakelijk"],
+      "prompts": {
+        "afsluiten": "Waar kun je een verzekering",
+        "vergelijken": "Waar kun je prijzen",
+        "uitkeren": "Waar zie je de verzekeraar geld",
+        "aansprakelijk": "Wie is hier",
+        "schade": "Waar zie je"
+      },
+      "weg": [
+        { "target": "premie", "options": ["premie", "polis", "uitkeren"] },
+        { "target": "verzekering", "options": ["aanvullend", "verzekering", "afsluiten"] },
+        { "target": "schade", "options": ["aansprakelijk", "inboedel", "schade"] },
+        { "target": "voorwaarde", "options": ["polis", "voorwaarde", "vergelijken"] },
+        { "target": "uitkeren", "options": ["uitkeren", "premie", "afsluiten"] }
+      ],
+      "anchors": [
+        {
+          "word": "verzekering", "prop": "g2Shelter", "slot": "wallA",
+          "label": "Een grote paraplu houdt een huis droog in de regen en het onweer",
+          "params": { "tone": "green" }
+        },
+        {
+          "word": "voorwaarde", "prop": "g2SmallPrint", "slot": "wallB",
+          "label": "Een papier met heel kleine lettertjes onder een vergrootglas: niet bij eigen schuld",
+          "params": { "lines": ["* niet bij", "eigen schuld"] }
+        },
+        {
+          "word": "vergelijken", "prop": "g2Laptop", "slot": "wallC",
+          "label": "Een scherm met drie aanbiedingen naast elkaar, met prijs en sterren; de beste heeft een vinkje",
+          "params": { "mount": "tv", "accessory": "compare", "lines": ["€ 32|3", "€ 28|5", "€ 35|2"], "highlight": 1 }
+        },
+        {
+          "word": "uitkeren", "prop": "g2MoneyFlow", "slot": "wallD",
+          "label": "Een kaart: geld gaat van de paraplu naar je portemonnee, 2000 euro na de inbraak",
+          "params": { "icons": ["g2Umbrella", "g2Wallet"], "tone": "teal", "text": "€ 2.000", "caption": "na de inbraak" }
+        },
+        {
+          "word": "polis", "prop": "paperSheet", "slot": "counterA",
+          "label": "Een document met een groene paraplu, je naam en een nummer",
+          "params": { "icons": ["g2Umbrella"], "variant": 1, "tone": "green", "lines": ["naam|N. Jansen", "nr.|83-20381"] }
+        },
+        {
+          "word": "premie", "prop": "g2Tagged", "slot": "counterB",
+          "label": "Een paraplu met een prijskaartje: 32 euro per maand",
+          "params": { "icons": ["g2Umbrella"], "tone": "green", "text": "€ 32", "caption": "per maand" }
+        },
+        {
+          "word": "afsluiten", "prop": "g2Handshake", "slot": "counterC",
+          "label": "Twee handen schudden boven een getekend papier met een paraplu, en een groen vinkje",
+          "params": { "icons": ["g2Umbrella"] }
+        },
+        {
+          "word": "aanvullend", "prop": "g2AddOn", "slot": "counterD",
+          "label": "Een schild met het woord basis, en een extra stukje met een plus en een tand dat erbij komt",
+          "params": { "text": "basis", "icons": ["g2Tooth"] }
+        },
+        {
+          "word": "schade", "prop": "g2Damage", "slot": "frontLeft",
+          "label": "Een rode auto is tegen een paal gereden: de voorkant is kapot",
+          "params": {  }
+        },
+        {
+          "word": "inboedel", "prop": "g2HouseContents", "slot": "frontMid",
+          "label": "Een open huisje met alles wat erin staat: bank, lamp, tv, schilderij en plant",
+          "params": {  }
+        },
+        {
+          "word": "aansprakelijk", "prop": "g2Liable", "slot": "standing", "frame": [256, 266, 110, 114], "pin": [366, 380],
+          "label": "Een hond heeft een vaas gebroken; een hand wijst naar de baas van de hond: jij betaalt!",
+          "params": { "variant": 3, "text": "jij betaalt!" }
+        }
+      ],
+      "decor": [
+        {"prop": "g2Person", "slot": "advisor", "params": {"accessory": "advisor", "variant": 0, "tone": "green"}}
+      ]
+    },
+    {
+      "sheet": 42,
+      "type": "g2EnergyOffice",
+      "order": ["meterstand", "zonnepaneel", "jaarafrekening", "voorschot", "verbruik", "doorgeven", "besparen", "leverancier", "zuinig", "bijbetalen", "variabel"],
+      "prompts": {
+        "doorgeven": "Waar kun je je meterstand",
+        "besparen": "Waar kun je energie",
+        "bijbetalen": "Waar moet je",
+        "zuinig": "Wat is",
+        "variabel": "Welke prijs is",
+        "verbruik": "Waar zie je het"
+      },
+      "weg": [
+        { "target": "voorschot", "options": ["jaarafrekening", "voorschot", "bijbetalen"] },
+        { "target": "meterstand", "options": ["meterstand", "doorgeven", "verbruik"] },
+        { "target": "zuinig", "options": ["besparen", "zonnepaneel", "zuinig"] },
+        { "target": "variabel", "options": ["verbruik", "variabel", "leverancier"] },
+        { "target": "bijbetalen", "options": ["bijbetalen", "jaarafrekening", "voorschot"] }
+      ],
+      "anchors": [
+        {
+          "word": "bijbetalen", "prop": "g2MoneyFlow", "slot": "wallA",
+          "label": "Een kaart: nog meer geld gaat uit je portemonnee naar het energiebedrijf, plus 80 euro",
+          "params": { "icons": ["g2Wallet", "g2Bolt"], "tone": "red", "text": "+ € 80", "caption": "extra" }
+        },
+        {
+          "word": "verbruik", "prop": "g2Chart", "slot": "wallB",
+          "label": "Een grafiek van het gas: in de winter hoge staven met sneeuw, in de zomer lage met een zon",
+          "params": { "accessory": "bars", "icons": ["g2Flame", "g2Snow", "sun"], "caption": "gas per maand" }
+        },
+        {
+          "word": "leverancier", "prop": "g2Supply", "slot": "wallC",
+          "label": "Een centrale met een bliksem stuurt stroom via een mast naar een huis",
+          "params": {  }
+        },
+        {
+          "word": "variabel", "prop": "g2Chart", "slot": "wallD",
+          "label": "Een scherm met een prijs die steeds op en neer gaat, met pijlen omhoog en omlaag",
+          "params": { "accessory": "zigzag", "text": "€ 0,31", "caption": "€ per kWh" }
+        },
+        {
+          "word": "jaarafrekening", "prop": "g2Bill", "slot": "counterA",
+          "label": "Een brief in een oranje envelop over het hele jaar 2025, van januari tot december",
+          "params": { "accessory": "envelope", "tone": "orange", "icons": ["g2Bolt"], "caption": "jan – dec", "text": "2025" }
+        },
+        {
+          "word": "doorgeven", "prop": "smartphone", "slot": "counterB", "frame": [92, 120, 92, 84],
+          "label": "Een telefoon: Wat is uw stand? Je stuurt het getal van de meter terug",
+          "params": { "lines": ["in|Uw stand?", "out|04731 kWh"] }
+        },
+        {
+          "word": "besparen", "prop": "g2Thermostat", "slot": "counterC", "frame": [188, 120, 68, 84], "pin": [222, 212],
+          "label": "Een thermostaat gaat van 21 naar 19 graden, met een pijl omlaag en een spaarvarken",
+          "params": { "text": "19°", "caption": "21°" }
+        },
+        {
+          "word": "voorschot", "prop": "g2Instalments", "slot": "counterD", "frame": [262, 118, 104, 86], "pin": [368, 214],
+          "label": "Twaalf kalenderblaadjes met elk een munt: elke maand 120 euro vooruit",
+          "params": { "text": "€ 120", "caption": "elke maand vooruit" }
+        },
+        {
+          "word": "meterstand", "prop": "g2Meter", "slot": "frontLeft",
+          "label": "Een open meterkast: de meter wijst 04731 kWh aan",
+          "params": { "text": "04731", "caption": "kWh" }
+        },
+        {
+          "word": "zuinig", "prop": "g2EnergyLabel", "slot": "frontMid",
+          "label": "Een wasmachine met een energielabel: de groene A, het beste label",
+          "params": { "highlight": 0 }
+        },
+        {
+          "word": "zonnepaneel", "prop": "g2SolarPanel", "slot": "standing", "frame": [270, 244, 96, 132], "pin": [366, 380],
+          "label": "Een blauw paneel op een standaard in de zon, met een kabel naar een stekker",
+          "params": {  }
+        }
+      ]
+    },
+    {
+      "sheet": 57,
+      "type": "g2Studio",
+      "noor": [],
+      "order": ["journaal", "presentator", "interview", "reclame", "kijker", "uitzenden", "aflevering", "terugkijken", "bewerken", "creatief", "kritisch"],
+      "prompts": {
+        "presentator": "Wie is de",
+        "kijker": "Wie is de",
+        "uitzenden": "Waar kun je een programma",
+        "terugkijken": "Waar kun je een programma",
+        "bewerken": "Waar kun je een video",
+        "kritisch": "Wie is",
+        "creatief": "Wat is"
+      },
+      "weg": [
+        { "target": "journaal", "options": ["journaal", "reclame", "aflevering"] },
+        { "target": "presentator", "options": ["kijker", "presentator", "kritisch"] },
+        { "target": "uitzenden", "options": ["uitzenden", "terugkijken", "bewerken"] },
+        { "target": "interview", "options": ["interview", "journaal", "presentator"] },
+        { "target": "creatief", "options": ["kritisch", "creatief", "bewerken"] }
+      ],
+      "anchors": [
+        {
+          "word": "reclame", "prop": "g2Laptop", "slot": "wallA",
+          "label": "Een scherm met een rode fles en een gele ster: NIEUW, voor maar 1 euro 99",
+          "params": { "mount": "tv", "accessory": "ad", "text": "NIEUW!", "caption": "€ 1,99" }
+        },
+        {
+          "word": "aflevering", "prop": "g2FilmStrip", "slot": "wallB",
+          "label": "Een filmstrook van seizoen 2 met vijf genummerde stukjes; nummer 4 is groot en speelt af",
+          "params": { "caption": "seizoen 2", "highlight": 3 }
+        },
+        {
+          "word": "terugkijken", "prop": "g2Laptop", "slot": "wallC",
+          "label": "Een scherm met het programma van gisteren, een grote pijl terug en een play-knop",
+          "params": { "mount": "monitor", "accessory": "replay", "text": "gisteren 20:00" }
+        },
+        {
+          "word": "creatief", "prop": "g2IdeaBoard", "slot": "wallD",
+          "label": "Een bord vol kleuren, schetsen en briefjes, en een lamp die aangaat: een idee!",
+          "params": {  }
+        },
+        {
+          "word": "bewerken", "prop": "g2Laptop", "slot": "setLeft",
+          "label": "Een laptop met een filmpje en een tijdlijn; een schaar knipt er een stukje uit",
+          "params": { "mount": "table", "accessory": "edit" }
+        },
+        {
+          "word": "journaal", "prop": "g2NewsDesk", "slot": "setMid",
+          "label": "Een nieuwslezer aan een desk, met een wereldbol en de klok op acht uur",
+          "params": { "time": "20:00" }
+        },
+        {
+          "word": "interview", "prop": "g2Talk", "slot": "setRight",
+          "label": "Twee mensen op stoelen: de een houdt een microfoon bij de ander en stelt een vraag",
+          "params": { "accessory": "mic", "variant": 2 }
+        },
+        {
+          "word": "uitzenden", "prop": "g2Broadcast", "slot": "floorA",
+          "label": "Een camera met een rode lamp: LIVE, en golven die het beeld de wereld in sturen",
+          "params": { "text": "LIVE" }
+        },
+        {
+          "word": "kijker", "prop": "g2Viewer", "slot": "floorB",
+          "label": "Iemand op de bank met popcorn en de afstandsbediening kijkt naar de tv",
+          "params": {  }
+        },
+        {
+          "word": "kritisch", "prop": "g2Person", "slot": "floorC",
+          "label": "Een journalist fronst door een vergrootglas: Klopt dat wel?",
+          "params": { "accessory": "critic", "variant": 6, "text": "Klopt dat wel?" }
+        },
+        {
+          "word": "presentator", "prop": "g2Person", "slot": "floorD",
+          "label": "Een man in een glimmend jasje praat in een microfoon, in het licht van de lamp",
+          "params": { "accessory": "host", "variant": 5 }
+        }
+      ]
+    },
+    {
+      "sheet": 58,
+      "type": "g2Loft",
+      "noor": [],
+      "order": ["ondernemer", "investering", "oplossing", "doel", "wachtwoord", "gegevens", "overleg", "ontwikkelen", "thuiswerken", "ambitieus", "zelfstandig"],
+      "prompts": {
+        "ondernemer": "Wie is de",
+        "gegevens": "Waar zijn de",
+        "ontwikkelen": "Waar kun je een app",
+        "thuiswerken": "Waar zie je iemand",
+        "ambitieus": "Wie is",
+        "zelfstandig": "Wie werkt"
+      },
+      "weg": [
+        { "target": "doel", "options": ["doel", "oplossing", "ambitieus"] },
+        { "target": "wachtwoord", "options": ["gegevens", "wachtwoord", "ontwikkelen"] },
+        { "target": "ondernemer", "options": ["zelfstandig", "ondernemer", "investering"] },
+        { "target": "overleg", "options": ["overleg", "thuiswerken", "zelfstandig"] },
+        { "target": "investering", "options": ["investering", "doel", "oplossing"] }
+      ],
+      "anchors": [
+        {
+          "word": "doel", "prop": "g2Target", "slot": "wallA",
+          "label": "Een dartbord met een pijltje precies in de roos",
+          "params": {  }
+        },
+        {
+          "word": "ambitieus", "prop": "g2Climb", "slot": "wallB",
+          "label": "Een hoge berg met een rode vlag op de top; iemand klimt bijna helemaal naar boven",
+          "params": {  }
+        },
+        {
+          "word": "oplossing", "prop": "g2Puzzle", "slot": "wallC",
+          "label": "Een puzzel: het laatste stukje past precies, met een groen vinkje",
+          "params": {  }
+        },
+        {
+          "word": "thuiswerken", "prop": "g2Laptop", "slot": "wallD",
+          "label": "Een videogesprek: een collega zit thuis aan de keukentafel, met een kat en een huisje in de hoek",
+          "params": { "mount": "tv", "accessory": "home" }
+        },
+        {
+          "word": "investering", "prop": "g2MoneyPlant", "slot": "tableA",
+          "label": "Een hand stopt een munt in een pot; er groeit een plant met munten als blaadjes, en een pijl omhoog",
+          "params": {  }
+        },
+        {
+          "word": "wachtwoord", "prop": "g2Laptop", "slot": "tableB",
+          "label": "Een laptop met een slot: de naam is ingevuld, de geheime code zie je als bolletjes, met een sleutel",
+          "params": { "accessory": "login", "text": "noor" }
+        },
+        {
+          "word": "gegevens", "prop": "g2Laptop", "slot": "tableC",
+          "label": "Een scherm met een foto en ingevulde vakjes: naam, e-mail en geboortedatum",
+          "params": { "mount": "monitor", "accessory": "form", "lines": ["naam|Noor Bakker", "e-mail|noor@mail.nl", "geboren|12-03-1998"] }
+        },
+        {
+          "word": "ontwikkelen", "prop": "g2Build", "slot": "tableD",
+          "label": "Een telefoon met een app die half af is, een tandwiel, een moersleutel en een balk op 60 procent",
+          "params": { "count": 60 }
+        },
+        {
+          "word": "overleg", "prop": "g2Talk", "slot": "floorA",
+          "label": "Twee collega's praten met elkaar aan een tafeltje met koffie",
+          "params": { "accessory": "coffee", "variant": 4 }
+        },
+        {
+          "word": "ondernemer", "prop": "g2Person", "slot": "floorB",
+          "label": "Iemand staat trots voor een eigen winkeltje en wijst naar het bordje OPEN",
+          "params": { "accessory": "founder", "text": "OPEN", "variant": 3 }
+        },
+        {
+          "word": "zelfstandig", "prop": "g2Person", "slot": "floorC", "frame": [250, 286, 116, 98],
+          "label": "Iemand werkt helemaal alleen met een laptop aan een hoge tafel: mijn eigen baas!",
+          "params": { "accessory": "solo", "text": "mijn eigen baas!", "variant": 7 }
+        }
+      ]
+    }
+  ]
+}

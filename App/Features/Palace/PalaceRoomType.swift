@@ -31,6 +31,11 @@ enum PalaceRoomType: String, CaseIterable {
     case g1Courtroom
     // g7: outdoors, water and travel (G7*Backdrop.swift)
     case g7Harbour, g7Mill, g7Farm, g7Beach, g7Camping, g7Airport
+    // g2: offices and paperwork (G2*Backdrop.swift). The three service desks share one backdrop.
+    case g2TaxOffice, g2Insurer, g2EnergyOffice
+    case g2Notary
+    case g2Studio
+    case g2Loft
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -61,8 +66,12 @@ enum PalaceRoomType: String, CaseIterable {
         case .g7Mill: "polder"
         case .g7Farm: "boerderij"
         case .g7Beach: "badplaats"
-        case .g7Camping: "camping"
+        case .g7Camping: "omgeving"
         case .g7Airport: "vertrekhal"
+        case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: "balie"
+        case .g2Notary: "werkkamer"
+        case .g2Studio: "studio"
+        case .g2Loft: "werkplek"
         }
     }
 
@@ -99,6 +108,12 @@ enum PalaceRoomType: String, CaseIterable {
         case .g7Beach: "Het strand met de zee en de duinen"
         case .g7Camping: "Een camping met tenten tussen de bomen"
         case .g7Airport: "De vertrekhal van een vliegveld met een groot raam"
+        case .g2TaxOffice: "De balie van het belastingkantoor"
+        case .g2Insurer: "De balie van de verzekeraar"
+        case .g2EnergyOffice: "De balie van het energiebedrijf"
+        case .g2Notary: "De werkkamer van de notaris"
+        case .g2Studio: "Een televisiestudio"
+        case .g2Loft: "Een startup in een oud pakhuis"
         }
     }
 
@@ -129,6 +144,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g7Beach: G7Beach.noor
         case .g7Camping: G7Camping.noor
         case .g7Airport: G7Airport.noor
+        case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2Service.noor
+        case .g2Notary: G2Notary.noor
+        case .g2Studio: G2Studio.noor
+        case .g2Loft: G2Loft.noor
         }
     }
 
@@ -158,6 +177,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g7Beach: G7Beach.slots
         case .g7Camping: G7Camping.slots
         case .g7Airport: G7Airport.slots
+        case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2Service.slots
+        case .g2Notary: G2Notary.slots
+        case .g2Studio: G2Studio.slots
+        case .g2Loft: G2Loft.slots
         }
     }
 }
@@ -192,6 +215,10 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g7Beach: G7BeachBackdrop()
         case .g7Camping: G7CampingBackdrop()
         case .g7Airport: G7AirportBackdrop()
+        case .g2TaxOffice, .g2Insurer, .g2EnergyOffice: G2ServiceBackdrop(type: type)
+        case .g2Notary: G2NotaryBackdrop()
+        case .g2Studio: G2StudioBackdrop()
+        case .g2Loft: G2LoftBackdrop()
         }
     }
 }

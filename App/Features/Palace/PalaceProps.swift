@@ -421,6 +421,13 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     // passport booth, security arch, destination poster, aisle through a plane door, plane
     // (`accessory` "up" | "down").
     case g7FlightScreen, g7BoardingPass, g7CabinCase, g7PassportBooth, g7SecurityArch, g7Destination, g7Aisle, g7Plane
+    // MARK: g2 — offices and paperwork (PalacePropsG2*.swift, where each one's params are described)
+    case g2MoneyFlow, g2Bill, g2TaxReturn, g2TopUp, g2Refund, g2Gross, g2Laptop, g2Person
+    case g2Shelter, g2Tagged, g2Damage, g2HouseContents, g2SmallPrint, g2Handshake, g2AddOn, g2Liable
+    case g2Meter, g2Instalments, g2Chart, g2Supply, g2Thermostat, g2EnergyLabel, g2SolarPanel
+    case g2Scroll, g2Deed, g2Signing, g2LawBook, g2Record, g2Heirlooms, g2FamilyTree, g2Inherit, g2Together, g2Proxy
+    case g2Talk, g2NewsDesk, g2Broadcast, g2Viewer, g2FilmStrip, g2IdeaBoard
+    case g2Target, g2Climb, g2Puzzle, g2MoneyPlant, g2Build
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -516,6 +523,13 @@ struct PalacePropView: View, Equatable {
                  .g7AirBed, .g7Tent, .g7Outhouse, .g7FlightScreen, .g7BoardingPass, .g7CabinCase, .g7PassportBooth,
                  .g7SecurityArch, .g7Destination, .g7Aisle, .g7Plane:
                 G7Props.draw(prop.kind, pen, p)
+            case .g2MoneyFlow, .g2Bill, .g2TaxReturn, .g2TopUp, .g2Refund, .g2Gross, .g2Laptop, .g2Person,
+                 .g2Shelter, .g2Tagged, .g2Damage, .g2HouseContents, .g2SmallPrint, .g2Handshake, .g2AddOn, .g2Liable,
+                 .g2Meter, .g2Instalments, .g2Chart, .g2Supply, .g2Thermostat, .g2EnergyLabel, .g2SolarPanel,
+                 .g2Scroll, .g2Deed, .g2Signing, .g2LawBook, .g2Record, .g2Heirlooms, .g2FamilyTree, .g2Inherit, .g2Together, .g2Proxy,
+                 .g2Talk, .g2NewsDesk, .g2Broadcast, .g2Viewer, .g2FilmStrip, .g2IdeaBoard,
+                 .g2Target, .g2Climb, .g2Puzzle, .g2MoneyPlant, .g2Build:
+                G2Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)
