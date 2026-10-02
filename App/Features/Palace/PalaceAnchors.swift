@@ -110,11 +110,20 @@ nonisolated struct PalaceAnchorBook: Sendable {
 
     static let empty = PalaceAnchorBook(rooms: [:])
 
-    /// anchors.json from the app bundle.
+    /// Every bundled `anchors*.json` (anchors.json, anchors-shop.json, …), merged.
+    /// One file per group of places, so rooms can be authored side by side.
     static let bundled: PalaceAnchorBook = {
-        guard let url = Bundle.main.url(forResource: "anchors", withExtension: "json"),
-              let data = try? Data(contentsOf: url) else { return .empty }
-        return PalaceAnchorBook(data: data)
+        let urls = (Bundle.main.urls(forResourcesWithExtension: "json", subdirectory: nil) ?? [])
+            .filter { $0.lastPathComponent.hasPrefix("anchors") }
+            .sorted { $0.lastPathComponent < $1.lastPathComponent }
+        var rooms: [Int: PalaceRoomSpec] = [:]
+        for url in urls {
+            guard let data = try? Data(contentsOf: url) else { continue }
+            for (sheet, spec) in PalaceAnchorBook(data: data).rooms where rooms[sheet] == nil {
+                rooms[sheet] = spec
+            }
+        }
+        return PalaceAnchorBook(rooms: rooms)
     }()
 
     init(rooms: [Int: PalaceRoomSpec]) {
