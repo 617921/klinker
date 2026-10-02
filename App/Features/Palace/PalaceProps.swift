@@ -265,6 +265,22 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1Cctv
     /// An open handbag, a black-gloved hand sneaking a wallet out.
     case g1Pickpocket
+    /// Glass room: an interviewer holds up a résumé and asks, a candidate in a tie answers.
+    case g1Interview
+    /// A résumé page: a photo, a name bar, a briefcase and a cap with lines.
+    case g1Resume
+    /// Years of work: three past jobs along an arrow from `labels[0]` to `labels[1]`, a star, `text` ("5 jaar").
+    case g1Timeline
+    /// Cork board with three job cards: a red band (`caption`, "Gezocht"), a picture and lines.
+    case g1JobBoard
+    /// Two month pages marked 1 and 2 under a magnifier, a tick and a cross: will it work out?
+    case g1TrialMonths
+    /// A laptop sending a letter with a résumé; a paper plane flies to a company.
+    case g1Apply
+    /// A card on the desk: a big handshake, `text` ("Welkom!"), confetti.
+    case g1Welcome
+    /// A puzzle with one gap and the last piece sliding in, a green tick.
+    case g1Puzzle
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -341,7 +357,8 @@ struct PalacePropView: View, Equatable {
             case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
                  .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
                  .g1Registered, .g1GiveAcross, .g1MailSlot, .g1OpenWindow, .g1Mould, .g1Repair, .g1HomeAd, .g1Objection,
-                 .g1Community, .g1QueueScreen, .g1BreakIn, .g1Megaphone, .g1Forbidden, .g1CutLock, .g1Cctv, .g1Pickpocket:
+                 .g1Community, .g1QueueScreen, .g1BreakIn, .g1Megaphone, .g1Forbidden, .g1CutLock, .g1Cctv, .g1Pickpocket,
+                 .g1Interview, .g1Resume, .g1Timeline, .g1JobBoard, .g1TrialMonths, .g1Apply, .g1Welcome, .g1Puzzle:
                 G1Props.draw(prop.kind, pen, p)
             }
         }

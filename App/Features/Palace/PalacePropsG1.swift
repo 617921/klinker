@@ -37,6 +37,14 @@ enum G1Props {
         case .g1CutLock: G1Police.cutLock(pen, p)
         case .g1Cctv: G1Police.cctv(pen, p)
         case .g1Pickpocket: G1Police.pickpocket(pen, p)
+        case .g1Interview: G1Jobs.interview(pen, p)
+        case .g1Resume: G1Jobs.resume(pen, p)
+        case .g1Timeline: G1Jobs.timeline(pen, p)
+        case .g1JobBoard: G1Jobs.jobBoard(pen, p)
+        case .g1TrialMonths: G1Jobs.trialMonths(pen, p)
+        case .g1Apply: G1JobsDesk.apply(pen, p)
+        case .g1Welcome: G1JobsDesk.welcome(pen, p)
+        case .g1Puzzle: G1JobsDesk.puzzle(pen, p)
         default: break
         }
     }

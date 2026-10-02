@@ -4,7 +4,7 @@ import SwiftUI
 /// right (`flip` faces left). `accessory` says who they are:
 /// "clerk" (behind a counter, seen from the front, cut at the counter top; `tone` coat, `mount`
 /// "cap" a peaked cap), "courier" (cap and a stack of parcels), "worker" (hard hat, hi-vis vest,
-/// a crate), "eager" (both fists up, sparks, `text` in a bubble), "caller" (a phone to the ear,
+/// a crate; "temp": the same with two companies and a back-and-forth arrow over the head), "eager" (both fists up, sparks, `text` in a bubble), "caller" (a phone to the ear,
 /// `text` in a bubble), "tenant" (at their own front door with the key: `text` house number,
 /// `caption` a slip on the door); police and court people are
 /// drawn in their own files ("witness", "victim", "suspect", "officer", "judge", "lawyer", "guilty").
@@ -15,6 +15,7 @@ enum G1People {
         switch p.accessory ?? "none" {
         case "clerk": return clerk(pen, p)
         case "tenant": return tenant(pen, p)
+        case "temp": return temp(pen, p)
         case "witness", "victim", "suspect", "officer": return G1PoliceFigures.draw(pen, p)
         case "judge", "lawyer", "guilty": return G1CourtFigures.draw(pen, p)
         default: break
@@ -192,5 +193,18 @@ enum G1People {
         me.rect(45, 20, 2.4, 12, 0xC9A15B)
         me.rect(47, 27, 3, 2, 0xC9A15B)
         me.svg("M50 14L56 9L62 14V22H50Z", 0xC8261B)
+    }
+
+    /// A temp worker (74 × 142): the hi-vis worker, and over the head two companies with an arrow
+    /// going back and forth between them (here this week, there the next).
+    static func temp(_ pen: PropPen, _ p: PalacePropParams) {
+        let f = pen.fitted(CGSize(width: 74, height: 142))
+        PalaceIcon.company.draw(f, in: CGRect(x: 0, y: 2, width: 20, height: 20), color: 0x5E6B73, detail: 0xFFFDF6)
+        PalaceIcon.company.draw(f, in: CGRect(x: 52, y: 2, width: 20, height: 20), color: 0x2F5BD3, detail: 0xFFFDF6)
+        f.svgLine("M22 8Q36 0 50 8", 0xF2711C, 2)
+        f.svg("M47 4L53 10L45 11Z", 0xF2711C)
+        f.svgLine("M50 18Q36 26 22 18", 0xF2711C, 2)
+        f.svg("M25 22L19 16L27 15Z", 0xF2711C)
+        worker(f.within(CGRect(x: 6, y: 28, width: 64, height: 114)), Look.at(p.variant ?? 1))
     }
 }

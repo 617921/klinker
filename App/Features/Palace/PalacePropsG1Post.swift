@@ -171,9 +171,9 @@ enum G1Post {
     }
 
     /// A little delivery van (about 22 × 10), top-left at (x, y).
-    static func van(_ f: PropPen, x: CGFloat, y: CGFloat) {
-        f.rect(x, y, 14, 8, 0xFFFDF6, radius: 1)
-        f.svg("M\(x + 14) \(y + 2)H\(x + 18)L\(x + 21) \(y + 5)V\(y + 8)H\(x + 14)Z", 0xFFFDF6)
+    static func van(_ f: PropPen, x: CGFloat, y: CGFloat, colour: UInt32 = 0xFFFDF6) {
+        f.rect(x, y, 14, 8, colour, radius: 1)
+        f.svg("M\(x + 14) \(y + 2)H\(x + 18)L\(x + 21) \(y + 5)V\(y + 8)H\(x + 14)Z", colour)
         f.dot(x + 4, y + 8.5, 1.8, 0x1E1E1C)
         f.dot(x + 17, y + 8.5, 1.8, 0x1E1E1C)
     }

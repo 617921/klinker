@@ -823,6 +823,207 @@
           }
         }
       ]
+    },
+    {
+      "sheet": 31,
+      "type": "office",
+      "noor": [],
+      "order": [
+        "vacature",
+        "cv",
+        "sollicitatiegesprek",
+        "uurloon",
+        "solliciteren",
+        "uitzendkracht",
+        "ervaring",
+        "aannemen",
+        "proeftijd",
+        "geschikt",
+        "gemotiveerd"
+      ],
+      "prompts": {
+        "vacature": "Waar zie je een",
+        "ervaring": "Waar zie je",
+        "uitzendkracht": "Wie is de",
+        "uurloon": "Waar zie je het",
+        "proeftijd": "Waar zie je de",
+        "solliciteren": "Waar kun je",
+        "aannemen": "Waar gaan ze iemand",
+        "gemotiveerd": "Wie is hier"
+      },
+      "weg": [
+        {
+          "target": "cv",
+          "options": [
+            "vacature",
+            "cv",
+            "ervaring"
+          ]
+        },
+        {
+          "target": "uurloon",
+          "options": [
+            "uurloon",
+            "proeftijd",
+            "ervaring"
+          ]
+        },
+        {
+          "target": "solliciteren",
+          "options": [
+            "aannemen",
+            "solliciteren",
+            "sollicitatiegesprek"
+          ]
+        },
+        {
+          "target": "gemotiveerd",
+          "options": [
+            "geschikt",
+            "uitzendkracht",
+            "gemotiveerd"
+          ]
+        },
+        {
+          "target": "proeftijd",
+          "options": [
+            "proeftijd",
+            "aannemen",
+            "vacature"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "word": "uurloon",
+          "prop": "sign",
+          "slot": "wallLeft",
+          "label": "Een bordje met een klok en een euroteken: 14,40 euro per uur",
+          "params": {
+            "caption": "per uur",
+            "icons": [
+              "clock",
+              "euro"
+            ],
+            "text": "€ 14,40",
+            "tone": "white",
+            "mount": "wall"
+          }
+        },
+        {
+          "word": "ervaring",
+          "prop": "g1Timeline",
+          "slot": "wallMid",
+          "label": "Een tijdlijn met drie oude banen en een ster aan het eind: 5 jaar",
+          "params": {
+            "labels": [
+              "2019",
+              "2024"
+            ],
+            "text": "5 jaar"
+          }
+        },
+        {
+          "word": "proeftijd",
+          "prop": "g1TrialMonths",
+          "slot": "wallRight",
+          "label": "Twee maanden, 1 en 2, onder een vergrootglas, met een vinkje en een kruisje",
+          "params": {}
+        },
+        {
+          "word": "sollicitatiegesprek",
+          "prop": "g1Interview",
+          "slot": "meeting",
+          "label": "In de glazen kamer: iemand stelt vragen met een papier met een foto in de hand, de ander in pak antwoordt",
+          "params": {}
+        },
+        {
+          "word": "vacature",
+          "prop": "g1JobBoard",
+          "slot": "boardLow",
+          "label": "Een prikbord met drie kaartjes: gezocht, met een busje, een bezem en een krat",
+          "params": {
+            "caption": "Gezocht"
+          }
+        },
+        {
+          "word": "cv",
+          "prop": "g1Resume",
+          "slot": "deskLeft",
+          "label": "Een papier met een pasfoto, een koffertje en een afstudeerhoedje",
+          "params": {}
+        },
+        {
+          "word": "solliciteren",
+          "prop": "g1Apply",
+          "slot": "deskMid",
+          "frame": [
+            152,
+            104,
+            104,
+            74
+          ],
+          "pin": [
+            204,
+            186
+          ],
+          "align": "center",
+          "label": "Een laptop stuurt een brief met een papier met een foto erbij; een papieren vliegtuigje vliegt naar een bedrijf",
+          "params": {}
+        },
+        {
+          "word": "aannemen",
+          "prop": "g1Welcome",
+          "slot": "frontLeft",
+          "label": "Een kaart met twee handen die elkaar schudden: welkom!",
+          "params": {
+            "text": "Welkom!"
+          }
+        },
+        {
+          "word": "geschikt",
+          "prop": "g1Puzzle",
+          "slot": "frontRight",
+          "label": "Een puzzel: het laatste stukje past precies, met een vinkje",
+          "params": {}
+        },
+        {
+          "word": "gemotiveerd",
+          "prop": "g1Person",
+          "frame": [
+            188,
+            286,
+            100,
+            116
+          ],
+          "label": "Iemand juicht met twee vuisten omhoog: ik wil graag!",
+          "params": {
+            "accessory": "eager",
+            "variant": 6,
+            "text": "Ik wil graag!"
+          }
+        },
+        {
+          "word": "uitzendkracht",
+          "prop": "g1Person",
+          "slot": "standing",
+          "frame": [
+            290,
+            262,
+            76,
+            140
+          ],
+          "pin": [
+            366,
+            236
+          ],
+          "label": "Een werker met een helm, een fel hesje en een krat; boven zijn hoofd twee bedrijven met pijlen heen en weer",
+          "params": {
+            "accessory": "temp",
+            "variant": 1
+          }
+        }
+      ]
     }
   ]
 }
