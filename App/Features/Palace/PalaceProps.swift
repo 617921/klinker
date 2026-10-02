@@ -194,6 +194,33 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case pupil
     /// Strict teacher: arm across, raised finger, frown. `variant`, `flip`.
     case teacher
+
+    // MARK: g1 — bank, post office, housing office, police, temp agency, court (PalacePropsG1*.swift)
+
+    /// A person (64 × 114, `variant` look, `flip`) whose `accessory` tells who they are; see
+    /// `G1People.person` for the list ("clerk", "courier", "worried", "witness", "judge" …).
+    case g1Person
+    /// Cash machine in the wall: `text` on its screen, notes coming out into a hand.
+    case g1Atm
+    /// Piggy bank with a coin dropping in.
+    case g1PiggyBank
+    /// Bank card held up in a hand: chip, contactless waves, `text` number, `tone` colour.
+    case g1BankCard
+    /// Note-counting machine with notes going through, the total `text` on its display.
+    case g1MoneyCounter
+    /// Banking screen. `accessory` "account": `caption` account number, rows `lines` "label|+12,50";
+    /// "transfer": `lines` [from, to] with a coin (`text`) going along an arrow. `mount` "hang" | "stand".
+    case g1BankApp
+    /// Twelve little month pages, each with the same coin on its first day; `caption` the year.
+    case g1MonthStrip
+    /// Poster: a bundle of money (`text`) from the bank to a car (`accessory` "house"), coins paid back.
+    case g1Loan
+    /// Wall chart with a pie chart, bars, a calculator and coins.
+    case g1Finance
+    /// Standing poster: coin stacks growing along an arrow, big `text` ("2,5 %") and `caption`.
+    case g1Growth
+    /// A worried person on a chair beside a pile of bills with red stamps; the top one `text` in red.
+    case g1Bills
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -267,6 +294,9 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
+            case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
+                 .g1Finance, .g1Growth, .g1Bills:
+                G1Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

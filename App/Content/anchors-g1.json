@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 15,
+      "type": "g1Bank",
+      "order": ["pinpas", "opnemen", "sparen", "rekening", "overmaken", "bedrag", "rente", "lening", "schuld", "maandelijks", "financieel"],
+      "prompts": {
+        "rekening": "Waar zie je je",
+        "overmaken": "Waar kun je geld",
+        "opnemen": "Waar kun je geld",
+        "sparen": "Waarin kun je",
+        "schuld": "Wie heeft een",
+        "lening": "Waar zie je een",
+        "rente": "Waar zie je de",
+        "maandelijks": "Wat gebeurt"
+      },
+      "weg": [
+        { "target": "overmaken", "options": ["overmaken", "opnemen", "sparen"] },
+        { "target": "rekening", "options": ["bedrag", "rekening", "pinpas"] },
+        { "target": "rente", "options": ["lening", "schuld", "rente"] },
+        { "target": "maandelijks", "options": ["financieel", "maandelijks", "rente"] },
+        { "target": "schuld", "options": ["schuld", "lening", "bedrag"] }
+      ],
+      "anchors": [
+        {
+          "word": "financieel", "prop": "g1Finance", "slot": "highLeft",
+          "label": "Een bord met een taartgrafiek met een euroteken, staafjes en een rekenmachine",
+          "params": {}
+        },
+        {
+          "word": "maandelijks", "prop": "g1MonthStrip", "slot": "highMid",
+          "label": "Twaalf kalenderblaadjes, op elk blaadje een muntje op de eerste dag",
+          "params": {}
+        },
+        {
+          "word": "lening", "prop": "g1Loan", "slot": "highRight",
+          "label": "Een poster: veel geld gaat van de bank naar een auto, en kleine muntjes gaan terug",
+          "params": { "text": "€ 15.000" }
+        },
+        {
+          "word": "opnemen", "prop": "g1Atm", "slot": "side",
+          "label": "Een geldautomaat in de muur: er komen briefjes uit en een hand pakt ze",
+          "params": { "text": "€ 50" }
+        },
+        {
+          "word": "rekening", "prop": "g1BankApp", "slot": "glassLeft",
+          "label": "Een scherm met een nummer met NL ervoor, en wat erbij en eraf ging",
+          "params": { "accessory": "account", "caption": "NL12 BANK 0345 67", "lines": ["salaris|+ 2.150", "huur|– 950"] }
+        },
+        {
+          "word": "overmaken", "prop": "g1BankApp", "slot": "glassRight",
+          "label": "Een scherm: een muntje gaat met een pijl van Noor naar Sam",
+          "params": { "accessory": "transfer", "lines": ["Noor", "Sam"], "text": "€ 50" }
+        },
+        {
+          "word": "pinpas", "prop": "g1BankCard", "slot": "counterLeft",
+          "label": "Een hand houdt een blauw kaartje met een chip omhoog",
+          "params": { "text": "•••• 4821" }
+        },
+        {
+          "word": "bedrag", "prop": "g1MoneyCounter", "slot": "counterMid",
+          "label": "Een telmachine met briefjes, op het schermpje staat 500 euro",
+          "params": { "text": "€ 500" }
+        },
+        {
+          "word": "schuld", "prop": "g1Bills", "slot": "floorLeft",
+          "label": "Iemand zit met zijn handen op zijn hoofd naast een stapel brieven met rode stempels: min 3200 euro",
+          "params": { "text": "– € 3.200" }
+        },
+        {
+          "word": "sparen", "prop": "g1PiggyBank", "slot": "floorMid",
+          "label": "Een roze spaarvarken, er valt een muntje in",
+          "params": {}
+        },
+        {
+          "word": "rente", "prop": "g1Growth", "slot": "floorRight",
+          "label": "Een bord met stapeltjes munten die groter worden: 2,5 procent per jaar",
+          "params": { "text": "2,5 %", "caption": "per jaar" }
+        }
+      ]
+    }
+  ]
+}

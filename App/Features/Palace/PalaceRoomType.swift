@@ -24,6 +24,9 @@ enum PalaceRoomType: String, CaseIterable {
     case library
     case doctorRoom
     case classroom
+    // g1: counter halls (G1CounterHallBackdrop.swift) and the courtroom (G1CourtroomBackdrop.swift)
+    case g1Bank, g1PostOffice, g1PoliceDesk, g1HousingDesk
+    case g1Courtroom
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -41,6 +44,9 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "bibliotheek"
         case .doctorRoom: "praktijk"
         case .classroom: "klas"
+        case .g1Bank: "bank"
+        case .g1PostOffice, .g1PoliceDesk, .g1HousingDesk: "hal"
+        case .g1Courtroom: "zaal"
         }
     }
 
@@ -60,6 +66,11 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: "De bibliotheek"
         case .doctorRoom: "De praktijk van de dokter"
         case .classroom: "Het klaslokaal"
+        case .g1Bank: "De hal van de bank, met loketten"
+        case .g1PostOffice: "Het postkantoor, met loketten"
+        case .g1PoliceDesk: "De balie van het politiebureau"
+        case .g1HousingDesk: "De balie van de woningcorporatie"
+        case .g1Courtroom: "Een zaal van de rechtbank"
         }
     }
 
@@ -77,6 +88,8 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.noor
         case .doctorRoom: DoctorRoom.noor
         case .classroom: Classroom.noor
+        case .g1Bank, .g1PostOffice, .g1PoliceDesk, .g1HousingDesk: G1CounterHall.noor
+        case .g1Courtroom: G1Courtroom.noor
         }
     }
 
@@ -93,6 +106,8 @@ enum PalaceRoomType: String, CaseIterable {
         case .library: Library.slots
         case .doctorRoom: DoctorRoom.slots
         case .classroom: Classroom.slots
+        case .g1Bank, .g1PostOffice, .g1PoliceDesk, .g1HousingDesk: G1CounterHall.slots
+        case .g1Courtroom: G1Courtroom.slots
         }
     }
 }
@@ -114,6 +129,8 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .library: LibraryBackdrop()
         case .doctorRoom: DoctorRoomBackdrop()
         case .classroom: ClassroomBackdrop()
+        case .g1Bank, .g1PostOffice, .g1PoliceDesk, .g1HousingDesk: G1CounterHallBackdrop(type: type)
+        case .g1Courtroom: G1CourtroomBackdrop()
         }
     }
 }
