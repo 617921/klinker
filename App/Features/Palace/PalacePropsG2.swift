@@ -14,6 +14,14 @@ enum G2Props {
         case .g2Gross: G2TaxProps.gross(pen, p)
         case .g2Laptop: G2Screens.laptop(pen, p)
         case .g2Person: G2People.person(pen, p)
+        case .g2Shelter: G2InsuranceProps.shelter(pen, p)
+        case .g2Tagged: G2InsuranceProps.tagged(pen, p)
+        case .g2Damage: G2InsuranceProps.damage(pen, p)
+        case .g2HouseContents: G2InsuranceProps.houseContents(pen, p)
+        case .g2SmallPrint: G2PolicyProps.smallPrint(pen, p)
+        case .g2Handshake: G2PolicyProps.handshake(pen, p)
+        case .g2AddOn: G2PolicyProps.addOn(pen, p)
+        case .g2Liable: G2PolicyProps.liable(pen, p)
         default: break
         }
     }

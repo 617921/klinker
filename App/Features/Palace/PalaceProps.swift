@@ -197,6 +197,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
 
     // MARK: g2 — offices and paperwork (PalacePropsG2*.swift, where each one's params are described)
     case g2MoneyFlow, g2Bill, g2TaxReturn, g2TopUp, g2Refund, g2Gross, g2Laptop, g2Person
+    case g2Shelter, g2Tagged, g2Damage, g2HouseContents, g2SmallPrint, g2Handshake, g2AddOn, g2Liable
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -270,7 +271,8 @@ struct PalacePropView: View, Equatable {
                  .doctor, .patient, .thermometer, .letter, .writingPad, .examCouch,
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
-            case .g2MoneyFlow, .g2Bill, .g2TaxReturn, .g2TopUp, .g2Refund, .g2Gross, .g2Laptop, .g2Person:
+            case .g2MoneyFlow, .g2Bill, .g2TaxReturn, .g2TopUp, .g2Refund, .g2Gross, .g2Laptop, .g2Person,
+                 .g2Shelter, .g2Tagged, .g2Damage, .g2HouseContents, .g2SmallPrint, .g2Handshake, .g2AddOn, .g2Liable:
                 G2Props.draw(prop.kind, pen, p)
             }
         }

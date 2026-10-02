@@ -80,7 +80,87 @@
         }
       ],
       "decor": [
-        { "prop": "g2Person", "slot": "advisor", "params": { "accessory": "advisor", "variant": 2, "tone": "blue" } }
+        {"prop": "g2Person", "slot": "advisor", "params": {"accessory": "advisor", "variant": 2, "tone": "blue"}}
+      ]
+    },
+    {
+      "sheet": 41,
+      "type": "g2Insurer",
+      "noor": [212, 292],
+      "order": ["verzekering", "polis", "premie", "schade", "inboedel", "voorwaarde", "afsluiten", "vergelijken", "uitkeren", "aanvullend", "aansprakelijk"],
+      "prompts": {
+        "afsluiten": "Waar kun je een verzekering",
+        "vergelijken": "Waar kun je prijzen",
+        "uitkeren": "Waar zie je de verzekeraar geld",
+        "aansprakelijk": "Wie is hier",
+        "schade": "Waar zie je"
+      },
+      "weg": [
+        { "target": "premie", "options": ["premie", "polis", "uitkeren"] },
+        { "target": "verzekering", "options": ["aanvullend", "verzekering", "afsluiten"] },
+        { "target": "schade", "options": ["aansprakelijk", "inboedel", "schade"] },
+        { "target": "voorwaarde", "options": ["polis", "voorwaarde", "vergelijken"] },
+        { "target": "uitkeren", "options": ["uitkeren", "premie", "afsluiten"] }
+      ],
+      "anchors": [
+        {
+          "word": "verzekering", "prop": "g2Shelter", "slot": "wallA",
+          "label": "Een grote paraplu houdt een huis droog in de regen en het onweer",
+          "params": { "tone": "green" }
+        },
+        {
+          "word": "voorwaarde", "prop": "g2SmallPrint", "slot": "wallB",
+          "label": "Een papier met heel kleine lettertjes onder een vergrootglas: niet bij eigen schuld",
+          "params": { "lines": ["* niet bij", "eigen schuld"] }
+        },
+        {
+          "word": "vergelijken", "prop": "g2Laptop", "slot": "wallC",
+          "label": "Een scherm met drie aanbiedingen naast elkaar, met prijs en sterren; de beste heeft een vinkje",
+          "params": { "mount": "tv", "accessory": "compare", "lines": ["€ 32|3", "€ 28|5", "€ 35|2"], "highlight": 1 }
+        },
+        {
+          "word": "uitkeren", "prop": "g2MoneyFlow", "slot": "wallD",
+          "label": "Een kaart: geld gaat van de paraplu naar je portemonnee, 2000 euro na de inbraak",
+          "params": { "icons": ["g2Umbrella", "g2Wallet"], "tone": "teal", "text": "€ 2.000", "caption": "na de inbraak" }
+        },
+        {
+          "word": "polis", "prop": "paperSheet", "slot": "counterA",
+          "label": "Een document met een groene paraplu, je naam en een nummer",
+          "params": { "icons": ["g2Umbrella"], "variant": 1, "tone": "green", "lines": ["naam|N. Jansen", "nr.|83-20381"] }
+        },
+        {
+          "word": "premie", "prop": "g2Tagged", "slot": "counterB",
+          "label": "Een paraplu met een prijskaartje: 32 euro per maand",
+          "params": { "icons": ["g2Umbrella"], "tone": "green", "text": "€ 32", "caption": "per maand" }
+        },
+        {
+          "word": "afsluiten", "prop": "g2Handshake", "slot": "counterC",
+          "label": "Twee handen schudden boven een getekend papier met een paraplu, en een groen vinkje",
+          "params": { "icons": ["g2Umbrella"] }
+        },
+        {
+          "word": "aanvullend", "prop": "g2AddOn", "slot": "counterD",
+          "label": "Een schild met het woord basis, en een extra stukje met een plus en een tand dat erbij komt",
+          "params": { "text": "basis", "icons": ["g2Tooth"] }
+        },
+        {
+          "word": "schade", "prop": "g2Damage", "slot": "frontLeft",
+          "label": "Een rode auto is tegen een paal gereden: de voorkant is kapot",
+          "params": {  }
+        },
+        {
+          "word": "inboedel", "prop": "g2HouseContents", "slot": "frontMid",
+          "label": "Een open huisje met alles wat erin staat: bank, lamp, tv, schilderij en plant",
+          "params": {  }
+        },
+        {
+          "word": "aansprakelijk", "prop": "g2Liable", "slot": "standing", "frame": [256, 266, 110, 114], "pin": [366, 380],
+          "label": "Een hond heeft een vaas gebroken; een hand wijst naar de baas van de hond: jij betaalt!",
+          "params": { "variant": 3, "text": "jij betaalt!" }
+        }
+      ],
+      "decor": [
+        {"prop": "g2Person", "slot": "advisor", "params": {"accessory": "advisor", "variant": 0, "tone": "green"}}
       ]
     }
   ]

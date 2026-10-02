@@ -15,7 +15,7 @@ enum G2Service {
         "counterA": PalaceSlot(frame: CGRect(x: 6, y: 122, width: 84, height: 82), pin: CGPoint(x: 6, y: 212), tilt: 1),
         "counterB": PalaceSlot(frame: CGRect(x: 94, y: 126, width: 80, height: 78), pin: CGPoint(x: 134, y: 246), align: .center, tilt: -1.5),
         "counterC": PalaceSlot(frame: CGRect(x: 238, y: 126, width: 62, height: 78), pin: CGPoint(x: 268, y: 212), align: .center, tilt: 1.5),
-        "counterD": PalaceSlot(frame: CGRect(x: 304, y: 122, width: 62, height: 82), pin: CGPoint(x: 366, y: 246), align: .trailing, tilt: -1),
+        "counterD": PalaceSlot(frame: CGRect(x: 304, y: 122, width: 62, height: 82), pin: CGPoint(x: 366, y: 242), align: .trailing, tilt: -1),
         "frontLeft": PalaceSlot(frame: CGRect(x: 6, y: 254, width: 100, height: 104), pin: CGPoint(x: 6, y: 358), tilt: -1.5),
         "frontMid": PalaceSlot(frame: CGRect(x: 112, y: 258, width: 96, height: 100), pin: CGPoint(x: 158, y: 364), align: .center, tilt: 1.5),
         "standing": PalaceSlot(frame: CGRect(x: 290, y: 280, width: 74, height: 122), pin: CGPoint(x: 366, y: 376), align: .trailing, tilt: 2),

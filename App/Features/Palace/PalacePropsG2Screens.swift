@@ -70,8 +70,40 @@ enum G2Screens {
             s.text(p.text ?? "", PropFont.demi(7.5), 0xFFFFFF, at: CGPoint(x: button.midX - 4, y: button.midY), maxWidth: button.width - 14)
             s.svg("M\(button.maxX - 9) \(button.midY - 3.5)L\(button.maxX - 3) \(button.midY)L\(button.maxX - 9) \(button.midY + 3.5)Z", 0xFFFFFF)
             cursor(s, at: CGPoint(x: button.midX + 6, y: button.midY))
+        case "compare":
+            compare(s, p)
         default:
             s.rect(0, 0, w, h, 0x232B3B)
+        }
+    }
+
+    /// Side-by-side offers: an umbrella, a price and a row of stars per column; the best one ticked.
+    private static func compare(_ s: PropPen, _ p: PalacePropParams) {
+        let (w, h) = (s.size.width, s.size.height)
+        s.rect(0, 0, w, h, 0xE4ECEE)
+        let rows = p.lines ?? []
+        let colW = (w - 4) / CGFloat(max(1, rows.count))
+        let icon = (p.icons ?? []).compactMap(PalaceIcon.init(rawValue:)).first ?? .g2Umbrella
+        for (i, row) in rows.enumerated() {
+            let cells = row.split(separator: "|").map(String.init)
+            let best = i == p.highlight
+            let card = CGRect(x: 2 + CGFloat(i) * colW + 1.5, y: 3, width: colW - 3, height: h - 6)
+            s.rect(card, 0xFFFFFF, radius: 2)
+            if best { s.stroke(Path(roundedRect: card, cornerRadius: 2), 0x1E7A4C, 2) }
+            let side = min(card.width - 8, h * 0.3)
+            icon.draw(s, in: CGRect(x: card.midX - side / 2, y: card.minY + 3, width: side, height: side),
+                      color: best ? 0x1E7A4C : 0x8C9499, detail: 0xFFFFFF)
+            s.text(cells.first ?? "", PropFont.heavy(9), 0x1E1E1C, at: CGPoint(x: card.midX, y: card.minY + side + 10), maxWidth: card.width - 3)
+            let stars = cells.count > 1 ? Int(cells[1]) ?? 0 : 0
+            let r: CGFloat = min(2.6, (card.width - 4) / 10)
+            for k in 0..<5 {
+                let cx = card.midX + (CGFloat(k) - 2) * r * 2.2
+                s.svg(PalacePeople.star(cx: cx, cy: card.minY + side + 20, r: r), k < stars ? 0xE8B32C : 0xD3D1C7)
+            }
+            if best {
+                s.dot(card.maxX - 5, card.maxY - 6, 5, 0x1E7A4C)
+                s.svgLine("M\(card.maxX - 7.5) \(card.maxY - 6)L\(card.maxX - 5.5) \(card.maxY - 4)L\(card.maxX - 2.5) \(card.maxY - 8.5)", 0xFFFFFF, 1.4)
+            }
         }
     }
 
