@@ -7,7 +7,7 @@ enum G5Hall {
     static let noor = CGPoint(x: 222, y: 292)
 
     nonisolated static let slots: [String: PalaceSlot] = [
-        "crest": PalaceSlot(frame: CGRect(x: 150, y: 1, width: 70, height: 38), pin: CGPoint(x: 185, y: 38), align: .center, tilt: -1),
+        "crest": PalaceSlot(frame: CGRect(x: 150, y: 0, width: 70, height: 44), pin: CGPoint(x: 185, y: 40), align: .center, tilt: -1),
         "stage": PalaceSlot(frame: CGRect(x: 134, y: 52, width: 102, height: 146), pin: CGPoint(x: 185, y: 172), align: .center, tilt: 1.5),
         "screen": PalaceSlot(frame: CGRect(x: 74, y: 34, width: 222, height: 138), pin: CGPoint(x: 80, y: 40), tilt: -1.5),
         "wallLeft": PalaceSlot(frame: CGRect(x: 6, y: 16, width: 54, height: 58), pin: CGPoint(x: 4, y: 76), tilt: 1.5),

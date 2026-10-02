@@ -10,7 +10,7 @@ enum G5Groups {
     static func group(_ pen: PropPen, _ p: PalacePropParams) {
         switch p.accessory ?? "tour" {
         case "choir": choir(pen.fitted(CGSize(width: 120, height: 92)), PropColor.named(p.tone, 0x7A1E1E))
-        case "circle": circle(pen.fitted(CGSize(width: 128, height: 84)))
+        case "circle": circle(pen.fitted(CGSize(width: 128, height: 98)))
         default: tour(pen.fitted(CGSize(width: 116, height: 128)), p)
         }
     }
@@ -64,19 +64,20 @@ enum G5Groups {
 
     private static func circle(_ f: PropPen) {
         let people: [(x: CGFloat, s: CGFloat, look: Int)] = [(12, 1.15, 4), (34, 1.3, 1), (56, 0.85, 3), (76, 1.3, 2), (98, 1.2, 6), (118, 0.95, 0)]
-        G5Props.heart(f, 64, 10, 8, 0xC8261B)
-        var hands: [CGPoint] = []
+        G5Props.heart(f, 64, 9, 8, 0xC8261B)
+        var hands: [(CGPoint, UInt32)] = []
         for person in people {
-            let box = CGRect(x: person.x - 15 * person.s, y: 82 - 60 * person.s, width: 30 * person.s, height: 60 * person.s)
-            PalaceFigures.mini(f.within(box, unit: person.s), Look.at(person.look), walking: false, briefcase: false)
-            hands.append(CGPoint(x: person.x, y: 82 - 60 * person.s + 26 * person.s))
+            let box = CGRect(x: person.x - 15 * person.s, y: 96 - 60 * person.s, width: 30 * person.s, height: 60 * person.s)
+            let look = Look.at(person.look)
+            PalaceFigures.mini(f.within(box, unit: person.s), look, walking: false, briefcase: false)
+            hands.append((CGPoint(x: person.x, y: 96 - 60 * person.s + 24 * person.s), look.coat))
         }
         for (a, b) in zip(hands, hands.dropFirst()) {
-            let mid = CGPoint(x: (a.x + b.x) / 2, y: max(a.y, b.y) + 6)
-            f.svgLine("M\(a.x + 5) \(a.y)Q\(mid.x - 4) \(mid.y) \(mid.x) \(mid.y)Q\(mid.x + 4) \(mid.y) \(b.x - 5) \(b.y)", 0x5E6B73, 2.4)
+            let mid = CGPoint(x: (a.0.x + b.0.x) / 2, y: max(a.0.y, b.0.y) + 8)
+            f.svgLine("M\(a.0.x + 5) \(a.0.y)Q\(mid.x - 4) \(mid.y) \(mid.x) \(mid.y)", a.1, 3)
+            f.svgLine("M\(mid.x) \(mid.y)Q\(mid.x + 4) \(mid.y) \(b.0.x - 5) \(b.0.y)", b.1, 3)
             f.dot(mid.x, mid.y, 2.8, 0xC99A74)
         }
-        f.svgLine("M\(people[0].x - 22) 54L\(people[0].x - 22) 82", 0x6B4A2E, 1.6)
     }
 
     // MARK: Couple

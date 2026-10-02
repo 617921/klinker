@@ -119,6 +119,48 @@
       ]
     },
     {
+      "sheet": 25,
+      "type": "g5Church",
+      "noor": [],
+      "order": ["koor", "bruiloft", "begrafenis", "trouwen", "feestdag", "gemeenschap", "godsdienst", "geloof", "herdenken", "gelovig", "plechtig"],
+      "prompts": {
+        "trouwen": "Wie gaan er",
+        "herdenken": "Waar kun je de doden",
+        "gelovig": "Wie is heel",
+        "plechtig": "Wie is er heel",
+        "feestdag": "Waar zie je een",
+        "koor": "Wie zingen er in het",
+        "gemeenschap": "Waar zie je de",
+        "bruiloft": "Wat eet je op de",
+        "begrafenis": "Waar zie je een",
+        "godsdienst": "Waar zie je meer dan één",
+        "geloof": "Waar zie je iets van"
+      },
+      "weg": [
+        {"target": "trouwen", "options": ["bruiloft", "trouwen", "feestdag"]},
+        {"target": "begrafenis", "options": ["herdenken", "begrafenis", "plechtig"]},
+        {"target": "geloof", "options": ["geloof", "gelovig", "godsdienst"]},
+        {"target": "koor", "options": ["gemeenschap", "koor", "plechtig"]},
+        {"target": "herdenken", "options": ["begrafenis", "feestdag", "herdenken"]}
+      ],
+      "anchors": [
+        {"word": "feestdag", "prop": "g5DatePage", "slot": "board", "label": "Een scheurkalender: 25 december in rood, met een kerstboompje", "params": {"accessory": "tearoff", "caption": "december", "text": "25", "icons": ["g5Tree"]}},
+        {"word": "koor", "prop": "g5Group", "slot": "gallery", "label": "Op de galerij voor het orgel zingen zeven mensen in rode gewaden uit zwarte mapjes", "params": {"accessory": "choir", "tone": "red"}},
+        {"word": "godsdienst", "prop": "sign", "slot": "signRight", "label": "Een bord met de tekens van vier religies naast elkaar: een kruis, een maan met een ster, een davidster en een wiel", "params": {"icons": ["g5Cross", "g5Crescent", "g5David", "g5Dharma"], "tone": "white", "mount": "wall"}},
+        {"word": "plechtig", "prop": "g5Maker", "slot": "pulpit", "label": "Hoog op de houten preekstoel staat een dominee in een zwarte toga met een witte bef, stil met een hand omhoog, tussen twee kaarsen", "params": {"accessory": "minister", "variant": 0}},
+        {"word": "trouwen", "prop": "g5Couple", "slot": "front", "label": "Een man in pak schuift een gouden ring om de vinger van een vrouw in een witte jurk met sluier", "params": {"variant": 1}},
+        {"word": "herdenken", "prop": "g5Memorial", "slot": "plaque", "label": "Een stenen plaat met 1940 – 1945, eronder een krans van rode en witte bloemen met een lint, 4 mei, en twee kaarsjes", "params": {"lines": ["1940 – 1945"], "caption": "4 mei"}},
+        {"word": "gemeenschap", "prop": "g5Group", "slot": "aisle", "label": "Jong en oud houden elkaar bij de hand onder een groot hart", "params": {"accessory": "circle"}},
+        {"word": "gelovig", "prop": "g5Fan", "slot": "floorLeft", "label": "Een oude vrouw met grijs haar zit in een kerkbank met gevouwen handen en gesloten ogen, een boekje op schoot", "params": {"accessory": "pray", "mount": "pew", "variant": 5}},
+        {"word": "geloof", "prop": "g5Candles", "slot": "floorMid", "label": "Een ijzeren rek vol brandende kaarsjes; een hand steekt er nog een aan", "params": {}},
+        {"word": "begrafenis", "prop": "g5Coffin", "slot": "floorCenter", "label": "Een houten kist met witte bloemen erop, een foto op een standaard en een kaars", "params": {}},
+        {"word": "bruiloft", "prop": "g5Cake", "slot": "floorRight", "label": "Een witte taart van drie lagen met een bruidspaartje erop, twee glazen die proosten en confetti", "params": {}}
+      ],
+      "decor": [
+
+      ]
+    },
+    {
       "sheet": 26,
       "type": "g5Theater",
       "noor": [228, 292],

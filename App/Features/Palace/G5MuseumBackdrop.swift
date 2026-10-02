@@ -10,7 +10,7 @@ enum G5Museum {
         "banner": PalaceSlot(frame: CGRect(x: 4, y: 12, width: 58, height: 142), pin: CGPoint(x: 4, y: 124), tilt: -1.5),
         "paintingLeft": PalaceSlot(frame: CGRect(x: 72, y: 26, width: 90, height: 70), pin: CGPoint(x: 117, y: 92), align: .center, tilt: 1.5),
         "niche": PalaceSlot(frame: CGRect(x: 74, y: 124, width: 86, height: 82), pin: CGPoint(x: 117, y: 204), align: .center, tilt: -1),
-        "plaque": PalaceSlot(frame: CGRect(x: 178, y: 208, width: 64, height: 34), pin: CGPoint(x: 212, y: 242), align: .center, tilt: 1),
+        "plaque": PalaceSlot(frame: CGRect(x: 178, y: 204, width: 66, height: 44), pin: CGPoint(x: 211, y: 246), align: .center, tilt: 1),
         "paintingBig": PalaceSlot(frame: CGRect(x: 172, y: 18, width: 128, height: 236), pin: CGPoint(x: 236, y: 24), align: .center, tilt: -1),
         "paintingRight": PalaceSlot(frame: CGRect(x: 306, y: 30, width: 62, height: 220), pin: CGPoint(x: 366, y: 104), align: .trailing, tilt: 1.5),
         "plinthLeft": PalaceSlot(frame: CGRect(x: 2, y: 166, width: 60, height: 136), pin: CGPoint(x: 4, y: 258), tilt: 1.5),
