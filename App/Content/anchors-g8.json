@@ -76,6 +76,83 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 54,
+      "type": "g8TownSquare",
+      "order": ["burgemeester", "stembureau", "verkiezing", "stempas", "stemmen", "partij", "demonstratie", "vrijheid", "vreedzaam", "gelijk", "opkomen"],
+      "prompts": {
+        "partij": "Waar zie je de",
+        "vrijheid": "Waar zie je",
+        "stemmen": "Waar kun je",
+        "opkomen": "Waar zie je iemand voor een ander",
+        "gelijk": "Waar zijn twee mensen",
+        "vreedzaam": "Welk teken is"
+      },
+      "weg": [
+        { "target": "stemmen", "options": ["stempas", "stemmen", "stembureau"] },
+        { "target": "partij", "options": ["verkiezing", "partij", "demonstratie"] },
+        { "target": "vreedzaam", "options": ["vrijheid", "vreedzaam", "gelijk"] },
+        { "target": "opkomen", "options": ["opkomen", "demonstratie", "burgemeester"] },
+        { "target": "stembureau", "options": ["stembureau", "verkiezing", "stempas"] }
+      ],
+      "anchors": [
+        {
+          "word": "stembureau", "prop": "g8PollingStation", "slot": "doorLeft",
+          "label": "Een open deur met een bordje met een bus erop; binnen twee hokjes, iemand in een hokje en een oranje bus met een gleuf",
+          "params": {}
+        },
+        {
+          "word": "vreedzaam", "prop": "g8Banner", "slot": "facade",
+          "label": "Een blauw doek aan de gevel met een witte duif met een olijftakje",
+          "params": { "icons": ["g8Dove"] }
+        },
+        {
+          "word": "burgemeester", "prop": "g8Mayor", "slot": "steps",
+          "label": "Iemand in een donker pak met een gouden ketting en een grote penning, die zwaait op de trap van het stadhuis",
+          "params": { "variant": 0 }
+        },
+        {
+          "word": "verkiezing", "prop": "g8ElectionBoard", "slot": "boardRight",
+          "label": "Een groen bord op twee palen met acht genummerde vakken, elk met een andere poster, en een datum erboven",
+          "params": { "text": "21 maart", "count": 8 }
+        },
+        {
+          "word": "demonstratie", "prop": "g8March", "slot": "squareLeft",
+          "label": "Een groep mensen loopt samen over het plein met een lang spandoek en borden met een hart, een wereld en een huis",
+          "params": { "icons": ["heart", "globe", "house", "sun"] }
+        },
+        {
+          "word": "vrijheid", "prop": "g8Cage", "slot": "squareMid",
+          "label": "Een sokkel met een gouden vogelkooi; het deurtje staat open en een gele vogel vliegt weg",
+          "params": {}
+        },
+        {
+          "word": "partij", "prop": "g8PartyStand", "slot": "squareRight",
+          "label": "Een kraam onder een paarse parasol met een gele ster, ballonnen en een kleed met Lijst 4",
+          "params": { "text": "Lijst 4", "tone": "purple" }
+        },
+        {
+          "word": "stempas", "prop": "g8PollCard", "slot": "nearLeft",
+          "label": "Een hand houdt een kaart met een oranje kop met een bus, een naam, een nummer en een streepjescode",
+          "params": { "tone": "orange", "icons": ["g8BallotBox"], "caption": "Gemeente", "lines": ["N. de Vries", "nr. 0412"] }
+        },
+        {
+          "word": "stemmen", "prop": "g8Ballot", "slot": "nearMid",
+          "label": "Een hand kleurt met een rood potlood één vakje rood op een groot papier met drie lijsten",
+          "params": { "highlight": 7 }
+        },
+        {
+          "word": "opkomen", "prop": "g8Megaphone", "slot": "nearSpeaker",
+          "label": "Iemand met een megafoon houdt een arm uit voor een kleiner iemand achter zich",
+          "params": { "variant": 1 }
+        },
+        {
+          "word": "gelijk", "prop": "g8Equal", "slot": "nearRight",
+          "label": "Een bord met een poster: twee verschillende mensen, even groot, met een rood is-teken ertussen",
+          "params": {}
+        }
+      ]
     }
   ]
 }

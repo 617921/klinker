@@ -221,6 +221,30 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     /// Two patches side by side: dry cracked ground with a wilted sprout (cross) and dark rich
     /// ground with a laden plant (tick).
     case g8Fertile
+
+    // Town hall square (PalacePropsG8Square.swift, PalacePropsG8SquarePeople.swift)
+    /// A doorway open on two voting booths and a ballot box, a ballot-box sign over it.
+    case g8PollingStation
+    /// An election poster board on two posts: `text` (date) on top, `count` numbered posters.
+    case g8ElectionBoard
+    /// A campaign stand under a parasol: `text` on the cloth, `tone` the party colour, balloons.
+    case g8PartyStand
+    /// People marching with a long banner and placards; `icons` the placards' pictures.
+    case g8March
+    /// An open birdcage on a plinth, a bird flying out of it.
+    case g8Cage
+    /// A cloth banner hanging from a rod: `icons` (first one big), `tone` the cloth.
+    case g8Banner
+    /// A person with the gold chain of office, waving. `variant` skin and hair.
+    case g8Mayor
+    /// A hand holding a card: `tone` header with `icons` and `caption`, `lines` printed, a barcode.
+    case g8PollCard
+    /// A ballot paper with lists of boxes, a hand colouring box `highlight` with a red pencil.
+    case g8Ballot
+    /// Someone with a megaphone, the other arm shielding a smaller person behind them.
+    case g8Megaphone
+    /// A notice board with a poster: two different people, a big equals sign between them.
+    case g8Equal
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -295,7 +319,8 @@ struct PalacePropView: View, Equatable {
                  .meeting, .reportCard, .testPaper, .certificate, .classTimetable, .pupil, .teacher:
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g8Shed, .g8Greenhouse, .g8Clubhouse, .g8Plot, .g8Weeds, .g8Gardener, .g8LayPath, .g8Sowing, .g8SoilCut,
-                 .g8SeedPacket, .g8Fertile:
+                 .g8SeedPacket, .g8Fertile, .g8PollingStation, .g8ElectionBoard, .g8PartyStand, .g8March, .g8Cage, .g8Banner,
+                 .g8Mayor, .g8PollCard, .g8Ballot, .g8Megaphone, .g8Equal:
                 G8Props.draw(prop.kind, pen, p)
             }
         }

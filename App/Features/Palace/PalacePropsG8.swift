@@ -16,6 +16,17 @@ enum G8Props {
         case .g8SoilCut: G8Garden.soilCut(pen, p)
         case .g8SeedPacket: G8GardenWork.seedPacket(pen, p)
         case .g8Fertile: G8Garden.fertile(pen, p)
+        case .g8PollingStation: G8Square.pollingStation(pen, p)
+        case .g8ElectionBoard: G8Square.electionBoard(pen, p)
+        case .g8PartyStand: G8Square.partyStand(pen, p)
+        case .g8Cage: G8Square.cage(pen, p)
+        case .g8Banner: G8Square.banner(pen, p)
+        case .g8March: G8SquarePeople.march(pen, p)
+        case .g8Mayor: G8SquarePeople.mayor(pen, p)
+        case .g8PollCard: G8SquarePeople.pollCard(pen, p)
+        case .g8Ballot: G8SquarePeople.ballot(pen, p)
+        case .g8Megaphone: G8SquarePeople.megaphone(pen, p)
+        case .g8Equal: G8SquarePeople.equal(pen, p)
         default: break
         }
     }

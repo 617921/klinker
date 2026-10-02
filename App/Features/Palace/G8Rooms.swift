@@ -8,7 +8,7 @@ enum G8Rooms {
     static func hall(_ type: PalaceRoomType) -> String {
         switch type {
         case .g8Allotment: "volkstuin"
-        case .g8TownSquare: "plein"
+        case .g8TownSquare: "omgeving"
         case .g8Roundabout: "kruising"
         case .g8Dike: "omgeving"
         case .g8Ferry: "kade"
