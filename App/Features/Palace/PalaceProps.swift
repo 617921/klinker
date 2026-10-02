@@ -281,6 +281,20 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1Welcome
     /// A puzzle with one gap and the last piece sliding in, a green tick.
     case g1Puzzle
+    /// Gold scales on a wooden plaque, both pans level, a green tick.
+    case g1Scales
+    /// A gavel striking its block with bang lines over a stamped sheet.
+    case g1Gavel
+    /// Two thick books, a big § on the front one.
+    case g1LawBook
+    /// A small table with a sealed bag (knife, tag `text`) and a fingerprint under a magnifier.
+    case g1Evidence
+    /// Framed picture: a prisoner in stripes behind bars, tally marks on the wall.
+    case g1Bars
+    /// A thick file on a lectern: two faces glaring across a lightning bolt, names `lines`.
+    case g1CaseFile
+    /// A photo on an easel: a traffic light on red, a cyclist riding past it.
+    case g1RedLight
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -358,7 +372,8 @@ struct PalacePropView: View, Equatable {
                  .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
                  .g1Registered, .g1GiveAcross, .g1MailSlot, .g1OpenWindow, .g1Mould, .g1Repair, .g1HomeAd, .g1Objection,
                  .g1Community, .g1QueueScreen, .g1BreakIn, .g1Megaphone, .g1Forbidden, .g1CutLock, .g1Cctv, .g1Pickpocket,
-                 .g1Interview, .g1Resume, .g1Timeline, .g1JobBoard, .g1TrialMonths, .g1Apply, .g1Welcome, .g1Puzzle:
+                 .g1Interview, .g1Resume, .g1Timeline, .g1JobBoard, .g1TrialMonths, .g1Apply, .g1Welcome, .g1Puzzle,
+                 .g1Scales, .g1Gavel, .g1LawBook, .g1Evidence, .g1Bars, .g1CaseFile, .g1RedLight:
                 G1Props.draw(prop.kind, pen, p)
             }
         }

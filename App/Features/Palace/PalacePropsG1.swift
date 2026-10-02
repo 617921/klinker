@@ -45,6 +45,13 @@ enum G1Props {
         case .g1Apply: G1JobsDesk.apply(pen, p)
         case .g1Welcome: G1JobsDesk.welcome(pen, p)
         case .g1Puzzle: G1JobsDesk.puzzle(pen, p)
+        case .g1Scales: G1Court.scales(pen, p)
+        case .g1Gavel: G1Court.gavel(pen, p)
+        case .g1LawBook: G1Court.lawBook(pen, p)
+        case .g1Evidence: G1Court.evidence(pen, p)
+        case .g1Bars: G1Court.bars(pen, p)
+        case .g1CaseFile: G1Court.caseFile(pen, p)
+        case .g1RedLight: G1Court.redLight(pen, p)
         default: break
         }
     }
