@@ -8,6 +8,9 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case banknote, noCard, tram, detour, wheelchair, dogLeash, bike, allowed
     // Home, café and office (drawn in PalacePropIconsLiving.swift)
     case house, euro, townHall, company, handshake, thermometer, sun
+    // Learning places (PalacePropIconsLearning.swift)
+    case heart, globe, pan, lesson, clock, talk, pill, hospital, practice, school, children, book, cap, steps
+    case abc, math, music, ball, paint
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -61,6 +64,9 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             PalaceOutdoorIcons.draw(self, p, c, d)
         case .house, .euro, .townHall, .company, .handshake, .thermometer, .sun:
             Self.drawLiving(self, p, c, d)
+        case .heart, .globe, .pan, .lesson, .clock, .talk, .pill, .hospital, .practice, .school, .children, .book, .cap, .steps,
+             .abc, .math, .music, .ball, .paint:
+            PalaceLearningIcons.draw(self, p, c, d)
         }
     }
 
