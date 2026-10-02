@@ -383,6 +383,84 @@
           "params": { "accessory": "flow", "variant": 7 }
         }
       ]
+    },
+    {
+      "sheet": 33,
+      "type": "doctorRoom",
+      "noor": [],
+      "order": ["kies", "poetsen", "controle", "gaatje", "beugel", "verdoofd", "gebit", "trekken", "vulling", "gevoelig", "tandvlees"],
+      "prompts": {
+        "poetsen": "Waar zie je iemand zijn tanden",
+        "trekken": "Waar kun je een tand",
+        "gevoelig": "Wiens tanden zijn",
+        "verdoofd": "Wie is er",
+        "beugel": "Wie heeft een",
+        "controle": "Wie is er op"
+      },
+      "weg": [
+        { "target": "kies", "options": ["gebit", "kies", "gaatje"] },
+        { "target": "vulling", "options": ["vulling", "gaatje", "trekken"] },
+        { "target": "verdoofd", "options": ["gevoelig", "verdoofd", "controle"] },
+        { "target": "tandvlees", "options": ["tandvlees", "poetsen", "beugel"] },
+        { "target": "beugel", "options": ["beugel", "gebit", "controle"] }
+      ],
+      "anchors": [
+        {
+          "word": "poetsen", "prop": "g3Face", "slot": "plaque",
+          "label": "Een poster: een tandenborstel schrobt de tanden, met schuim en een klokje van twee minuten",
+          "params": { "accessory": "brush", "text": "2 min" }
+        },
+        {
+          "word": "tandvlees", "prop": "g3Face", "slot": "card",
+          "label": "Een poster: de lip omhoog, het roze vlees boven de tanden met een rode druppel",
+          "params": { "accessory": "gums" }
+        },
+        {
+          "word": "verdoofd", "prop": "g3Patient", "slot": "door", "frame": [18, 150, 72, 140],
+          "label": "Een man in de deur met een dikke wang vol stipjes en een scheve mond waar een druppel uit loopt",
+          "params": { "accessory": "numb", "variant": 7 }
+        },
+        {
+          "word": "gebit", "prop": "g3Tooth", "slot": "deskLeft", "frame": [104, 170, 50, 68], "pin": [104, 240], "align": "leading",
+          "label": "Een model met twee rijen tanden, boven en onder, in een roze rand",
+          "params": { "accessory": "set" }
+        },
+        {
+          "word": "gaatje", "prop": "g3Tooth", "slot": "deskMid", "frame": [154, 174, 46, 64], "pin": [177, 266],
+          "label": "Een grote witte tand met een zwart putje erin, onder een vergrootglas",
+          "params": { "accessory": "cavity" }
+        },
+        {
+          "word": "vulling", "prop": "g3Tooth", "slot": "deskMid", "frame": [200, 174, 46, 64], "pin": [223, 240],
+          "label": "Een grote witte tand met een grijs plekje dat een staafje erin drukt; het glimt",
+          "params": { "accessory": "filling" }
+        },
+        {
+          "word": "kies", "prop": "g3Tooth", "slot": "deskChair", "frame": [246, 140, 52, 100], "pin": [272, 266],
+          "label": "Een heel grote tand op een voetje: breed, met twee wortels",
+          "params": { "accessory": "molar" }
+        },
+        {
+          "word": "trekken", "prop": "g3Tooth", "slot": "cabinet", "frame": [302, 160, 62, 80],
+          "label": "Een tang trekt een tand met wortels en al uit het roze vlees; een pijl omhoog",
+          "params": { "accessory": "pull" }
+        },
+        {
+          "word": "gevoelig", "prop": "g3Patient", "slot": "chair1", "frame": [4, 292, 90, 104],
+          "label": "Een vrouw likt aan een ijsje en knijpt een oog dicht; een rode bliksem bij haar wang",
+          "params": { "accessory": "cold", "variant": 3 }
+        },
+        {
+          "word": "beugel", "prop": "g3Patient", "slot": "chair3", "frame": [96, 292, 90, 104], "pin": [140, 376],
+          "label": "Een meisje lacht breed: over haar tanden loopt een draadje met blokjes; het glinstert",
+          "params": { "accessory": "braces", "variant": 6 }
+        },
+        {
+          "word": "controle", "prop": "g3DentalChair", "slot": "couch", "frame": [194, 284, 172, 116],
+          "label": "De tandarts kijkt met een spiegeltje in de open mond van een man in de stoel",
+          "params": { "variant": 2 }
+        }
+      ]
     }
   ]
 }

@@ -201,7 +201,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     /// A door: `tone` colour, sign `icons`/`text`; `accessory` "lamp" (red lamp lit above) | "ajar".
     case g3Door
     /// A person at work: `accessory` "nurse" | "surgeon" | "hairdresser" | "professor" | "waiter" |
-    /// "graduate" | "beard"; `variant` look; `flip`.
+    /// "graduate" | "beard"; `variant` look; `flip`; `mount` "desk" (cut at a desk top).
     case g3Worker
     /// A patient in an armchair on a drip.
     case g3Drip
@@ -209,9 +209,9 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g3Bed
     /// A pill box for every day of the week over a row of years `labels`.
     case g3PillWeek
-    /// A big model molar: `accessory` "cavity" | "filling" | "pull" | "cold" | "gums" | "set" | "braces".
+    /// A big model tooth: `accessory` "molar" | "cavity" | "filling" | "pull" | "set" (a whole set).
     case g3Tooth
-    /// A face close-up: `accessory` "brush" | "numb"; `variant` look; `mount` "wall" (a framed poster), `text`.
+    /// A mouth close-up on a poster: `accessory` "brush" | "gums"; `text` on a little clock.
     case g3Face
     /// The dentist's chair: a patient with the mouth open, the dentist with a mirror under the lamp.
     case g3DentalChair
@@ -229,7 +229,7 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g3CutCard
     /// A mannequin head: `accessory` "straight" | "curly" | "fringe" | "parting"; `tone` hair colour.
     case g3Head
-    /// A customer in a salon chair: `accessory` "dry" | "trim"; `variant`, `flip`.
+    /// A customer in a salon chair: `accessory` "dry" (blow-dried) | "trim"; `variant`, `flip`.
     case g3SalonChair
     /// A poster of three hairstyles, one with a star (`highlight`).
     case g3StylePoster
@@ -251,11 +251,14 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g3MouthChart
     /// A board full of crossing arrows between `labels`, a big question mark.
     case g3Tangle
-    /// A month with the days crossed off up to a circled day; `text` on a note.
+    /// A month (`caption`) crossed off up to circled day `count`; `text` on a note; `mount` "desk".
     case g3Countdown
     /// Someone talking: `accessory` "slow" (syllables `text`) | "flow" (a long flowing bubble) |
-    /// "home" (a mother with her child, bubble `text`); `variant`, `flip`.
+    /// "home" (a mother with her child, bubble `text`) | "hand" (a hand up, bubble `text`); `variant`.
     case g3Speaker
+    /// A dental patient: `accessory` "numb" (standing, swollen cheek) | "cold" (seated with an ice
+    /// cream, wincing) | "braces" (seated, a big grin with braces); `variant`.
+    case g3Patient
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -332,7 +335,8 @@ struct PalacePropView: View, Equatable {
             case .g3Door, .g3Worker, .g3Drip, .g3Bed, .g3PillWeek, .g3Tooth, .g3Face, .g3DentalChair,
                  .g3Lockers, .g3Treadmill, .g3Bike, .g3Athlete, .g3Streak, .g3CutCard,
                  .g3Head, .g3SalonChair, .g3StylePoster, .g3HairLock, .g3DyeBowl,
-                 .g3Lecture, .g3Thesis, .g3Retry, .g3Levels, .g3Chest, .g3MouthChart, .g3Tangle, .g3Countdown, .g3Speaker:
+                 .g3Lecture, .g3Thesis, .g3Retry, .g3Levels, .g3Chest, .g3MouthChart, .g3Tangle, .g3Countdown, .g3Speaker,
+                 .g3Patient:
                 G3Props.draw(prop.kind, pen, p)
             }
         }

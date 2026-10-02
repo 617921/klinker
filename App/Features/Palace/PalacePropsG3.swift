@@ -13,6 +13,7 @@ enum G3Props {
         case .g3Tooth: G3Dentist.tooth(pen, p)
         case .g3Face: G3Dentist.face(pen, p)
         case .g3DentalChair: G3Dentist.chair(pen, p)
+        case .g3Patient: G3DentalPatients.patient(pen, p)
         case .g3Lockers: G3Gym.lockers(pen, p)
         case .g3Treadmill: G3Gym.treadmill(pen, p)
         case .g3Bike: G3Gym.bike(pen, p)
