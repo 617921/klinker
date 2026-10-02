@@ -327,6 +327,86 @@
           "params": { "accessory": "hose" }
         }
       ]
+    },
+    {
+      "sheet": 55,
+      "type": "g6ConcertHall",
+      "order": ["orkest", "dirigent", "muzikant", "instrument", "podium", "voorverkoop", "klassiek", "repeteren", "toegift", "meezingen", "vals"],
+      "prompts": {
+        "orkest": "Waar speelt het",
+        "muzikant": "Waar staat een",
+        "instrument": "Waar ligt een",
+        "voorverkoop": "Waar zie je de prijs in de",
+        "toegift": "Wie vraagt om een",
+        "repeteren": "Waar moet je nog",
+        "meezingen": "Wie gaat",
+        "klassiek": "Wat is",
+        "vals": "Wie zingt"
+      },
+      "weg": [
+        { "target": "orkest", "options": ["muzikant", "orkest", "dirigent"] },
+        { "target": "toegift", "options": ["toegift", "meezingen", "vals"] },
+        { "target": "voorverkoop", "options": ["podium", "voorverkoop", "repeteren"] },
+        { "target": "instrument", "options": ["klassiek", "muzikant", "instrument"] },
+        { "target": "vals", "options": ["vals", "repeteren", "meezingen"] }
+      ],
+      "anchors": [
+        {
+          "word": "voorverkoop", "prop": "g6Ticket", "slot": "wallLeft", "pin": [40, 10],
+          "label": "Een affiche met een kaartje en een kalender: nu twintig euro, aan de deur vijfentwintig euro",
+          "params": { "caption": "kaartjes", "lines": ["nu|€ 20", "aan de deur|€ 25"], "highlight": 0 }
+        },
+        {
+          "word": "klassiek", "prop": "g6Bust", "slot": "niche",
+          "label": "Een wit borstbeeld van een componist met een krullenpruik, met muzieknoten",
+          "params": {}
+        },
+        {
+          "word": "orkest", "prop": "g6Orchestra", "slot": "orchestra", "pin": [185, 38],
+          "label": "Twee rijen spelers in het zwart op stoelen: violen, cello's, hoorns en een pauk",
+          "params": {}
+        },
+        {
+          "word": "muzikant", "prop": "g6Musician", "slot": "stageLeft",
+          "label": "Een vrouw in een paarse jurk speelt viool, er komen noten uit",
+          "params": { "accessory": "violin", "variant": 3 }
+        },
+        {
+          "word": "repeteren", "prop": "g6Score", "slot": "standLeft",
+          "label": "Een lessenaar met muziek tussen herhaaltekens, een potlood, en: nog een keer!",
+          "params": { "text": "nog een keer!" }
+        },
+        {
+          "word": "dirigent", "prop": "g6Musician", "slot": "conductor",
+          "label": "Een man in rok op een kistje, met zijn armen omhoog en een stokje",
+          "params": { "accessory": "baton" }
+        },
+        {
+          "word": "instrument", "prop": "g6Instruments", "slot": "stageRight",
+          "label": "Een viool, een trompet, een fluit en een trommel bij elkaar",
+          "params": {}
+        },
+        {
+          "word": "podium", "prop": "g6Podium", "slot": "steps", "pin": [366, 126],
+          "label": "De hoek van het toneel met een trapje, en een spotlicht op een lege microfoon",
+          "params": {}
+        },
+        {
+          "word": "toegift", "prop": "g6Crowd", "slot": "seatsLeft",
+          "label": "Mensen in de zaal klappen met de handen omhoog en roepen: nog één!",
+          "params": { "accessory": "clap", "text": "nog één!" }
+        },
+        {
+          "word": "meezingen", "prop": "g6Crowd", "slot": "seatsMid",
+          "label": "Mensen in de zaal met de armen om elkaar heen en noten in de lucht: la la la",
+          "params": { "accessory": "sing", "text": "la la la" }
+        },
+        {
+          "word": "vals", "prop": "g6Crowd", "slot": "seatsRight",
+          "label": "Iemand in de zaal zingt kromme rode noten; de buurman draait zich om en houdt zijn oren dicht",
+          "params": { "accessory": "offkey" }
+        }
+      ]
     }
   ]
 }

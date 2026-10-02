@@ -268,8 +268,8 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g6ExitSign
     /// An orchestra on chairs in two rows: violins, cellos, horns and a kettle drum.
     case g6Orchestra
-    /// A musician. `accessory` "baton" (conductor from behind on a little box, a score stand),
-    /// "violin" (a soloist playing, notes), "trumpet"; `variant`, `flip`.
+    /// A musician. `accessory` "baton" (a conductor from behind on a little box, baton up), else a
+    /// soloist playing the violin, notes rising; `variant`, `flip`.
     case g6Musician
     /// A violin, a trumpet, a flute and a drum together.
     case g6Instruments
