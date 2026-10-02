@@ -29,6 +29,16 @@ enum G2Props {
         case .g2Thermostat: G2EnergyHomeProps.thermostat(pen, p)
         case .g2EnergyLabel: G2EnergyHomeProps.energyLabel(pen, p)
         case .g2SolarPanel: G2EnergyHomeProps.solarPanel(pen, p)
+        case .g2Scroll: G2NotaryProps.scroll(pen, p)
+        case .g2Deed: G2NotaryProps.deed(pen, p)
+        case .g2Signing: G2NotaryProps.signing(pen, p)
+        case .g2LawBook: G2NotaryProps.lawBook(pen, p)
+        case .g2Record: G2NotaryProps.record(pen, p)
+        case .g2Heirlooms: G2FamilyProps.heirlooms(pen, p)
+        case .g2FamilyTree: G2FamilyProps.familyTree(pen, p)
+        case .g2Inherit: G2FamilyProps.inherit(pen, p)
+        case .g2Together: G2Pairs.together(pen, p)
+        case .g2Proxy: G2Pairs.proxy(pen, p)
         default: break
         }
     }

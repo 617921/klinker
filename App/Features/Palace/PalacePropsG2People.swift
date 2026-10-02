@@ -4,7 +4,8 @@ import SwiftUI
 /// `variant` picks the look; `accessory` what they do:
 /// "advisor" — a friendly advisor seen from the waist up behind a counter (58 × 88), lanyard in `tone`;
 /// "objection" — someone frowning, holding up a letter with a struck-out amount (`text`) and a red
-/// note (`caption`) (84 × 114).
+/// note (`caption`) (84 × 114);
+/// "notary" — a grey-haired notary in a dark suit and glasses, seen from the waist up behind a desk (58 × 88).
 enum G2People {
     typealias Look = PalaceFigures.Look
 
@@ -12,6 +13,7 @@ enum G2People {
         let v = Look.at(p.variant ?? 0)
         switch p.accessory {
         case "objection": objection(pen, p, v)
+        case "notary": notary(pen, v)
         default: advisor(pen, p, v)
         }
     }
@@ -66,6 +68,26 @@ enum G2People {
         f.svgLine("M50 62C55 56 56 48 54 40", v.coat, 7)
         f.dot(54, 36, 4.4, v.skin)
         f.svgLine("M51 33V28M54 32V27M57 33V28.5", v.skin, 2)
+    }
+
+    // MARK: Notary
+
+    private static func notary(_ pen: PropPen, _ v: Look) {
+        let f = pen.fitted(CGSize(width: 58, height: 88))
+        let suit: UInt32 = 0x232B3B
+        f.svg("M4 88V60C4 48 12 42 29 42C46 42 54 48 54 60V88Z", suit)
+        f.svg("M21 42L29 62L37 42Z", 0xFFFDF6)
+        f.svg("M27.5 46H30.5L31.5 60L29 63L26.5 60Z", 0x7A1E1E)
+        f.svg("M21 42L26 58L18 48Z M37 42L32 58L40 48Z", 0x1E1E1C, 0.5)
+        f.rect(24, 34, 10, 9, v.skin)
+        let grey = Look(coat: suit, trousers: suit, skin: v.skin, hair: 0xD3D1C7, bag: 0)
+        head(f, grey, cx: 29, cy: 24, r: 13, mood: "smile")
+        f.ring(33, 24, 3.6, 0x1E1E1C, 1.2)
+        f.ring(41, 24, 3.6, 0x1E1E1C, 1.2)
+        f.line(36.6, 24, 37.4, 24, 0x1E1E1C, 1.2)
+        // Hands folded on the desk
+        f.rect(16, 80, 26, 8, v.skin, radius: 4)
+        f.svgLine("M10 70L18 82M48 70L40 82", suit, 6)
     }
 
     // MARK: Objection

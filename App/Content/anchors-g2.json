@@ -84,6 +84,85 @@
       ]
     },
     {
+      "sheet": 40,
+      "type": "g2Notary",
+      "order": ["testament", "erfenis", "erfgenaam", "akte", "ondertekenen", "samenlevingscontract", "volmacht", "erven", "vastleggen", "wettelijk", "gezamenlijk"],
+      "prompts": {
+        "erfgenaam": "Wie is de",
+        "volmacht": "Wie heeft een",
+        "erven": "Waar zie je iemand iets",
+        "vastleggen": "Waar kun je afspraken",
+        "gezamenlijk": "Wie hebben het huis"
+      },
+      "weg": [
+        { "target": "testament", "options": ["testament", "akte", "volmacht"] },
+        { "target": "erfgenaam", "options": ["erfenis", "erfgenaam", "erven"] },
+        { "target": "ondertekenen", "options": ["ondertekenen", "vastleggen", "samenlevingscontract"] },
+        { "target": "erven", "options": ["gezamenlijk", "erfenis", "erven"] },
+        { "target": "wettelijk", "options": ["akte", "wettelijk", "testament"] }
+      ],
+      "anchors": [
+        {
+          "word": "erfgenaam", "prop": "g2FamilyTree", "slot": "wallA",
+          "label": "Een stamboom: oma bovenaan met een zwart lintje, en twee kleinkinderen met een gouden ster",
+          "params": { "count": 2 }
+        },
+        {
+          "word": "testament", "prop": "g2Scroll", "slot": "wallB",
+          "label": "Een perkamentrol met een rood lakzegel en een veer: Mijn laatste wil",
+          "params": { "text": "Mijn laatste wil" }
+        },
+        {
+          "word": "erven", "prop": "g2Inherit", "slot": "wallC",
+          "label": "Een oude hand laat de sleutel van het huis in een jonge hand vallen",
+          "params": {  }
+        },
+        {
+          "word": "vastleggen", "prop": "g2Record", "slot": "wallD",
+          "label": "Twee tekstballonnen met pijlen naar een papier dat wordt opgeschreven en vastgeprikt",
+          "params": {  }
+        },
+        {
+          "word": "wettelijk", "prop": "g2LawBook", "slot": "shelf",
+          "label": "Een dik wetboek met een gouden paragraafteken, en een weegschaal",
+          "params": {  }
+        },
+        {
+          "word": "akte", "prop": "g2Deed", "slot": "deskC", "pin": [366, 230],
+          "label": "Een officieel papier met een huis, een zegel en twee handtekeningen: koper en verkoper",
+          "params": { "icons": ["house"], "labels": ["koper", "verkoper"], "accessory": "seal" }
+        },
+        {
+          "word": "ondertekenen", "prop": "g2Signing", "slot": "deskB",
+          "label": "Een hand zet met een vulpen een handtekening op de lijn",
+          "params": {  }
+        },
+        {
+          "word": "samenlevingscontract", "prop": "g2Deed", "slot": "deskA", "pin": [98, 230], "align": "leading",
+          "label": "Een papier met twee mensen onder één dak en een hartje, getekend door Sanne en Ali",
+          "params": { "icons": ["g2Couple"], "labels": ["Sanne", "Ali"], "tone": "pink" }
+        },
+        {
+          "word": "erfenis", "prop": "g2Heirlooms", "slot": "frontLeft",
+          "label": "Een oude kist vol goud, parels en een zakhorloge, met een kaartje: van oma",
+          "params": { "text": "van oma" }
+        },
+        {
+          "word": "volmacht", "prop": "g2Proxy", "slot": "frontMid",
+          "label": "Iemand op krukken geeft een papier aan een ander, die voor haar tekent: namens Anna",
+          "params": { "text": "namens Anna", "variant": 3 }
+        },
+        {
+          "word": "gezamenlijk", "prop": "g2Together", "slot": "standing", "frame": [262, 282, 104, 98],
+          "label": "Twee mensen tillen samen één huisje op",
+          "params": { "variant": 1 }
+        }
+      ],
+      "decor": [
+        {"prop": "g2Person", "slot": "notary", "params": {"accessory": "notary", "variant": 0}}
+      ]
+    },
+    {
       "sheet": 41,
       "type": "g2Insurer",
       "noor": [212, 292],
