@@ -26,6 +26,11 @@ enum G4Props {
         case .g4ToyBox: G4KidsCare.toyBox(pen, p)
         case .g4SettleChart: G4KidsCare.settleChart(pen, p)
         case .g4Babysit: G4KidsCare.babysit(pen, p)
+        case .g4Neighbour: G4Neighbours.neighbour(pen, p)
+        case .g4JoinIn: G4Neighbours.joinIn(pen, p)
+        case .g4LocalMap: G4NeighbourWall.localMap(pen, p)
+        case .g4Network: G4NeighbourWall.network(pen, p)
+        case .g4PlanBoard: G4NeighbourWall.planBoard(pen, p)
         default: break
         }
     }

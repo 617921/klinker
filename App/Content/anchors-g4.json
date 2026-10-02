@@ -669,6 +669,206 @@
      }
     }
    ]
+  },
+  {
+   "sheet": 51,
+   "type": "g4CommunityHall",
+   "order": [
+    "vrijwilliger",
+    "eenzaam",
+    "activiteit",
+    "meedoen",
+    "buurthuis",
+    "bijeenkomst",
+    "inzetten",
+    "organiseren",
+    "buurtbewoner",
+    "initiatief",
+    "betrokken"
+   ],
+   "prompts": {
+    "vrijwilliger": "Wie is de",
+    "buurtbewoner": "Waar woont een",
+    "activiteit": "Waar zie je elke",
+    "initiatief": "Wie neemt het",
+    "meedoen": "Wie wil",
+    "inzetten": "Wie gaat zich",
+    "organiseren": "Waar zie je een straatfeest",
+    "eenzaam": "Wie is",
+    "betrokken": "Wie is erg"
+   },
+   "weg": [
+    {
+     "target": "inzetten",
+     "options": [
+      "vrijwilliger",
+      "inzetten",
+      "organiseren"
+     ]
+    },
+    {
+     "target": "bijeenkomst",
+     "options": [
+      "bijeenkomst",
+      "activiteit",
+      "meedoen"
+     ]
+    },
+    {
+     "target": "eenzaam",
+     "options": [
+      "eenzaam",
+      "betrokken",
+      "buurtbewoner"
+     ]
+    },
+    {
+     "target": "initiatief",
+     "options": [
+      "initiatief",
+      "organiseren",
+      "betrokken"
+     ]
+    },
+    {
+     "target": "buurtbewoner",
+     "options": [
+      "buurthuis",
+      "buurtbewoner",
+      "activiteit"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "activiteit",
+     "prop": "classTimetable",
+     "slot": "boardLeft",
+     "label": "Een week-rooster met plaatjes: muziek, schilderen, voetbal, koken en meer",
+     "params": {
+      "labels": [
+       "ma",
+       "di",
+       "wo",
+       "do"
+      ],
+      "icons": [
+       "music",
+       "paint",
+       "ball",
+       "pan",
+       "talk",
+       "book",
+       "children",
+       "g4Cup"
+      ]
+     }
+    },
+    {
+     "word": "betrokken",
+     "prop": "g4Network",
+     "slot": "posterMid",
+     "label": "Een tekening: een man in het midden met lijnen naar huizen, de school, kinderen en buren"
+    },
+    {
+     "word": "buurtbewoner",
+     "prop": "g4LocalMap",
+     "slot": "posterRight",
+     "label": "Een kaart van de wijk; bij één huisje een rode speld en het gezicht van een vrouw",
+     "params": {
+      "caption": "hier woon ik"
+     }
+    },
+    {
+     "word": "buurthuis",
+     "prop": "sign",
+     "slot": "signDoor",
+     "label": "Het bord: een huis en een groepje mensen, iedereen welkom",
+     "params": {
+      "icons": [
+       "house",
+       "g4Group"
+      ],
+      "text": "iedereen welkom",
+      "mount": "wall",
+      "tone": "yellow"
+     }
+    },
+    {
+     "word": "eenzaam",
+     "prop": "g4Neighbour",
+     "slot": "window",
+     "pin": [
+      6,
+      244
+     ],
+     "label": "Een oude man zit alleen aan een tafeltje met één kopje; de stoel tegenover hem is leeg",
+     "params": {
+      "accessory": "lonely",
+      "variant": 4
+     }
+    },
+    {
+     "word": "vrijwilliger",
+     "prop": "g4Neighbour",
+     "slot": "hatch",
+     "label": "Een vrouw in een groen hesje met een hartje schenkt koffie achter het luik",
+     "params": {
+      "accessory": "volunteer",
+      "variant": 1
+     }
+    },
+    {
+     "word": "bijeenkomst",
+     "prop": "meetingTable",
+     "slot": "sideRoom",
+     "label": "Een glazen zaaltje: buren zitten samen aan tafel, één vrouw vertelt bij een flip-over",
+     "params": {
+      "count": 4
+     }
+    },
+    {
+     "word": "organiseren",
+     "prop": "g4PlanBoard",
+     "slot": "floor1",
+     "label": "Een bord op een ezel met vlaggetjes, een datum en een lijstje met vinkjes",
+     "params": {
+      "text": "za 14 juni",
+      "icons": [
+       "music",
+       "pan",
+       "g4Group"
+      ],
+      "count": 2
+     }
+    },
+    {
+     "word": "initiatief",
+     "prop": "g4Neighbour",
+     "slot": "floor2",
+     "label": "Een vrouw stapt naar voren met haar hand omhoog en een lampje boven haar hoofd",
+     "params": {
+      "accessory": "idea",
+      "variant": 3
+     }
+    },
+    {
+     "word": "meedoen",
+     "prop": "g4JoinIn",
+     "slot": "floor3",
+     "label": "Drie mensen doen yoga; een vierde komt met een matje aanrennen"
+    },
+    {
+     "word": "inzetten",
+     "prop": "g4Neighbour",
+     "slot": "floor4",
+     "label": "Een man sjouwt een hoge stapel stoelen; het zweet vliegt eraf",
+     "params": {
+      "accessory": "chairs",
+      "variant": 1
+     }
+    }
+   ]
   }
  ]
 }

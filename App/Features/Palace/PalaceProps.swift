@@ -251,6 +251,20 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g4SettleChart
     /// A framed evening at home: a teenager reads to a child on the sofa, the parents wave goodbye.
     case g4Babysit
+
+    // Community centre (PalacePropsG4Neighbours.swift, PalacePropsG4NeighbourWall.swift)
+    /// A neighbour. `accessory` "volunteer" (green bodywarmer with a heart, pouring coffee behind a
+    /// counter), "idea" (stepping forward, hand up, a lit bulb), "chairs" (carrying a tall stack of
+    /// chairs, sweating), "lonely" (an old man alone at a table, an empty chair, a grey cloud). `variant`.
+    case g4Neighbour
+    /// Three people in the same yoga pose on mats; a fourth hurries in with a mat to join them.
+    case g4JoinIn
+    /// A neighbourhood map: streets, canal, park, little houses; one pinned home with a face. `caption`.
+    case g4LocalMap
+    /// A drawing of a person in the middle linked to a house, a school, children, neighbours, a heart.
+    case g4Network
+    /// A whiteboard on an easel: bunting, a date `text`, a checklist of `icons`, `count` ticked.
+    case g4PlanBoard
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -326,7 +340,8 @@ struct PalacePropView: View, Equatable {
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam,
                  .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
-                 .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit:
+                 .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit,
+                 .g4Neighbour, .g4JoinIn, .g4LocalMap, .g4Network, .g4PlanBoard:
                 G4Props.draw(prop.kind, pen, p)
             }
         }
