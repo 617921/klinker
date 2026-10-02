@@ -1,0 +1,466 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 17,
+      "type": "g3Ward",
+      "order": ["verpleegkundige", "operatie", "bezoekuur", "herstellen", "uitslag", "opereren", "wachtlijst", "ernstig", "afdeling", "chronisch", "behandeling"],
+      "prompts": {
+        "opereren": "Waar zie je iemand",
+        "herstellen": "Wie is aan het",
+        "verpleegkundige": "Wie is de",
+        "bezoekuur": "Wanneer is het",
+        "behandeling": "Waar zie je een"
+      },
+      "weg": [
+        { "target": "operatie", "options": ["opereren", "operatie", "behandeling"] },
+        { "target": "herstellen", "options": ["herstellen", "ernstig", "chronisch"] },
+        { "target": "wachtlijst", "options": ["uitslag", "wachtlijst", "bezoekuur"] },
+        { "target": "verpleegkundige", "options": ["afdeling", "verpleegkundige", "opereren"] },
+        { "target": "chronisch", "options": ["behandeling", "ernstig", "chronisch"] }
+      ],
+      "anchors": [
+        {
+          "word": "bezoekuur", "prop": "sign", "slot": "signLeft",
+          "label": "Het bordje met een bos bloemen en een klok: elke dag van drie tot acht uur",
+          "params": { "caption": "ma t/m zo", "icons": ["g3Flowers", "clock"], "text": "15:00 – 20:00", "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "afdeling", "prop": "sign", "slot": "signMid",
+          "label": "Het blauwe bord aan het plafond: een hart en een pijl naar cardiologie",
+          "params": { "caption": "2e etage", "icons": ["heart", "arrow"], "text": "Cardiologie" }
+        },
+        {
+          "word": "chronisch", "prop": "g3PillWeek", "slot": "signRight",
+          "label": "Een kaart met een pillendoos voor elke dag van de week, al jaren: 2019, 2021, 2023, 2025 en verder",
+          "params": { "labels": ["2019", "2021", "2023", "2025"] }
+        },
+        {
+          "word": "operatie", "prop": "g3Door", "slot": "door",
+          "label": "De dubbele deur met ronde raampjes: binnen een grote lamp en mensen in het groen; boven de deur brandt een rode lamp",
+          "params": { "accessory": "lamp", "text": "OK" }
+        },
+        {
+          "word": "wachtlijst", "prop": "clipboard", "slot": "wallLeft",
+          "label": "Een klembord met een lange rij namen, nummer 46 tot 49, voor een nieuwe heup over drie maanden",
+          "params": { "caption": "heup · 3 mnd", "lines": ["46. Bakker", "47. Smit", "48. Yilmaz", "49. Noor"] }
+        },
+        {
+          "word": "uitslag", "prop": "letter", "slot": "wallRight",
+          "label": "Een brief van het lab: een buisje bloed, een pijl en een groen vinkje",
+          "params": { "icons": ["g3Tube", "arrow", "check"], "caption": "LAB", "tone": "green" }
+        },
+        {
+          "word": "ernstig", "prop": "g3Bed", "slot": "bedLeft",
+          "label": "Een man ligt plat in bed met een kapje op zijn gezicht; het scherm boven hem knippert rood",
+          "params": { "accessory": "serious", "variant": 0 }
+        },
+        {
+          "word": "herstellen", "prop": "g3Bed", "slot": "bedRight",
+          "label": "Een vrouw zit rechtop in bed en steekt haar duim op; de lijn op de kaart gaat omhoog",
+          "params": { "accessory": "recover", "variant": 3 }
+        },
+        {
+          "word": "behandeling", "prop": "g3Drip", "slot": "floorLeft",
+          "label": "Een man rust in een stoel; uit een zakje aan een paal loopt een slangetje naar zijn arm",
+          "params": { "variant": 2 }
+        },
+        {
+          "word": "opereren", "prop": "g3Worker", "slot": "floorMid",
+          "label": "Een chirurg in het groen met een mondkapje houdt een mesje omhoog onder de grote lamp",
+          "params": { "accessory": "surgeon", "variant": 1 }
+        },
+        {
+          "word": "verpleegkundige", "prop": "g3Worker", "slot": "floorRight",
+          "label": "Een vrouw in een lichtblauw pakje met een horloge op haar borst en een kaart in haar hand",
+          "params": { "accessory": "nurse", "variant": 5, "flip": true }
+        }
+      ]
+    },
+    {
+      "sheet": 18,
+      "type": "g3Gym",
+      "order": ["kluisje", "spierpijn", "lidmaatschap", "conditie", "stijf", "kleedkamer", "afvallen", "blessure", "opzeggen", "intensief", "volhouden"],
+      "prompts": {
+        "afvallen": "Waar zie je iemand",
+        "volhouden": "Waar zie je iemand het",
+        "stijf": "Wie is er",
+        "spierpijn": "Wie heeft er",
+        "blessure": "Wie heeft er een",
+        "conditie": "Wie werkt aan haar"
+      },
+      "weg": [
+        { "target": "spierpijn", "options": ["spierpijn", "stijf", "blessure"] },
+        { "target": "lidmaatschap", "options": ["opzeggen", "lidmaatschap", "kluisje"] },
+        { "target": "kleedkamer", "options": ["kluisje", "kleedkamer", "lidmaatschap"] },
+        { "target": "conditie", "options": ["intensief", "conditie", "volhouden"] },
+        { "target": "afvallen", "options": ["afvallen", "conditie", "stijf"] }
+      ],
+      "anchors": [
+        {
+          "word": "lidmaatschap", "prop": "card", "slot": "wallLeft",
+          "label": "Een hand houdt een pasje van de sportschool op, met een foto: dertig euro per maand",
+          "params": { "caption": "SPORT", "text": "€ 30 p/m", "tone": "orange", "variant": 1, "accessory": "hand" }
+        },
+        {
+          "word": "volhouden", "prop": "g3Streak", "slot": "wallMid",
+          "label": "Een kaart aan de muur: week na week drie groene vinkjes, onderaan een beker",
+          "params": { "labels": ["ma", "wo", "vr"], "count": 5 }
+        },
+        {
+          "word": "opzeggen", "prop": "g3CutCard", "slot": "wallRight",
+          "label": "Een schaar knipt het pasje van de sportschool in twee stukken, naast een brief",
+          "params": { "caption": "SPORT" }
+        },
+        {
+          "word": "kleedkamer", "prop": "g3Door", "slot": "door",
+          "label": "Een deur staat open: binnen hangen kleren aan haakjes boven een bankje",
+          "params": { "accessory": "ajar", "icons": ["g3Hanger"], "tone": "brown" }
+        },
+        {
+          "word": "kluisje", "prop": "g3Lockers", "slot": "lockers",
+          "label": "Een rij metalen kastjes; één staat open met een tas erin en een sleutel aan een bandje",
+          "params": { "count": 6, "highlight": 4 }
+        },
+        {
+          "word": "conditie", "prop": "g3Treadmill", "slot": "machineLeft",
+          "label": "Een vrouw rent op een loopband; op het schermpje een hart en vijfenveertig minuten",
+          "params": { "text": "45:00", "variant": 7 }
+        },
+        {
+          "word": "intensief", "prop": "g3Bike", "slot": "machineRight",
+          "label": "Een man trapt hard op een fiets die stilstaat; hij zweet, zijn gezicht is rood, zijn hart klopt 180",
+          "params": { "text": "180", "variant": 3 }
+        },
+        {
+          "word": "spierpijn", "prop": "g3Athlete", "slot": "floor1",
+          "label": "Een man met een vertrokken gezicht pakt zijn schouder vast; rode lijntjes op zijn arm en benen",
+          "params": { "accessory": "sore", "variant": 2 }
+        },
+        {
+          "word": "blessure", "prop": "g3Athlete", "slot": "floor2",
+          "label": "Een vrouw op krukken met een verband om haar knie",
+          "params": { "accessory": "injured", "variant": 5 }
+        },
+        {
+          "word": "stijf", "prop": "g3Athlete", "slot": "floor3",
+          "label": "Een man buigt voorover, maar zijn handen komen niet bij zijn tenen",
+          "params": { "accessory": "stiff", "variant": 4 }
+        },
+        {
+          "word": "afvallen", "prop": "g3Athlete", "slot": "floor4",
+          "label": "Een man op de weegschaal houdt zijn veel te wijde broek op: tien kilo minder",
+          "params": { "accessory": "scale", "text": "−10 kg", "variant": 0 }
+        }
+      ]
+    },
+    {
+      "sheet": 27,
+      "type": "g3Salon",
+      "order": ["kapper", "steil", "föhnen", "kapsel", "pony", "baard", "bijknippen", "scheiding", "krullend", "verven", "puntje"],
+      "prompts": {
+        "kapper": "Wie is de",
+        "baard": "Wie heeft een",
+        "föhnen": "Waar zie je iemand",
+        "bijknippen": "Waar zie je iemand",
+        "verven": "Waarmee kun je haar",
+        "steil": "Welk haar is",
+        "krullend": "Welk haar is"
+      },
+      "weg": [
+        { "target": "steil", "options": ["krullend", "steil", "pony"] },
+        { "target": "föhnen", "options": ["föhnen", "bijknippen", "verven"] },
+        { "target": "kapper", "options": ["kapper", "kapsel", "baard"] },
+        { "target": "scheiding", "options": ["pony", "scheiding", "puntje"] },
+        { "target": "bijknippen", "options": ["puntje", "kapper", "bijknippen"] }
+      ],
+      "anchors": [
+        {
+          "word": "kapsel", "prop": "g3StylePoster", "slot": "posterLeft",
+          "label": "Een poster met drie hoofden, elk met een ander model haar; één heeft een ster",
+          "params": { "highlight": 1 }
+        },
+        {
+          "word": "puntje", "prop": "g3HairLock", "slot": "posterMid",
+          "label": "Een lange lok haar; een vergrootglas laat de uiteinden zien, die zijn gesplitst",
+          "params": {  }
+        },
+        {
+          "word": "steil", "prop": "g3Head", "slot": "head1",
+          "label": "Een paspop met lang, glad haar dat recht naar beneden hangt",
+          "params": { "accessory": "straight", "variant": 3 }
+        },
+        {
+          "word": "krullend", "prop": "g3Head", "slot": "head2",
+          "label": "Een paspop met een grote bos rood haar vol kringetjes",
+          "params": { "accessory": "curly", "variant": 0 }
+        },
+        {
+          "word": "pony", "prop": "g3Head", "slot": "head3",
+          "label": "Een paspop met blond haar dat over haar ogen hangt",
+          "params": { "accessory": "fringe", "variant": 2 }
+        },
+        {
+          "word": "scheiding", "prop": "g3Head", "slot": "head4",
+          "label": "Een paspop met zwart haar; een kam trekt een witte lijn in het haar, links van het midden",
+          "params": { "accessory": "parting", "variant": 5 }
+        },
+        {
+          "word": "föhnen", "prop": "g3SalonChair", "slot": "chairLeft",
+          "label": "Een vrouw in de stoel; een hand blaast met een rood apparaat warme lucht door haar lange haar",
+          "params": { "accessory": "dry", "variant": 2 }
+        },
+        {
+          "word": "bijknippen", "prop": "g3SalonChair", "slot": "chairRight",
+          "label": "Een man in de stoel; achter zijn hoofd knipt een schaar een klein stukje haar weg, er vallen haartjes",
+          "params": { "accessory": "trim", "variant": 4 }
+        },
+        {
+          "word": "kapper", "prop": "g3Worker", "slot": "floor1",
+          "label": "Een man in een zwarte schort houdt een schaar omhoog, een kam in zijn zak",
+          "params": { "accessory": "hairdresser", "variant": 7 }
+        },
+        {
+          "word": "baard", "prop": "g3Worker", "slot": "floor2",
+          "label": "Een man met een dikke bruine snor en veel haar op zijn kin en wangen; hij aait erover",
+          "params": { "accessory": "beard", "variant": 0 }
+        },
+        {
+          "word": "verven", "prop": "g3DyeBowl", "slot": "floor3",
+          "label": "Een karretje met een bakje rode haarkleur, een kwastje erin en een waaier met kleuren haar",
+          "params": {  }
+        }
+      ]
+    },
+    {
+      "sheet": 29,
+      "type": "g3LectureHall",
+      "order": ["college", "hoogleraar", "tentamen", "studiefinanciering", "afstuderen", "scriptie", "aanwezig", "collegegeld", "herkansen", "bijbaan", "wetenschappelijk"],
+      "prompts": {
+        "afstuderen": "Waar zie je iemand",
+        "aanwezig": "Wie is er",
+        "hoogleraar": "Wie is de",
+        "bijbaan": "Wie heeft een"
+      },
+      "weg": [
+        { "target": "collegegeld", "options": ["studiefinanciering", "collegegeld", "college"] },
+        { "target": "tentamen", "options": ["tentamen", "herkansen", "scriptie"] },
+        { "target": "hoogleraar", "options": ["college", "hoogleraar", "afstuderen"] },
+        { "target": "bijbaan", "options": ["bijbaan", "studiefinanciering", "aanwezig"] },
+        { "target": "afstuderen", "options": ["scriptie", "afstuderen", "wetenschappelijk"] }
+      ],
+      "anchors": [
+        {
+          "word": "wetenschappelijk", "prop": "sign", "slot": "signLeft",
+          "label": "Een wit bord met een microscoop en een glazen kolf: onderzoek",
+          "params": { "caption": "onderzoek", "icons": ["g3Microscope", "g3Flask"], "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "college", "prop": "g3Lecture", "slot": "screen",
+          "label": "Een docent wijst naar een grafiek op het grote scherm; voor hem zit een rij studenten; de klok zegt negen uur",
+          "params": { "time": "9:00", "variant": 4 }
+        },
+        {
+          "word": "collegegeld", "prop": "paperSheet", "slot": "board",
+          "label": "Een rekening op het prikbord met een rode kop: 2530 euro per jaar om te studeren",
+          "params": { "tone": "red", "icons": ["cap", "euro"], "text": "€ 2.530", "caption": "per jaar", "mount": "wall" }
+        },
+        {
+          "word": "scriptie", "prop": "g3Thesis", "slot": "desk1",
+          "label": "Een dik ingebonden boekwerk met een blauwe kaft over migratie; erachter een klad met rode strepen",
+          "params": { "text": "Migratie", "caption": "bachelor · 2026" }
+        },
+        {
+          "word": "tentamen", "prop": "testPaper", "slot": "desk2",
+          "label": "Een blad met vragen en lege vakjes, een potlood en een zandloper",
+          "params": { "accessory": "timer", "lines": ["1. 12 x 15 =", "2. 2^5 =", "3. 15% van 80", "4. log 100 ="] }
+        },
+        {
+          "word": "herkansen", "prop": "g3Retry", "slot": "desk3",
+          "label": "Een blad met een rode 4,5 en een kruis; een groene pijl gaat rond naar een nieuw, leeg blad",
+          "params": { "text": "4,5", "caption": "ronde 2" }
+        },
+        {
+          "word": "studiefinanciering", "prop": "paperSheet", "slot": "desk4",
+          "label": "Een groen briefje: elke maand driehonderd euro erbij voor een student",
+          "params": { "tone": "green", "icons": ["euro", "cap"], "text": "+ € 300", "caption": "elke maand" }
+        },
+        {
+          "word": "hoogleraar", "prop": "g3Worker", "slot": "step1",
+          "label": "Een oudere man in een zwarte toga met een witte bef en een zwarte muts, een dik boek in zijn hand",
+          "params": { "accessory": "professor", "variant": 5 }
+        },
+        {
+          "word": "aanwezig", "prop": "g3Speaker", "slot": "step2",
+          "label": "Een student steekt haar hand op en roept: hier!",
+          "params": { "accessory": "hand", "text": "Hier!", "variant": 6 }
+        },
+        {
+          "word": "bijbaan", "prop": "g3Worker", "slot": "step3",
+          "label": "Een student met een rugzak en een schort draagt koffie op een dienblad",
+          "params": { "accessory": "waiter", "variant": 2 }
+        },
+        {
+          "word": "afstuderen", "prop": "g3Worker", "slot": "step4",
+          "label": "Een student met een plat hoedje met een kwastje houdt een opgerold papier met een rood lint omhoog; er vallen snippers",
+          "params": { "accessory": "graduate", "variant": 1 }
+        }
+      ]
+    },
+    {
+      "sheet": 30,
+      "type": "classroom",
+      "noor": [],
+      "order": ["uitspraak", "niveau", "woordenschat", "examen", "moedertaal", "uitspreken", "ingewikkeld", "herhalen", "vloeiend", "voorbereiden", "inburgering"],
+      "prompts": {
+        "uitspreken": "Waar zie je iemand een woord",
+        "voorbereiden": "Waar kun je je",
+        "vloeiend": "Wie praat er",
+        "moedertaal": "Waar spreekt iemand haar",
+        "niveau": "Waar zie je het"
+      },
+      "weg": [
+        { "target": "uitspraak", "options": ["uitspreken", "uitspraak", "herhalen"] },
+        { "target": "examen", "options": ["voorbereiden", "examen", "niveau"] },
+        { "target": "vloeiend", "options": ["vloeiend", "ingewikkeld", "moedertaal"] },
+        { "target": "woordenschat", "options": ["woordenschat", "uitspraak", "inburgering"] },
+        { "target": "herhalen", "options": ["herhalen", "voorbereiden", "uitspreken"] }
+      ],
+      "anchors": [
+        {
+          "word": "niveau", "prop": "g3Levels", "slot": "signLeft", "frame": [8, 14, 100, 66], "pin": [10, 84],
+          "label": "Een trap met vijf treden: A1, A2, B1, B2 en C1; een vrouw met een vlaggetje staat op B1",
+          "params": { "labels": ["A1", "A2", "B1", "B2", "C1"], "highlight": 2 }
+        },
+        {
+          "word": "ingewikkeld", "prop": "g3Tangle", "slot": "board",
+          "label": "Het bord vol losse woordjes met pijlen die kris-kras door elkaar lopen, en grote vraagtekens",
+          "params": { "labels": ["ik", "heb", "ge-", "-d", "zijn", "er"] }
+        },
+        {
+          "word": "inburgering", "prop": "sign", "slot": "window", "frame": [264, 18, 100, 78], "pin": [366, 96],
+          "label": "Een geel bord: van de wereldbol naar een huis hier, met taal, werk en wonen",
+          "params": { "caption": "nieuw in NL", "icons": ["globe", "arrow", "house"], "text": "taal · werk · wonen", "tone": "yellow", "mount": "wall" }
+        },
+        {
+          "word": "uitspraak", "prop": "g3MouthChart", "slot": "wallLeft", "frame": [12, 112, 92, 66], "pin": [8, 178],
+          "label": "Een plaat met drie monden: wijd open, rond en klein, met ui, eu en oe eronder",
+          "params": { "labels": ["ui", "eu", "oe"] }
+        },
+        {
+          "word": "herhalen", "prop": "screen", "slot": "wallMid",
+          "label": "Een scherm met een koptelefoon en twee ronde pijlen: nog drie keer",
+          "params": { "icons": ["g3Headphones", "g3Repeat"], "text": "3×", "mount": "wall" }
+        },
+        {
+          "word": "uitspreken", "prop": "g3Speaker", "slot": "teacher", "frame": [192, 104, 92, 136],
+          "label": "De docent wijst naar zijn open mond en zegt heel langzaam: h-ui-s",
+          "params": { "accessory": "slow", "text": "h – ui – s", "variant": 5 }
+        },
+        {
+          "word": "examen", "prop": "testPaper", "slot": "desk1",
+          "label": "Op een tafeltje een blad met vier delen: lezen, luisteren, schrijven, spreken; ernaast een zandloper",
+          "params": { "mount": "desk", "accessory": "timer", "lines": ["1. Lezen", "2. Luisteren", "3. Schrijven", "4. Spreken"] }
+        },
+        {
+          "word": "voorbereiden", "prop": "g3Countdown", "slot": "desk3", "frame": [268, 184, 92, 90], "pin": [366, 258],
+          "label": "Op een tafeltje een kalender: de dagen zijn doorgestreept tot een rode cirkel met een ster; een geel briefje: nog 3 dagen",
+          "params": { "caption": "juni", "count": 17, "text": "nog 3 dagen", "mount": "desk" }
+        },
+        {
+          "word": "woordenschat", "prop": "g3Chest", "slot": "floorLeft", "frame": [4, 300, 100, 96], "pin": [6, 378],
+          "label": "Een open kist met goud en kaartjes: huis, fiets, kaas, werk",
+          "params": { "labels": ["huis", "fiets", "kaas", "werk"] }
+        },
+        {
+          "word": "moedertaal", "prop": "g3Speaker", "slot": "floorRight", "frame": [108, 286, 96, 112], "pin": [156, 378], "align": "center",
+          "label": "Een moeder met haar kind aan de hand zegt: Merhaba! Er is een hartje",
+          "params": { "accessory": "home", "text": "Merhaba!", "variant": 3 }
+        },
+        {
+          "word": "vloeiend", "prop": "g3Speaker", "slot": "floorRight", "frame": [226, 290, 104, 110], "pin": [278, 378], "align": "center",
+          "label": "Een man praat ontspannen; zijn woorden stromen als één lange golf, met een groen vinkje",
+          "params": { "accessory": "flow", "variant": 7 }
+        }
+      ]
+    },
+    {
+      "sheet": 33,
+      "type": "doctorRoom",
+      "noor": [],
+      "order": ["kies", "poetsen", "controle", "gaatje", "beugel", "verdoofd", "gebit", "trekken", "vulling", "gevoelig", "tandvlees"],
+      "prompts": {
+        "poetsen": "Waar zie je iemand zijn tanden",
+        "trekken": "Waar kun je een tand",
+        "gevoelig": "Wiens tanden zijn",
+        "verdoofd": "Wie is er",
+        "beugel": "Wie heeft een",
+        "controle": "Wie is er op"
+      },
+      "weg": [
+        { "target": "kies", "options": ["gebit", "kies", "gaatje"] },
+        { "target": "vulling", "options": ["vulling", "gaatje", "trekken"] },
+        { "target": "verdoofd", "options": ["gevoelig", "verdoofd", "controle"] },
+        { "target": "tandvlees", "options": ["tandvlees", "poetsen", "beugel"] },
+        { "target": "beugel", "options": ["beugel", "gebit", "controle"] }
+      ],
+      "anchors": [
+        {
+          "word": "poetsen", "prop": "g3Face", "slot": "plaque",
+          "label": "Een poster: een tandenborstel schrobt de tanden, met schuim en een klokje van twee minuten",
+          "params": { "accessory": "brush", "text": "2 min" }
+        },
+        {
+          "word": "tandvlees", "prop": "g3Face", "slot": "card",
+          "label": "Een poster: de lip omhoog, het roze vlees boven de tanden met een rode druppel",
+          "params": { "accessory": "gums" }
+        },
+        {
+          "word": "verdoofd", "prop": "g3Patient", "slot": "door", "frame": [18, 150, 72, 140],
+          "label": "Een man in de deur met een dikke wang vol stipjes en een scheve mond waar een druppel uit loopt",
+          "params": { "accessory": "numb", "variant": 7 }
+        },
+        {
+          "word": "gebit", "prop": "g3Tooth", "slot": "deskLeft", "frame": [104, 170, 50, 68], "pin": [104, 240], "align": "leading",
+          "label": "Een model met twee rijen tanden, boven en onder, in een roze rand",
+          "params": { "accessory": "set" }
+        },
+        {
+          "word": "gaatje", "prop": "g3Tooth", "slot": "deskMid", "frame": [154, 174, 46, 64], "pin": [177, 266],
+          "label": "Een grote witte tand met een zwart putje erin, onder een vergrootglas",
+          "params": { "accessory": "cavity" }
+        },
+        {
+          "word": "vulling", "prop": "g3Tooth", "slot": "deskMid", "frame": [200, 174, 46, 64], "pin": [223, 240],
+          "label": "Een grote witte tand met een grijs plekje dat een staafje erin drukt; het glimt",
+          "params": { "accessory": "filling" }
+        },
+        {
+          "word": "kies", "prop": "g3Tooth", "slot": "deskChair", "frame": [246, 140, 52, 100], "pin": [272, 266],
+          "label": "Een heel grote tand op een voetje: breed, met twee wortels",
+          "params": { "accessory": "molar" }
+        },
+        {
+          "word": "trekken", "prop": "g3Tooth", "slot": "cabinet", "frame": [302, 160, 62, 80],
+          "label": "Een tang trekt een tand met wortels en al uit het roze vlees; een pijl omhoog",
+          "params": { "accessory": "pull" }
+        },
+        {
+          "word": "gevoelig", "prop": "g3Patient", "slot": "chair1", "frame": [4, 292, 90, 104],
+          "label": "Een vrouw likt aan een ijsje en knijpt een oog dicht; een rode bliksem bij haar wang",
+          "params": { "accessory": "cold", "variant": 3 }
+        },
+        {
+          "word": "beugel", "prop": "g3Patient", "slot": "chair3", "frame": [96, 292, 90, 104], "pin": [140, 376],
+          "label": "Een meisje lacht breed: over haar tanden loopt een draadje met blokjes; het glinstert",
+          "params": { "accessory": "braces", "variant": 6 }
+        },
+        {
+          "word": "controle", "prop": "g3DentalChair", "slot": "couch", "frame": [194, 284, 172, 116],
+          "label": "De tandarts kijkt met een spiegeltje in de open mond van een man in de stoel",
+          "params": { "variant": 2 }
+        }
+      ]
+    }
+  ]
+}

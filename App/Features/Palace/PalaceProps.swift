@@ -438,6 +438,70 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g5Poster, g5Print, g5Cloakroom, g5DatePage, g5Screen, g5Emblem, g5Banner, g5Frame, g5Statue
     // Church
     case g5Memorial, g5Candles, g5Coffin, g5Cake
+    // MARK: g3 — care and learning (hospital, gym, hairdresser, university, language school, dentist)
+    // Drawn by `G3Props` (PalacePropsG3*.swift), where each one's params are described in full.
+
+    /// A door: `tone` colour, sign `icons`/`text`; `accessory` "lamp" (red lamp lit above) | "ajar".
+    case g3Door
+    /// A person at work: `accessory` "nurse" | "surgeon" | "hairdresser" | "professor" | "waiter" |
+    /// "graduate" | "beard"; `variant` look; `flip`; `mount` "desk" (cut at a desk top).
+    case g3Worker
+    /// A patient in an armchair on a drip.
+    case g3Drip
+    /// A hospital bed: `accessory` "recover" (sitting up, chart going up) | "serious" (mask, alarm).
+    case g3Bed
+    /// A pill box for every day of the week over a row of years `labels`.
+    case g3PillWeek
+    /// A big model tooth: `accessory` "molar" | "cavity" | "filling" | "pull" | "set" (a whole set).
+    case g3Tooth
+    /// A mouth close-up on a poster: `accessory` "brush" | "gums"; `text` on a little clock.
+    case g3Face
+    /// The dentist's chair: a patient with the mouth open, the dentist with a mirror under the lamp.
+    case g3DentalChair
+    /// A row of lockers, one open with a bag and a key. `count`, `highlight`.
+    case g3Lockers
+    /// Someone running on a treadmill; its display shows `text`.
+    case g3Treadmill
+    /// Someone on a spinning bike, sweating hard; its display shows `text`.
+    case g3Bike
+    /// A person in sportswear: `accessory` "sore" | "injured" | "stiff" | "scale" (`text` on the scale).
+    case g3Athlete
+    /// A card of weeks with ticks under day `labels`; `count` weeks ticked, a cup at the end.
+    case g3Streak
+    /// A pass card (`caption`) cut in two by scissors next to a letter.
+    case g3CutCard
+    /// A mannequin head: `accessory` "straight" | "curly" | "fringe" | "parting"; `tone` hair colour.
+    case g3Head
+    /// A customer in a salon chair: `accessory` "dry" (blow-dried) | "trim"; `variant`, `flip`.
+    case g3SalonChair
+    /// A poster of three hairstyles, one with a star (`highlight`).
+    case g3StylePoster
+    /// A lock of hair whose ends are split, under a magnifying glass.
+    case g3HairLock
+    /// A bowl of hair dye with a brush and a fan of colour swatches.
+    case g3DyeBowl
+    /// A lecture: rows of students before a screen with a chart and a lecturer at a lectern; `time`.
+    case g3Lecture
+    /// A thick bound thesis: `text` title, `caption` subtitle, a draft with red marks behind it.
+    case g3Thesis
+    /// A failed paper (red `text` grade) and a looping arrow to a fresh paper (`caption` date).
+    case g3Retry
+    /// A staircase of levels `labels`; a figure stands on step `highlight`.
+    case g3Levels
+    /// A treasure chest overflowing with word cards `labels`.
+    case g3Chest
+    /// A chart of mouth shapes, one per sound in `labels`.
+    case g3MouthChart
+    /// A board full of crossing arrows between `labels`, a big question mark.
+    case g3Tangle
+    /// A month (`caption`) crossed off up to circled day `count`; `text` on a note; `mount` "desk".
+    case g3Countdown
+    /// Someone talking: `accessory` "slow" (syllables `text`) | "flow" (a long flowing bubble) |
+    /// "home" (a mother with her child, bubble `text`) | "hand" (a hand up, bubble `text`); `variant`.
+    case g3Speaker
+    /// A dental patient: `accessory` "numb" (standing, swollen cheek) | "cold" (seated with an ice
+    /// cream, wincing) | "braces" (seated, a big grin with braces); `variant`.
+    case g3Patient
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -544,6 +608,12 @@ struct PalacePropView: View, Equatable {
                  .g5Maker, .g5Group, .g5Couple, .g5Poster, .g5Print, .g5Cloakroom, .g5DatePage, .g5Screen, .g5Emblem,
                  .g5Banner, .g5Frame, .g5Statue, .g5Memorial, .g5Candles, .g5Coffin, .g5Cake:
                 G5Props.draw(prop.kind, pen, p)
+            case .g3Door, .g3Worker, .g3Drip, .g3Bed, .g3PillWeek, .g3Tooth, .g3Face, .g3DentalChair,
+                 .g3Lockers, .g3Treadmill, .g3Bike, .g3Athlete, .g3Streak, .g3CutCard,
+                 .g3Head, .g3SalonChair, .g3StylePoster, .g3HairLock, .g3DyeBowl,
+                 .g3Lecture, .g3Thesis, .g3Retry, .g3Levels, .g3Chest, .g3MouthChart, .g3Tangle, .g3Countdown, .g3Speaker,
+                 .g3Patient:
+                G3Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

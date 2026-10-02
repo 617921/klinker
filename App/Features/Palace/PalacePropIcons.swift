@@ -19,6 +19,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     case g2Wallet, g2Umbrella, g2Bolt, g2Piggy, g2Tooth, g2Couple, g2Lock, g2Flame, g2Snow, g2Car, g2Scales, g2Gear
     // Group g5 (PalacePropIconsG5.swift)
     case g5Wrench, g5Film, g5Masks, g5Cross, g5Crescent, g5David, g5Dharma, g5Bulb, g5Tyre, g5Chair, g5Tree
+    // g3: care and learning places (PalacePropIconsG3.swift)
+    case g3Flowers, g3Tube, g3Microscope, g3Flask, g3Repeat, g3Hanger, g3Tooth, g3Headphones, g3Dumbbell, g3Scissors
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -83,6 +85,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
             G2Icons.draw(self, p, c, d)
         case .g5Wrench, .g5Film, .g5Masks, .g5Cross, .g5Crescent, .g5David, .g5Dharma, .g5Bulb, .g5Tyre, .g5Chair, .g5Tree:
             G5Icons.draw(self, p, c, d)
+        case .g3Flowers, .g3Tube, .g3Microscope, .g3Flask, .g3Repeat, .g3Hanger, .g3Tooth, .g3Headphones, .g3Dumbbell, .g3Scissors:
+            G3Icons.draw(self, p, c, d)
         }
     }
 

@@ -38,6 +38,8 @@ enum PalaceRoomType: String, CaseIterable {
     case g2Loft
     // Group g5 (workshops and culture): see G5Rooms.swift.
     case g5BikeShop, g5DiyStore, g5Cinema, g5Theater, g5Museum, g5Church
+    // g3: care and learning places (G3*Backdrop.swift)
+    case g3Ward, g3Gym, g3Salon, g3LectureHall
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -75,6 +77,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Studio: "studio"
         case .g2Loft: "werkplek"
         case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Hall
+        case .g3Ward: "zaal"
+        case .g3Gym: "sportschool"
+        case .g3Salon: "salon"
+        case .g3LectureHall: "zaal"
         }
     }
 
@@ -118,6 +124,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Studio: "Een televisiestudio"
         case .g2Loft: "Een startup in een oud pakhuis"
         case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5SceneLabel
+        case .g3Ward: "Een zaal in het ziekenhuis"
+        case .g3Gym: "De sportschool"
+        case .g3Salon: "Een kapsalon met spiegels"
+        case .g3LectureHall: "Een zaal van de universiteit met een groot scherm"
         }
     }
 
@@ -153,6 +163,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Studio: G2Studio.noor
         case .g2Loft: G2Loft.noor
         case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Noor
+        case .g3Ward: G3Ward.noor
+        case .g3Gym: G3GymRoom.noor
+        case .g3Salon: G3SalonRoom.noor
+        case .g3LectureHall: G3LectureHall.noor
         }
     }
 
@@ -187,6 +201,10 @@ enum PalaceRoomType: String, CaseIterable {
         case .g2Studio: G2Studio.slots
         case .g2Loft: G2Loft.slots
         case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: g5Slots
+        case .g3Ward: G3Ward.slots
+        case .g3Gym: G3GymRoom.slots
+        case .g3Salon: G3SalonRoom.slots
+        case .g3LectureHall: G3LectureHall.slots
         }
     }
 }
@@ -226,6 +244,10 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g2Studio: G2StudioBackdrop()
         case .g2Loft: G2LoftBackdrop()
         case .g5BikeShop, .g5DiyStore, .g5Cinema, .g5Theater, .g5Museum, .g5Church: G5RoomBackdrop(type: type)
+        case .g3Ward: G3WardBackdrop()
+        case .g3Gym: G3GymBackdrop()
+        case .g3Salon: G3SalonBackdrop()
+        case .g3LectureHall: G3LectureHallBackdrop()
         }
     }
 }
