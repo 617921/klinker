@@ -24,6 +24,13 @@ enum G1Props {
         case .g1Registered: G1PostDesk.registered(pen, p)
         case .g1GiveAcross: G1PostDesk.giveAcross(pen, p)
         case .g1MailSlot: G1PostDesk.mailSlot(pen, p)
+        case .g1OpenWindow: G1Housing.openWindow(pen, p)
+        case .g1Mould: G1Housing.mould(pen, p)
+        case .g1Repair: G1Housing.repair(pen, p)
+        case .g1HomeAd: G1Housing.homeAd(pen, p)
+        case .g1Objection: G1HousingDesk.objection(pen, p)
+        case .g1Community: G1HousingDesk.community(pen, p)
+        case .g1QueueScreen: G1HousingDesk.queueScreen(pen, p)
         default: break
         }
     }

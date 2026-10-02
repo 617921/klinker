@@ -238,6 +238,21 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     case g1GiveAcross
     /// A letter box in the wall: a hand pushes a letter in, another letter flies off on a dotted line.
     case g1MailSlot
+    /// A window with its right half swung open, blue air streaming in and out.
+    case g1OpenWindow
+    /// A tiled corner with a damp stain and black and green spots.
+    case g1Mould
+    /// A sink with a dripping pipe, a wrench on the nut, a toolbox.
+    case g1Repair
+    /// Screen with a home for rent (`lines`), a hand pointer clicks the green tick button (`text`).
+    /// `accessory` "compare": two homes, the dear one (`lines[0]`) crossed out, the cheap one ticked.
+    case g1HomeAd
+    /// A decision letter with a red line (`text`) and a hand raised against it, bubble `caption`.
+    case g1Objection
+    /// Poster: four neighbours holding hands under one roof, a heart in the gable.
+    case g1Community
+    /// Hanging screen: a long queue of little people, a clock and the waiting time `text`.
+    case g1QueueScreen
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -313,7 +328,8 @@ struct PalacePropView: View, Equatable {
                 PalaceLearningProps.draw(prop.kind, pen, p)
             case .g1Person, .g1Atm, .g1PiggyBank, .g1BankCard, .g1MoneyCounter, .g1BankApp, .g1MonthStrip, .g1Loan,
                  .g1Finance, .g1Growth, .g1Bills, .g1Parcel, .g1PostScale, .g1Stamps, .g1EnvelopeBack, .g1RateBoard,
-                 .g1Registered, .g1GiveAcross, .g1MailSlot:
+                 .g1Registered, .g1GiveAcross, .g1MailSlot, .g1OpenWindow, .g1Mould, .g1Repair, .g1HomeAd, .g1Objection,
+                 .g1Community, .g1QueueScreen:
                 G1Props.draw(prop.kind, pen, p)
             }
         }

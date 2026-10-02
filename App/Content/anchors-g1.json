@@ -381,6 +381,224 @@
           }
         }
       ]
+    },
+    {
+      "sheet": 20,
+      "type": "g1HousingDesk",
+      "order": [
+        "huurder",
+        "schimmel",
+        "ventileren",
+        "reparatie",
+        "melden",
+        "huurtoeslag",
+        "wachttijd",
+        "reageren",
+        "bezwaar",
+        "betaalbaar",
+        "sociaal"
+      ],
+      "prompts": {
+        "huurder": "Wie is de",
+        "ventileren": "Waar kun je",
+        "melden": "Wie wil iets",
+        "reageren": "Waar kun je op een huis",
+        "betaalbaar": "Welk huis is",
+        "schimmel": "Waar zit de",
+        "wachttijd": "Waar zie je de",
+        "huurtoeslag": "Waar zie je de",
+        "bezwaar": "Waar maakt iemand"
+      },
+      "weg": [
+        {
+          "target": "schimmel",
+          "options": [
+            "ventileren",
+            "schimmel",
+            "reparatie"
+          ]
+        },
+        {
+          "target": "huurtoeslag",
+          "options": [
+            "huurtoeslag",
+            "betaalbaar",
+            "huurder"
+          ]
+        },
+        {
+          "target": "melden",
+          "options": [
+            "reageren",
+            "bezwaar",
+            "melden"
+          ]
+        },
+        {
+          "target": "wachttijd",
+          "options": [
+            "sociaal",
+            "wachttijd",
+            "betaalbaar"
+          ]
+        },
+        {
+          "target": "huurder",
+          "options": [
+            "huurder",
+            "melden",
+            "reageren"
+          ]
+        }
+      ],
+      "anchors": [
+        {
+          "word": "sociaal",
+          "prop": "g1Community",
+          "slot": "highLeft",
+          "label": "Een poster: vier verschillende buren houden elkaars hand vast onder één dak met een hart",
+          "params": {}
+        },
+        {
+          "word": "betaalbaar",
+          "prop": "g1HomeAd",
+          "slot": "highMid",
+          "label": "Twee huizen: het dure huis van 1850 euro is doorgestreept, het huis van 640 euro krijgt een vinkje",
+          "params": {
+            "accessory": "compare",
+            "lines": [
+              "€ 1.850",
+              "€ 640"
+            ]
+          }
+        },
+        {
+          "word": "wachttijd",
+          "prop": "g1QueueScreen",
+          "slot": "highRight",
+          "label": "Een scherm met een lange rij mensjes, een klok en: ongeveer 8 jaar",
+          "params": {
+            "text": "± 8 jaar"
+          }
+        },
+        {
+          "word": "ventileren",
+          "prop": "g1OpenWindow",
+          "slot": "sideTop",
+          "label": "Een raam staat open, blauwe lucht stroomt naar binnen",
+          "params": {}
+        },
+        {
+          "word": "schimmel",
+          "prop": "g1Mould",
+          "slot": "sideLow",
+          "label": "Een hoek met tegels vol zwarte en groene vlekjes",
+          "params": {}
+        },
+        {
+          "word": "reageren",
+          "prop": "g1HomeAd",
+          "slot": "glassLeft",
+          "pin": [
+            126,
+            166
+          ],
+          "label": "Een scherm met een huis te huur, een handje klikt op de groene knop met een vinkje",
+          "params": {
+            "lines": [
+              "3 kamers",
+              "€ 640"
+            ],
+            "text": "Ja!"
+          }
+        },
+        {
+          "word": "huurtoeslag",
+          "prop": "paperSheet",
+          "slot": "counterLeft",
+          "frame": [
+            116,
+            190,
+            80,
+            48
+          ],
+          "pin": [
+            116,
+            238
+          ],
+          "label": "Een brief van de overheid met een huisje: elke maand 210 euro erbij",
+          "params": {
+            "icons": [
+              "townHall",
+              "house"
+            ],
+            "tone": "green",
+            "text": "+ € 210",
+            "caption": "elke maand"
+          }
+        },
+        {
+          "word": "bezwaar",
+          "prop": "g1Objection",
+          "slot": "counterMid",
+          "label": "Een brief met een rode regel, en een hand gaat omhoog: niet eens!",
+          "params": {
+            "text": "+ 6 %",
+            "caption": "Niet eens!"
+          }
+        },
+        {
+          "word": "huurder",
+          "prop": "g1Person",
+          "slot": "floorLeft",
+          "label": "Iemand voor de eigen voordeur met de sleutel omhoog; op de deur een briefje van 640 euro",
+          "params": {
+            "accessory": "tenant",
+            "text": "12B",
+            "caption": "€ 640"
+          }
+        },
+        {
+          "word": "reparatie",
+          "prop": "g1Repair",
+          "slot": "floorMid",
+          "label": "Een gootsteen met een lekkende buis, een moersleutel draait de moer vast, en een gereedschapskist",
+          "params": {}
+        },
+        {
+          "word": "melden",
+          "prop": "g1Person",
+          "slot": "floorRight",
+          "frame": [
+            270,
+            272,
+            96,
+            130
+          ],
+          "label": "Iemand belt en zegt: de kraan lekt!",
+          "params": {
+            "accessory": "caller",
+            "variant": 3,
+            "text": "Kraan lekt!"
+          }
+        }
+      ],
+      "decor": [
+        {
+          "prop": "g1Person",
+          "frame": [
+            282,
+            138,
+            64,
+            84
+          ],
+          "params": {
+            "accessory": "clerk",
+            "variant": 5,
+            "tone": "green"
+          }
+        }
+      ]
     }
   ]
 }

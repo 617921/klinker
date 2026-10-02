@@ -4,7 +4,9 @@ import SwiftUI
 /// right (`flip` faces left). `accessory` says who they are:
 /// "clerk" (behind a counter, seen from the front, cut at the counter top; `tone` coat, `mount`
 /// "cap" a peaked cap), "courier" (cap and a stack of parcels), "worker" (hard hat, hi-vis vest,
-/// a crate), "eager" (both fists up, sparks, `text` in a bubble); police and court people are
+/// a crate), "eager" (both fists up, sparks, `text` in a bubble), "caller" (a phone to the ear,
+/// `text` in a bubble), "tenant" (at their own front door with the key: `text` house number,
+/// `caption` a slip on the door); police and court people are
 /// drawn in their own files ("witness", "victim", "suspect", "officer", "judge", "lawyer", "guilty").
 enum G1People {
     typealias Look = PalaceFigures.Look
@@ -12,6 +14,7 @@ enum G1People {
     static func person(_ pen: PropPen, _ p: PalacePropParams) {
         switch p.accessory ?? "none" {
         case "clerk": return clerk(pen, p)
+        case "tenant": return tenant(pen, p)
         case "witness", "victim", "suspect", "officer": return G1PoliceFigures.draw(pen, p)
         case "judge", "lawyer", "guilty": return G1CourtFigures.draw(pen, p)
         default: break
@@ -23,6 +26,7 @@ enum G1People {
         case "courier": courier(f, v)
         case "worker": worker(f, v)
         case "eager": eager(f, v, p.text)
+        case "caller": caller(f, v, p.text)
         default: body(f, v, coat: v.coat); head(f, v)
         }
     }
@@ -145,5 +149,48 @@ enum G1People {
         if let text {
             G1Props.bubble(f, CGRect(x: 44, y: 40, width: 52, height: 22), text, tail: CGPoint(x: 36, y: 30), font: PropFont.heavy(9.5))
         }
+    }
+
+    /// Someone on the phone (96 × 114), the phone at the ear, telling something (`text` in a bubble).
+    static func caller(_ f: PropPen, _ v: Look, _ text: String?) {
+        body(f, v, coat: v.coat)
+        head(f, v, mood: "open")
+        f.svgLine("M31 42C40 44 40 32 32 26", v.coat, 6)
+        f.rect(26, 10, 7, 17, 0x1E1E1C, radius: 2)
+        f.dot(31.5, 26, 3.4, v.skin)
+        f.svgLine("M36 8Q40 12 36 16M40 5Q46 12 40 19", 0xF2711C, 1.4)
+        if let text {
+            G1Props.bubble(f, CGRect(x: 38, y: 22, width: 58, height: 22), text, tail: CGPoint(x: 32, y: 34), font: PropFont.heavy(9.5))
+        }
+    }
+
+    /// A tenant at their own front door (84 × 128): the door with its number (`text`) and a slip
+    /// (`caption`), and the person in front of it holding up the key.
+    static func tenant(_ pen: PropPen, _ p: PalacePropParams) {
+        let f = pen.fitted(CGSize(width: 84, height: 128))
+        let v = Look.at(p.variant ?? 6)
+        f.rect(34, 6, 50, 118, 0xEFEBE2)
+        f.rect(38, 10, 42, 114, 0x2F4B3A)
+        f.rect(44, 16, 30, 22, 0xBCCDD6, radius: 1)
+        f.svg("M48 36L58 18H62L52 36Z", 0xFFFFFF, 0.3)
+        f.rect(49, 44, 20, 11, 0xFFFDF6, radius: 1.5)
+        f.text(p.text ?? "12B", PropFont.heavy(8), 0x1E1E1C, at: CGPoint(x: 59, y: 49.5), maxWidth: 18)
+        if let caption = p.caption {
+            f.rect(46, 60, 28, 16, 0xFAC775, radius: 1)
+            f.dot(60, 61.5, 1.4, 0xC8261B)
+            f.text(caption, PropFont.heavy(7.5), 0x412402, at: CGPoint(x: 60, y: 69), maxWidth: 25)
+        }
+        f.rect(50, 92, 20, 4, 0xC9A15B, radius: 1)
+        f.dot(74, 74, 2, 0xC9A15B)
+        f.rect(30, 122, 54, 6, 0xB4B2A9)
+        let me = f.within(CGRect(x: -4, y: 14, width: 64, height: 114))
+        body(me, v, coat: v.coat)
+        head(me, v)
+        me.svgLine("M31 42C38 42 42 36 44 28", v.coat, 6)
+        me.dot(44.5, 26, 3.4, v.skin)
+        me.ring(46, 17, 4, 0xC9A15B, 2)
+        me.rect(45, 20, 2.4, 12, 0xC9A15B)
+        me.rect(47, 27, 3, 2, 0xC9A15B)
+        me.svg("M50 14L56 9L62 14V22H50Z", 0xC8261B)
     }
 }
