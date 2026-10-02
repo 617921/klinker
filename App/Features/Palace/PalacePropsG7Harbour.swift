@@ -192,11 +192,11 @@ enum G7HarbourProps {
         let f = pen.fitted(CGSize(width: road ? 116 : 70, height: 116))
         let x: CGFloat = road ? 30 : 35
         if road {
-            f.svg("M58 116C64 96 92 92 96 76C98 68 92 64 94 58H98C100 64 104 70 102 78C98 96 76 100 80 116Z", 0xE2D6BC)
-            f.rect(92, 46, 14, 10, 0xD9CDB4)
-            f.svg("M90 47L99 39L108 47Z", 0x9A5238)
-            f.rect(97, 50, 3, 6, 0x4A3524)
-            f.svgLine("M110 56Q112 48 110 44", 0x5E8C45, 3)
+            f.svg("M54 116C62 98 96 96 100 84C102 76 94 72 101 64H102.5C98 72 106 78 104 86C98 100 74 102 80 116Z", 0xE2D6BC)
+            f.rect(98, 58, 9, 6, 0xD9CDB4)
+            f.svg("M96.5 58.5L102.5 53.5L108.5 58.5Z", 0x9A5238)
+            f.rect(101.5, 61, 2, 3, 0x4A3524)
+            f.dot(112, 61, 3, 0x5E8C45)
         }
         f.oval(x - 10, 111, 20, 5, 0x1E1E1C, 0.15)
         f.rect(x - 2.5, 16, 5, 98, 0xEFEBE2)

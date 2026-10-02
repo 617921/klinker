@@ -152,6 +152,84 @@
           "params": {}
         }
       ]
+    },
+    {
+      "sheet": 45,
+      "type": "g7Farm",
+      "noor": [],
+      "order": ["boer", "stal", "vee", "weiland", "melken", "voeren", "zuivel", "streekproduct", "platteland", "landelijk", "afgelegen"],
+      "prompts": {
+        "vee": "Waar staat het",
+        "platteland": "Waar zie je het",
+        "melken": "Waar kun je een koe",
+        "voeren": "Waar kun je de geit",
+        "landelijk": "Waar is het",
+        "afgelegen": "Wat ligt"
+      },
+      "weg": [
+        { "target": "vee", "options": ["vee", "boer", "stal"] },
+        { "target": "melken", "options": ["voeren", "melken", "zuivel"] },
+        { "target": "platteland", "options": ["platteland", "landelijk", "afgelegen"] },
+        { "target": "weiland", "options": ["stal", "weiland", "platteland"] },
+        { "target": "streekproduct", "options": ["zuivel", "landelijk", "streekproduct"] }
+      ],
+      "anchors": [
+        {
+          "word": "afgelegen", "prop": "g7Signpost", "slot": "farLeft",
+          "label": "Een wegwijzer: het dorp is 14 kilometer ver; een lange weg naar één huisje",
+          "params": { "mount": "road", "lines": ["Dorp|14 km", "Stad|38 km"] }
+        },
+        {
+          "word": "stal", "prop": "g7Barn", "slot": "barn",
+          "label": "Een rode schuur met open deuren; koeien kijken naar buiten over het hooi",
+          "params": {}
+        },
+        {
+          "word": "platteland", "prop": "g7Fields", "slot": "farRight",
+          "label": "Akkers en hooibalen tot aan de horizon, met een rij bomen en een kerktorentje",
+          "params": {}
+        },
+        {
+          "word": "weiland", "prop": "g7Meadow", "slot": "midLeft",
+          "label": "Een groen stuk gras met een houten hek, een poort en madeliefjes",
+          "params": {}
+        },
+        {
+          "word": "streekproduct", "prop": "g7FarmStall", "slot": "midStall",
+          "label": "Een kastje langs de weg met eieren, honing en aardappels uit de buurt; een bordje: van hier",
+          "params": { "text": "van hier" }
+        },
+        {
+          "word": "landelijk", "prop": "g7Tractor", "slot": "midLane",
+          "label": "Een groene trekker op een modderig zandpad; een kip steekt over",
+          "params": {}
+        },
+        {
+          "word": "vee", "prop": "g7Livestock", "slot": "midRight",
+          "label": "Een koe, een schaap en een geit bij elkaar",
+          "params": {}
+        },
+        {
+          "word": "boer", "prop": "g7Worker", "slot": "frontLeft",
+          "label": "Een man in een blauwe tuinbroek met een pet en een hooivork",
+          "params": { "accessory": "farmer", "variant": 0 }
+        },
+        {
+          "word": "melken", "prop": "g7Milking", "slot": "frontMid",
+          "label": "Iemand op een krukje bij een koe; witte stralen gaan in een emmer",
+          "params": {}
+        },
+        {
+          "word": "voeren", "prop": "g7Feeding", "slot": "frontMidRight",
+          "label": "Een kind houdt een flesje en wat hooi bij een geit",
+          "params": { "variant": 3 }
+        },
+        {
+          "word": "zuivel", "prop": "g7Dairy", "slot": "frontRight",
+          "label": "Een melkbus, een fles melk, een kaas, boter en yoghurt",
+          "params": {}
+        }
+      ]
     }
   ]
 }
