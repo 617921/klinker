@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 39,
+      "type": "g2TaxOffice",
+      "order": ["belastingaangifte", "aanslag", "teruggave", "toeslag", "inkomen", "bruto", "bezwaarschrift", "indienen", "opgeven", "terugbetalen", "voorlopig"],
+      "prompts": {
+        "belastingaangifte": "Waar doe je je",
+        "toeslag": "Waar krijg je",
+        "bezwaarschrift": "Wie schrijft een",
+        "opgeven": "Waar kun je je spaargeld",
+        "terugbetalen": "Waar moet je geld",
+        "indienen": "Waar kun je een formulier",
+        "voorlopig": "Wat is nog",
+        "bruto": "Wat verdien je"
+      },
+      "weg": [
+        { "target": "aanslag", "options": ["aanslag", "teruggave", "terugbetalen"] },
+        { "target": "inkomen", "options": ["bruto", "inkomen", "toeslag"] },
+        { "target": "indienen", "options": ["opgeven", "indienen", "belastingaangifte"] },
+        { "target": "voorlopig", "options": ["voorlopig", "aanslag", "bezwaarschrift"] },
+        { "target": "toeslag", "options": ["terugbetalen", "teruggave", "toeslag"] }
+      ],
+      "anchors": [
+        {
+          "word": "inkomen", "prop": "g2MoneyFlow", "slot": "wallA",
+          "label": "Een kaart: geld gaat van het werk naar je portemonnee, 2800 euro per maand",
+          "params": { "icons": ["company", "g2Wallet"], "tone": "teal", "text": "€ 2.800", "caption": "elke maand" }
+        },
+        {
+          "word": "bruto", "prop": "g2Gross", "slot": "wallB",
+          "label": "Een grote geldzak van 3000 euro met een cirkel erom, en een kleine zak van 2300 euro na de belasting",
+          "params": { "lines": ["€ 3.000", "€ 2.300"], "caption": "−23%" }
+        },
+        {
+          "word": "voorlopig", "prop": "g2Bill", "slot": "wallC",
+          "label": "Een papier met een stippellijn: het bedrag in potlood, een vraagteken en een gum",
+          "params": { "accessory": "draft", "text": "≈ € 900", "caption": "nog niet definitief" }
+        },
+        {
+          "word": "terugbetalen", "prop": "g2MoneyFlow", "slot": "wallD",
+          "label": "Een kaart: geld gaat uit je portemonnee terug naar de overheid, want je kreeg te veel",
+          "params": { "icons": ["g2Wallet", "townHall"], "tone": "red", "text": "€ 150", "caption": "te veel gekregen" }
+        },
+        {
+          "word": "belastingaangifte", "prop": "g2TaxReturn", "slot": "counterA",
+          "label": "Een lang formulier over het jaar 2025, een rekenmachine en een geel briefje: vóór 1 mei",
+          "params": { "text": "2025", "caption": "vóór 1 mei" }
+        },
+        {
+          "word": "aanslag", "prop": "g2Bill", "slot": "counterB",
+          "label": "Een brief uit een blauwe envelop: je moet 1240 euro betalen",
+          "params": { "accessory": "envelope", "tone": "blue", "icons": ["townHall"], "caption": "te betalen", "text": "€ 1.240" }
+        },
+        {
+          "word": "teruggave", "prop": "g2Refund", "slot": "counterC",
+          "label": "Een blauwe envelop waar geld uit springt, met een pijl terug: plus 200 euro",
+          "params": { "tone": "blue", "text": "+ € 200" }
+        },
+        {
+          "word": "opgeven", "prop": "paperSheet", "slot": "counterD",
+          "label": "Een formulier op een klembord met een spaarvarken: je schrijft je spaargeld op, 8000 euro",
+          "params": { "icons": ["g2Piggy"], "variant": 1, "tone": "red", "lines": ["spaargeld|€ 8.000"], "accessory": "pen", "mount": "clipboard" }
+        },
+        {
+          "word": "toeslag", "prop": "g2TopUp", "slot": "frontLeft",
+          "label": "Een hand van de overheid stopt een groene munt met een plus in een spaarhuisje: hulp bij de huur",
+          "params": { "text": "huur" }
+        },
+        {
+          "word": "indienen", "prop": "g2Laptop", "slot": "frontMid",
+          "label": "Een laptop op een tafeltje: de muis klikt op de groene knop verzenden",
+          "params": { "mount": "table", "accessory": "send", "text": "verzenden" }
+        },
+        {
+          "word": "bezwaarschrift", "prop": "g2Person", "slot": "standing", "frame": [274, 260, 92, 142],
+          "label": "Iemand houdt boos een brief omhoog: het bedrag is doorgestreept, niet mee eens!",
+          "params": { "accessory": "objection", "variant": 1, "text": "€ 1.240", "caption": "niet eens!" }
+        }
+      ],
+      "decor": [
+        { "prop": "g2Person", "slot": "advisor", "params": { "accessory": "advisor", "variant": 2, "tone": "blue" } }
+      ]
+    }
+  ]
+}

@@ -11,6 +11,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
     // Learning places (PalacePropIconsLearning.swift)
     case heart, globe, pan, lesson, clock, talk, pill, hospital, practice, school, children, book, cap, steps
     case abc, math, music, ball, paint
+    // g2: offices and paperwork (PalacePropIconsG2.swift)
+    case g2Wallet, g2Umbrella, g2Bolt, g2Piggy, g2Tooth, g2Couple, g2Lock, g2Flame, g2Snow, g2Car, g2Scales, g2Gear
 
     /// Paints the icon into a square `rect`.
     @MainActor func draw(_ pen: PropPen, in rect: CGRect, color c: UInt32, detail d: UInt32) {
@@ -67,6 +69,8 @@ nonisolated enum PalaceIcon: String, CaseIterable, Sendable {
         case .heart, .globe, .pan, .lesson, .clock, .talk, .pill, .hospital, .practice, .school, .children, .book, .cap, .steps,
              .abc, .math, .music, .ball, .paint:
             PalaceLearningIcons.draw(self, p, c, d)
+        case .g2Wallet, .g2Umbrella, .g2Bolt, .g2Piggy, .g2Tooth, .g2Couple, .g2Lock, .g2Flame, .g2Snow, .g2Car, .g2Scales, .g2Gear:
+            G2Icons.draw(self, p, c, d)
         }
     }
 
