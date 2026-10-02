@@ -502,6 +502,106 @@ nonisolated enum PalacePropKind: String, Codable, Sendable, CaseIterable {
     /// A dental patient: `accessory` "numb" (standing, swollen cheek) | "cold" (seated with an ice
     /// cream, wincing) | "braces" (seated, a big grin with braces); `variant`.
     case g3Patient
+    // MARK: g4 · care, community and hospitality (PalacePropsG4*.swift, dispatched by `G4Props`)
+
+    // Vet (PalacePropsG4Vet.swift, animals in PalacePropsG4Animals.swift)
+    /// A framed picture: a house with a dog, a cat and a goldfish bowl inside, a heart on the roof.
+    case g4PetHouse
+    /// Yellow-edged card: a sneezing cat sprays germs that fly over to a dog; a warning triangle.
+    case g4Contagion
+    /// An animal sitting (`variant` 0 dog, 1 cat, 2 rabbit; `tone` coat). `accessory` "sad" (alone,
+    /// a tear, a rain cloud), "flea" (magnifier with a flea), "paw" (bandaged paw held up), "brush"
+    /// (fluffy coat, a brush full of hair); `mount` "box" (in a cardboard box); `flip`.
+    case g4Animal
+    /// An animal on a table, a gloved hand with a tool at its neck: `accessory` "syringe" (and a vial)
+    /// or "scanner" (screen `text`, a lens showing the chip). `variant`, `tone` as `g4Animal`.
+    case g4AnimalCare
+    /// A bag of animal food tipped over a bowl, kibble pouring. `variant` 0 dog, 1 cat on the bag;
+    /// `mount` "shelf" (on a wall shelf).
+    case g4FoodBag
+    /// A girl kneeling with an animal in her arms, giving it a carrot; hearts. `variant` animal.
+    case g4PetCare
+    /// A vet in green scrubs with a paw badge listening to a dog on a steel table, a lamp.
+    case g4VetExam
+
+    // Pool (PalacePropsG4Pool.swift, PalacePropsG4Swim.swift)
+    /// A water slide: ladder, a curving yellow chute with a child sliding down, a splash.
+    case g4Slide
+    /// A diving board from a ladder tower, a swimmer jumping above its tip, a splash below.
+    case g4DivingBoard
+    /// A lifeguard on a high white chair, whistle blowing, a ring hanging on the chair. `variant`.
+    case g4LifeguardChair
+    /// A changing cubicle: a sign (shirt → swimsuit), a T-shirt over the door, feet and dropped trousers.
+    case g4Cubicle
+    /// A swimsuit on a hanger on a hook. `tone`.
+    case g4Swimsuit
+    /// A bather rubbing their hair with a striped towel, drops flying, a puddle. `variant`, `tone` suit.
+    case g4TowelDry
+    /// Swimmers: `accessory` "laps" (crawl and an arrow there and back), "lesson" (teacher and children
+    /// with armbands), "shallow" (a child in water to the knees, a depth tile `text`).
+    case g4Swimmers
+    /// A floating thermometer with a `text` tag, steam over the water, a heater coil under it.
+    case g4PoolThermometer
+
+    // Day care (PalacePropsG4Kids.swift, PalacePropsG4KidsCare.swift)
+    /// A small child, front-facing. `accessory` "toddle" (walking with a teddy, wobbling; `text` a
+    /// badge), "shy" (peeking round a door, blushing), "potty" (proud on a potty by a star chart),
+    /// "sleep" (asleep in a cot, zzz). `variant` look.
+    case g4Child
+    /// A shelf with a stack of nappies, a pack with a baby on it and one open nappy.
+    case g4Nappies
+    /// A changing table: a baby on the mat, hands fastening a clean nappy, a bin with a used one.
+    case g4ChangingTable
+    /// An open toy box overflowing: ball, teddy, rings; letter blocks and a toy car beside it.
+    case g4ToyBox
+    /// A chart of three days (`labels`): a child's face from tears to a smile, an arrow under it.
+    case g4SettleChart
+    /// A framed evening at home: a teenager reads to a child on the sofa, the parents wave goodbye.
+    case g4Babysit
+
+    // Community centre (PalacePropsG4Neighbours.swift, PalacePropsG4NeighbourWall.swift)
+    /// A neighbour. `accessory` "volunteer" (green bodywarmer with a heart, pouring coffee behind a
+    /// counter), "idea" (stepping forward, hand up, a lit bulb), "chairs" (carrying a tall stack of
+    /// chairs, sweating), "lonely" (an old man alone at a table, an empty chair, a grey cloud). `variant`.
+    case g4Neighbour
+    /// Three people in the same yoga pose on mats; a fourth hurries in with a mat to join them.
+    case g4JoinIn
+    /// A neighbourhood map: streets, canal, park, little houses; one pinned home with a face. `caption`.
+    case g4LocalMap
+    /// A drawing of a person in the middle linked to a house, a school, children, neighbours, a heart.
+    case g4Network
+    /// A whiteboard on an easel: bunting, a date `text`, a checklist of `icons`, `count` ticked.
+    case g4PlanBoard
+
+    // Hotel (PalacePropsG4Hotel.swift, PalacePropsG4HotelGuests.swift)
+    /// A guest room's bed: `accessory` "double" (wide bed, two pillows, two lamps, a two-person
+    /// plaque) or "wake" (a man bolt upright, an alarm clock ringing at `time`). `variant`.
+    case g4HotelBed
+    /// A key rack with numbered hooks, keys on the first `count`, a red board with `text` across it.
+    case g4KeyRack
+    /// The receptionist behind the desk (desk top at the bottom), a desk bell ringing. `variant`, `flip`.
+    case g4Receptionist
+    /// A standing board: a price `text` = `icons` (bed, cup, wifi …) each with a green tick.
+    case g4PriceCard
+    /// A guest: `accessory` "checkout" (walking out with a suitcase under an exit sign, a clock at
+    /// `time`) or "phone" (holding up a phone; a bubble with a mail, a big tick and `lines`). `variant`.
+    case g4Guest
+    /// A laptop: a bed, a calendar with two days chosen, a pointer clicking the green button.
+    case g4Laptop
+
+    // Restaurant (PalacePropsG4Dining.swift, PalacePropsG4DiningTables.swift)
+    /// An open menu in a glass case: fork and knife, three courses with pictures and `lines` prices.
+    case g4Menu
+    /// A plate on the pass: `accessory` "cloche" (a hand lifts the cover off a steaming dish), "main"
+    /// (meat, potatoes, beans, knife and fork), "veg" (vegetables, a green leaf badge), "dessert" (ice cream).
+    case g4Plate
+    /// A restaurant table with a white cloth: `accessory` "set" (laid for four, a card with `text`),
+    /// "clear" (hands stacking the dirty plates), "complain" (a guest points at cold soup; bubble
+    /// `text`), "spicy" (a red-faced guest breathing fire over hot peppers), "portion" (a guest stares at
+    /// a huge heap of fries). `variant` the guest.
+    case g4Table
+    /// A waiter: white shirt, black waistcoat and bow tie, long apron, towel on the arm, a notepad.
+    case g4Waiter
 }
 
 /// Settings that make a prop say something specific. Every field is optional; each prop
@@ -614,6 +714,13 @@ struct PalacePropView: View, Equatable {
                  .g3Lecture, .g3Thesis, .g3Retry, .g3Levels, .g3Chest, .g3MouthChart, .g3Tangle, .g3Countdown, .g3Speaker,
                  .g3Patient:
                 G3Props.draw(prop.kind, pen, p)
+            case .g4PetHouse, .g4Contagion, .g4Animal, .g4AnimalCare, .g4FoodBag, .g4PetCare, .g4VetExam,
+                 .g4Slide, .g4DivingBoard, .g4LifeguardChair, .g4Cubicle, .g4Swimsuit, .g4TowelDry, .g4Swimmers,
+                 .g4PoolThermometer, .g4Child, .g4Nappies, .g4ChangingTable, .g4ToyBox, .g4SettleChart, .g4Babysit,
+                 .g4Neighbour, .g4JoinIn, .g4LocalMap, .g4Network, .g4PlanBoard,
+                 .g4HotelBed, .g4KeyRack, .g4Receptionist, .g4PriceCard, .g4Guest, .g4Laptop,
+                 .g4Menu, .g4Plate, .g4Table, .g4Waiter:
+                G4Props.draw(prop.kind, pen, p)
             }
         }
         .allowsHitTesting(false)

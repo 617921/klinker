@@ -1,0 +1,1273 @@
+{
+ "version": 1,
+ "rooms": [
+  {
+   "sheet": 34,
+   "type": "doctorRoom",
+   "hall": "praktijk",
+   "noor": [],
+   "order": [
+    "dierenarts",
+    "huisdier",
+    "poot",
+    "voer",
+    "vlo",
+    "inenten",
+    "chip",
+    "vacht",
+    "verzorgen",
+    "zielig",
+    "besmettelijk"
+   ],
+   "prompts": {
+    "zielig": "Welk dier is",
+    "vlo": "Waar zie je een",
+    "inenten": "Waar laat je een dier",
+    "poot": "Waar zie je een zere",
+    "vacht": "Waar zie je een lange",
+    "verzorgen": "Wie gaat haar konijn",
+    "dierenarts": "Wie is de",
+    "besmettelijk": "Wat is",
+    "huisdier": "Waar zie je thuis een"
+   },
+   "weg": [
+    {
+     "target": "poot",
+     "options": [
+      "poot",
+      "vacht",
+      "vlo"
+     ]
+    },
+    {
+     "target": "zielig",
+     "options": [
+      "zielig",
+      "besmettelijk",
+      "huisdier"
+     ]
+    },
+    {
+     "target": "inenten",
+     "options": [
+      "chip",
+      "inenten",
+      "dierenarts"
+     ]
+    },
+    {
+     "target": "voer",
+     "options": [
+      "voer",
+      "verzorgen",
+      "huisdier"
+     ]
+    },
+    {
+     "target": "vacht",
+     "options": [
+      "vlo",
+      "vacht",
+      "verzorgen"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "huisdier",
+     "prop": "g4PetHouse",
+     "slot": "plaque",
+     "label": "Een schilderijtje: een huis met een hond, een kat en een goudvis erin"
+    },
+    {
+     "word": "besmettelijk",
+     "prop": "g4Contagion",
+     "slot": "card",
+     "label": "Een gele kaart: een zieke kat niest en de bacillen vliegen naar een hond"
+    },
+    {
+     "word": "zielig",
+     "prop": "g4Animal",
+     "slot": "door",
+     "label": "Een klein hondje zit alleen in een doos in de regen, met een traan",
+     "params": {
+      "variant": 0,
+      "accessory": "sad",
+      "mount": "box"
+     }
+    },
+    {
+     "word": "vlo",
+     "prop": "g4Animal",
+     "frame": [
+      100,
+      150,
+      82,
+      90
+     ],
+     "pin": [
+      106,
+      150
+     ],
+     "tilt": -1.5,
+     "label": "Een kat krabt zich; onder het vergrootglas zit een klein springend beestje",
+     "params": {
+      "variant": 1,
+      "accessory": "flea",
+      "tone": "brown"
+     }
+    },
+    {
+     "word": "inenten",
+     "prop": "g4AnimalCare",
+     "frame": [
+      184,
+      150,
+      102,
+      90
+     ],
+     "pin": [
+      236,
+      252
+     ],
+     "align": "center",
+     "tilt": 1,
+     "label": "Een kat op de tafel krijgt een prikje in de nek",
+     "params": {
+      "variant": 1,
+      "accessory": "syringe",
+      "tone": "grey"
+     }
+    },
+    {
+     "word": "voer",
+     "prop": "g4FoodBag",
+     "frame": [
+      176,
+      54,
+      60,
+      52
+     ],
+     "pin": [
+      206,
+      112
+     ],
+     "align": "center",
+     "tilt": -1.5,
+     "label": "Een plank met een zak brokjes en een volle bak",
+     "params": {
+      "variant": 0
+     }
+    },
+    {
+     "word": "chip",
+     "prop": "g4AnimalCare",
+     "slot": "cabinet",
+     "frame": [
+      286,
+      140,
+      82,
+      100
+     ],
+     "label": "Een hond; een apparaatje bij zijn nek leest een nummer, het vergrootglas toont iets piepkleins onder de huid",
+     "params": {
+      "variant": 0,
+      "accessory": "scanner",
+      "text": "528 1400"
+     }
+    },
+    {
+     "word": "poot",
+     "prop": "g4Animal",
+     "frame": [
+      0,
+      318,
+      72,
+      76
+     ],
+     "pin": [
+      4,
+      300
+     ],
+     "tilt": -1.5,
+     "label": "Een hond tilt zijn voet in een wit verband op; het doet pijn",
+     "params": {
+      "variant": 0,
+      "accessory": "paw"
+     }
+    },
+    {
+     "word": "vacht",
+     "prop": "g4Animal",
+     "frame": [
+      72,
+      318,
+      82,
+      72
+     ],
+     "pin": [
+      80,
+      296
+     ],
+     "tilt": 1.5,
+     "label": "Een pluizige kat met lang haar en een borstel vol haren",
+     "params": {
+      "variant": 1,
+      "accessory": "brush",
+      "tone": "gold"
+     }
+    },
+    {
+     "word": "verzorgen",
+     "prop": "g4PetCare",
+     "frame": [
+      150,
+      290,
+      76,
+      96
+     ],
+     "pin": [
+      188,
+      380
+     ],
+     "align": "center",
+     "tilt": -1,
+     "label": "Een meisje houdt een konijn op schoot en geeft het een wortel",
+     "params": {
+      "variant": 2
+     }
+    },
+    {
+     "word": "dierenarts",
+     "prop": "g4VetExam",
+     "slot": "couch",
+     "label": "Een vrouw in groene kleren luistert met een stethoscoop naar een hond op de tafel",
+     "params": {
+      "variant": 1
+     }
+    }
+   ]
+  },
+  {
+   "sheet": 35,
+   "type": "g4Pool",
+   "order": [
+    "badmeester",
+    "glijbaan",
+    "duikplank",
+    "zwemles",
+    "badpak",
+    "omkleden",
+    "afdrogen",
+    "baantje",
+    "ondiep",
+    "verwarmd",
+    "zwemdiploma"
+   ],
+   "prompts": {
+    "badmeester": "Wie is de",
+    "baantje": "Waar zwemt iemand een",
+    "omkleden": "Waar kun je je",
+    "afdrogen": "Wie gaat zich",
+    "ondiep": "Waar is het water"
+   },
+   "weg": [
+    {
+     "target": "zwemles",
+     "options": [
+      "zwemles",
+      "zwemdiploma",
+      "baantje"
+     ]
+    },
+    {
+     "target": "duikplank",
+     "options": [
+      "glijbaan",
+      "duikplank",
+      "badmeester"
+     ]
+    },
+    {
+     "target": "afdrogen",
+     "options": [
+      "omkleden",
+      "afdrogen",
+      "badpak"
+     ]
+    },
+    {
+     "target": "ondiep",
+     "options": [
+      "ondiep",
+      "verwarmd",
+      "baantje"
+     ]
+    },
+    {
+     "target": "badpak",
+     "options": [
+      "badpak",
+      "omkleden",
+      "zwemdiploma"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "glijbaan",
+     "prop": "g4Slide",
+     "slot": "slide",
+     "label": "Een gele bocht naar het water; een kind glijdt naar beneden"
+    },
+    {
+     "word": "zwemdiploma",
+     "prop": "certificate",
+     "slot": "wallLeft",
+     "label": "Een ingelijst papier met een rood zegel: deze kinderen kunnen zwemmen",
+     "params": {
+      "caption": "zwemmen",
+      "text": "A + B"
+     }
+    },
+    {
+     "word": "badpak",
+     "prop": "g4Swimsuit",
+     "slot": "hook",
+     "pin": [
+      266,
+      34
+     ],
+     "align": "leading",
+     "label": "Een blauw zwempak met witte stippen aan een hanger"
+    },
+    {
+     "word": "omkleden",
+     "prop": "g4Cubicle",
+     "slot": "cubicle",
+     "label": "Een hokje met een shirt over de deur en blote voeten onder de deur"
+    },
+    {
+     "word": "afdrogen",
+     "prop": "g4TowelDry",
+     "slot": "deck",
+     "pin": [
+      196,
+      242
+     ],
+     "align": "leading",
+     "label": "Iemand wrijft met een handdoek over zijn haar; er vallen druppels"
+    },
+    {
+     "word": "badmeester",
+     "prop": "g4LifeguardChair",
+     "slot": "chair",
+     "pin": [
+      250,
+      170
+     ],
+     "label": "Een man in een rood shirt op een hoge stoel blaast op een fluitje"
+    },
+    {
+     "word": "duikplank",
+     "prop": "g4DivingBoard",
+     "slot": "board",
+     "pin": [
+      366,
+      182
+     ],
+     "label": "Een lange plank boven het water; iemand springt eraf"
+    },
+    {
+     "word": "baantje",
+     "prop": "g4Swimmers",
+     "slot": "lane",
+     "pin": [
+      106,
+      262
+     ],
+     "align": "leading",
+     "label": "Een zwemmer gaat heen en weer door het water; een witte pijl draait om",
+     "params": {
+      "accessory": "laps"
+     }
+    },
+    {
+     "word": "zwemles",
+     "prop": "g4Swimmers",
+     "slot": "waterLeft",
+     "frame": [
+      2,
+      320,
+      128,
+      62
+     ],
+     "pin": [
+      6,
+      382
+     ],
+     "label": "Een juf in het water leert twee kinderen met bandjes zwemmen",
+     "params": {
+      "accessory": "lesson"
+     }
+    },
+    {
+     "word": "ondiep",
+     "prop": "g4Swimmers",
+     "slot": "waterMid",
+     "frame": [
+      134,
+      320,
+      112,
+      62
+     ],
+     "pin": [
+      190,
+      382
+     ],
+     "label": "Een kind staat in het water tot aan de knieën, naast een eendje",
+     "params": {
+      "accessory": "shallow",
+      "text": "0,5 m"
+     }
+    },
+    {
+     "word": "verwarmd",
+     "prop": "g4PoolThermometer",
+     "slot": "waterRight",
+     "frame": [
+      250,
+      320,
+      118,
+      62
+     ],
+     "pin": [
+      366,
+      382
+     ],
+     "label": "Een thermometer drijft in het water: 29 graden; er komt damp af",
+     "params": {
+      "text": "29°"
+     }
+    }
+   ]
+  },
+  {
+   "sheet": 36,
+   "type": "g4Daycare",
+   "order": [
+    "peuter",
+    "speelgoed",
+    "luier",
+    "dutje",
+    "kinderopvang",
+    "verschonen",
+    "zindelijk",
+    "verlegen",
+    "oppas",
+    "wennen",
+    "kinderopvangtoeslag"
+   ],
+   "prompts": {
+    "dutje": "Waar doet een kind een",
+    "oppas": "Wie is de",
+    "kinderopvangtoeslag": "Waar zie je de",
+    "wennen": "Waar zie je een kind",
+    "verschonen": "Waar gaat iemand de baby",
+    "verlegen": "Welk kind is",
+    "zindelijk": "Welk kind is al"
+   },
+   "weg": [
+    {
+     "target": "luier",
+     "options": [
+      "luier",
+      "verschonen",
+      "dutje"
+     ]
+    },
+    {
+     "target": "verlegen",
+     "options": [
+      "peuter",
+      "verlegen",
+      "zindelijk"
+     ]
+    },
+    {
+     "target": "oppas",
+     "options": [
+      "oppas",
+      "kinderopvang",
+      "wennen"
+     ]
+    },
+    {
+     "target": "kinderopvangtoeslag",
+     "options": [
+      "kinderopvangtoeslag",
+      "kinderopvang",
+      "speelgoed"
+     ]
+    },
+    {
+     "target": "wennen",
+     "options": [
+      "wennen",
+      "verlegen",
+      "peuter"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "kinderopvang",
+     "prop": "sign",
+     "slot": "signDoor",
+     "label": "Het bord boven de deur: kinderen in een huis, open van half acht tot half zeven",
+     "params": {
+      "icons": [
+       "children",
+       "house"
+      ],
+      "text": "7:30 – 18:30",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "oppas",
+     "prop": "g4Babysit",
+     "slot": "frameLeft",
+     "label": "Een schilderijtje: 's avonds leest een tiener voor aan een kind; de ouders zwaaien bij de deur"
+    },
+    {
+     "word": "wennen",
+     "prop": "g4SettleChart",
+     "slot": "frameRight",
+     "label": "Een kaart met drie dagen: eerst huilt het kind, dan twijfelt het, dan lacht het",
+     "params": {
+      "labels": [
+       "dag 1",
+       "dag 2",
+       "dag 3"
+      ]
+     }
+    },
+    {
+     "word": "kinderopvangtoeslag",
+     "prop": "paperSheet",
+     "slot": "paper",
+     "pin": [
+      120,
+      140
+     ],
+     "align": "trailing",
+     "tilt": -1.5,
+     "label": "Een brief met een euroteken en kinderen: elke maand geld erbij",
+     "params": {
+      "icons": [
+       "euro",
+       "children"
+      ],
+      "tone": "green",
+      "text": "+ € 420",
+      "caption": "per maand",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "luier",
+     "prop": "g4Nappies",
+     "slot": "shelf",
+     "label": "Een plank met een stapel witte broekjes voor baby's en een pak met een baby erop"
+    },
+    {
+     "word": "verschonen",
+     "prop": "g4ChangingTable",
+     "slot": "changer",
+     "frame": [
+      184,
+      166,
+      108,
+      98
+     ],
+     "pin": [
+      238,
+      246
+     ],
+     "label": "Een baby op de commode; twee handen doen een schone aan, de vieze gaat in de bak"
+    },
+    {
+     "word": "verlegen",
+     "prop": "g4Child",
+     "slot": "doorway",
+     "frame": [
+      300,
+      162,
+      66,
+      92
+     ],
+     "label": "Een klein kind kijkt om de deur, met rode wangen en de ogen naar beneden",
+     "params": {
+      "accessory": "shy",
+      "variant": 5
+     }
+    },
+    {
+     "word": "dutje",
+     "prop": "g4Child",
+     "slot": "cot",
+     "label": "Een kind slaapt in een bedje met spijlen: z z z",
+     "params": {
+      "accessory": "sleep",
+      "variant": 2
+     }
+    },
+    {
+     "word": "peuter",
+     "prop": "g4Child",
+     "slot": "floorLeft",
+     "frame": [
+      8,
+      294,
+      62,
+      88
+     ],
+     "label": "Een klein kind van twee loopt wiebelig met een beer in de hand",
+     "params": {
+      "accessory": "toddle",
+      "variant": 1,
+      "text": "2 jaar"
+     }
+    },
+    {
+     "word": "speelgoed",
+     "prop": "g4ToyBox",
+     "slot": "floorMid",
+     "frame": [
+      84,
+      298,
+      112,
+      84
+     ],
+     "label": "Een open kist vol: een bal, een beer, blokken en een autootje"
+    },
+    {
+     "word": "zindelijk",
+     "prop": "g4Child",
+     "slot": "floorRight",
+     "frame": [
+      204,
+      294,
+      90,
+      88
+     ],
+     "label": "Een trots kind op het potje, naast een kaart vol sterren",
+     "params": {
+      "accessory": "potty",
+      "variant": 6
+     }
+    }
+   ]
+  },
+  {
+   "sheet": 51,
+   "type": "g4CommunityHall",
+   "order": [
+    "vrijwilliger",
+    "eenzaam",
+    "activiteit",
+    "meedoen",
+    "buurthuis",
+    "bijeenkomst",
+    "inzetten",
+    "organiseren",
+    "buurtbewoner",
+    "initiatief",
+    "betrokken"
+   ],
+   "prompts": {
+    "vrijwilliger": "Wie is de",
+    "buurtbewoner": "Waar woont een",
+    "activiteit": "Waar zie je elke",
+    "initiatief": "Wie neemt het",
+    "meedoen": "Wie wil",
+    "inzetten": "Wie gaat zich",
+    "organiseren": "Waar zie je een straatfeest",
+    "eenzaam": "Wie is",
+    "betrokken": "Wie is erg"
+   },
+   "weg": [
+    {
+     "target": "inzetten",
+     "options": [
+      "vrijwilliger",
+      "inzetten",
+      "organiseren"
+     ]
+    },
+    {
+     "target": "bijeenkomst",
+     "options": [
+      "bijeenkomst",
+      "activiteit",
+      "meedoen"
+     ]
+    },
+    {
+     "target": "eenzaam",
+     "options": [
+      "eenzaam",
+      "betrokken",
+      "buurtbewoner"
+     ]
+    },
+    {
+     "target": "initiatief",
+     "options": [
+      "initiatief",
+      "organiseren",
+      "betrokken"
+     ]
+    },
+    {
+     "target": "buurtbewoner",
+     "options": [
+      "buurthuis",
+      "buurtbewoner",
+      "activiteit"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "activiteit",
+     "prop": "classTimetable",
+     "slot": "boardLeft",
+     "label": "Een week-rooster met plaatjes: muziek, schilderen, voetbal, koken en meer",
+     "params": {
+      "labels": [
+       "ma",
+       "di",
+       "wo",
+       "do"
+      ],
+      "icons": [
+       "music",
+       "paint",
+       "ball",
+       "pan",
+       "talk",
+       "book",
+       "children",
+       "g4Cup"
+      ]
+     }
+    },
+    {
+     "word": "betrokken",
+     "prop": "g4Network",
+     "slot": "posterMid",
+     "label": "Een tekening: een man in het midden met lijnen naar huizen, de school, kinderen en buren"
+    },
+    {
+     "word": "buurtbewoner",
+     "prop": "g4LocalMap",
+     "slot": "posterRight",
+     "label": "Een kaart van de wijk; bij één huisje een rode speld en het gezicht van een vrouw",
+     "params": {
+      "caption": "hier woon ik"
+     }
+    },
+    {
+     "word": "buurthuis",
+     "prop": "sign",
+     "slot": "signDoor",
+     "label": "Het bord: een huis en een groepje mensen, iedereen welkom",
+     "params": {
+      "icons": [
+       "house",
+       "g4Group"
+      ],
+      "text": "iedereen welkom",
+      "mount": "wall",
+      "tone": "yellow"
+     }
+    },
+    {
+     "word": "eenzaam",
+     "prop": "g4Neighbour",
+     "slot": "window",
+     "pin": [
+      6,
+      244
+     ],
+     "label": "Een oude man zit alleen aan een tafeltje met één kopje; de stoel tegenover hem is leeg",
+     "params": {
+      "accessory": "lonely",
+      "variant": 4
+     }
+    },
+    {
+     "word": "vrijwilliger",
+     "prop": "g4Neighbour",
+     "slot": "hatch",
+     "label": "Een vrouw in een groen hesje met een hartje schenkt koffie achter het luik",
+     "params": {
+      "accessory": "volunteer",
+      "variant": 1
+     }
+    },
+    {
+     "word": "bijeenkomst",
+     "prop": "meetingTable",
+     "slot": "sideRoom",
+     "label": "Een glazen zaaltje: buren zitten samen aan tafel, één vrouw vertelt bij een flip-over",
+     "params": {
+      "count": 4
+     }
+    },
+    {
+     "word": "organiseren",
+     "prop": "g4PlanBoard",
+     "slot": "floor1",
+     "label": "Een bord op een ezel met vlaggetjes, een datum en een lijstje met vinkjes",
+     "params": {
+      "text": "za 14 juni",
+      "icons": [
+       "music",
+       "pan",
+       "g4Group"
+      ],
+      "count": 2
+     }
+    },
+    {
+     "word": "initiatief",
+     "prop": "g4Neighbour",
+     "slot": "floor2",
+     "label": "Een vrouw stapt naar voren met haar hand omhoog en een lampje boven haar hoofd",
+     "params": {
+      "accessory": "idea",
+      "variant": 3
+     }
+    },
+    {
+     "word": "meedoen",
+     "prop": "g4JoinIn",
+     "slot": "floor3",
+     "label": "Drie mensen doen yoga; een vierde komt met een matje aanrennen"
+    },
+    {
+     "word": "inzetten",
+     "prop": "g4Neighbour",
+     "slot": "floor4",
+     "label": "Een man sjouwt een hoge stapel stoelen; het zweet vliegt eraf",
+     "params": {
+      "accessory": "chairs",
+      "variant": 1
+     }
+    }
+   ]
+  },
+  {
+   "sheet": 49,
+   "type": "g4HotelLobby",
+   "order": [
+    "receptie",
+    "tweepersoonskamer",
+    "boeken",
+    "bevestiging",
+    "overnachting",
+    "uitchecken",
+    "wekken",
+    "volgeboekt",
+    "inbegrepen",
+    "verblijf",
+    "toeristenbelasting"
+   ],
+   "prompts": {
+    "wekken": "Waar zie je de wekker iemand",
+    "overnachting": "Waar zie je de prijs van een",
+    "verblijf": "Hoe lang is het",
+    "boeken": "Waar kun je een kamer",
+    "uitchecken": "Wie gaat",
+    "inbegrepen": "Wat is bij de prijs"
+   },
+   "weg": [
+    {
+     "target": "bevestiging",
+     "options": [
+      "boeken",
+      "bevestiging",
+      "receptie"
+     ]
+    },
+    {
+     "target": "verblijf",
+     "options": [
+      "overnachting",
+      "verblijf",
+      "toeristenbelasting"
+     ]
+    },
+    {
+     "target": "volgeboekt",
+     "options": [
+      "inbegrepen",
+      "volgeboekt",
+      "overnachting"
+     ]
+    },
+    {
+     "target": "wekken",
+     "options": [
+      "wekken",
+      "uitchecken",
+      "tweepersoonskamer"
+     ]
+    },
+    {
+     "target": "inbegrepen",
+     "options": [
+      "toeristenbelasting",
+      "inbegrepen",
+      "boeken"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "tweepersoonskamer",
+     "prop": "g4HotelBed",
+     "slot": "roomLeft",
+     "label": "Een kamer boven met een breed bed, twee kussens en twee lampjes",
+     "params": {
+      "accessory": "double"
+     }
+    },
+    {
+     "word": "wekken",
+     "prop": "g4HotelBed",
+     "slot": "roomRight",
+     "label": "Een wekker rinkelt om zeven uur; een man schiet rechtop in bed",
+     "params": {
+      "accessory": "wake",
+      "time": "7:00",
+      "variant": 0
+     }
+    },
+    {
+     "word": "overnachting",
+     "prop": "sign",
+     "slot": "wallLeft",
+     "label": "Een wit bord: van de maan naar de zon, voor 95 euro",
+     "params": {
+      "icons": [
+       "g4Moon",
+       "arrow",
+       "sun"
+      ],
+      "text": "€ 95",
+      "tone": "white",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "verblijf",
+     "prop": "wallCalendar",
+     "slot": "calendar",
+     "label": "Een kalender: een hele week is geel, met een koffer erin",
+     "params": {
+      "caption": "juli",
+      "highlight": 2,
+      "icons": [
+       "g4Suitcase"
+      ]
+     }
+    },
+    {
+     "word": "volgeboekt",
+     "prop": "g4KeyRack",
+     "slot": "keys",
+     "label": "Het sleutelbord: alle haakjes zijn leeg en er hangt een rood bordje over",
+     "params": {
+      "text": "vol",
+      "count": 0
+     }
+    },
+    {
+     "word": "toeristenbelasting",
+     "prop": "sign",
+     "slot": "wallRight",
+     "label": "Een geel bord: een fototoestel, een pijl naar het stadhuis en 3,50 euro",
+     "params": {
+      "caption": "per persoon, per nacht",
+      "icons": [
+       "g4Camera",
+       "arrow",
+       "townHall"
+      ],
+      "text": "€ 3,50",
+      "tone": "yellow",
+      "mount": "wall"
+     }
+    },
+    {
+     "word": "receptie",
+     "prop": "g4Receptionist",
+     "slot": "desk",
+     "label": "Achter de lange balie: een vrouw in een blauw jasje en een belletje",
+     "params": {
+      "flip": true
+     }
+    },
+    {
+     "word": "boeken",
+     "prop": "g4Laptop",
+     "slot": "deskLeft",
+     "label": "Een laptop: je kiest twee dagen en een bed en klikt op de groene knop"
+    },
+    {
+     "word": "bevestiging",
+     "prop": "g4Guest",
+     "slot": "guestLeft",
+     "label": "Een gast houdt zijn telefoon omhoog: een mail met een groot groen vinkje",
+     "params": {
+      "accessory": "phone",
+      "lines": [
+       "kamer 12",
+       "3 nachten"
+      ],
+      "variant": 7
+     }
+    },
+    {
+     "word": "uitchecken",
+     "prop": "g4Guest",
+     "slot": "guestRight",
+     "label": "Een gast loopt met zijn koffer naar de uitgang; de klok wijst elf uur",
+     "params": {
+      "accessory": "checkout",
+      "time": "11:00",
+      "variant": 3
+     }
+    },
+    {
+     "word": "inbegrepen",
+     "prop": "g4PriceCard",
+     "slot": "front",
+     "label": "Een bord: 95 euro is bed, koffie en wifi, alles met een groen vinkje",
+     "params": {
+      "text": "€ 95",
+      "icons": [
+       "g4Bed",
+       "g4Cup",
+       "g4Wifi"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "sheet": 28,
+   "type": "g4Restaurant",
+   "order": [
+    "ober",
+    "menukaart",
+    "tafeltje",
+    "nagerecht",
+    "pittig",
+    "gerecht",
+    "klagen",
+    "hoofdgerecht",
+    "afruimen",
+    "vegetarisch",
+    "portie"
+   ],
+   "prompts": {
+    "ober": "Wie is de",
+    "tafeltje": "Waar is een vrij",
+    "afruimen": "Waar gaat iemand de tafel",
+    "klagen": "Wie gaat",
+    "pittig": "Welk eten is",
+    "vegetarisch": "Welk bord is",
+    "portie": "Waar zie je een grote",
+    "gerecht": "Waar zie je een warm"
+   },
+   "weg": [
+    {
+     "target": "hoofdgerecht",
+     "options": [
+      "gerecht",
+      "hoofdgerecht",
+      "nagerecht"
+     ]
+    },
+    {
+     "target": "pittig",
+     "options": [
+      "pittig",
+      "vegetarisch",
+      "portie"
+     ]
+    },
+    {
+     "target": "afruimen",
+     "options": [
+      "ober",
+      "afruimen",
+      "tafeltje"
+     ]
+    },
+    {
+     "target": "klagen",
+     "options": [
+      "klagen",
+      "pittig",
+      "portie"
+     ]
+    },
+    {
+     "target": "menukaart",
+     "options": [
+      "menukaart",
+      "gerecht",
+      "nagerecht"
+     ]
+    }
+   ],
+   "anchors": [
+    {
+     "word": "menukaart",
+     "prop": "g4Menu",
+     "slot": "menu",
+     "label": "In een glazen kastje: een kaart met soep, vis en ijs en de prijzen",
+     "params": {
+      "lines": [
+       "7,50",
+       "19,50",
+       "8,00"
+      ]
+     }
+    },
+    {
+     "word": "gerecht",
+     "prop": "g4Plate",
+     "slot": "pass2",
+     "pin": [
+      160,
+      66
+     ],
+     "align": "leading",
+     "label": "Een hand tilt de deksel van een bord: er komt warme damp af",
+     "params": {
+      "accessory": "cloche"
+     }
+    },
+    {
+     "word": "hoofdgerecht",
+     "prop": "g4Plate",
+     "slot": "pass1",
+     "pin": [
+      112,
+      154
+     ],
+     "align": "leading",
+     "label": "Een groot bord met vlees, aardappels en boontjes, met mes en vork",
+     "params": {
+      "accessory": "main"
+     }
+    },
+    {
+     "word": "vegetarisch",
+     "prop": "g4Plate",
+     "slot": "pass4",
+     "pin": [
+      366,
+      154
+     ],
+     "align": "trailing",
+     "label": "Een bord met alleen groenten en een groen blaadje erbij",
+     "params": {
+      "accessory": "veg"
+     }
+    },
+    {
+     "word": "nagerecht",
+     "prop": "g4Plate",
+     "slot": "pass3",
+     "pin": [
+      246,
+      66
+     ],
+     "align": "leading",
+     "label": "Een coupe met drie bolletjes ijs, slagroom en een kers",
+     "params": {
+      "accessory": "dessert"
+     }
+    },
+    {
+     "word": "afruimen",
+     "prop": "g4Table",
+     "slot": "tableLeft",
+     "label": "Twee handen pakken de vieze borden van een tafel en stapelen ze",
+     "params": {
+      "accessory": "clear"
+     }
+    },
+    {
+     "word": "klagen",
+     "prop": "g4Table",
+     "slot": "tableMid",
+     "label": "Een boze man wijst naar zijn soep en zegt: koud!",
+     "params": {
+      "accessory": "complain",
+      "text": "koud!",
+      "variant": 0
+     }
+    },
+    {
+     "word": "tafeltje",
+     "prop": "g4Table",
+     "slot": "tableRight",
+     "pin": [
+      244,
+      186
+     ],
+     "label": "Een lege tafel met vier borden, vier glazen en een kaartje met een 4",
+     "params": {
+      "accessory": "set",
+      "text": "4"
+     }
+    },
+    {
+     "word": "pittig",
+     "prop": "g4Table",
+     "slot": "frontLeft",
+     "label": "Een vrouw met een rood hoofd: er komt vuur uit haar mond; op haar bord liggen rode pepers",
+     "params": {
+      "accessory": "spicy",
+      "variant": 3
+     }
+    },
+    {
+     "word": "portie",
+     "prop": "g4Table",
+     "slot": "frontMid",
+     "label": "Een man kijkt met grote ogen naar een enorme berg patat op zijn bord",
+     "params": {
+      "accessory": "portion",
+      "variant": 6
+     }
+    },
+    {
+     "word": "ober",
+     "prop": "g4Waiter",
+     "slot": "waiter",
+     "label": "Een man met een vlinderdas, een schort en een doek over zijn arm schrijft de bestelling op"
+    }
+   ]
+  }
+ ]
+}

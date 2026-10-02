@@ -40,6 +40,8 @@ enum PalaceRoomType: String, CaseIterable {
     case g5BikeShop, g5DiyStore, g5Cinema, g5Theater, g5Museum, g5Church
     // g3: care and learning places (G3*Backdrop.swift)
     case g3Ward, g3Gym, g3Salon, g3LectureHall
+    // g4 · care, community and hospitality: see G4Rooms.swift and G4*Backdrop.swift.
+    case g4Pool, g4Daycare, g4CommunityHall, g4HotelLobby, g4Restaurant
 
     /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
     var hall: String {
@@ -81,6 +83,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Gym: "sportschool"
         case .g3Salon: "salon"
         case .g3LectureHall: "zaal"
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.hall(self)
         }
     }
 
@@ -128,6 +131,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Gym: "De sportschool"
         case .g3Salon: "Een kapsalon met spiegels"
         case .g3LectureHall: "Een zaal van de universiteit met een groot scherm"
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.sceneLabel(self)
         }
     }
 
@@ -167,6 +171,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Gym: G3GymRoom.noor
         case .g3Salon: G3SalonRoom.noor
         case .g3LectureHall: G3LectureHall.noor
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.noor(self)
         }
     }
 
@@ -205,6 +210,7 @@ enum PalaceRoomType: String, CaseIterable {
         case .g3Gym: G3GymRoom.slots
         case .g3Salon: G3SalonRoom.slots
         case .g3LectureHall: G3LectureHall.slots
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4Rooms.slots(self)
         }
     }
 }
@@ -248,6 +254,7 @@ struct PalaceRoomTypeBackdrop: View, Equatable {
         case .g3Gym: G3GymBackdrop()
         case .g3Salon: G3SalonBackdrop()
         case .g3LectureHall: G3LectureHallBackdrop()
+        case .g4Pool, .g4Daycare, .g4CommunityHall, .g4HotelLobby, .g4Restaurant: G4RoomBackdrop(type: type)
         }
     }
 }
