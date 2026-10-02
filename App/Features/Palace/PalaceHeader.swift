@@ -63,11 +63,12 @@ struct PalaceHeader: View {
 /// Segmented control: Verken | Waar is…? | Wat is weg?
 struct PalaceModePicker: View {
     let mode: PalaceMode
+    var modes: [PalaceMode] = PalaceMode.allCases
     let onSelect: (PalaceMode) -> Void
 
     var body: some View {
         HStack(spacing: 2) {
-            ForEach(PalaceMode.allCases) { item in
+            ForEach(modes) { item in
                 let on = item == mode
                 Button {
                     guard !on else { return }

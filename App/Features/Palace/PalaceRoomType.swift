@@ -1,0 +1,54 @@
+import SwiftUI
+
+/// Where a prop stands in a room type (its tap box, in scene points) and where its strip hangs.
+nonisolated struct PalaceSlot: Sendable {
+    var frame: CGRect
+    var pin: CGPoint
+    var align: PalacePinAlign = .leading
+    var tilt: Double = 0
+}
+
+/// The rooms that anchored places are built in. Each type draws its own backdrop and names the
+/// slots where props fit, so a new place of the same kind only needs lines in anchors.json.
+/// Raw values are the names used in anchors.json (`type`).
+enum PalaceRoomType: String, CaseIterable {
+    case stationHall
+
+    /// The room word in the panels: "Verken de hal", "Kijk goed naar de hal…".
+    var hall: String {
+        switch self {
+        case .stationHall: "hal"
+        }
+    }
+
+    /// VoiceOver name of the whole scene.
+    var sceneLabel: String {
+        switch self {
+        case .stationHall: "De stationshal"
+        }
+    }
+
+    /// Where Noor stands by default (top-left of her 44 × 112 figure).
+    var noor: CGPoint? {
+        switch self {
+        case .stationHall: StationHall.noor
+        }
+    }
+
+    var slots: [String: PalaceSlot] {
+        switch self {
+        case .stationHall: StationHall.slots
+        }
+    }
+}
+
+/// The backdrop (everything that carries no word) of an anchored room.
+struct PalaceRoomTypeBackdrop: View, Equatable {
+    let type: PalaceRoomType
+
+    var body: some View {
+        switch type {
+        case .stationHall: StationHallBackdrop()
+        }
+    }
+}

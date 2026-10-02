@@ -36,32 +36,6 @@ nonisolated enum PalaceCanal {
         PalaceHouse(type: .lijst, width: 96, floors: 3, cols: 4, doorLeft: false, shop: false, flowers: true,
                     color: 0x9A5238, door: 0x24533F, awning: 0x1F3A6B),
     ]
-
-    static let facades: [UInt32] = [0x7B3F2E, 0x9A5238, 0x5B3328, 0x8C4A3A, 0x6E3A2C, 0x2C2C2A, 0x5E6B73, 0xD9CDB4, 0xE3D6BC, 0xC9A15B, 0x3F5A4A]
-    static let doors: [UInt32] = [0x2F4B3A, 0x1F3A6B, 0x7A1E1E, 0x1E1E1C, 0x24533F]
-    static let awnings: [UInt32] = [0xC8261B, 0x2F4B3A, 0x1F3A6B, 0xF2711C]
-
-    /// A seeded row of houses wide enough to fill the window.
-    static func seeded(_ seed: Int) -> [PalaceHouse] {
-        var rnd = PalaceRandom(seed: seed &* 7919 &+ 17)
-        var out: [PalaceHouse] = []
-        var total = 0.0
-        var previous: PalaceGable?
-        // The window is 84 points wide; houses are drawn at 0.42, so ~230 house units fill it.
-        while total < 230 {
-            var type = rnd.pick([PalaceGable.trap, .hals, .klok, .tuit, .lijst])
-            if type == previous { type = rnd.pick([PalaceGable.trap, .hals, .klok, .tuit]) }
-            previous = type
-            let width = type == .lijst ? 96.0 : rnd.pick([62.0, 70])
-            out.append(PalaceHouse(
-                type: type, width: width, floors: rnd.pick([3, 3, 4]), cols: width >= 96 ? 4 : 2,
-                doorLeft: rnd.next() < 0.5, shop: rnd.next() < 0.3, flowers: rnd.next() < 0.6,
-                color: rnd.pick(facades), door: rnd.pick(doors), awning: rnd.pick(awnings)
-            ))
-            total += width + 4
-        }
-        return out
-    }
 }
 
 /// The canal seen through a window (84 × 180 points), with a drifting boat and shimmering water.

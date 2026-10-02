@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "rooms": [
+    {
+      "sheet": 1,
+      "type": "stationHall",
+      "order": ["perron", "vertraging", "reiziger", "storing", "inchecken", "spitsuur", "abonnement", "overstappen", "overvol", "aansluiting", "rechtstreeks"],
+      "prompts": {
+        "inchecken": "Waar kun je",
+        "overstappen": "Waar kun je",
+        "spitsuur": "Waar zie je het",
+        "rechtstreeks": "Welke route is"
+      },
+      "weg": [
+        { "target": "vertraging", "options": ["storing", "vertraging", "spitsuur"] },
+        { "target": "inchecken", "options": ["abonnement", "reiziger", "inchecken"] },
+        { "target": "overstappen", "options": ["overstappen", "aansluiting", "rechtstreeks"] },
+        { "target": "overvol", "options": ["perron", "overvol", "spitsuur"] },
+        { "target": "perron", "options": ["reiziger", "storing", "perron"] }
+      ],
+      "anchors": [
+        {
+          "word": "vertraging", "prop": "board", "slot": "boardLeft",
+          "label": "Het vertrekbord: de trein van 08:12 heeft plus tien minuten",
+          "params": { "lines": ["08:12|Utrecht|+10", "08:20|Leiden", "08:31|Zwolle"], "highlight": 0 }
+        },
+        {
+          "word": "perron", "prop": "sign", "slot": "signCenter",
+          "label": "Het blauwe bord van spoor 5",
+          "params": { "caption": "spoor", "text": "5", "tone": "blue" }
+        },
+        {
+          "word": "storing", "prop": "screen", "slot": "screenRight",
+          "label": "Het scherm met een waarschuwing en een kapot spoor",
+          "params": { "caption": "geen treinen", "icons": ["warning", "brokenTrack"], "tone": "dark" }
+        },
+        {
+          "word": "rechtstreeks", "prop": "routeMap", "slot": "wallLeft",
+          "label": "De kaart met één rechte lijn van A naar B",
+          "params": { "labels": ["A", "B"] }
+        },
+        {
+          "word": "aansluiting", "prop": "sign", "slot": "wallCenter",
+          "label": "Het bord: trein om 08:12, bus om 08:16",
+          "params": { "icons": ["train", "link", "bus"], "labels": ["08:12", "", "08:16"], "tone": "white", "mount": "wall" }
+        },
+        {
+          "word": "overstappen", "prop": "sign", "slot": "wallRight",
+          "label": "Het gele bord: van de ene trein naar de andere lopen",
+          "params": { "icons": ["train", "change", "train"], "tone": "yellow", "mount": "wall" }
+        },
+        {
+          "word": "overvol", "prop": "crowdedWindow", "slot": "trainWindow",
+          "label": "Een treinraam vol mensen",
+          "params": { "count": 10 }
+        },
+        {
+          "word": "spitsuur", "prop": "clock", "slot": "platformPole",
+          "label": "De stationsklok op kwart over acht, met veel mensen",
+          "params": { "time": "8:15", "count": 7 }
+        },
+        {
+          "word": "reiziger", "prop": "person", "slot": "floorRight",
+          "label": "Een man met een koffer",
+          "params": { "variant": 0, "accessory": "suitcase" }
+        },
+        {
+          "word": "inchecken", "prop": "reader", "slot": "floorMid",
+          "label": "Het paaltje waar je je pas tegen houdt",
+          "params": {}
+        },
+        {
+          "word": "abonnement", "prop": "poster", "slot": "floorLeft",
+          "label": "De poster met een reispas voor 99 euro per maand",
+          "params": { "icons": ["pass"], "text": "€ 99", "caption": "per maand" }
+        }
+      ]
+    }
+  ]
+}

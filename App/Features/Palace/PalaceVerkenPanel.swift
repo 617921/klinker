@@ -24,7 +24,7 @@ struct PalaceVerkenPanel: View {
                 hint
             }
             if all {
-                PalaceButtonPair(secondary: "Opnieuw", primary: "Waar is…?", onSecondary: {
+                PalaceButtonPair(secondary: "Opnieuw", primary: game.room.playsWaar ? "Waar is…?" : "Wat is weg?", onSecondary: {
                     withAnimation(.easeInOut(duration: 0.25)) { game.resetVerken() }
                 }, onPrimary: onNext)
                 .transition(.opacity)
@@ -51,7 +51,7 @@ struct PalaceVerkenPanel: View {
             Text("Tik op iets in de \(game.room.hall).")
                 .font(.system(size: 19, weight: .heavy))
                 .foregroundStyle(Theme.ink)
-            Text("Elk ding draagt een woord. Een oranje stip betekent: hier wacht nog een woord.")
+            Text("Elk \(game.room.thing) draagt een woord. Een oranje stip betekent: hier wacht nog een woord.")
                 .font(Fonts.body(14))
                 .foregroundStyle(Theme.muted)
                 .fixedSize(horizontal: false, vertical: true)

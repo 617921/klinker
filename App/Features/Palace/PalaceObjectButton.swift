@@ -1,15 +1,17 @@
 import SwiftUI
 
-/// Draws any palace object, town hall or generic.
+/// Draws any palace object: a town-hall object, a prop from the library, or a prikbord note.
 struct PalaceObjectArt: View {
     let art: PalaceArt
 
     var body: some View {
         switch art {
-        case .calendar, .wallPhone, .loketSign, .permitCard, .inTray, .form, .signature, .stamp, .idSign, .passport, .standingDesk:
-            GemeentehuisObjectArt(art: art)
+        case let .prop(prop):
+            PalacePropView(prop: prop).equatable()
+        case let .note(variant):
+            PalaceNoteArt(variant: variant)
         default:
-            PalaceGenericObjectArt(art: art)
+            GemeentehuisObjectArt(art: art)
         }
     }
 }

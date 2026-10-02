@@ -1,8 +1,8 @@
 import SwiftUI
 
 /// The memory palace of one place (method of loci): the sheet's eleven words hang on objects
-/// in an illustrated interior. Vel 14 is the town hall from the prototype; every other place gets
-/// a seeded Dutch room. Presented full screen; closes with `dismiss`.
+/// that mean them. Vel 14 is the town hall from the prototype, places in anchors.json get their
+/// own room of props, and the rest a neutral prikbord. Presented full screen; closes with `dismiss`.
 struct PlaceInteriorView: View {
     let sheetNumber: Int
     @State private var game: PalaceGame?
@@ -43,7 +43,7 @@ struct PlaceInteriorView: View {
     }
 
     @ViewBuilder private func content(_ game: PalaceGame, scale: CGFloat) -> some View {
-        PalaceModePicker(mode: game.mode) { mode in
+        PalaceModePicker(mode: game.mode, modes: game.room.modes) { mode in
             withAnimation(.easeOut(duration: 0.25)) { game.setMode(mode) }
         }
         PalaceScaledScene(room: game.room, game: game, scale: scale) { id in
@@ -52,7 +52,7 @@ struct PlaceInteriorView: View {
         .frame(maxWidth: .infinity)
         Group {
             switch game.mode {
-            case .verken: PalaceVerkenPanel(game: game) { switchMode(game, .waar) }
+            case .verken: PalaceVerkenPanel(game: game) { switchMode(game, game.room.playsWaar ? .waar : .weg) }
             case .waar: PalaceWaarPanel(game: game) { switchMode(game, .weg) }
             case .weg: PalaceWegPanel(game: game) { close() }
             }

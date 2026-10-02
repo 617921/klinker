@@ -63,6 +63,7 @@ enum GemeentehuisRoom {
             window: PalaceCanal.row(PalaceCanal.gemeentehuis),
             noor: CGPoint(x: 240, y: 292),
             hall: "zaal",
+            sceneLabel: "De zaal van het gemeentehuis",
             waarOrder: order.filter { present.contains($0) },
             wegRounds: rounds.filter { r in r.options.allSatisfy { present.contains($0) } },
             promptOverrides: ["verlengen": "Wat kun je hier"]

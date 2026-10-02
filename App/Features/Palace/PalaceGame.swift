@@ -72,9 +72,10 @@ final class PalaceGame {
 
     // MARK: Modes
 
-    func setMode(_ next: PalaceMode) {
+    func setMode(_ requested: PalaceMode) {
         cancelTimer()
         Speech.shared.stop()
+        let next = room.modes.contains(requested) ? requested : .verken
         mode = next
         selected = nil
         switch next {

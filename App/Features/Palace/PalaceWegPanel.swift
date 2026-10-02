@@ -27,7 +27,7 @@ struct PalaceWegPanel: View {
                 }, onPrimary: onClose)
             } else if let round = game.wegRound {
                 if game.wegPhase == .look {
-                    PalaceLookCard(hall: game.room.hall)
+                    PalaceLookCard(hall: game.room.hall, thing: game.room.thing)
                         .id(game.wegIndex)
                         .transition(.opacity)
                 } else {
@@ -101,6 +101,7 @@ struct PalaceWegPanel: View {
 /// "Kijk goed…" with a two-second bar that runs out.
 private struct PalaceLookCard: View {
     let hall: String
+    let thing: String
     @State private var left: CGFloat = 1
 
     var body: some View {
@@ -108,7 +109,7 @@ private struct PalaceLookCard: View {
             Text("Kijk goed naar de \(hall)…")
                 .font(.system(size: 20, weight: .heavy))
                 .foregroundStyle(Theme.ink)
-            Text("Zo meteen verdwijnt er één ding met zijn woord.")
+            Text("Zo meteen verdwijnt er één \(thing) met zijn woord.")
                 .font(Fonts.body(14))
                 .foregroundStyle(Theme.muted)
             GeometryReader { geo in

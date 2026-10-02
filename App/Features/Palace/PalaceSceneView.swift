@@ -26,7 +26,7 @@ struct PalaceSceneView: View {
                 }
             }
             if let noor = room.noor {
-                PalaceNoor().palaceAt(noor.x, noor.y).allowsHitTesting(false)
+                PalaceNoor(facingLeft: room.noorFacesLeft).palaceAt(noor.x, noor.y).allowsHitTesting(false)
             }
             if let game {
                 PalacePinLayout(spread: room.spreadPins, obstacles: pinObstacles) {
@@ -42,7 +42,7 @@ struct PalaceSceneView: View {
         .clipShape(RoundedRectangle(cornerRadius: 3))
         .dynamicTypeSize(.xSmall ... .xLarge)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel(room.hall == "zaal" ? "De zaal van het \(room.placeName.lowercased())" : "De ruimte: \(room.placeName)")
+        .accessibilityLabel(room.sceneLabel.isEmpty ? "De ruimte: \(room.placeName)" : room.sceneLabel)
     }
 
     /// Areas strips should keep clear of: Noor's face and body.
@@ -55,9 +55,10 @@ struct PalaceSceneView: View {
         switch room.kind {
         case .gemeentehuis:
             GemeentehuisBackdrop(window: room.window).equatable()
-        case let .generic(style):
-            PalaceGenericBackdrop(sheetNumber: room.sheetNumber, style: style, placeName: room.placeName,
-                                  window: room.window, marks: room.backdrop)
+        case let .anchored(type):
+            PalaceRoomTypeBackdrop(type: type).equatable()
+        case .noticeBoard:
+            PalaceNoticeBackdrop(sheetNumber: room.sheetNumber, placeName: room.placeName, marks: room.backdrop)
                 .equatable()
         }
     }
