@@ -301,7 +301,11 @@ struct KaartHouseCanvas: View, Equatable {
             litGlass: StadInk.hex(night && status == .built ? 0xF6D27A : glass),
             box: StadInk.hex(0x3F5A4A),
             bloom: StadInk.hex(0xC8261B),
-            snow: season == .winter ? StadInk.hex(night ? 0xC9CDD8 : 0xFFFFFF) : nil
+            snow: season == .winter ? StadInk.hex(night ? 0xC9CDD8 : 0xFFFFFF) : nil,
+            mortar: GevelPalette.mortar(geo.color, night: night),
+            curtain: GevelPalette.curtain(night: night),
+            iron: StadInk.hex(night ? 0x0B0C10 : 0x1E1E1C),
+            stone: StadInk.hex(night ? 0x7D7A72 : 0xCFC8BA)
         )
         let side = StadInk.hex(Gevelkit.shade(geo.color, night ? 0.42 : 0.74))
         // Winter puts snow on every roof.
