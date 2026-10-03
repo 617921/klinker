@@ -149,6 +149,7 @@ final class PalaceGame {
             waarTap = (id, true)
             waarScore += 1
             progress.record(target.id, .good)
+            KlinkerAudio.shared.play(.correct)
             Speech.shared.say(target.spoken)
             Haptics.success()
             schedule(1.3) { $0.nextQuestion() }
@@ -156,6 +157,7 @@ final class PalaceGame {
             waarTap = (id, false)
             progress.record(target.id, .again)
             shakes[id, default: 0] += 1
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
             schedule(2.3) { $0.nextQuestion() }
         }
@@ -165,6 +167,7 @@ final class PalaceGame {
         waarTap = nil
         if waarIndex + 1 >= waarOrder.count {
             waarDone = true
+            KlinkerAudio.shared.play(.roundDone)
             Haptics.success()
             return
         }
@@ -197,6 +200,7 @@ final class PalaceGame {
         if right { wegScore += 1 }
         progress.record(round.target, right ? .good : .again)
         if let word = word(round.target) { Speech.shared.say(word.spoken) }
+        KlinkerAudio.shared.play(right ? .correct : .wrong)
         if right { Haptics.success() } else { Haptics.error() }
     }
 

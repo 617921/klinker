@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The small "..." menu: day or night, test mode (all places open), jump to the demo moment, or start over.
+/// The small "..." menu: day or night, sounds, test mode (all places open), jump to the demo moment, or start over.
 struct SettingsMenu: View {
     let onDemo: () -> Void
     let onReset: () -> Void
@@ -9,6 +9,7 @@ struct SettingsMenu: View {
 
     @Environment(ProgressStore.self) private var progress
     @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
+    private let audio = KlinkerAudio.shared
 
     var body: some View {
         Menu {
@@ -20,6 +21,12 @@ struct SettingsMenu: View {
                 Label("Dag en nacht", systemImage: "sun.and.horizon")
             }
             .pickerStyle(.menu)
+            Toggle(isOn: Binding(get: { audio.effectsOn }, set: { audio.effectsOn = $0 })) {
+                Label("Geluiden", systemImage: "speaker.wave.2")
+            }
+            Toggle(isOn: Binding(get: { audio.cityOn }, set: { audio.cityOn = $0 })) {
+                Label("Stadsgeluiden", systemImage: "building.2")
+            }
             Toggle(isOn: Binding(get: { progress.unlockAll }, set: { on in
                 withAnimation(.spring) { progress.setUnlockAll(on) }
             })) {

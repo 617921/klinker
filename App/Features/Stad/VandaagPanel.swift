@@ -107,7 +107,10 @@ struct VandaagPanel: View {
                 let target = VandaagDetent.allCases.min {
                     abs(height($0) - projected) < abs(height($1) - projected)
                 } ?? detent
-                if target != detent { Haptics.tap() }
+                if target != detent {
+                    Haptics.tap()
+                    KlinkerAudio.shared.play(.paper)
+                }
                 withAnimation(springy) {
                     detent = target
                     dragOffset = 0
@@ -119,6 +122,7 @@ struct VandaagPanel: View {
     private func cycle() {
         withAnimation(springy) { detent = detent == .peek ? .half : .peek }
         Haptics.tap()
+        KlinkerAudio.shared.play(.paper)
     }
 
     /// VoiceOver swipe up or down on the grabber.

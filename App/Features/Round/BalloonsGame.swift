@@ -83,8 +83,10 @@ final class BalloonsGame {
         round.record(question.word.id, ok ? .good : .again)
         round.balloons = RoundModel.Score(right: score, total: questions.count)
         if ok {
+            KlinkerAudio.shared.play(.correct)
             Haptics.success()
         } else {
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
         }
         later(ok ? 0.85 : 1.4) { $0.next() }

@@ -115,6 +115,7 @@ final class MatchRushGame {
             pairs += 1
             flash = Flash(left: l, right: r, ok: true)
             round.record(word.id, .good)
+            KlinkerAudio.shared.play(.correct)
             Speech.shared.say(word.spoken)
             Haptics.success()
             later(0.32) { $0.replace(l, r) }
@@ -123,6 +124,7 @@ final class MatchRushGame {
             misses += 1
             flash = Flash(left: l, right: r, ok: false)
             round.record(word.id, .again)
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
             later(0.45) { game in
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {

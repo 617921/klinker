@@ -189,6 +189,7 @@ final class HousePlay {
                 store.place(item.id, in: slot.id)
                 self.hoist = nil
             }
+            KlinkerAudio.shared.play(.tap)
             Haptics.thump()
             self.finishHoist(item, slot, before: before, store: store, captionDelay: 0)
         }
@@ -218,7 +219,8 @@ final class HousePlay {
         cheerTask = Task {
             try? await Task.sleep(for: .milliseconds(1200))
             guard !Task.isCancelled else { return }
-            Speech.shared.say("Wat gezellig!")
+            KlinkerAudio.shared.play(.applause)
+            Speech.shared.say("Wat gezellig!", after: 0.6)
             Haptics.success()
         }
     }

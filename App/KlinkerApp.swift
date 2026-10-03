@@ -45,5 +45,6 @@ struct RootView: View {
             .fullScreenCover(item: $visit) { visit in
                 PlaceInteriorView(sheetNumber: visit.sheetNumber)
             }
+            .task { KlinkerAudio.shared.prepare() }
     }
 }

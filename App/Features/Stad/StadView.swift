@@ -51,7 +51,7 @@ struct StadView: View {
                     currentPlace: progress.currentSheetNumber,
                     mood: mood,
                     selected: $picked,
-                    active: onScreen && detent != .full,
+                    active: onScreen && !covered && detent != .full,
                     insets: EdgeInsets(top: top + topBarHeight, leading: 0, bottom: peekHeight, trailing: 0),
                     mail: LetterShelf(content: .shared, store: .shared, progress: progress).unreadCount,
                     onMail: { lettersOpen = true },
@@ -191,9 +191,16 @@ struct StadView: View {
             let next = parties.removeFirst()
             setDetent(.peek)
             withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { party = next }
-            Speech.shared.say(StadPlaces.spoken(next.n))
+            if next.kind == .opened { KlinkerAudio.shared.play(.snip) }
+            Speech.shared.say(StadPlaces.spoken(next.n), after: next.kind == .opened ? 0.35 : 0)
             AccessibilityNotification.Announcement(announcement(next)).post()
             try? await Task.sleep(for: .seconds(reduceMotion ? 0.3 : next.payoff))
+            switch next.kind {
+            case .built: KlinkerAudio.shared.play(.built)
+            case .opened: KlinkerAudio.shared.play(.applause)
+            case .restored: KlinkerAudio.shared.play(.roundDone)
+            }
+            KlinkerAudio.shared.play(.pops, volume: 0.8)
             Haptics.success()
             try? await Task.sleep(for: .seconds(max(1.6, next.duration - next.payoff) + 0.6))
             withAnimation(.easeOut(duration: 0.3)) { party = nil }
