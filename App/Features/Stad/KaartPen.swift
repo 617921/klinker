@@ -55,8 +55,27 @@ nonisolated struct KaartPen {
         poly([(x, y0), (x + dx, y0 + dy), (x + w + dx, y0 + dy), (x + w, y0)], top)
         let front = CGRect(x: x, y: y0, width: w, height: h)
         fill(Path(front), paint)
+        if paint == .wall && Gevelkit.isBrick(art.wall) { mortar(front) }
         if art.front == .zero { art.front = front }
         return front
+    }
+
+    /// Courses of bricks with staggered joints, inside `area`.
+    mutating func mortar(_ area: CGRect) {
+        var lines = Path()
+        var row = 0
+        var y = Double(area.maxY) - 4.2
+        while y > Double(area.minY) {
+            lines.move(to: CGPoint(x: area.minX, y: y)); lines.addLine(to: CGPoint(x: area.maxX, y: y))
+            var x = Double(area.minX) + (row % 2 == 0 ? 4.2 : 8.4)
+            while x < Double(area.maxX) {
+                lines.move(to: CGPoint(x: x, y: y)); lines.addLine(to: CGPoint(x: x, y: y + 4.2))
+                x += 8.4
+            }
+            y -= 4.2
+            row += 1
+        }
+        art.layers.append(KaartLayer(path: lines, paint: .mortar, line: 0.45, clip: Path(area)))
     }
 
     /// A pitched roof with its gable end facing you (ridge running back), on top of `front`.
@@ -112,6 +131,12 @@ nonisolated struct KaartPen {
                 frames.addPath(pane)
                 frames.move(to: CGPoint(x: x + w / 2, y: y + (arched ? w / 2 : 0)))
                 frames.addLine(to: CGPoint(x: x + w / 2, y: y + h))
+                if h >= 15 && w >= 9 {
+                    // Sash rails: eight panes.
+                    for f in [0.25, 0.5, 0.75] where !arched || h * f > w / 2 {
+                        frames.move(to: CGPoint(x: x, y: y + h * f)); frames.addLine(to: CGPoint(x: x + w, y: y + h * f))
+                    }
+                }
                 sills.addRect(CGRect(x: x - 1.5, y: y + h, width: w + 3, height: 2.2))
             }
         }
@@ -238,19 +263,27 @@ nonisolated struct KaartPen {
         fill(roof.path.applying(move), type == .lijst ? .color(0x6E6B64) : .roof)
 
         fill(g.body.applying(move), body)
+        if Gevelkit.isBrick(color ?? art.wall) {
+            art.layers.append(KaartLayer(path: g.brick.applying(move), paint: .mortar, line: 0.45, clip: g.body.applying(move)))
+        }
         line(g.edge.applying(move), .trim, width: 3)
         fill(g.trim.applying(move), .trim)
+        fill(g.steps.applying(move), .color(0xCFC8BA))
         fill(g.glass.applying(move), .glass)
         line(g.glass.applying(move), .trim, width: 2.5)
         fill(g.lit.applying(move), .lit)
+        fill(g.curtains.applying(move), .curtain)
         line(g.lit.applying(move), .trim, width: 2.5)
-        line(g.mull.applying(move), .trim, width: 1.5)
+        line(g.mull.applying(move), .trim, width: 1.1)
+        fill(g.shutters.applying(move), .door)
+        line(g.ornament.applying(move), .trim, width: 2.2)
         fill(g.door.applying(move), .door)
         fill(g.awning.applying(move), .awning)
         fill(g.stripes.applying(move), .white)
         fill(g.box.applying(move), .color(0x3F5A4A))
         fill(g.bloom.applying(move), .bloom)
         fill(g.deco.applying(move), .ink)
+        line(g.iron.applying(move), .ink, width: 1.1)
 
         let doorBox = g.door.boundingRect
         if art.doorRect == .zero, !doorBox.isNull { art.doorRect = doorBox.applying(move) }

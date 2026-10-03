@@ -312,7 +312,8 @@ nonisolated struct KaartHouseGeometry: Sendable {
                 cols: s.width >= 96 ? 4 : s.width >= 76 ? 3 : 2, doorLeft: s.doorLeft, shop: s.shop,
                 flowers: s.flowers, lit: lit, color: s.color, door: s.door, awning: s.awning ?? 0xC8261B, stone: 0
             )
-            g = Gevelkit.gevel(spec)
+            // Background houses (numbered from 7000) are tiny: no close-up details.
+            g = Gevelkit.gevel(spec, rich: n < 7000)
             hasSide = true
             W = s.width; B = g.size.height; x1 = 3 + W; cx = 3 + W / 2
             yb = B - (60 + 34 * Double(s.floors)); topY = g.topY

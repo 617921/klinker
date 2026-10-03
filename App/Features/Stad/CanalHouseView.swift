@@ -65,8 +65,22 @@ nonisolated struct GevelPalette: Sendable {
     var box: Color?
     var bloom: Color?
     var snow: Color?
+    /// Mortar lines (brick fronts only).
+    var mortar: Color? = nil
+    var curtain: Color = StadInk.hex(0xF4EEDC)
+    var iron: Color = StadInk.hex(0x1E1E1C)
+    var stone: Color = StadInk.hex(0xCFC8BA)
 
     static let deco = StadInk.hex(0x2E2117)
+
+    /// Faint light mortar; fainter still on dark tarred brick, so it stays dark.
+    static func mortar(_ facade: UInt32, night: Bool) -> Color? {
+        guard Gevelkit.isBrick(facade) else { return nil }
+        let dark = (facade >> 16 & 0xFF) < 70
+        return Color.white.opacity(night ? 0.05 : dark ? 0.08 : 0.15)
+    }
+
+    static func curtain(night: Bool) -> Color { StadInk.hex(night ? 0xFFF0C4 : 0xF4EEDC) }
     static let stripes = Color.white.opacity(0.85)
 
     /// The street colours: night darkens facades (×0.62), lights the lit windows; seasons recolour flowers and snow.
@@ -81,7 +95,11 @@ nonisolated struct GevelPalette: Sendable {
             litGlass: StadInk.hex(night ? 0xF6D27A : 0x3E4C55),
             box: season.box.map { StadInk.hex($0) },
             bloom: season.bloom.map { StadInk.hex($0) },
-            snow: season == .winter ? .white : nil
+            snow: season == .winter ? .white : nil,
+            mortar: mortar(spec.color, night: night),
+            curtain: curtain(night: night),
+            iron: StadInk.hex(night ? 0x0B0C10 : 0x1E1E1C),
+            stone: StadInk.hex(night ? 0x7D7A72 : 0xCFC8BA)
         )
     }
 }
@@ -90,13 +108,23 @@ nonisolated struct GevelPalette: Sendable {
 nonisolated enum GevelPainter {
     static func draw(_ g: GevelGeometry, palette p: GevelPalette, in ctx: inout GraphicsContext) {
         ctx.fill(g.body, with: .color(p.body))
+        if let mortar = p.mortar {
+            var wall = ctx
+            wall.clip(to: g.body)
+            wall.stroke(g.brick, with: .color(mortar), lineWidth: 0.45)
+        }
         ctx.stroke(g.edge, with: .color(p.trim), style: StrokeStyle(lineWidth: 3, lineJoin: .round))
         ctx.fill(g.trim, with: .color(p.trim))
+        ctx.fill(g.steps, with: .color(p.stone))
         ctx.fill(g.glass, with: .color(p.glass))
         ctx.stroke(g.glass, with: .color(p.trim), lineWidth: 2.5)
         ctx.fill(g.lit, with: .color(p.litGlass))
+        ctx.fill(g.curtains, with: .color(p.curtain))
         ctx.stroke(g.lit, with: .color(p.trim), lineWidth: 2.5)
-        ctx.stroke(g.mull, with: .color(p.trim), lineWidth: 1.5)
+        ctx.stroke(g.mull, with: .color(p.trim), lineWidth: 1.1)
+        ctx.fill(g.shutters, with: .color(p.door))
+        ctx.stroke(g.shutters, with: .color(p.trim), lineWidth: 1)
+        ctx.stroke(g.ornament, with: .color(p.trim), style: StrokeStyle(lineWidth: 2.2, lineCap: .round, lineJoin: .round))
         ctx.fill(g.door, with: .color(p.door))
         ctx.fill(g.awning, with: .color(p.awning))
         ctx.fill(g.stripes, with: .color(GevelPalette.stripes))
@@ -104,6 +132,7 @@ nonisolated enum GevelPainter {
         if let bloom = p.bloom { ctx.fill(g.bloom, with: .color(bloom)) }
         if let snow = p.snow { ctx.fill(g.snow, with: .color(snow)) }
         ctx.fill(g.deco, with: .color(GevelPalette.deco))
+        ctx.stroke(g.iron, with: .color(p.iron), style: StrokeStyle(lineWidth: 1.1, lineCap: .round, lineJoin: .round))
     }
 
     /// The water reflection keeps only body, trim, glass, lit and door (as in the prototype).

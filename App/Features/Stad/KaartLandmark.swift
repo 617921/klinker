@@ -12,6 +12,8 @@ nonisolated enum KaartPaint: Sendable, Hashable {
     case trim
     /// Dark wood and iron (beams, railings, signs), white, leaves, flowers (season colour).
     case ink, white, plant, bloom
+    /// Light mortar lines on brick, and curtains behind lit windows.
+    case mortar, curtain
     /// Any colour (darkened at night), and the same colour on a shaded side wall.
     case color(UInt32), darker(UInt32)
 
@@ -39,6 +41,8 @@ nonisolated struct KaartLayer: Sendable {
     var paint: KaartPaint
     /// Line width for a stroke; nil fills the path.
     var line: Double?
+    /// Only drawn inside this shape (mortar inside its wall).
+    var clip: Path? = nil
 }
 
 /// A place's own building, in art units: the units of a canal-house front (a house is ~70 wide,
@@ -103,7 +107,11 @@ nonisolated enum KaartLandmarkPainter {
                 if windows.contains(where: { $0.contains(box) }) { continue }
             }
             let color = resolve(layer.paint, art: art, look: look)
-            if let width = layer.line {
+            if let clip = layer.clip, let width = layer.line {
+                var inside = ctx
+                inside.clip(to: clip)
+                inside.stroke(layer.path, with: .color(color), lineWidth: width)
+            } else if let width = layer.line {
                 ctx.stroke(layer.path, with: .color(color), style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
             } else {
                 ctx.fill(layer.path, with: .color(color))
@@ -161,6 +169,8 @@ nonisolated enum KaartLandmarkPainter {
         case .white: return StadInk.hex(night ? 0xB9B4A8 : 0xFFFFFF)
         case .plant: return hex(0x5E8C45)
         case .bloom: return hex(look.season.bloom ?? 0xC8261B)
+        case .mortar: return GevelPalette.mortar(art.wall, night: night) ?? .clear
+        case .curtain: return GevelPalette.curtain(night: night)
         case .color(let v): return hex(v)
         case .darker(let v): return hex(v, side)
         }

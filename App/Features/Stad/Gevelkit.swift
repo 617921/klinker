@@ -113,6 +113,19 @@ nonisolated struct GevelGeometry: Sendable {
     var bloom = Path()
     var snow = Path()
     var deco = Path()
+    // The rich details (only with `rich`; the tiny background houses skip them).
+    /// Mortar lines between the bricks (stroke, clipped to `body`; brick houses only).
+    var brick = Path()
+    /// White stone curls and crowns on the gable (stroke).
+    var ornament = Path()
+    /// Wrought iron: railings, wall anchors, the lamp bracket, cellar bars (stroke).
+    var iron = Path()
+    /// Stone front steps (fill).
+    var steps = Path()
+    /// Curtains in the lit windows (fill).
+    var curtains = Path()
+    /// Warehouse shutters beside the windows (fill, door colour).
+    var shutters = Path()
 }
 
 /// A tiny SVG-like pen: same commands as the prototype's path strings.
@@ -209,7 +222,17 @@ nonisolated enum Gevelkit {
 
     // MARK: gevel()
 
-    static func gevel(_ o: HouseSpec) -> GevelGeometry {
+    /// Is this facade colour brick (red, brown or tarred black), so mortar shows? Cream, grey
+    /// and green fronts are painted.
+    static func isBrick(_ hex: UInt32) -> Bool {
+        let r = Int(hex >> 16 & 0xFF), g = Int(hex >> 8 & 0xFF), b = Int(hex & 0xFF)
+        let lum = (r * 3 + g * 6 + b) / 10
+        return (r > g + 25 && r > b + 25 && lum < 200) || lum < 55
+    }
+
+    /// One canal house. `rich` adds the close-up details (bricks, sash panes, curtains, curls,
+    /// stoop and railings, anchors, lamp); the tiny background houses skip them.
+    static func gevel(_ o: HouseSpec, rich: Bool = true) -> GevelGeometry {
         let W = o.width, fl = o.floors, fh = 34.0, gh = 46.0, band = 14.0, GH = o.type.gableHeight
         let H = gh + band + Double(fl) * fh
         let T = H + GH + 14
@@ -217,6 +240,7 @@ nonisolated enum Gevelkit {
         var body = GevelPen(), edge = GevelPen()
         var trim = Path(), glass = Path(), lit = Path(), mull = Path(), deco = Path(), door = Path()
         var awning = Path(), stripes = Path(), box = Path(), bloom = Path(), snow = Path()
+        var ornament = Path(), iron = Path(), steps = Path(), curtains = Path(), shutters = Path()
         var li = 0
 
         func isLit() -> Bool {
@@ -226,15 +250,54 @@ nonisolated enum Gevelkit {
             return v
         }
 
-        func win(_ x: Double, _ y: Double, _ w: Double, _ h: Double, _ on: Bool) {
+        /// A window. Rich sash windows get eight panes (a centre bar and three rails), shop
+        /// windows tall mullions and a transom; lit ones get curtains.
+        func win(_ x: Double, _ y: Double, _ w: Double, _ h: Double, _ on: Bool, shop: Bool = false, drapes: Bool = false) {
             let d = rect(x, y, w, h)
             if on { lit.addPath(d) } else { glass.addPath(d) }
             var m = GevelPen()
-            m.M(r(x + w / 2), r(y))
-            m.v(r(h))
-            m.M(r(x), r(y + h * 0.45))
-            m.h(r(w))
+            if rich && shop {
+                var at = x + 11
+                while at < x + w - 4 { m.M(r(at), r(y)); m.v(r(h)); at += 11 }
+                m.M(r(x), r(y + h * 0.28)); m.h(r(w))
+            } else if rich && h >= 15 && w >= 9 {
+                m.M(r(x + w / 2), r(y)); m.v(r(h))
+                for f in [0.25, 0.5, 0.75] { m.M(r(x), r(y + h * f)); m.h(r(w)) }
+            } else {
+                m.M(r(x + w / 2), r(y)); m.v(r(h))
+                m.M(r(x), r(y + h * 0.45)); m.h(r(w))
+            }
             mull.addPath(m.path)
+            if rich && drapes && on {
+                // A valance and two curtains hanging at the sides.
+                curtains.addPath(rect(x, y, w, h * 0.12))
+                curtains.addPath(rect(x, y, w * 0.2, h))
+                curtains.addPath(rect(x + w * 0.8, y, w * 0.2, h))
+            }
+        }
+
+        /// A white stone curl (volute) centred at (x, y), curling in towards `dir` (+1 right).
+        func curl(_ x: Double, _ y: Double, _ radius: Double, _ dir: Double) {
+            var p = Path()
+            for i in 0...28 {
+                let t = Double(i) / 28
+                let a = .pi / 2 + dir * t * 2.4 * .pi
+                let rr = radius * (1 - 0.72 * t)
+                let point = CGPoint(x: x + rr * cos(a) * dir, y: y - rr * sin(a))
+                if i == 0 { p.move(to: point) } else { p.addLine(to: point) }
+            }
+            ornament.addPath(p)
+        }
+
+        /// Iron wall anchors (muurankers) at the floor lines, between the windows.
+        func anchors(_ xs: [Double], _ y: Double) {
+            for x in xs {
+                var p = GevelPen()
+                p.M(r(x), r(y - 4)); p.v(8)
+                p.M(r(x - 2), r(y - 3)); p.l(4, 0)
+                p.M(r(x - 2), r(y + 3)); p.l(4, 0)
+                iron.addPath(p.path)
+            }
         }
 
         func hoistBeam(_ top: Double) {
@@ -318,6 +381,11 @@ nonisolated enum Gevelkit {
             snow.addPath(s.path)
             win(cx - nw * 0.2, (ys + yn) / 2 - 10, nw * 0.4, 20, isLit())
             glass.addPath(dot(cx, yn - 4, 3))
+            if rich {
+                curl(x0 + W * 0.13, yb - GH * 0.2, W * 0.06, 1)
+                curl(x1 - W * 0.13, yb - GH * 0.2, W * 0.06, -1)
+                ornament.addPath(dot(cx, yt - GH * 0.05, 2.2))
+            }
             topY = yt
 
         case .klok:
@@ -340,6 +408,13 @@ nonisolated enum Gevelkit {
             let apex = 0.25 * ys + 0.75 * yc
             win(cx - nw * 0.2, ys - 14, nw * 0.4, 22, isLit())
             deco.addPath(dot(cx, apex - 3, 3))
+            if rich {
+                curl(x0 + W * 0.15, yb - GH * 0.12, W * 0.065, 1)
+                curl(x1 - W * 0.15, yb - GH * 0.12, W * 0.065, -1)
+                // A stone crown over the bell and the hoisting beam under it.
+                ornament.addEllipse(in: CGRect(x: cx - 6, y: apex - 9, width: 12, height: 7))
+                hoistBeam(apex - 1)
+            }
             var s = GevelPen()
             s.M(r(xL), r(ys))
             bell(&s)
@@ -383,12 +458,27 @@ nonisolated enum Gevelkit {
 
         // Floors
         let cols = max(1, o.cols), m = W * 0.12, cw = (W - 2 * m) / Double(cols), ww = cw * 0.62, wh = fh * 0.62
+        let warehouse = o.type == .tuit
         for f in 0..<fl {
             let y = yb + Double(f) * fh + fh * 0.18
+            if rich && f > 0 && (o.type == .trap || o.type == .tuit || o.type == .hals) {
+                // A thin stone band at each floor, with iron anchors on brick fronts.
+                trim.addPath(rect(x0, yb + Double(f) * fh - 1, W, 1.8))
+                if isBrick(o.color) { anchors((1..<cols).map { x0 + m + Double($0) * cw }, yb + Double(f) * fh) }
+            }
             for k in 0..<cols {
                 let x = x0 + m + Double(k) * cw + (cw - ww) / 2
-                win(x, y, ww, wh, isLit())
+                win(x, y, ww, wh, isLit(), drapes: !warehouse)
                 trim.addPath(rect(x - 2, y + wh, ww + 4, 3))
+                if rich {
+                    // Stone lintel (with a keystone on the grander fronts).
+                    trim.addPath(rect(x - 1.5, y - 3.5, ww + 3, 3))
+                    if o.type == .lijst || o.type == .klok { trim.addPath(rect(x + ww / 2 - 1.6, y - 5, 3.2, 4.5)) }
+                    if warehouse {
+                        shutters.addPath(rect(x - ww * 0.42 - 1, y, ww * 0.42, wh))
+                        shutters.addPath(rect(x + ww + 1, y, ww * 0.42, wh))
+                    }
+                }
                 if f == fl - 1 && o.flowers {
                     box.addPath(rect(x - 1, y + wh + 3, ww + 2, 5))
                     bloom.addPath(dot(x + ww * 0.2, y + wh + 1, 2))
@@ -405,14 +495,46 @@ nonisolated enum Gevelkit {
         // Ground floor: door plus shop window or windows
         let dw = max(16, W * 0.22), dh = gh * 0.72
         let dx = o.doorLeft ? x0 + m * 0.7 : x1 - m * 0.7 - dw
-        door = rect(dx, B - dh, dw, dh)
-        glass.addPath(rect(dx + 2, B - dh - 9, dw - 4, 7))
-        trim.addPath(rect(dx - 4, B - 3, dw + 8, 3))
-        deco.addPath(rect(dx + dw * 0.72, B - dh * 0.5, 2.5, 2.5))
+        // Houses (not shops) stand on a stoop: the door is raised over stone steps.
+        let stoop = rich && !o.shop ? 7.0 : 0
+        let db = B - stoop
+        door = rect(dx, db - dh, dw, dh)
+        glass.addPath(rect(dx + 2, db - dh - 9, dw - 4, 7))
+        deco.addPath(rect(dx + dw * 0.72, db - dh * 0.5, 2.5, 2.5))
+        if stoop > 0 {
+            trim.addPath(rect(dx - 2, db - 1.5, dw + 4, 2))
+            steps.addPath(rect(dx - 2, db, dw + 4, 2.4))
+            steps.addPath(rect(dx - 4, db + 2.4, dw + 8, 2.3))
+            steps.addPath(rect(dx - 6, db + 4.7, dw + 12, 2.3))
+            // Railings either side, and a lamp by the door.
+            var rail = GevelPen()
+            rail.M(r(dx - 6), r(B)); rail.L(r(dx - 2), r(db - 9)); rail.M(r(dx - 6), r(B)); rail.v(-9)
+            rail.M(r(dx + dw + 6), r(B)); rail.L(r(dx + dw + 2), r(db - 9)); rail.M(r(dx + dw + 6), r(B)); rail.v(-9)
+            iron.addPath(rail.path)
+            let lampX = o.doorLeft ? dx + dw + 5 : dx - 9
+            iron.addPath(rect(lampX + 1.5, db - dh + 2, 1, 6))
+            lit.addPath(rect(lampX, db - dh + 8, 4, 6))
+            deco.addPath(rect(lampX - 0.5, db - dh + 7, 5, 1.4))
+            // Plants in pots at the foot of the steps.
+            let px = o.doorLeft ? dx + dw + 10 : dx - 13
+            deco.addPath(rect(px, B - 6, 6, 6))
+            box.addPath(dot(px + 3, B - 9, 4.4))
+        } else {
+            trim.addPath(rect(dx - 4, B - 3, dw + 8, 3))
+        }
+        if rich {
+            // Transom bars and door panels.
+            var bars = GevelPen()
+            bars.M(r(dx + dw / 3 + 0.7), r(db - dh - 9)); bars.v(7)
+            bars.M(r(dx + 2 * dw / 3 - 0.7), r(db - dh - 9)); bars.v(7)
+            mull.addPath(bars.path)
+            iron.addPath(rect(dx + 3, db - dh + 4, dw - 6, dh * 0.38))
+            iron.addPath(rect(dx + 3, db - dh * 0.48, dw - 6, dh * 0.38))
+        }
         let sx = o.doorLeft ? dx + dw + 6 : x0 + m * 0.7
         let avail = W - dw - m * 1.4 - 6
         if o.shop {
-            win(sx, gy + 12, avail, gh - 18, isLit())
+            win(sx, gy + 12, avail, gh - 18, isLit(), shop: true)
             var a = GevelPen()
             a.M(r(sx - 3), r(gy + 1))
             a.h(r(avail + 6))
@@ -428,14 +550,43 @@ nonisolated enum Gevelkit {
             let slot = avail / Double(n)
             let gw = min(ww, slot * 0.8)
             for k in 0..<n {
-                win(sx + Double(k) * slot + (slot - gw) / 2, gy + 8, gw, gh * 0.52, isLit())
+                let wx = sx + Double(k) * slot + (slot - gw) / 2
+                win(wx, gy + 8, gw, gh * 0.52, isLit(), drapes: true)
+                if rich {
+                    // A barred cellar window under the ground-floor window.
+                    glass.addPath(rect(wx + 1, B - 9, gw - 2, 6))
+                    var bars = GevelPen()
+                    var bx = wx + 3.5
+                    while bx < wx + gw - 2 { bars.M(r(bx), r(B - 9)); bars.v(6); bx += 3.5 }
+                    iron.addPath(bars.path)
+                }
             }
+        }
+
+        // Mortar: courses of bricks with staggered joints (painters clip them to the wall).
+        var brick = Path()
+        if rich && isBrick(o.color) {
+            var lines = brick
+            var row = 0
+            var y = B - 4.2
+            while y > topY - 4 {
+                lines.move(to: CGPoint(x: x0, y: y)); lines.addLine(to: CGPoint(x: x1, y: y))
+                var x = x0 + (row % 2 == 0 ? 4.2 : 8.4)
+                while x < x1 {
+                    lines.move(to: CGPoint(x: x, y: y)); lines.addLine(to: CGPoint(x: x, y: y + 4.2))
+                    x += 8.4
+                }
+                y -= 4.2
+                row += 1
+            }
+            brick = lines
         }
 
         return GevelGeometry(
             size: CGSize(width: W + 6, height: T), topY: topY,
             body: body.path, edge: edge.path, trim: trim, glass: glass, lit: lit, mull: mull,
-            door: door, awning: awning, stripes: stripes, box: box, bloom: bloom, snow: snow, deco: deco
+            door: door, awning: awning, stripes: stripes, box: box, bloom: bloom, snow: snow, deco: deco,
+            brick: brick, ornament: ornament, iron: iron, steps: steps, curtains: curtains, shutters: shutters
         )
     }
 
