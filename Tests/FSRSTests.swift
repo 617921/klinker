@@ -99,4 +99,27 @@ final class FSRSTests: XCTestCase {
         XCTAssertEqual(progress.status(ofSheet: 2, now: start), .current)
         XCTAssertEqual(progress.wordsOnWall, 4)
     }
+
+    func testTestModeOpensEveryPlaceWithoutTouchingProgress() {
+        let words = (0..<2).map { Word(id: "t\($0)", nl: "woord\($0)", article: .de, pos: .noun, en: "word", forms: "", partners: "", example: "", style: $0) }
+        let later = Word(id: "z", nl: "z", article: .het, pos: .noun, en: "z", forms: "", partners: "", example: "", style: 1)
+        let content = ContentStore(sheets: [
+            Sheet(number: 1, title: "Een", place: "Station", words: words, sentences: []),
+            Sheet(number: 2, title: "Twee", place: "Bakker", words: [later], sentences: []),
+        ])
+        let defaults = UserDefaults(suiteName: "682.tests.\(UUID().uuidString)")!
+        let progress = ProgressStore(context: nil, content: content, defaults: defaults)
+        XCTAssertEqual(progress.status(ofSheet: 2), .locked)
+
+        progress.setUnlockAll(true)
+        XCTAssertEqual(progress.status(ofSheet: 2), .growing)
+        XCTAssertTrue(progress.isOpenedByTestMode(2))
+        XCTAssertEqual(progress.currentSheetNumber, 1, "test mode never moves real progress")
+        XCTAssertEqual(progress.status(ofSheet: 3), .locked, "places without content stay locked")
+
+        // Remembered across launches, and off restores the locks.
+        XCTAssertTrue(ProgressStore(context: nil, content: content, defaults: defaults).unlockAll)
+        progress.setUnlockAll(false)
+        XCTAssertEqual(progress.status(ofSheet: 2), .locked)
+    }
 }

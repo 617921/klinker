@@ -134,6 +134,8 @@ private struct StadHeader: View {
     let onDemo: () -> Void
     let onReset: () -> Void
 
+    @Environment(ProgressStore.self) private var progress
+
     var body: some View {
         let built = statuses.filter { $0 == .built || $0 == .fading }.count
         VStack(alignment: .leading, spacing: 10) {
@@ -157,6 +159,20 @@ private struct StadHeader: View {
                 .font(Fonts.body(14))
                 .foregroundStyle(Theme.muted)
                 .fixedSize(horizontal: false, vertical: true)
+            if progress.unlockAll {
+                Button {
+                    withAnimation(.spring) { progress.setUnlockAll(false) }
+                } label: {
+                    Label("Testmodus aan · alle plekken open · zet uit", systemImage: "lock.open")
+                        .font(.system(size: 13, weight: .heavy))
+                        .foregroundStyle(Theme.orangeText)
+                        .padding(.horizontal, 12)
+                        .frame(minHeight: 32)
+                        .background(Color(hex: 0xFCE3CF), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("Tik om de testmodus uit te zetten.")
+            }
             HStack(spacing: 1) {
                 ForEach(statuses.indices, id: \.self) { i in
                     Rectangle()

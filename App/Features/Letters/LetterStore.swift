@@ -72,6 +72,7 @@ final class LetterStore {
     /// Letter n arrives when sheet n is the current sheet or already behind you.
     func isAvailable(_ number: Int, progress: ProgressStore) -> Bool {
         number <= progress.currentSheetNumber || progress.completedSheets.count >= ContentStore.totalSheets
+            || progress.unlockAll
     }
 
     func available(in content: LetterContent, progress: ProgressStore) -> [Letter] {

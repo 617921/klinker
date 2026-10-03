@@ -29,6 +29,9 @@ final class ProgressStore {
     private(set) var states: [String: MemoryState] = [:]
     private(set) var completedSheets: Set<Int> = []
     private(set) var activeDays: Set<String> = []
+    /// Test mode: every place with content is open, whatever the learner knows.
+    /// Real progress is untouched, so switching it off restores the normal locks.
+    private(set) var unlockAll = false
 
     static let fadingThreshold = 0.85
 
@@ -44,11 +47,13 @@ final class ProgressStore {
         }
         completedSheets = Set(defaults.array(forKey: Keys.completed) as? [Int] ?? [])
         activeDays = Set(defaults.stringArray(forKey: Keys.days) ?? [])
+        unlockAll = defaults.bool(forKey: Keys.unlockAll)
     }
 
     private enum Keys {
         static let completed = "682.completedSheets"
         static let days = "682.activeDays"
+        static let unlockAll = "klinker.unlockAll"
     }
 
     // MARK: - Words
@@ -130,7 +135,19 @@ final class ProgressStore {
         let current = currentSheetNumber
         if number == current, content.sheet(number) != nil { return .current }
         if number < current, content.sheet(number) != nil { return .growing }
+        if unlockAll, content.sheet(number) != nil { return .growing }
         return .locked
+    }
+
+    /// Turns test mode (all places open) on or off. Remembered across launches.
+    func setUnlockAll(_ on: Bool) {
+        unlockAll = on
+        defaults.set(on, forKey: Keys.unlockAll)
+    }
+
+    /// Open only because of test mode: the learner hasn't reached this place yet.
+    func isOpenedByTestMode(_ number: Int) -> Bool {
+        unlockAll && number > currentSheetNumber && content.sheet(number) != nil
     }
 
     /// Words of a sheet that are slipping, most urgent first.
