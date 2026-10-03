@@ -43,7 +43,9 @@ struct StadPlaceSheet: View {
                     }
                     .padding(.top, 4)
                 }
-                Text(message(status, learned: status == .current ? met : learned, total: total))
+                Text(progress.isOpenedByTestMode(n)
+                     ? "Testmodus: deze plek is open, ook al ben je hier nog niet. Je echte voortgang blijft gewoon bewaard."
+                     : message(status, learned: status == .current ? met : learned, total: total))
                     .font(Fonts.body(15))
                     .foregroundStyle(Theme.ink)
                     .fixedSize(horizontal: false, vertical: true)
