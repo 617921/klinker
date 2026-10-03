@@ -98,10 +98,13 @@ nonisolated enum KaartLandmarkPainter {
                 ctx.stroke(layer.path, with: .color(color), style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
             } else {
                 ctx.fill(layer.path, with: .color(color))
-                if layer.paint.isSurface { KaartDepth.shade(layer.path, night: look.night, in: &ctx) }
+                if layer.paint.isSurface {
+                    KaartDepth.shade(layer.path, night: look.night, in: &ctx)
+                    // Outlined right away, so anything drawn later in front covers the line.
+                    KaartDepth.outline(layer.path, night: look.night, in: &ctx)
+                }
             }
         }
-        KaartDepth.outline(art.silhouette, night: look.night, in: &ctx)
     }
 
     static func resolve(_ paint: KaartPaint, art: KaartLandmark, look: KaartLook) -> Color {

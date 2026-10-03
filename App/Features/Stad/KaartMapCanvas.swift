@@ -312,9 +312,12 @@ struct KaartHouseCanvas: View, Equatable {
             } else {
                 house.fill(geo.side, with: .color(side))
                 KaartDepth.shade(geo.side, night: night, in: &house)
+                KaartDepth.outline(geo.side, night: night, in: &house)
                 house.fill(geo.roof, with: .color(roof))
+                KaartDepth.outline(geo.roof, night: night, in: &house)
                 GevelPainter.draw(geo.gevel, palette: palette, in: &house)
                 KaartDepth.shade(geo.gevel.body, night: night, in: &house)
+                KaartDepth.outline(geo.gevel.body, night: night, in: &house)
                 if locked {
                     var windows = geo.gevel.glass
                     windows.addPath(geo.gevel.lit)
@@ -323,7 +326,6 @@ struct KaartHouseCanvas: View, Equatable {
                 house.fill(geo.spA, with: .color(extras[0]))
                 house.fill(geo.spB, with: .color(extras[1]))
                 house.fill(geo.spC, with: .color(extras[2]))
-                KaartDepth.outline(geo.silhouette, night: night, in: &house)
             }
             if let scaffold {
                 ctx.fill(scaffold.net, with: .color(StadInk.hex(0xF2711C, 0.22)))
