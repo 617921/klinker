@@ -1,10 +1,13 @@
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// The old-map finish: paper grain, a double rule round the world, district names set along
 /// the canal ring, italic names for the countryside and a title cartouche over the lake.
 enum KaartOldMap {
     /// A tile of paper grain (specks and a few fibres), made once and tiled over the map.
+    #if canImport(UIKit)
     static let paperTile: Image = {
         let size = CGSize(width: 180, height: 180)
         let format = UIGraphicsImageRendererFormat()
@@ -34,6 +37,10 @@ enum KaartOldMap {
         }
         return Image(uiImage: image)
     }()
+    #else
+    /// (The macOS render harness has no paper grain.)
+    static let paperTile = Image(size: CGSize(width: 1, height: 1)) { _ in }
+    #endif
 
     // MARK: Drawn into the map canvas (world units)
 

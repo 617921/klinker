@@ -60,7 +60,7 @@ private struct NowRow: View {
             VandaagRow {
                 ZStack {
                     RoundedRectangle(cornerRadius: 3).fill(Theme.orange)
-                    Image(systemName: PlaceCatalog.symbol(n))
+                    Image(systemName: KaartPlaceView.symbol(n))
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(Theme.ink)
                 }
@@ -163,6 +163,16 @@ struct VandaagMore: View {
                 .accessibilityHidden(true)
                 KaartLegend()
                     .padding(.top, 6)
+            }
+            section("Ontdekt in de stad") {
+                let discoveries = KaartDiscoveries.shared
+                Text("\(discoveries.count) van \(discoveries.total) gevonden")
+                    .font(.system(size: 16, weight: .heavy))
+                    .foregroundStyle(Theme.ink)
+                Text("Zoom helemaal in en tik op katten, eenden, kraampjes en bootjes: zo leer je extra woorden. Sommige zie je alleen in een bepaald seizoen.")
+                    .font(Fonts.body(14))
+                    .foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
             }
             section("Jouw straat") {
                 StraatView(night: night, active: active)

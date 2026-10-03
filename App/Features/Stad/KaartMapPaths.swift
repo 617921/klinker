@@ -257,36 +257,6 @@ nonisolated enum KaartArt {
     static let bikeWheels = StadSVG.path("M0.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z M14.8 10a4.2 4.2 0 1 0 8.4 0a4.2 4.2 0 1 0-8.4 0Z")
     static let bikeFrame = StadSVG.path("M5 10h6l-2-6zM9 4h7l-5 6M16 4l3 6M7 3h4M16 4l.5-2.5H19")
 
-    static let outlineHouse = StadSVG.path("M12 50V31L23 20L34 31V50ZM34 31L43 25V44L34 50M23 20L32 14L43 25")
-    static let outlineWide = StadSVG.path("M9 50V31H39V50ZM39 31L48 25V44L39 50M9 31L18 25H48")
-    static let outlineMill = StadSVG.path("M22 50L25 26H35L38 50ZM23 26Q30 15 37 26")
-    static let outlineTower = StadSVG.path("M25 50L27.5 14H32.5L35 50ZM22 14H38L36 8H24ZM26 32H34")
-    static let outlineRing = StadSVG.path("M10 46a20 7 0 1 0 40 0a20 7 0 1 0-40 0ZM24 46a6 2 0 1 0 12 0a6 2 0 1 0-12 0Z")
-    static let outlineBoat = StadSVG.path("M8 40H52L46 49H14ZM21 40V33H37V40")
-    static let baseFlat = StadSVG.path("M4 50H50L57 40H11Z")
-    static let baseDefault = StadSVG.path("M8 50H48L54 43H14Z")
-    static let millSails = StadSVG.path("M22 22V3M22 22H41M22 22V41M22 22H3M22 3h5v13h-5M41 22v5H28v-5M22 41h-5V28h5M3 22v-5h13v5")
-
-    static func outline(_ kind: KaartOutline) -> Path {
-        switch kind {
-        case .house: outlineHouse
-        case .wide: outlineWide
-        case .mill: outlineMill
-        case .tower: outlineTower
-        case .ring: outlineRing
-        case .boat: outlineBoat
-        case .flat: Path()
-        }
-    }
-
-    static func base(_ kind: KaartOutline) -> Path {
-        switch kind {
-        case .flat: baseFlat
-        case .boat: Path()
-        default: baseDefault
-        }
-    }
-
     // Crane over the place under construction (svg 160 × 146).
     static let craneLattice = StadSVG.path("M97 144V22M107 144V22M97 144L107 132L97 120L107 108L97 96L107 84L97 72L107 60L97 48L107 36L97 24")
     static let craneJib = StadSVG.path("M8 18H152M8 25H152M8 25L16 18L24 25L32 18L40 25L48 18L56 25L64 18L72 25L80 18L88 25L96 18M112 18L120 25L128 18L136 25L144 18L152 25")

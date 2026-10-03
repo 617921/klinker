@@ -1,5 +1,15 @@
 import SwiftUI
 
+/// A tapped detail's word, shown over the map for a few seconds.
+struct KaartBubble: Equatable {
+    let detail: KaartDetail
+    let point: CGPoint
+    let isNew: Bool
+    let id = UUID()
+
+    static func == (a: KaartBubble, b: KaartBubble) -> Bool { a.id == b.id }
+}
+
 /// Where the map should scroll next, as a content offset.
 struct KaartScrollRequest: Equatable {
     var offset: CGPoint
@@ -112,7 +122,7 @@ struct KaartShopSign: View, Equatable {
                 ctx.fill(Path(roundedRect: rect, cornerRadius: 2.5), with: .color(board))
                 ctx.stroke(Path(roundedRect: rect.insetBy(dx: 1.4, dy: 1.4), cornerRadius: 1.5), with: .color(paint.opacity(0.7)), lineWidth: 0.6)
             }
-            Image(systemName: PlaceCatalog.symbol(n))
+            Image(systemName: KaartPlaceView.symbol(n))
                 .font(.system(size: max(5, 8 * k), weight: .semibold))
                 .foregroundStyle(paint)
                 .frame(width: 18 * k, height: 15 * k)
@@ -202,9 +212,13 @@ struct KaartLegendIcon: View {
                 Circle().fill(Theme.orange).frame(width: 6, height: 6).offset(x: 2, y: -2)
             }
         case .locked:
-            RoundedRectangle(cornerRadius: 2)
-                .strokeBorder(StadInk.hex(0x8E8A80), style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
-                .frame(width: 14, height: 12)
+            ZStack(alignment: .bottom) {
+                Self.house.fill(StadInk.hex(0x9A5238))
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 7, weight: .bold))
+                    .foregroundStyle(StadInk.hex(0xD9A441))
+                    .offset(y: -1)
+            }
         }
     }
 }
