@@ -78,26 +78,33 @@ struct KaartMapCanvas: View, Equatable {
         ctx.fill(Path(CGRect(x: 0, y: -KaartData.north, width: 1000, height: KaartData.north)), with: .color(c.north))
         ctx.fill(Path(CGRect(x: 0, y: -5, width: 1000, height: 5)), with: .color(c.northEdge))
 
-        ctx.fill(m.meadow, with: .color(c.meadow))
-        KaartSouth.drawFields(&ctx, rects: m.fieldRects, colors: c)
-        ctx.fill(m.sand, with: .color(c.sand))
-        ctx.fill(m.dike, with: .color(c.dike))
-        ctx.fill(m.runway, with: .color(c.runway))
-        ctx.stroke(m.runwayDash, with: .color(.white), style: StrokeStyle(lineWidth: 2, dash: [10, 8]))
-        ctx.stroke(m.ditch, with: .color(c.edge), lineWidth: 3)
+        let ink = KaartInk.line(night: night)
+        let hairline = StrokeStyle(lineWidth: 1.1, lineCap: .round, lineJoin: .round)
 
-        KaartCity.drawStreets(m.streets, in: &ctx, colors: c)
-        ctx.fill(m.park, with: .color(c.park))
+        // The countryside: watercolour washes, inked edges.
+        KaartInk.wash(m.meadow, c.meadow, rim: 10, in: &ctx, strength: 0.7)
+        KaartInk.blooms(m.meadow, c.meadow, spots: KaartInk.bloomSpots, in: &ctx)
+        KaartSouth.drawFields(&ctx, rects: m.fieldRects, colors: c)
+        ctx.stroke(m.fieldInk, with: .color(ink), style: StrokeStyle(lineWidth: 0.9, lineJoin: .round))
+        ctx.stroke(m.meadowEdge, with: .color(ink), style: hairline)
+        KaartInk.wash(m.sand, c.sand, rim: 6, in: &ctx)
+        ctx.stroke(m.sand, with: .color(ink), style: hairline)
+        KaartInk.wash(m.dike, c.dike, rim: 6, in: &ctx)
+        ctx.stroke(m.dike, with: .color(ink), style: hairline)
+        ctx.fill(m.runway, with: .color(c.runway))
+        ctx.stroke(m.runway, with: .color(ink), style: hairline)
+        ctx.stroke(m.runwayDash, with: .color(.white), style: StrokeStyle(lineWidth: 2, dash: [10, 8]))
+        ctx.stroke(m.ditch, with: .color(ink), lineWidth: 3.6)
+        ctx.stroke(m.ditch, with: .color(c.water), lineWidth: 2.2)
+
+        // Streets, then the park and all the water over them, then bridges where streets cross canals.
+        KaartCity.drawStreets(m.allStreets, in: &ctx, colors: c, night: night)
+        KaartInk.wash(m.park, c.park, rim: 7, in: &ctx)
         ctx.stroke(m.parkPath, with: .color(c.parkPath), lineWidth: 4)
-        ctx.fill(m.water, with: .color(c.water))
-        ctx.stroke(m.water, with: .color(c.edge), lineWidth: 3)
-        ctx.stroke(m.canals, with: .color(c.edge), lineWidth: 22)
-        ctx.stroke(m.canals, with: .color(c.water), lineWidth: 16)
-        if !c.frozen {
-            // Deeper at the walls, lighter in the middle.
-            ctx.stroke(m.canals, with: .color(.white.opacity(night ? 0.06 : 0.16)), lineWidth: 6)
-        }
-        KaartCity.drawStreets(m.radials, in: &ctx, colors: c)
+        ctx.stroke(m.park, with: .color(ink), style: hairline)
+        KaartInk.wash(m.waterAll, c.water, rim: 5, in: &ctx, strength: c.frozen ? 0.5 : 1.2)
+        if !c.frozen { KaartInk.blooms(m.waterAll, c.water, spots: KaartInk.bloomSpots, in: &ctx) }
+        ctx.stroke(m.waterAll, with: .color(ink), style: StrokeStyle(lineWidth: 1.2, lineCap: .round, lineJoin: .round))
         KaartCity.drawBridges(m.bridges, in: &ctx, colors: c, night: night)
         ctx.fill(m.jetty, with: .color(c.jetty))
         ctx.fill(m.mooredA, with: .color(c.mooredA))
@@ -125,8 +132,10 @@ struct KaartMapCanvas: View, Equatable {
             shade.fill(m.treesDark, with: .color(StadInk.hex(0x1E1E1C, 0.12)))
         }
         ctx.fill(m.treesDark, with: .color(c.treeDark))
-        ctx.fill(m.trees, with: .color(c.tree))
-        ctx.fill(m.treesAlt, with: .color(c.treeAlt))
+        KaartInk.wash(m.trees, c.tree, rim: 2.6, in: &ctx, strength: 1.2)
+        KaartInk.wash(m.treesAlt, c.treeAlt, rim: 2.6, in: &ctx, strength: 1.2)
+        ctx.stroke(m.trees, with: .color(ink.opacity(0.7)), lineWidth: 0.7)
+        ctx.stroke(m.treesAlt, with: .color(ink.opacity(0.7)), lineWidth: 0.7)
 
         let lampGreen = StadInk.hex(0x2B3A33)
         for q in m.lamps {
@@ -316,14 +325,15 @@ struct KaartHouseCanvas: View, Equatable {
             if let landmark = geo.landmark {
                 KaartLandmarkPainter.draw(landmark, look: look, in: &house)
             } else {
-                house.fill(geo.side, with: .color(side))
-                KaartDepth.shade(geo.side, night: night, in: &house)
+                KaartInk.wash(geo.side, side, rim: 7, in: &house)
                 KaartDepth.outline(geo.side, night: night, in: &house)
-                house.fill(geo.roof, with: .color(roof))
+                KaartInk.wash(geo.roof, roof, rim: 7, in: &house)
                 KaartDepth.outline(geo.roof, night: night, in: &house)
                 GevelPainter.draw(geo.gevel, palette: palette, in: &house)
-                KaartDepth.shade(geo.gevel.body, night: night, in: &house)
+                KaartInk.pool(geo.gevel.body, palette.body, rim: 7, in: &house)
                 KaartDepth.outline(geo.gevel.body, night: night, in: &house)
+                KaartDepth.outline(geo.gevel.door, night: night, in: &house, width: 1.6)
+                KaartDepth.outline(geo.gevel.awning, night: night, in: &house, width: 1.6)
                 if locked {
                     var windows = geo.gevel.glass
                     windows.addPath(geo.gevel.lit)
