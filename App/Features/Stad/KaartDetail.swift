@@ -19,6 +19,14 @@ nonisolated struct KaartDetail: Identifiable, Sendable {
     var motion: KaartDetailMotion = .still
     /// Drawn mirrored (facing left).
     var flipped = false
+    /// Only in these seasons (nil: all year), e.g. no pedal boats in winter.
+    var seasons: [GevelSeason]? = nil
+    /// Also out at night.
+    var nightToo = true
+
+    func shows(in mood: KaartMood) -> Bool {
+        (seasons?.contains(mood.season) ?? true) && (nightToo || !mood.night)
+    }
 
     var spoken: String { article == .none ? nl : "\(article.rawValue) \(nl)" }
 
@@ -114,7 +122,9 @@ struct KaartDetailsLayer: View {
 
     var body: some View {
         let k = zoom
-        let shown = KaartDetails.all.filter { k >= $0.minZoom - 0.01 && visible.insetBy(dx: -60, dy: -60).intersects($0.reach) }
+        let shown = KaartDetails.all.filter {
+            k >= $0.minZoom - 0.01 && $0.shows(in: mood) && visible.insetBy(dx: -60, dy: -60).intersects($0.reach)
+        }
         TimelineView(.animation(minimumInterval: 1.0 / 30, paused: !active || reduceMotion || shown.isEmpty)) { timeline in
             let t = reduceMotion ? 12 : timeline.date.timeIntervalSinceReferenceDate
             ZStack(alignment: .topLeading) {

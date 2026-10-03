@@ -4,6 +4,6 @@ import SwiftUI
 /// their gevelkit spec in `KaartData`. Groups live in their own files.
 nonisolated enum KaartLandmarks {
     static func make(_ n: Int) -> KaartLandmark? {
-        shops(n) ?? big(n) ?? outskirts(n)
+        shops(n) ?? offices(n) ?? big(n) ?? work(n) ?? outskirts(n)
     }
 }
