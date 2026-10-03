@@ -14,6 +14,12 @@ nonisolated struct KaartPen {
 
     // MARK: Free shapes
 
+    /// Remembers where a named part is, for the Gevelplaat (the first one of each kind counts).
+    mutating func mark(_ part: GevelDeel, _ rect: CGRect) {
+        guard art.marks[part] == nil, !rect.isNull, rect.width > 0 || rect.height > 0 else { return }
+        art.marks[part] = rect
+    }
+
     mutating func fill(_ path: Path, _ paint: KaartPaint) {
         art.layers.append(KaartLayer(path: path, paint: paint, line: nil))
     }
@@ -55,6 +61,8 @@ nonisolated struct KaartPen {
         poly([(x, y0), (x + dx, y0 + dy), (x + w + dx, y0 + dy), (x + w, y0)], top)
         let front = CGRect(x: x, y: y0, width: w, height: h)
         fill(Path(front), paint)
+        mark(.gevel, front)
+        if top == .roof && w >= 40 && depth >= 20 { mark(.dak, CGRect(x: x + dx * 0.3, y: y0 + dy, width: w, height: -dy)) }
         if paint == .wall && Gevelkit.isBrick(art.wall) { mortar(front) }
         if art.front == .zero { art.front = front }
         return front
@@ -76,6 +84,7 @@ nonisolated struct KaartPen {
             row += 1
         }
         art.layers.append(KaartLayer(path: lines, paint: .mortar, line: 0.45, clip: Path(area)))
+        mark(.baksteen, area)
     }
 
     /// A pitched roof with its gable end facing you (ridge running back), on top of `front`.
@@ -86,6 +95,7 @@ nonisolated struct KaartPen {
         poly([(px, py), (px + dx, py + dy), (right + overhang + dx, top + dy), (right + overhang, top)], .roofSide)
         poly([(left, top), (px, py), (right, top)], gable)
         line(Self.polygonLine([(left - overhang, top + 1), (px, py), (right + overhang, top + 1)]), .roof, width: 3.5)
+        mark(.dak, CGRect(x: px + dx * 0.2, y: py + dy * 0.3, width: right - px + dx * 0.6, height: (top - py) * 0.8))
     }
 
     /// A pitched roof with its long eaves facing you (ridge running left to right).
@@ -95,6 +105,7 @@ nonisolated struct KaartPen {
         let ridgeY = top - rise + dy / 2
         poly([(right + overhang, top), (right + dx + overhang, top + dy), (right + dx / 2 + overhang, ridgeY)], .roofSide)
         poly([(left - overhang, top), (right + overhang, top), (right + dx / 2 + overhang, ridgeY), (left + dx / 2 - overhang, ridgeY)], .roof)
+        mark(.dak, CGRect(x: left + dx / 4, y: ridgeY, width: right - left, height: top - ridgeY))
     }
 
     /// A dome on top of `front` (museum, church, observatory).
@@ -105,12 +116,14 @@ nonisolated struct KaartPen {
         p.addQuadCurve(to: CGPoint(x: c + w / 2, y: front.minY), control: CGPoint(x: c, y: front.minY - h * 2))
         p.closeSubpath()
         fill(p, paint)
+        if w >= 30 { mark(.koepel, CGRect(x: c - w / 4, y: Double(front.minY) - h * 0.9, width: w / 2, height: h * 0.6)) }
     }
 
     /// A spire or pointed tower roof standing on `base` (y), `w` wide at the foot.
     mutating func spire(cx: Double, base: Double, w: Double, h: Double, paint: KaartPaint = .roof) {
         poly([(cx - w / 2, base), (cx, base - h), (cx + w / 2, base)], paint)
         poly([(cx, base - h), (cx + w / 2, base), (cx + w / 2 + 6, base - 4)], paint.shaded)
+        mark(.toren, CGRect(x: cx - w / 4, y: base - h * 0.45, width: w / 2, height: h * 0.3))
     }
 
     // MARK: Fronts
@@ -127,6 +140,7 @@ nonisolated struct KaartPen {
                 let x = area.minX + gapX + Double(c) * (w + gapX)
                 let y = area.minY + gapY + Double(r) * (h + gapY)
                 let pane = Self.window(x: x, y: y, w: w, h: h, arched: arched)
+                mark(.raam, CGRect(x: x, y: y, width: w, height: h))
                 if rnd.next() < 0.55 { lit.addPath(pane) } else { glass.addPath(pane) }
                 frames.addPath(pane)
                 frames.move(to: CGPoint(x: x + w / 2, y: y + (arched ? w / 2 : 0)))
@@ -165,6 +179,7 @@ nonisolated struct KaartPen {
         fill(shape, paint)
         oval(cx + w / 2 - 4, base - h / 2, 2, 2, .trim)
         if art.doorRect == .zero { art.doorRect = rect }
+        mark(.deur, rect)
     }
 
     /// Classical columns from x to x2 on `base`, `h` high, with a beam on top.
@@ -180,6 +195,7 @@ nonisolated struct KaartPen {
         }
         fill(shafts, paint)
         rect(x - 8, base - h - 7, x2 - x + 16, 7, paint)
+        mark(.zuil, CGRect(x: x - 3, y: base - h, width: 6, height: h))
     }
 
     /// A triangular pediment above a beam at `y`.
@@ -191,6 +207,7 @@ nonisolated struct KaartPen {
     /// A shop awning: a sloped canvas with stripes from x to x+w, hanging from y.
     mutating func awning(x: Double, y: Double, w: Double, drop: Double = 10, stripes: Bool = true) {
         poly([(x - 2, y + drop), (x + w + 2, y + drop), (x + w - 1, y), (x + 1, y)], .awning)
+        mark(.luifel, CGRect(x: x, y: y, width: w, height: drop))
         guard stripes else { return }
         var s = Path()
         var at = x + 3
@@ -205,6 +222,7 @@ nonisolated struct KaartPen {
     mutating func flag(x: Double, y: Double, height: Double = 34, colors: [UInt32] = [0xAE1C28, 0xFFFFFF, 0x21468B]) {
         rect(x - 0.8, y - height, 1.6, height, .ink)
         for (i, c) in colors.enumerated() { rect(x + 0.8, y - height + Double(i) * 4, 18, 4, .color(c)) }
+        mark(.vlag, CGRect(x: x + 0.8, y: y - height, width: 18, height: 12))
     }
 
     /// Flower boxes under windows and plants by the door.
@@ -219,6 +237,7 @@ nonisolated struct KaartPen {
         }
         fill(leaves, .plant)
         fill(blooms, .bloom)
+        mark(.bloembak, CGRect(x: x, y: y - 4, width: w, height: 8))
     }
 
     /// A tree in a pot or a small street tree, foot at (x, 0).
@@ -289,6 +308,20 @@ nonisolated struct KaartPen {
         if art.doorRect == .zero, !doorBox.isNull { art.doorRect = doorBox.applying(move) }
         let front = CGRect(x: x, y: wallTop - B, width: width, height: B - wallTop)
         if art.front == .zero { art.front = front }
+        if art.gable == nil { art.gable = type }
+        // Where the Gevelplaat points.
+        let first = { (path: Path) in KaartLandmarkPainter.subpathBounds(path.applying(move)).first ?? .null }
+        mark(.gevel, front)
+        mark(.dak, roof.path.applying(move).boundingRect)
+        mark(.raam, first(g.lit.isEmpty ? g.glass : g.lit))
+        mark(.deur, doorBox.applying(move))
+        mark(.stoep, g.steps.applying(move).boundingRect)
+        mark(.hijsbalk, g.hoist.applying(move))
+        mark(.lantaarn, g.lamp.applying(move))
+        mark(.luifel, g.awning.applying(move).boundingRect)
+        mark(.bloembak, first(g.box))
+        mark(.gordijn, first(g.curtains))
+        if Gevelkit.isBrick(color ?? art.wall) { mark(.baksteen, front) }
         return front
     }
 

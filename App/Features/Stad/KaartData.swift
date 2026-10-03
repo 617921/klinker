@@ -165,6 +165,48 @@ nonisolated struct KaartHouseGeometry: Sendable {
     var landmark: KaartLandmark? = nil
     /// The front door inside the tap target (world units): ribbon and padlock while locked.
     var doorFrame: CGRect = .zero
+    var kind: KaartBuilding.Kind = .gevel
+
+    /// Where the Gevelplaat can point at each part (viewBox units).
+    var marks: [GevelDeel: CGRect] {
+        if let landmark { return landmark.marks }
+        var m: [GevelDeel: CGRect] = [:]
+        func put(_ part: GevelDeel, _ rect: CGRect) {
+            guard m[part] == nil, !rect.isNull, rect.width > 0 || rect.height > 0 else { return }
+            m[part] = rect
+        }
+        let first = { (path: Path) in KaartLandmarkPainter.subpathBounds(path).first ?? .null }
+        switch kind {
+        case .markt:
+            put(.kraam, first(gevel.awning))
+            put(.luifel, first(gevel.stripes))
+        case .park, .tram:
+            put(.dak, spB.boundingRect)
+            put(.raam, first(gevel.glass))
+        case .gevel:
+            put(.gevel, gevel.body.boundingRect)
+            put(.dak, roof.boundingRect)
+            put(.raam, first(gevel.lit.isEmpty ? gevel.glass : gevel.lit))
+            put(.deur, gevel.door.boundingRect)
+            put(.toren, first(spA))
+            put(.stoep, gevel.steps.boundingRect)
+            put(.hijsbalk, gevel.hoist)
+            put(.lantaarn, gevel.lamp)
+            put(.luifel, gevel.awning.boundingRect)
+            put(.bloembak, first(gevel.box))
+            put(.gordijn, first(gevel.curtains))
+            if Gevelkit.isBrick(color) { put(.baksteen, gevel.body.boundingRect) }
+        }
+        return m
+    }
+
+    /// A viewBox point in the place's frame (world units), as the map draws it.
+    func framePoint(_ p: CGPoint) -> CGPoint {
+        CGPoint(
+            x: spriteOrigin.x + (p.x - viewBox.minX) * spriteSize.width / viewBox.width,
+            y: spriteOrigin.y + (p.y - viewBox.minY) * spriteSize.height / viewBox.height
+        )
+    }
 
     /// Everything solid in viewBox units, for the sun shadow.
     var silhouette: Path {
@@ -428,7 +470,8 @@ nonisolated struct KaartHouseGeometry: Sendable {
             scaffoldPart: hasSide ? scaffold(full: false) : nil,
             spFills: spFills, awning: awning, color: color, door: s.door,
             roofColor: s.type == .lijst && s.kind == .gevel ? 0x6E6B64 : 0x5B3328,
-            doorFrame: doorFrame(g.door)
+            doorFrame: doorFrame(g.door),
+            kind: s.kind
         )
     }
 }

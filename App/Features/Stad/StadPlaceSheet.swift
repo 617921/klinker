@@ -25,6 +25,7 @@ struct StadPlaceSheet: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header(status)
+                GevelPlaat(n: n, status: status)
                 HStack(spacing: 10) {
                     statusChip(status, learned: status == .current ? met : learned, total: total, fading: fading.count)
                     Spacer(minLength: 0)
