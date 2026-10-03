@@ -187,9 +187,6 @@ struct KaartWordBubble: View {
         .padding(.vertical, 10)
         .frame(width: 190, alignment: .leading)
         .background(Theme.note, in: RoundedRectangle(cornerRadius: 3))
-        .overlay(alignment: .topLeading) {
-            Rectangle().fill(Theme.tapeDe.opacity(0.9)).frame(width: 34, height: 11).rotationEffect(.degrees(-6)).offset(x: 14, y: -6)
-        }
         .rotationEffect(.degrees(-1))
         .shadow(color: Theme.ink.opacity(0.25), radius: 10, y: 6)
         .accessibilityElement(children: .combine)
