@@ -98,8 +98,8 @@ nonisolated enum KaartDetails {
             point: CGPoint(x: 291, y: 158), size: CGSize(width: 20, height: 20), nightToo: false
         ),
         KaartDetail(
-            id: "bloemenfiets", kind: .bloemenfiets, nl: "bloem", article: .de, en: "flower",
-            point: CGPoint(x: 724, y: 169), size: CGSize(width: 20, height: 14)
+            id: "bloemenfiets-brug", kind: .bloemenfiets, nl: "bloem", article: .de, en: "flower",
+            point: CGPoint(x: 774, y: 185), size: CGSize(width: 20, height: 14)
         ),
         KaartDetail(
             id: "oliebollenkraam", kind: .oliebol, nl: "oliebol", article: .de, en: "Dutch doughnut",
@@ -146,13 +146,13 @@ nonisolated enum KaartDetails {
         ),
         KaartDetail(
             id: "ganzen-wei", kind: .gans, nl: "gans", article: .de, en: "goose",
-            point: CGPoint(x: 60, y: 790), size: CGSize(width: 26, height: 14),
-            motion: .path([CGPoint(x: 60, y: 790), CGPoint(x: 170, y: 776)], period: 70), nightToo: false
+            point: CGPoint(x: 100, y: 776), size: CGSize(width: 26, height: 14),
+            motion: .path([CGPoint(x: 100, y: 776), CGPoint(x: 196, y: 764)], period: 70), nightToo: false
         ),
         KaartDetail(
             id: "luchtballon-wei", kind: .luchtballon, nl: "luchtballon", article: .de, en: "hot-air balloon",
-            point: CGPoint(x: 60, y: 742), size: CGSize(width: 18, height: 25),
-            motion: .path([CGPoint(x: 60, y: 742), CGPoint(x: 170, y: 734)], period: 90), seasons: open, nightToo: false
+            point: CGPoint(x: 60, y: 738), size: CGSize(width: 18, height: 25),
+            motion: .path([CGPoint(x: 60, y: 738), CGPoint(x: 170, y: 730)], period: 90), seasons: open, nightToo: false
         ),
         KaartDetail(
             id: "konijn-wei", kind: .konijn, nl: "konijn", article: .het, en: "rabbit",
@@ -180,7 +180,7 @@ nonisolated enum KaartDetails {
             point: CGPoint(x: 565, y: 1080), size: CGSize(width: 17, height: 10), seasons: [.lente]
         ),
         KaartDetail(
-            id: "ligstoelen-strand", kind: .ligstoel, nl: "ligstoel", article: .de, en: "deck chair",
+            id: "ligstoelen-strand", kind: .ligstoel, nl: "ligstoel", article: .de, en: "sun lounger",
             point: CGPoint(x: 436, y: 1094), size: CGSize(width: 21, height: 11), seasons: [.zomer], nightToo: false
         ),
         KaartDetail(
