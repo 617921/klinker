@@ -115,7 +115,7 @@ struct StadPlaceSheet: View {
                     .font(Fonts.label(18))
                     .foregroundStyle(fg)
             } else {
-                Image(systemName: PlaceCatalog.symbol(n))
+                Image(systemName: KaartPlaceView.symbol(n))
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundStyle(fg)
             }

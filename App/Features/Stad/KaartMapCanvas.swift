@@ -233,10 +233,16 @@ struct KaartPlaceView: View, Equatable {
             .fill(fill)
             .overlay(Circle().stroke(Theme.ink, lineWidth: 1.5))
             .overlay(
-                Image(systemName: PlaceCatalog.symbol(place.n))
+                Image(systemName: Self.symbol(place.n))
                     .font(.system(size: max(7, 11 * zoom), weight: .bold))
                     .foregroundStyle(fg)
             )
+    }
+
+    /// The place's own sign symbol, else the catalog's.
+    static func symbol(_ n: Int) -> String {
+        if let sign = KaartData.house(n).landmark?.sign, !sign.isEmpty { return sign }
+        return PlaceCatalog.symbol(n)
     }
 
     private var nameTag: some View {

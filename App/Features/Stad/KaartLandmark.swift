@@ -88,10 +88,19 @@ nonisolated struct KaartLook: Sendable {
 /// Paints a `KaartLandmark` into a context already scaled to art units.
 nonisolated enum KaartLandmarkPainter {
     static func draw(_ art: KaartLandmark, look: KaartLook, in ctx: inout GraphicsContext) {
+        // While locked, what's behind the glass (bread, books, bottles) is hidden by the shutters.
+        var windows: [CGRect] = []
         for layer in art.layers {
             if look.locked && (layer.paint == .glass || layer.paint == .lit) {
-                if layer.line == nil { KaartShutters.draw(layer.path, night: look.night, in: &ctx) }
+                if layer.line == nil {
+                    KaartShutters.draw(layer.path, night: look.night, in: &ctx)
+                    windows += subpathBounds(layer.path).map { $0.insetBy(dx: -1, dy: -1) }
+                }
                 continue
+            }
+            if look.locked, layer.paint != .trim, !windows.isEmpty {
+                let box = layer.path.boundingRect
+                if windows.contains(where: { $0.contains(box) }) { continue }
             }
             let color = resolve(layer.paint, art: art, look: look)
             if let width = layer.line {
@@ -105,6 +114,27 @@ nonisolated enum KaartLandmarkPainter {
                 }
             }
         }
+    }
+
+    /// The bounding box of each separate shape in a path (each window of a window layer).
+    static func subpathBounds(_ path: Path) -> [CGRect] {
+        var boxes: [CGRect] = []
+        var current = Path()
+        path.forEach { element in
+            if case .move = element, !current.isEmpty {
+                boxes.append(current.boundingRect)
+                current = Path()
+            }
+            switch element {
+            case .move(let p): current.move(to: p)
+            case .line(let p): current.addLine(to: p)
+            case .quadCurve(let p, let c): current.addQuadCurve(to: p, control: c)
+            case .curve(let p, let c1, let c2): current.addCurve(to: p, control1: c1, control2: c2)
+            case .closeSubpath: current.closeSubpath()
+            }
+        }
+        if !current.isEmpty { boxes.append(current.boundingRect) }
+        return boxes
     }
 
     static func resolve(_ paint: KaartPaint, art: KaartLandmark, look: KaartLook) -> Color {

@@ -60,7 +60,7 @@ private struct NowRow: View {
             VandaagRow {
                 ZStack {
                     RoundedRectangle(cornerRadius: 3).fill(Theme.orange)
-                    Image(systemName: PlaceCatalog.symbol(n))
+                    Image(systemName: KaartPlaceView.symbol(n))
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundStyle(Theme.ink)
                 }

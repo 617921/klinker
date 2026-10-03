@@ -122,7 +122,7 @@ struct KaartShopSign: View, Equatable {
                 ctx.fill(Path(roundedRect: rect, cornerRadius: 2.5), with: .color(board))
                 ctx.stroke(Path(roundedRect: rect.insetBy(dx: 1.4, dy: 1.4), cornerRadius: 1.5), with: .color(paint.opacity(0.7)), lineWidth: 0.6)
             }
-            Image(systemName: KaartData.house(n).landmark?.sign ?? PlaceCatalog.symbol(n))
+            Image(systemName: KaartPlaceView.symbol(n))
                 .font(.system(size: max(5, 8 * k), weight: .semibold))
                 .foregroundStyle(paint)
                 .frame(width: 18 * k, height: 15 * k)
