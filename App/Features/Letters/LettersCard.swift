@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The home card for De Anonieme Brieven: a red brievenbus (with an envelope in the slot when
+/// The Vandaag row for De Anonieme Brieven: a red brievenbus (with an envelope in the slot when
 /// there's unread mail), "Post voor Noor" and how many letters are new. Opens `LettersView`.
 struct LettersCard: View {
     @Environment(ProgressStore.self) private var progress
@@ -18,34 +18,26 @@ struct LettersCard: View {
         let shelf = LetterShelf(content: content, store: store, progress: progress)
         let unread = shelf.unreadCount
         Button { isOpen = true } label: {
-            HStack(alignment: .center, spacing: 14) {
+            VandaagRow {
                 LetterMailbox(hasMail: unread > 0)
-                    .frame(width: 72, height: 96)
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 8) {
-                        CourierLabel(text: "De anonieme brieven", size: 12)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                        Spacer(minLength: 0)
-                        if unread > 0 { LetterNewBadge(count: unread) }
-                    }
-                    Text("Post voor Noor")
-                        .font(.system(size: 22, weight: .heavy))
-                        .tracking(-0.4)
-                        .foregroundStyle(Theme.ink)
-                    Text(line(shelf))
-                        .font(Fonts.body(14))
-                        .foregroundStyle(Theme.muted)
-                        .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: 48, height: 64)
+            } text: {
+                HStack(spacing: 8) {
+                    CourierLabel(text: "De anonieme brieven", size: 12)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                    Spacer(minLength: 0)
+                    if unread > 0 { LetterNewBadge(count: unread) }
                 }
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 15, weight: .bold))
+                Text("Post voor Noor")
+                    .font(.system(size: 19, weight: .heavy))
+                    .tracking(-0.3)
+                    .foregroundStyle(Theme.ink)
+                Text(line(shelf))
+                    .font(Fonts.body(13))
                     .foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(14)
-            .frame(maxWidth: .infinity, minHeight: 120, alignment: .leading)
-            .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
-            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)

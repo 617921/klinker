@@ -27,24 +27,29 @@ struct TapeLegend: View {
     }
 }
 
-/// The big "Speel je ronde" CTA and the three single-game strips.
-struct PlayButtons: View {
+/// The big "Speel je ronde" CTA: the day's mixed round.
+struct PlayRoundButton: View {
     @Environment(\.startRound) private var startRound
 
     var body: some View {
-        VStack(spacing: 14) {
-            Button("Speel je ronde · 6 min") {
-                Haptics.thump()
-                startRound(.full)
-            }
-            .buttonStyle(InkButtonStyle())
-            .accessibilityHint("Match rush, Ballonnen en Knip & plak na elkaar.")
+        Button("Speel je ronde · 6 min") {
+            Haptics.thump()
+            startRound(.full)
+        }
+        .buttonStyle(InkButtonStyle())
+        .accessibilityHint("Match rush, Ballonnen en Knip & plak na elkaar.")
+    }
+}
 
-            HStack(spacing: 8) {
-                game(.match, style: StripStyle.at(6), font: Fonts.label(15), uppercase: false, tilt: 1)
-                game(.balloons, style: StripStyle.at(2), font: .custom(StripStyle.at(2).fontName, size: 16), uppercase: true, tilt: -1)
-                game(.ransom, style: StripStyle.at(3), font: .custom(StripStyle.at(3).fontName, size: 17), uppercase: false, tilt: 1.5)
-            }
+/// The three single games as cut-out strips.
+struct GameStrips: View {
+    @Environment(\.startRound) private var startRound
+
+    var body: some View {
+        HStack(spacing: 8) {
+            game(.match, style: StripStyle.at(6), font: Fonts.label(15), uppercase: false, tilt: 1)
+            game(.balloons, style: StripStyle.at(2), font: .custom(StripStyle.at(2).fontName, size: 16), uppercase: true, tilt: -1)
+            game(.ransom, style: StripStyle.at(3), font: .custom(StripStyle.at(3).fontName, size: 17), uppercase: false, tilt: 1.5)
         }
     }
 

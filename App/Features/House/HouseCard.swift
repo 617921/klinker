@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The "Jouw huis" card for the Stad screen: Noor's klokgevel, the gezelligheidsmeter and how many of
+/// The "Jouw huis" row in the Vandaag panel: Noor's klokgevel, the gezelligheidsmeter and how many of
 /// your things are in the house. Tapping it opens `HouseView` full screen.
 struct HouseCard: View {
     @Environment(ProgressStore.self) private var progress
@@ -17,42 +17,34 @@ struct HouseCard: View {
         let state = HouseState(store: store, completedSheets: progress.completedSheets)
         let newCount = state.newItems.count
         Button { isOpen = true } label: {
-            HStack(alignment: .center, spacing: 14) {
+            VandaagRow {
                 HouseFacadeMini(night: clockNight, lights: HouseLights(state: state))
-                    .frame(width: 84, height: 122)
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack(spacing: 8) {
-                        CourierLabel(text: "Jouw huis")
-                        Spacer(minLength: 0)
-                        if newCount > 0 {
-                            Text("\(newCount) nieuw")
-                                .font(.system(size: 13, weight: .heavy))
-                                .foregroundStyle(Theme.ink)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 2)
-                                .background(Theme.orange, in: Capsule())
-                                .rotationEffect(.degrees(3))
-                        }
+                    .frame(width: 48, height: 70)
+            } text: {
+                HStack(spacing: 8) {
+                    CourierLabel(text: "Jouw huis", size: 12)
+                    Spacer(minLength: 0)
+                    if newCount > 0 {
+                        Text("\(newCount) nieuw")
+                            .font(.system(size: 13, weight: .heavy))
+                            .foregroundStyle(Theme.ink)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 2)
+                            .background(Theme.orange, in: Capsule())
+                            .rotationEffect(.degrees(3))
                     }
-                    Text("Bij Noor thuis")
-                        .font(.system(size: 22, weight: .heavy))
-                        .tracking(-0.4)
-                        .foregroundStyle(Theme.ink)
-                    HouseMeterBar(fraction: Double(state.score) / 100, height: 8)
-                        .padding(.top, 2)
-                    Text(subline(state))
-                        .font(Fonts.body(14))
-                        .foregroundStyle(Theme.muted)
-                        .fixedSize(horizontal: false, vertical: true)
                 }
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 15, weight: .bold))
+                Text("Bij Noor thuis")
+                    .font(.system(size: 19, weight: .heavy))
+                    .tracking(-0.3)
+                    .foregroundStyle(Theme.ink)
+                HouseMeterBar(fraction: Double(state.score) / 100, height: 6)
+                    .padding(.vertical, 3)
+                Text(subline(state))
+                    .font(Fonts.body(13))
                     .foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(14)
-            .frame(maxWidth: .infinity, minHeight: 150, alignment: .leading)
-            .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
-            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)

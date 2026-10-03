@@ -189,6 +189,12 @@ final class ProgressStore {
             .compactMap { content.word($0.key) }
     }
 
+    /// How many words want a review now (outside the current sheet, which the round covers anyway).
+    func reviewCount(now: Date = .now) -> Int {
+        let current = Set(currentSheet?.words.map(\.id) ?? [])
+        return states.filter { !current.contains($0.key) && $0.value.reps > 0 && ($0.value.due ?? .distantFuture) <= now }.count
+    }
+
     /// The words for a round: the current sheet first, then due reviews.
     func roundPool(now: Date = .now, reviews: Int = 8) -> [Word] {
         var pool = currentSheet?.words ?? []
@@ -211,6 +217,11 @@ final class ProgressStore {
         guard !activeDays.contains(key) else { return }
         activeDays.insert(key)
         defaults.set(Array(activeDays), forKey: Keys.days)
+    }
+
+    /// Whether the learner answered anything on this day.
+    func wasActive(on date: Date = .now) -> Bool {
+        activeDays.contains(Self.dayFormatter.string(from: date))
     }
 
     /// Consecutive days with at least one answer, ending today or yesterday.

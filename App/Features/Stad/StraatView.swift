@@ -1,16 +1,17 @@
 import SwiftUI
 
 /// The canal street: a horizontally scrolling scene (gevelkit houses on a quay, water with
-/// reflections, boat or skaters) with season, day/night and "Nieuwe straat" controls.
+/// reflections, boat or skaters) and a "Nieuwe straat" button. Season follows the calendar,
+/// day and night follow the city.
 struct StraatView: View {
-    @Binding var night: Bool
+    let night: Bool
     /// Whether the card is on screen; the animation clock only runs while it is.
     var active = true
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var seed = 682
     @State private var houses = StraatLayout.initial
-    @State private var season = GevelSeason.of(.now)
+    private let season = GevelSeason.of(.now)
     @State private var selected: Int?
     @State private var appeared = false
 
@@ -34,7 +35,13 @@ struct StraatView: View {
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Jouw straat. Tik op een huis.")
 
-            StraatControls(season: $season, night: $night, newStreet: newStreet)
+            HStack {
+                Spacer(minLength: 0)
+                Button(action: newStreet) {
+                    Label("Nieuwe straat", systemImage: "arrow.clockwise")
+                }
+                .buttonStyle(StadInkPillStyle())
+            }
 
             StraatInfoCard(house: selectedHouse)
                 .animation(.easeOut(duration: 0.25), value: selected)
@@ -124,38 +131,6 @@ private struct StraatHouseButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .brightness(configuration.isPressed ? -0.06 : 0)
-    }
-}
-
-/// Season pills, day/night switch and the "Nieuwe straat" button.
-private struct StraatControls: View {
-    @Binding var season: GevelSeason
-    @Binding var night: Bool
-    let newStreet: () -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 6) {
-                ForEach(GevelSeason.allCases) { option in
-                    Button(option.label) {
-                        withAnimation(.easeInOut(duration: 0.3)) { season = option }
-                        Haptics.tap()
-                    }
-                    .buttonStyle(StadPillStyle(selected: season == option))
-                    .accessibilityAddTraits(season == option ? .isSelected : [])
-                }
-            }
-            HStack(spacing: 8) {
-                StadDayNightToggle(night: $night)
-                    .fixedSize()
-                    .layoutPriority(1)
-                Spacer(minLength: 0)
-                Button(action: newStreet) {
-                    Label("Nieuwe straat", systemImage: "arrow.clockwise")
-                }
-                .buttonStyle(StadInkPillStyle())
-            }
-        }
     }
 }
 

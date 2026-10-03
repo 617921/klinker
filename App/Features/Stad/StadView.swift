@@ -1,77 +1,83 @@
 import SwiftUI
 
-/// The Stad tab: header with progress, "Jouw straat" (the gevelkit street) and "Jouw kaart"
-/// (the canal-ring map with the 62 places). Day/night follows the clock unless toggled.
+/// The home screen: the city map fills the screen, with a small top bar (KLINKER, streak, menu)
+/// and the Vandaag panel over the bottom (today's round, current place, post, house; pull up for more).
+/// Day and night follow the clock unless set in the menu.
 struct StadView: View {
     @Environment(ProgressStore.self) private var progress
-    @Environment(\.startRound) private var startRound
     @Environment(\.enterPlace) private var enterPlace
+    @Environment(\.startRound) private var startRound
+    @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
 
-    @State private var nightOverride: Bool?
     @State private var clockNight = StadClock.isNight()
     @State private var picked: StadPlacePick?
     @State private var pendingRound: RoundKind?
     @State private var pendingVisit: Int?
+    @State private var pendingHouse = false
+    @State private var houseOpen = false
+    @State private var lettersOpen = false
     @State private var confirmReset = false
     @State private var onScreen = false
-    @State private var streetVisible = true
-    @State private var mapVisible = false
+    @State private var detent: VandaagDetent = .peek
+    @State private var topBarHeight: CGFloat = 60
+    @State private var peekHeight: CGFloat = 200
 
-    private var night: Bool { nightOverride ?? clockNight }
-
-    /// Toggling back to what the clock says hands control back to the clock.
-    private var nightBinding: Binding<Bool> {
-        Binding(
-            get: { nightOverride ?? clockNight },
-            set: { value in nightOverride = value == clockNight ? nil : value }
-        )
-    }
+    private var night: Bool { light.isNight(clockNight: clockNight) }
 
     var body: some View {
         let statuses = (1...ContentStore.totalSheets).map { progress.status(ofSheet: $0) }
-        ScrollView {
-            VStack(alignment: .leading, spacing: 26) {
-                StadHeader(
+        GeometryReader { geo in
+            let top = geo.safeAreaInsets.top
+            ZStack(alignment: .top) {
+                StadMapView(
                     statuses: statuses,
-                    wordsOnWall: progress.wordsOnWall,
+                    currentPlace: progress.currentSheetNumber,
+                    night: night,
+                    selected: $picked,
+                    active: onScreen && detent != .full,
+                    insets: EdgeInsets(top: top + topBarHeight, leading: 0, bottom: peekHeight, trailing: 0),
+                    mail: LetterShelf(content: .shared, store: .shared, progress: progress).unreadCount,
+                    onMail: { lettersOpen = true }
+                )
+                .ignoresSafeArea()
+
+                // Keeps the (dark) clock and battery readable over the busy map, day or night.
+                LinearGradient(
+                    colors: [Theme.paper.opacity(night ? 0.8 : 0.9), Theme.paper.opacity(0)],
+                    startPoint: .top, endPoint: .bottom
+                )
+                .frame(height: top + 16)
+                .ignoresSafeArea(edges: .top)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+
+                if detent == .full {
+                    Theme.ink.opacity(0.28)
+                        .ignoresSafeArea()
+                        .onTapGesture { setDetent(.half) }
+                        .accessibilityHidden(true)
+                        .transition(.opacity)
+                }
+
+                StadTopBar(
                     streak: progress.streak(),
                     onDemo: { withAnimation(.spring) { progress.seedDemo() } },
                     onReset: { confirmReset = true }
                 )
-                .padding(.horizontal, 16)
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { topBarHeight = $0 }
 
-                NowCard(onOpen: { picked = StadPlacePick(n: progress.currentSheetNumber) })
-                    .padding(.horizontal, 16)
-
-                LettersCard()
-                    .padding(.horizontal, 16)
-
-                HouseCard()
-                    .padding(.horizontal, 16)
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Jouw straat")
-                        .font(.system(size: 26, weight: .heavy))
-                        .tracking(-0.6)
-                        .accessibilityAddTraits(.isHeader)
-                    StraatView(night: nightBinding, active: onScreen && streetVisible)
-                }
-                .padding(.horizontal, 16)
-                .onGeometryChange(for: Bool.self) { Self.isVisible($0) } action: { streetVisible = $0 }
-
-                StadMapView(
-                    statuses: statuses,
-                    currentPlace: progress.currentSheetNumber,
-                    night: nightBinding,
-                    selected: $picked,
-                    active: onScreen && mapVisible
+                VandaagPanel(
+                    detent: $detent,
+                    maxHeight: geo.size.height + geo.safeAreaInsets.bottom - 8,
+                    bottomInset: geo.safeAreaInsets.bottom,
+                    night: night,
+                    onOpenPlace: openPlace,
+                    onPeekHeight: { peekHeight = $0 }
                 )
-                .onGeometryChange(for: Bool.self) { Self.isVisible($0) } action: { mapVisible = $0 }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .ignoresSafeArea(edges: .bottom)
             }
-            .padding(.top, 12)
-            .padding(.bottom, 32)
         }
-        .coordinateSpace(.named("stad"))
         .background(Theme.paper)
         .sheet(item: $picked, onDismiss: runPendingRound) { pick in
             StadPlaceSheet(
@@ -79,8 +85,17 @@ struct StadView: View {
                 night: night,
                 onRepair: { start(.match) },
                 onPlay: { start(.full) },
-                onEnter: { pendingVisit = pick.n; picked = nil }
+                onEnter: { pendingVisit = pick.n; picked = nil },
+                onHouse: { pendingHouse = true; picked = nil }
             )
+        }
+        .letterCover(isPresented: $lettersOpen) {
+            LettersView()
+                .environment(progress)
+        }
+        .houseCover(isPresented: $houseOpen) {
+            HouseView()
+                .environment(progress)
         }
         .confirmationDialog("Opnieuw beginnen?", isPresented: $confirmReset, titleVisibility: .visible) {
             Button("Alles wissen en opnieuw beginnen", role: .destructive) {
@@ -102,10 +117,16 @@ struct StadView: View {
         }
     }
 
-    /// Whether a view intersects the visible part of the Stad scroll view.
-    nonisolated private static func isVisible(_ proxy: GeometryProxy) -> Bool {
-        guard let bounds = proxy.bounds(of: .named("stad")) else { return true }
-        return bounds.intersects(CGRect(origin: .zero, size: proxy.size))
+    /// From the panel: fold it away and show the place on the map with its sheet.
+    private func openPlace(_ n: Int) {
+        setDetent(.peek)
+        picked = StadPlacePick(n: n)
+        Speech.shared.say(StadPlaces.spoken(n))
+        Haptics.tap()
+    }
+
+    private func setDetent(_ value: VandaagDetent) {
+        withAnimation(.spring(response: 0.36, dampingFraction: 0.86)) { detent = value }
     }
 
     /// Rounds start after the sheet has gone, so the full-screen cover can present.
@@ -115,6 +136,11 @@ struct StadView: View {
     }
 
     private func runPendingRound() {
+        if pendingHouse {
+            pendingHouse = false
+            houseOpen = true
+            return
+        }
         if let place = pendingVisit {
             pendingVisit = nil
             enterPlace(place)
@@ -126,10 +152,9 @@ struct StadView: View {
     }
 }
 
-/// "DE STAD" strip, streak, "x van 62 plekken gebouwd · n / 682 woorden" and a 62-segment bar.
-private struct StadHeader: View {
-    let statuses: [SheetStatus]
-    let wordsOnWall: Int
+/// Floating over the top of the map: the KLINKER strip, the streak and the menu,
+/// plus a badge while test mode is on.
+private struct StadTopBar: View {
     let streak: Int
     let onDemo: () -> Void
     let onReset: () -> Void
@@ -137,124 +162,44 @@ private struct StadHeader: View {
     @Environment(ProgressStore.self) private var progress
 
     var body: some View {
-        let built = statuses.filter { $0 == .built || $0 == .fading }.count
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
                 Text("KLINKER")
-                    .font(Fonts.cta(26))
+                    .font(Fonts.cta(24))
                     .foregroundStyle(Theme.onInk)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 3)
                     .background(Theme.ink)
                     .rotationEffect(.degrees(-2))
+                    .shadow(color: Theme.ink.opacity(0.25), radius: 3, y: 2)
                     .accessibilityAddTraits(.isHeader)
                 Spacer(minLength: 8)
                 if streak > 0 {
                     Chip(text: streak == 1 ? "1 dag" : "\(streak) dagen", systemImage: "bicycle")
+                        .shadow(color: Theme.ink.opacity(0.2), radius: 3, y: 2)
                         .accessibilityLabel("\(streak) \(streak == 1 ? "dag" : "dagen") op rij")
                 }
                 SettingsMenu(onDemo: onDemo, onReset: onReset)
             }
-            Text("\(built) van \(ContentStore.totalSheets) plekken gebouwd · \(wordsOnWall) / \(ContentStore.totalWords) woorden")
-                .font(Fonts.body(14))
-                .foregroundStyle(Theme.muted)
-                .fixedSize(horizontal: false, vertical: true)
             if progress.unlockAll {
                 Button {
                     withAnimation(.spring) { progress.setUnlockAll(false) }
                 } label: {
-                    Label("Testmodus aan · alle plekken open · zet uit", systemImage: "lock.open")
+                    Label("Testmodus aan · zet uit", systemImage: "lock.open")
                         .font(.system(size: 13, weight: .heavy))
                         .foregroundStyle(Theme.orangeText)
                         .padding(.horizontal, 12)
                         .frame(minHeight: 32)
                         .background(Color(hex: 0xFCE3CF), in: Capsule())
+                        .shadow(color: Theme.ink.opacity(0.15), radius: 3, y: 2)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Testmodus aan: alle plekken zijn open.")
                 .accessibilityHint("Tik om de testmodus uit te zetten.")
             }
-            HStack(spacing: 1) {
-                ForEach(statuses.indices, id: \.self) { i in
-                    Rectangle()
-                        .fill(color(statuses[i]))
-                        .clipShape(RoundedRectangle(cornerRadius: 1))
-                }
-            }
-            .frame(height: 8)
-            .accessibilityHidden(true)
         }
-    }
-
-    private func color(_ status: SheetStatus) -> Color {
-        switch status {
-        case .built: Theme.ink
-        case .growing: Theme.orange.opacity(0.45)
-        case .current: Theme.orange
-        case .fading: Theme.tapeOther
-        case .locked: Theme.hairline
-        }
-    }
-}
-
-/// "Nu in aanbouw": the current place, its progress and the round buttons.
-private struct NowCard: View {
-    let onOpen: () -> Void
-
-    @Environment(ProgressStore.self) private var progress
-
-    var body: some View {
-        let n = progress.currentSheetNumber
-        let sheet = progress.content.sheet(n)
-        let total = sheet?.words.count ?? 11
-        let met = min(total, progress.metCount(inSheet: n))
-        let left = total - met
-        let next = n < ContentStore.totalSheets ? PlaceCatalog.name(n + 1) : nil
-        VStack(alignment: .leading, spacing: 16) {
-            Button(action: onOpen) {
-                HStack(alignment: .center, spacing: 14) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 3).fill(Theme.orange)
-                        Image(systemName: PlaceCatalog.symbol(n))
-                            .font(.system(size: 22, weight: .semibold))
-                            .foregroundStyle(Theme.ink)
-                    }
-                    .frame(width: 52, height: 52)
-                    .rotationEffect(.degrees(-3))
-                    .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 3) {
-                        CourierLabel(text: "Nu bezig · vel \(n)")
-                        Text(sheet?.title ?? PlaceCatalog.name(n))
-                            .font(.system(size: 22, weight: .heavy))
-                            .tracking(-0.4)
-                            .foregroundStyle(Theme.ink)
-                            .multilineTextAlignment(.leading)
-                        Text(next.map { "Nog \(left) \(left == 1 ? "woord" : "woorden") goed, dan gaat \($0) open" } ?? "Nog \(left) \(left == 1 ? "woord" : "woorden") te gaan")
-                            .font(Fonts.body(14))
-                            .foregroundStyle(Theme.muted)
-                    }
-                    Spacer(minLength: 0)
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 15, weight: .bold))
-                        .foregroundStyle(Theme.muted)
-                        .accessibilityHidden(true)
-                }
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityHint("Bekijk de woorden van deze plek.")
-
-            HStack(spacing: 4) {
-                ForEach(0..<total, id: \.self) { i in
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(i < met ? Theme.orange : Theme.hairline)
-                }
-            }
-            .frame(height: 10)
-            .accessibilityHidden(true)
-
-            PlayButtons()
-        }
-        .padding(16)
-        .background(Color.white, in: RoundedRectangle(cornerRadius: 3))
+        .padding(.horizontal, 16)
+        .padding(.top, 4)
+        .padding(.bottom, 4)
     }
 }
