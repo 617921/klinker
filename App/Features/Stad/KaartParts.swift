@@ -57,7 +57,7 @@ struct KaartMailboxButton: View {
             onMail()
         } label: {
             LetterMailbox(hasMail: mail > 0)
-                .frame(width: 30 * k, height: 41 * k)
+                .frame(width: 19 * k, height: 26 * k)
                 .overlay(alignment: .topTrailing) {
                     if mail > 0 {
                         Text("\(min(mail, 99))")
@@ -67,10 +67,10 @@ struct KaartMailboxButton: View {
                             .frame(minWidth: 20, minHeight: 20)
                             .background(Theme.orange, in: Capsule())
                             .overlay(Capsule().stroke(Color.white, lineWidth: 1.5))
-                            .offset(x: 12, y: -8)
+                            .offset(x: 14, y: -10)
                     }
                 }
-                .frame(width: max(44, 30 * k), height: max(48, 41 * k))
+                .frame(width: 44, height: 48)
                 .contentShape(Rectangle())
         }
         .buttonStyle(KaartPlaceButtonStyle())
@@ -79,6 +79,48 @@ struct KaartMailboxButton: View {
             ? "Brievenbus: \(mail) \(mail == 1 ? "nieuwe brief" : "nieuwe brieven")"
             : "Brievenbus: geen nieuwe post")
         .accessibilityHint("Open de anonieme brieven.")
+    }
+}
+
+/// An uithangbord: a painted board on an iron bracket, with the place's sign on it
+/// (world 26 × 22). Grey while the place is fading.
+struct KaartShopSign: View, Equatable {
+    let n: Int
+    let faded: Bool
+    let night: Bool
+    let zoom: CGFloat
+
+    private static let boards: [UInt32] = [0x2F4B3A, 0x7A1E1E, 0x1F3A6B, 0x2C2C2A, 0x8A5A1E]
+
+    var body: some View {
+        let k = zoom
+        let f = night ? 0.6 : 1
+        let board = StadInk.hex(faded ? 0xB4B2A9 : Gevelkit.shade(Self.boards[n % Self.boards.count], f))
+        let paint = faded ? Theme.muted : StadInk.hex(night ? 0xD9CFAE : 0xF4E9CF)
+        let iron = StadInk.hex(night ? 0x8A8F9E : 0x1E1E1C)
+        ZStack(alignment: .topLeading) {
+            Canvas { ctx, _ in
+                ctx.scaleBy(x: k, y: k)
+                var bracket = Path()
+                bracket.move(to: CGPoint(x: 25, y: 2)); bracket.addLine(to: CGPoint(x: 5, y: 2))
+                bracket.move(to: CGPoint(x: 25, y: 7)); bracket.addLine(to: CGPoint(x: 17, y: 2))
+                bracket.move(to: CGPoint(x: 8, y: 2)); bracket.addLine(to: CGPoint(x: 8, y: 5))
+                bracket.move(to: CGPoint(x: 19, y: 2)); bracket.addLine(to: CGPoint(x: 19, y: 5))
+                ctx.stroke(bracket, with: .color(iron), style: StrokeStyle(lineWidth: 1.2, lineCap: .round))
+                let rect = CGRect(x: 4.5, y: 5, width: 18, height: 15)
+                ctx.fill(Path(roundedRect: rect.offsetBy(dx: 0.8, dy: 1), cornerRadius: 2.5), with: .color(StadInk.hex(0x1E1E1C, 0.2)))
+                ctx.fill(Path(roundedRect: rect, cornerRadius: 2.5), with: .color(board))
+                ctx.stroke(Path(roundedRect: rect.insetBy(dx: 1.4, dy: 1.4), cornerRadius: 1.5), with: .color(paint.opacity(0.7)), lineWidth: 0.6)
+            }
+            Image(systemName: PlaceCatalog.symbol(n))
+                .font(.system(size: max(5, 8 * k), weight: .semibold))
+                .foregroundStyle(paint)
+                .frame(width: 18 * k, height: 15 * k)
+                .offset(x: 4.5 * k, y: 5 * k)
+        }
+        .frame(width: 26 * k, height: 22 * k, alignment: .topLeading)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
     }
 }
 

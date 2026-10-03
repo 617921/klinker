@@ -37,6 +37,8 @@ nonisolated struct KaartMood: Equatable, Sendable {
     var phase: KaartLightPhase
     var season: GevelSeason
     var rain: Bool
+    /// Where shadows fall: −1 west (morning) … +1 east (evening), in quarter steps; nil at night.
+    var lean: Double? = -0.25
 
     var night: Bool { phase == .night }
 
@@ -51,11 +53,29 @@ nonisolated struct KaartMood: Equatable, Sendable {
         case .night: .night
         }
         let season = GevelSeason.of(date)
-        let mood = KaartMood(phase: phase, season: season, rain: drizzles(at: date, season: season, calendar: calendar))
+        let lean: Double? = switch light {
+        case .auto: phase == .night ? nil : sunLean(at: date, calendar: calendar)
+        case .day: -0.25
+        case .night: nil
+        }
+        let mood = KaartMood(
+            phase: phase, season: season,
+            rain: drizzles(at: date, season: season, calendar: calendar), lean: lean
+        )
         #if DEBUG
         if let forced = ProcessInfo.processInfo.environment["KLINKER_MOOD"] { return mood.forced(forced) }
         #endif
         return mood
+    }
+
+    /// The sun crosses from east to west: long shadows to the west in the morning, short at noon,
+    /// long to the east in the evening. Quarter steps, so the map redraws a few times a day.
+    static func sunLean(at date: Date, calendar: Calendar = .current) -> Double {
+        let sun = KaartSun.times(on: date, calendar: calendar)
+        let parts = calendar.dateComponents([.hour, .minute], from: date)
+        let hour = Double(parts.hour ?? 12) + Double(parts.minute ?? 0) / 60
+        let f = min(1, max(0, (hour - sun.rise) / max(1, sun.set - sun.rise)))
+        return (-cos(.pi * f) * 4).rounded() / 4
     }
 
     #if DEBUG
@@ -65,10 +85,10 @@ nonisolated struct KaartMood: Equatable, Sendable {
         for token in spec.split(separator: ",").map(String.init) {
             if let season = GevelSeason(rawValue: token) { mood.season = season }
             switch token {
-            case "dawn": mood.phase = .dawn
-            case "day": mood.phase = .day
-            case "golden": mood.phase = .golden
-            case "night": mood.phase = .night
+            case "dawn": mood.phase = .dawn; mood.lean = -1
+            case "day": mood.phase = .day; mood.lean = -0.25
+            case "golden": mood.phase = .golden; mood.lean = 1
+            case "night": mood.phase = .night; mood.lean = nil
             case "rain": mood.rain = true
             case "dry": mood.rain = false
             default: break

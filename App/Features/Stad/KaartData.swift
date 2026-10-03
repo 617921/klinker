@@ -162,7 +162,8 @@ nonisolated struct KaartHouseGeometry: Sendable {
         let rect = Gevelkit.rect
         let dot = Gevelkit.dot
         let D = 30.0, DY = 17.0, x0 = 3.0
-        let KS = s.kind == .gevel ? 0.3 : 0.36
+        // Places stand out over the background houses: 1.3× the prototype size.
+        let KS = s.kind == .gevel ? 0.39 : 0.46
         var g = GevelGeometry(size: .zero, topY: 0)
         var W = 0.0, B = 0.0, x1 = 0.0, cx = 0.0, yb = 0.0, topY = 0.0, wallTop = 0.0
         var hasSide = false

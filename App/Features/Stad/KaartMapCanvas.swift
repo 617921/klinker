@@ -1,21 +1,29 @@
 import SwiftUI
 
-/// The static map, drawn once per zoom level, day/night and season (not per frame).
+/// The static map, drawn once per zoom level, day/night, season, sun and progress (not per frame).
 struct KaartMapCanvas: View, Equatable {
     let night: Bool
     var season: GevelSeason = .zomer
     let zoom: CGFloat
+    /// Sun shadows lean this way (nil: none).
+    var lean: Double? = nil
+    /// Places with a building (they cast shadows), and those fully built (their windows glow at night).
+    var standing: [Int] = []
+    var built: [Int] = []
 
     var body: some View {
         let colors = KaartColors(night: night, season: season)
         let season = season
+        let lean = lean
+        let standing = standing
+        let built = built
         let showLabels = zoom > 0.8
         let waterFont = Fonts.readingItalic(14)
         let canalFont = Fonts.readingItalic(12)
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             ctx.translateBy(x: 0, y: KaartData.north)
-            Self.drawMap(&ctx, colors: colors, night: night, season: season)
+            Self.drawMap(&ctx, colors: colors, night: night, season: season, lean: lean, standing: standing, built: built)
             KaartOldMap.drawDistricts(&ctx, night: night)
             KaartOldMap.drawCountryNames(&ctx, night: night, paper: colors.ground)
             KaartOldMap.drawCartouche(&ctx, night: night)
@@ -36,7 +44,10 @@ struct KaartMapCanvas: View, Equatable {
         .allowsHitTesting(false)
     }
 
-    private static func drawMap(_ ctx: inout GraphicsContext, colors c: KaartColors, night: Bool, season: GevelSeason) {
+    private static func drawMap(
+        _ ctx: inout GraphicsContext, colors c: KaartColors, night: Bool, season: GevelSeason,
+        lean: Double?, standing: [Int], built: [Int]
+    ) {
         let m = KaartMapPaths.shared
         ctx.fill(Path(CGRect(x: 0, y: -KaartData.north, width: 1000, height: KaartData.contentHeight)), with: .color(c.ground))
         ctx.fill(Path(CGRect(x: 0, y: -KaartData.north, width: 1000, height: KaartData.north)), with: .color(c.north))
@@ -50,19 +61,19 @@ struct KaartMapCanvas: View, Equatable {
         ctx.stroke(m.runwayDash, with: .color(.white), style: StrokeStyle(lineWidth: 2, dash: [10, 8]))
         ctx.stroke(m.ditch, with: .color(c.edge), lineWidth: 3)
 
-        let caseStyle = StrokeStyle(lineWidth: 14, lineCap: .round)
-        let streetStyle = StrokeStyle(lineWidth: 10, lineCap: .round)
-        ctx.stroke(m.streets, with: .color(c.streetCase), style: caseStyle)
-        ctx.stroke(m.streets, with: .color(c.street), style: streetStyle)
+        KaartCity.drawStreets(m.streets, in: &ctx, colors: c)
         ctx.fill(m.park, with: .color(c.park))
         ctx.stroke(m.parkPath, with: .color(c.parkPath), lineWidth: 4)
         ctx.fill(m.water, with: .color(c.water))
         ctx.stroke(m.water, with: .color(c.edge), lineWidth: 3)
         ctx.stroke(m.canals, with: .color(c.edge), lineWidth: 22)
         ctx.stroke(m.canals, with: .color(c.water), lineWidth: 16)
-        ctx.stroke(m.radials, with: .color(c.streetCase), style: caseStyle)
-        ctx.stroke(m.radials, with: .color(c.street), style: streetStyle)
-        ctx.stroke(m.rails, with: .color(c.rail), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        if !c.frozen {
+            // Deeper at the walls, lighter in the middle.
+            ctx.stroke(m.canals, with: .color(.white.opacity(night ? 0.06 : 0.16)), lineWidth: 6)
+        }
+        KaartCity.drawStreets(m.radials, in: &ctx, colors: c)
+        KaartCity.drawBridges(m.bridges, in: &ctx, colors: c, night: night)
         ctx.fill(m.jetty, with: .color(c.jetty))
         ctx.fill(m.mooredA, with: .color(c.mooredA))
         ctx.fill(m.mooredB, with: .color(c.mooredB))
@@ -70,8 +81,24 @@ struct KaartMapCanvas: View, Equatable {
             KaartSouth.drawIce(&ctx, night: night)
         } else {
             ctx.stroke(m.shimmer, with: .color(.white.opacity(0.45)), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+            ctx.stroke(m.ripples, with: .color(.white.opacity(night ? 0.18 : 0.5)), style: StrokeStyle(lineWidth: 1, lineCap: .round))
+            KaartCity.drawHouseboats(m.houseboats, in: &ctx, night: night)
         }
         KaartSouth.drawCountryside(&ctx, night: night, season: season)
+
+        if let lean {
+            KaartCity.drawPlaceShadows(standing, lean: lean, in: &ctx)
+        }
+        if night {
+            KaartCity.drawPlaceGlows(built, in: &ctx)
+        }
+        KaartFiller.shared.draw(&ctx, night: night, season: season, lean: lean)
+        if let lean {
+            // Tree shadows on the ground, away from the sun.
+            var shade = ctx
+            shade.translateBy(x: lean * 7, y: 4)
+            shade.fill(m.treesDark, with: .color(StadInk.hex(0x1E1E1C, 0.12)))
+        }
         ctx.fill(m.treesDark, with: .color(c.treeDark))
         ctx.fill(m.trees, with: .color(c.tree))
         ctx.fill(m.treesAlt, with: .color(c.treeAlt))
@@ -89,15 +116,18 @@ struct KaartMapCanvas: View, Equatable {
             ctx.fill(dot, with: .color(StadInk.hex(night ? 0xF6D27A : 0xDDE6E8)))
             ctx.stroke(dot, with: .color(lampGreen), lineWidth: 1.5)
         }
+        // People and bikes at house scale.
         for (q, coat, skin) in m.people {
             var p = ctx
-            p.translateBy(x: q.x - 6, y: q.y - 20)
+            p.translateBy(x: q.x - 3.6, y: q.y - 12)
+            p.scaleBy(x: 0.6, y: 0.6)
             p.fill(Path(ellipseIn: CGRect(x: 2.6, y: 0.6, width: 6.8, height: 6.8)), with: .color(StadInk.hex(skin)))
             p.fill(KaartArt.personBody, with: .color(StadInk.hex(coat)))
         }
         for (q, frame) in m.bikes {
             var b = ctx
-            b.translateBy(x: q.x - 12, y: q.y - 14)
+            b.translateBy(x: q.x - 7.8, y: q.y - 9)
+            b.scaleBy(x: 0.65, y: 0.65)
             b.stroke(KaartArt.bikeWheels, with: .color(StadInk.hex(0x1E1E1C)), lineWidth: 1.4)
             b.stroke(KaartArt.bikeFrame, with: .color(StadInk.hex(frame)), style: StrokeStyle(lineWidth: 1.8, lineCap: .round, lineJoin: .round))
         }
@@ -150,9 +180,15 @@ struct KaartPlaceView: View, Equatable {
             } else {
                 KaartHouseCanvas(n: place.n, status: status, night: night, season: season, zoom: k)
                     .offset(x: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k, y: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k)
-                badge
-                    .frame(width: 22 * k, height: 22 * k)
-                    .offset(x: geo.badge.x * k, y: geo.badge.y * k)
+                if status == .current {
+                    badge
+                        .frame(width: 22 * k, height: 22 * k)
+                        .offset(x: geo.badge.x * k, y: geo.badge.y * k)
+                } else {
+                    // A hanging shop sign instead of a round icon: part of the drawing.
+                    KaartShopSign(n: place.n, faded: status == .fading, night: night, zoom: k)
+                        .offset(x: (geo.badge.x - 6) * k, y: (geo.badge.y + 6) * k)
+                }
                 if status == .current {
                     Text("VEL \(place.n) · NU")
                         .font(Fonts.label(11))

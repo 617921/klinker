@@ -137,8 +137,12 @@ struct StadMapView: View {
         let currentKaart = status(currentPlace) == .current ? KaartData.byNumber[currentPlace] : nil
         return ScrollView([.horizontal, .vertical], showsIndicators: false) {
             ZStack(alignment: .topLeading) {
-                KaartMapCanvas(night: night, season: mood.season, zoom: k)
-                    .equatable()
+                KaartMapCanvas(
+                    night: night, season: mood.season, zoom: k, lean: mood.lean,
+                    standing: statuses.indices.filter { statuses[$0] != .locked }.map { $0 + 1 },
+                    built: statuses.indices.filter { statuses[$0] == .built }.map { $0 + 1 }
+                )
+                .equatable()
                 // Paper grain over the ground, under the houses.
                 KaartOldMap.paperTile
                     .resizable(resizingMode: .tile)

@@ -4,7 +4,9 @@ import SwiftUI
 /// fresh green and blossom in spring, gold in autumn, snow and ice in winter.
 nonisolated struct KaartColors: Sendable {
     let ground, north, northEdge, meadow, sand, dike, runway: Color
-    let streetCase, street, park, parkPath, water, edge, rail, jetty, mooredA, mooredB: Color
+    let streetCase, street, park, parkPath, water, edge, jetty, mooredA, mooredB: Color
+    /// Klinkers: the joints between the street bricks, and the stone parapets of the bridges.
+    let brickJoint, parapet: Color
     let tree, treeDark, treeAlt, waterLabel, landLabel: Color
     /// Field rows: the row colour and the soil between rows, one pair per field look.
     let fields: [(row: Color, soil: Color)]
@@ -22,13 +24,14 @@ nonisolated struct KaartColors: Sendable {
         sand = h(night ? 0x3E3B33 : winter ? 0xEDE8DA : 0xEADFC2)
         dike = h(night ? 0x2B3B2E : Self.pick(season, 0xB3D196, 0xBCD1A3, 0xC4C99A, 0xDDE4D9))
         runway = h(night ? 0x3A3E48 : 0x8E8B83)
-        streetCase = h(night ? 0x3A3F4E : winter ? 0xD9D6CC : 0xD6CCB4)
-        street = h(night ? 0x4B5163 : 0xFFFFFF)
+        streetCase = h(night ? 0x343947 : winter ? 0xD6CFC2 : 0xC4A784)
+        street = h(night ? 0x4B5163 : winter ? 0xF2EEE6 : 0xE6D2B4)
+        brickJoint = h(night ? 0x3E4454 : winter ? 0xDDD5C8 : 0xC9AC88)
+        parapet = h(night ? 0x8A8F9E : 0xF4EEE2)
         park = h(night ? 0x26392F : Self.pick(season, 0xC6E2B2, 0xCFE0C0, 0xD8D9B2, 0xE1E7DF))
         parkPath = h(night ? 0x3D4A3F : 0xE9DFC6)
         water = h(night ? (winter ? 0x3A4A66 : 0x2B3A58) : (winter ? 0xD5E6EE : 0xA9CBE0))
         edge = h(night ? (winter ? 0x2A3550 : 0x1D2A44) : (winter ? 0xA7C3D2 : 0x8FB6CF))
-        rail = h(night ? 0x8A8F9E : 0xEFEBE2)
         jetty = h(night ? 0x2E2117 : 0x4A3524)
         mooredA = h(night ? 0x1F3328 : 0x2F4B3A)
         mooredB = h(night ? 0x4A1A1A : 0x7A1E1E)
