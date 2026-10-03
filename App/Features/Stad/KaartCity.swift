@@ -4,13 +4,12 @@ import SwiftUI
 /// houseboats, and the light on the ground: sun shadows of the places and, at night, the glow
 /// of their windows. World units, drawn into the static map.
 nonisolated enum KaartCity {
-    /// Brick streets: a kerb, the brick surface, and joints across it (a dashed stroke, so the
-    /// bricks follow every curve).
-    static func drawStreets(_ path: Path, in ctx: inout GraphicsContext, colors c: KaartColors) {
-        ctx.stroke(path, with: .color(c.streetCase), style: StrokeStyle(lineWidth: 14, lineCap: .round))
-        ctx.stroke(path, with: .color(c.street), style: StrokeStyle(lineWidth: 10, lineCap: .round))
-        // Fine, low-contrast joints: a brick texture, not a railway.
-        ctx.stroke(path, with: .color(c.brickJoint.opacity(0.55)), style: StrokeStyle(lineWidth: 9.5, lineCap: .butt, dash: [0.7, 2.3]))
+    /// Streets as on a hand-drawn map: inked on both sides, pale paving inside with a faint brick
+    /// texture (a dashed stroke, so the bricks follow every curve). One path, so junctions are clean.
+    static func drawStreets(_ path: Path, in ctx: inout GraphicsContext, colors c: KaartColors, night: Bool) {
+        ctx.stroke(path, with: .color(KaartInk.line(night: night)), style: StrokeStyle(lineWidth: 13.2, lineCap: .round, lineJoin: .round))
+        ctx.stroke(path, with: .color(c.street), style: StrokeStyle(lineWidth: 11.2, lineCap: .round, lineJoin: .round))
+        ctx.stroke(path, with: .color(c.brickJoint.opacity(0.18)), style: StrokeStyle(lineWidth: 10, lineCap: .butt, dash: [0.7, 2.3]))
     }
 
     /// A brick deck with stone parapets over the water, and the dark arch underneath on the near side.
@@ -33,7 +32,7 @@ nonisolated enum KaartCity {
                 var rail = Path()
                 rail.move(to: CGPoint(x: -17, y: y))
                 rail.addLine(to: CGPoint(x: 17, y: y))
-                b.stroke(rail, with: .color(c.streetCase), style: StrokeStyle(lineWidth: 3.2, lineCap: .round))
+                b.stroke(rail, with: .color(KaartInk.line(night: night)), style: StrokeStyle(lineWidth: 3.4, lineCap: .round))
                 b.stroke(rail, with: .color(c.parapet), style: StrokeStyle(lineWidth: 1.8, lineCap: .round))
             }
         }

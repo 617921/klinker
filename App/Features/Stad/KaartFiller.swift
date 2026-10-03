@@ -20,6 +20,8 @@ nonisolated struct KaartFiller: Sendable {
     var windows = Path()
     var litWindows = Path()
     var doors = Path()
+    /// Every edge of every background house, for the ink.
+    var ink = Path()
 
     static let shared = build()
 
@@ -68,6 +70,9 @@ nonisolated struct KaartFiller: Sendable {
                 filler.windows.addPath(geo.gevel.glass.applying(t))
                 filler.litWindows.addPath(geo.gevel.lit.applying(t))
                 filler.doors.addPath(geo.gevel.door.applying(t))
+                filler.ink.addPath(body)
+                filler.ink.addPath(side)
+                filler.ink.addPath(roof)
                 var silhouette = body
                 silhouette.addPath(side)
                 silhouette.addPath(roof)
@@ -100,6 +105,7 @@ nonisolated struct KaartFiller: Sendable {
         ctx.fill(windows, with: .color(StadInk.hex(night ? 0x1E2433 : 0x5E6B73)))
         ctx.fill(litWindows, with: .color(StadInk.hex(night ? 0xF6D27A : 0x5E6B73)))
         ctx.fill(doors, with: .color(StadInk.hex(night ? 0x14171F : 0x3A3632)))
+        ctx.stroke(ink, with: .color(KaartInk.line(night: night).opacity(0.75)), style: StrokeStyle(lineWidth: 0.5, lineJoin: .round))
     }
 
     /// Casts a shape onto the ground from its base: squashed back and leaning with the sun

@@ -6,6 +6,14 @@ nonisolated struct KaartMapPaths: Sendable {
     var streets = Path()
     var radials = Path()
     var water = Path()
+    /// All water as one shape (river, lake, pond and the canals), so banks are inked once and
+    /// canals flow into the river without a line.
+    var waterAll = Path()
+    /// Streets and radials together, inked and paved in one go (clean junctions).
+    var allStreets = Path()
+    /// The edge between city and countryside, and the field borders, in ink.
+    var meadowEdge = Path()
+    var fieldInk = Path()
     var park = Path()
     var parkPath = Path()
     var meadow = Path()
@@ -247,6 +255,22 @@ nonisolated struct KaartMapPaths: Sendable {
         ] {
             m.bikes.append((CGPoint(x: x, y: y), color))
         }
+        // Redraw the base by hand: every long edge wavers a little.
+        m.canals = KaartInk.wobble(m.canals, amount: 1.2, seed: 1)
+        m.streets = KaartInk.wobble(m.streets, amount: 1.0, seed: 2)
+        m.radials = KaartInk.wobble(m.radials, amount: 0.9, seed: 3)
+        m.water = KaartInk.wobble(m.water, amount: 1.4, seed: 4)
+        m.park = KaartInk.wobble(m.park, amount: 1.2, seed: 5)
+        m.parkPath = KaartInk.wobble(m.parkPath, amount: 0.8, seed: 6)
+        m.sand = KaartInk.wobble(m.sand, amount: 1.2, seed: 7)
+        m.dike = KaartInk.wobble(m.dike, amount: 1.2, seed: 8)
+        m.meadowEdge = KaartInk.wobble(StadSVG.path("M0 495.3A640 640 0 0 0 1000 495.3"), amount: 1.2, seed: 9)
+        var fields = Path()
+        for rect in m.fieldRects { fields.addPath(Path(rect)) }
+        m.fieldInk = KaartInk.wobble(fields, amount: 0.7, step: 8, seed: 10)
+        m.allStreets = m.streets
+        m.allStreets.addPath(m.radials)
+        m.waterAll = m.water.union(m.canals.strokedPath(StrokeStyle(lineWidth: 21, lineCap: .butt)))
         return m
     }
 }

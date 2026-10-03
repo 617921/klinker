@@ -108,9 +108,12 @@ nonisolated enum KaartLandmarkPainter {
             } else {
                 ctx.fill(layer.path, with: .color(color))
                 if layer.paint.isSurface {
-                    KaartDepth.shade(layer.path, night: look.night, in: &ctx)
-                    // Outlined right away, so anything drawn later in front covers the line.
+                    // Watercolour pooling at the edges, then the ink line right away, so anything
+                    // drawn later in front covers it.
+                    KaartInk.pool(layer.path, color, rim: 7, in: &ctx)
                     KaartDepth.outline(layer.path, night: look.night, in: &ctx)
+                } else if layer.paint == .door || layer.paint == .awning || layer.paint == .accent {
+                    KaartDepth.outline(layer.path, night: look.night, in: &ctx, width: 1.6)
                 }
             }
         }
@@ -164,23 +167,11 @@ nonisolated enum KaartLandmarkPainter {
     }
 }
 
-/// Light from above: walls a touch lighter at the top and darker at the foot, and a thin
-/// dark outline round the solid shapes, so places stand out from the flat background city.
+/// The ink line round the solid shapes, so places stand out from the background city.
 nonisolated enum KaartDepth {
-    static func shade(_ path: Path, night: Bool, in ctx: inout GraphicsContext) {
-        let box = path.boundingRect
-        guard box.width * box.height > 300 else { return }
-        let gradient = Gradient(stops: [
-            .init(color: .white.opacity(night ? 0.04 : 0.13), location: 0),
-            .init(color: .white.opacity(0), location: 0.35),
-            .init(color: .black.opacity(0), location: 0.6),
-            .init(color: .black.opacity(night ? 0.12 : 0.1), location: 1),
-        ])
-        ctx.fill(path, with: .linearGradient(gradient, startPoint: CGPoint(x: box.midX, y: box.minY), endPoint: CGPoint(x: box.midX, y: box.maxY)))
-    }
-
-    static func outline(_ path: Path, night: Bool, in ctx: inout GraphicsContext) {
-        ctx.stroke(path, with: .color(StadInk.hex(night ? 0x0A0C12 : 0x2E2117, night ? 0.6 : 0.42)), style: StrokeStyle(lineWidth: 1.8, lineJoin: .round))
+    /// The ink line round a shape (art units; about 1 world unit on the map).
+    static func outline(_ path: Path, night: Bool, in ctx: inout GraphicsContext, width: Double = 2.5) {
+        ctx.stroke(path, with: .color(KaartInk.line(night: night)), style: StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round))
     }
 }
 
