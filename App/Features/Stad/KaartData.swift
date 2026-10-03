@@ -115,11 +115,16 @@ nonisolated enum KaartData {
         )
     }
 
-    /// The 3/4 houses, built once.
-    static let houses: [Int: KaartHouseGeometry] = Dictionary(uniqueKeysWithValues: (1...62).map { ($0, KaartHouseGeometry.make($0, building($0))) })
+    /// The buildings, made once: a place's own landmark if it has one, else its canal house.
+    static let houses: [Int: KaartHouseGeometry] = Dictionary(uniqueKeysWithValues: (1...62).map { ($0, make($0)) })
 
     static func house(_ n: Int) -> KaartHouseGeometry {
-        houses[n] ?? KaartHouseGeometry.make(n, building(n))
+        houses[n] ?? make(n)
+    }
+
+    private static func make(_ n: Int) -> KaartHouseGeometry {
+        if let landmark = KaartLandmarks.make(n) { return KaartHouseGeometry.make(n, landmark: landmark) }
+        return KaartHouseGeometry.make(n, building(n))
     }
 }
 
@@ -156,6 +161,85 @@ nonisolated struct KaartHouseGeometry: Sendable {
     var color: UInt32
     var door: UInt32
     var roofColor: UInt32
+    /// The place's own building, when it has one (then `gevel`, `side` and `roof` are empty).
+    var landmark: KaartLandmark? = nil
+    /// The front door inside the tap target (world units): ribbon and padlock while locked.
+    var doorFrame: CGRect = .zero
+
+    /// Everything solid in viewBox units, for the sun shadow.
+    var silhouette: Path {
+        if let landmark { return landmark.silhouette }
+        var path = gevel.body
+        for part in [side, roof, spA, spB] { path.addPath(part) }
+        return path
+    }
+
+    /// A place drawn with the building kit: same frame rules as the canal houses.
+    static func make(_ n: Int, landmark art: KaartLandmark) -> KaartHouseGeometry {
+        let r = Gevelkit.r
+        let KS = 0.39
+        let bounds = art.bounds.isNull ? CGRect(x: 0, y: -100, width: 70, height: 100) : art.bounds
+        let vx = (bounds.minX - 6).rounded(.down)
+        let vy = (bounds.minY - 6).rounded(.down)
+        let vw = (bounds.maxX + 6 - vx).rounded(.up)
+        let vh = (max(0, bounds.maxY) + 6 - vy).rounded(.up)
+        let sw = r(vw * KS), sh = r(vh * KS)
+        let bw = max(72, (sw + 6).rounded(.up))
+        let svgLeft = r(bw / 2 - (bounds.midX - vx) * KS), svgTop = r(58 + vy * KS)
+        func local(_ p: CGPoint) -> CGPoint { CGPoint(x: svgLeft + (p.x - vx) * KS, y: svgTop + (p.y - vy) * KS) }
+        let front = art.front == .zero ? bounds : art.front
+        let sign = local(art.signAt ?? CGPoint(x: front.minX - 6, y: front.minY + min(40, front.height * 0.35)))
+        let bang = local(CGPoint(x: front.maxX + 15, y: front.minY - 22))
+
+        func scaffold(full: Bool) -> KaartScaffold {
+            let D = 30.0, DY = 17.0
+            let x0 = front.minX, x1 = front.maxX, W = front.width
+            let top = full ? front.minY - 6 : front.minY + front.height * 0.45
+            let xs = [x0 - 6, front.midX, x1 + 6]
+            var poles = GevelPen()
+            var planks = Path()
+            for x in xs { poles.M(r(x), 0); poles.V(r(top)) }
+            poles.M(x1 + D + 3, -DY)
+            poles.V(r(top - DY))
+            var prev = 0.0, i = 0
+            var y = -32.0
+            while y > top + 6 {
+                planks.addPath(Gevelkit.rect(x0 - 11, y, W + 22, 5))
+                var p = GevelPen()
+                p.M(x1 + 11, y); p.L(x1 + D + 6, y - DY); p.v(5); p.L(x1 + 11, y + 5); p.Z()
+                planks.addPath(p.path)
+                let a = i % 2
+                poles.M(r(xs[a]), r(prev))
+                poles.L(r(xs[a + 1]), r(y))
+                prev = y
+                i += 1
+                y -= 34
+            }
+            planks.addPath(Gevelkit.rect(x0 - 11, top, W + 22, 5))
+            let net = full ? Gevelkit.rect(x0 - 8, top + 5, W + 16, max(0, -top - 40)) : Path()
+            return KaartScaffold(poles: poles.path, planks: planks, net: net)
+        }
+
+        var shadow = GevelPen()
+        shadow.M(bounds.minX - 2, 1); shadow.H(bounds.maxX + 10); shadow.L(bounds.maxX, -14); shadow.H(bounds.minX + 6); shadow.Z()
+
+        let door = art.doorRect == .zero ? CGRect(x: front.midX - 7, y: -24, width: 14, height: 24) : art.doorRect
+        let d0 = local(door.origin)
+        return KaartHouseGeometry(
+            gevel: GevelGeometry(size: .zero, topY: 0), shadow: shadow.path,
+            viewBox: CGRect(x: vx, y: vy, width: vw, height: vh),
+            spriteSize: CGSize(width: sw, height: sh),
+            buttonWidth: bw,
+            spriteOrigin: CGPoint(x: svgLeft, y: svgTop),
+            badge: CGPoint(x: r(sign.x), y: r(sign.y)),
+            bang: CGPoint(x: r(bang.x - 10), y: r(bang.y - 10)),
+            scaffoldFull: scaffold(full: true),
+            scaffoldPart: scaffold(full: false),
+            spFills: [0x1E1E1C, 0x1E1E1C, 0x1E1E1C], awning: art.awning, color: art.wall, door: art.door,
+            roofColor: art.roof, landmark: art,
+            doorFrame: CGRect(x: d0.x, y: d0.y, width: door.width * KS, height: door.height * KS)
+        )
+    }
 
     static func make(_ n: Int, _ s: KaartBuilding) -> KaartHouseGeometry {
         let r = Gevelkit.r
@@ -325,6 +409,11 @@ nonisolated struct KaartHouseGeometry: Sendable {
         default: spFills = [0x1E1E1C, 0x1E1E1C, 0x1E1E1C]
         }
         let awning: UInt32 = s.kind == .markt ? 0xC8261B : s.kind == .tram ? 0x2B3A33 : (s.awning ?? 0xC8261B)
+        func doorFrame(_ door: Path) -> CGRect {
+            let d = door.boundingRect
+            guard !d.isNull, d.width > 0 else { return CGRect(x: bw / 2 - 3, y: 50, width: 6, height: 8) }
+            return CGRect(x: svgLeft + (d.minX - vx) * KS, y: svgTop + (d.minY - vy) * KS, width: d.width * KS, height: d.height * KS)
+        }
 
         return KaartHouseGeometry(
             gevel: g, side: side, roof: roof, shadow: shadow.path, spA: spA, spB: spB, spC: spC,
@@ -337,7 +426,8 @@ nonisolated struct KaartHouseGeometry: Sendable {
             scaffoldFull: hasSide ? scaffold(full: true) : nil,
             scaffoldPart: hasSide ? scaffold(full: false) : nil,
             spFills: spFills, awning: awning, color: color, door: s.door,
-            roofColor: s.type == .lijst && s.kind == .gevel ? 0x6E6B64 : 0x5B3328
+            roofColor: s.type == .lijst && s.kind == .gevel ? 0x6E6B64 : 0x5B3328,
+            doorFrame: doorFrame(g.door)
         )
     }
 }

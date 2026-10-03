@@ -164,6 +164,16 @@ struct VandaagMore: View {
                 KaartLegend()
                     .padding(.top, 6)
             }
+            section("Ontdekt in de stad") {
+                let discoveries = KaartDiscoveries.shared
+                Text("\(discoveries.count) van \(discoveries.total) gevonden")
+                    .font(.system(size: 16, weight: .heavy))
+                    .foregroundStyle(Theme.ink)
+                Text("Zoom helemaal in en tik op katten, eenden, kraampjes en bootjes: zo leer je extra woorden.")
+                    .font(Fonts.body(14))
+                    .foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             section("Jouw straat") {
                 StraatView(night: night, active: active)
             }

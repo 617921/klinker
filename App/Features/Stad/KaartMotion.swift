@@ -96,13 +96,11 @@ struct KaartBelowMotion: View {
     }
 }
 
-/// Things that move above the places: Ria de postbode (tappable), the "!" on fading places, the mill.
+/// Things that move above the places: Ria de postbode (tappable) and the "!" on fading places.
 struct KaartAboveMotion: View {
     let zoom: CGFloat
     /// World top-left of each 20-unit "!" badge.
     let bangs: [CGPoint]
-    /// World top-left of the 44-unit mill sails, when the mill plot is still empty.
-    let mill: CGPoint?
     let night: Bool
     let active: Bool
     let reduceMotion: Bool
@@ -126,12 +124,6 @@ struct KaartAboveMotion: View {
         let riaCenter = kaartPoint(ria.point.x, ria.point.y - 20, k)
         let bob = reduceMotion ? 0 : -3 * stadWave(t, period: 1.6)
         return ZStack(alignment: .topLeading) {
-            if let mill {
-                KaartMillSails(zoom: k, night: night)
-                    .rotationEffect(.degrees(reduceMotion ? 20 : 360 * stadPhase(t, period: 18)))
-                    .position(kaartPoint(mill.x + 22, mill.y + 22, k))
-                    .allowsHitTesting(false)
-            }
             ForEach(bangs.indices, id: \.self) { i in
                 Text("!")
                     .font(Fonts.cta(12))
@@ -256,22 +248,6 @@ private struct KaartHookSprite: View, Equatable {
             ctx.fill(KaartArt.hookLoad, with: .color(StadInk.hex(0x8A6A3E)))
         }
         .frame(width: 40 * zoom, height: 70 * zoom)
-    }
-}
-
-private struct KaartMillSails: View, Equatable {
-    let zoom: CGFloat
-    let night: Bool
-
-    var body: some View {
-        Canvas { ctx, _ in
-            ctx.scaleBy(x: zoom, y: zoom)
-            // In pencil, like the rest of the unbuilt city.
-            let ink = KaartPencil(night: night)
-            ctx.fill(KaartArt.millSails, with: .color(ink.wash))
-            ctx.stroke(KaartArt.millSails, with: .color(ink.lead), style: StrokeStyle(lineWidth: 1.2, lineCap: .round, lineJoin: .round))
-        }
-        .frame(width: 44 * zoom, height: 44 * zoom)
     }
 }
 

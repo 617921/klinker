@@ -10,6 +10,9 @@ struct KaartMapCanvas: View, Equatable {
     /// Places with a building (they cast shadows), and those fully built (their windows glow at night).
     var standing: [Int] = []
     var built: [Int] = []
+    /// The part of the content to draw (content units: world x, world y + north). The map is
+    /// drawn in tiles so close zoom doesn't need one huge bitmap.
+    var tile = CGRect(x: 0, y: 0, width: KaartData.worldWidth, height: KaartData.contentHeight)
 
     var body: some View {
         let colors = KaartColors(night: night, season: season)
@@ -17,12 +20,15 @@ struct KaartMapCanvas: View, Equatable {
         let lean = lean
         let standing = standing
         let built = built
+        let tile = tile
+        let paper = KaartOldMap.paperTile
         let showLabels = zoom > 0.8
         let waterFont = Fonts.readingItalic(14)
         let canalFont = Fonts.readingItalic(12)
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
-            ctx.translateBy(x: 0, y: KaartData.north)
+            ctx.translateBy(x: -tile.minX, y: KaartData.north - tile.minY)
+            defer { Self.drawPaper(paper, in: &ctx, tile: tile, zoom: zoom, night: night) }
             Self.drawMap(&ctx, colors: colors, night: night, season: season, lean: lean, standing: standing, built: built)
             KaartOldMap.drawDistricts(&ctx, night: night)
             KaartOldMap.drawCountryNames(&ctx, night: night, paper: colors.ground)
@@ -39,9 +45,28 @@ struct KaartMapCanvas: View, Equatable {
                 c.draw(Text(name).font(canalFont).foregroundStyle(colors.waterLabel), at: CGPoint(x: 0, y: 7), anchor: .bottom)
             }
         }
-        .frame(width: KaartData.worldWidth * zoom, height: KaartData.contentHeight * zoom)
+        .frame(width: tile.width * zoom, height: tile.height * zoom)
         .accessibilityHidden(true)
         .allowsHitTesting(false)
+    }
+
+    /// Paper grain over the ground, the same size on screen at every zoom, lined up across tiles.
+    private static func drawPaper(_ paper: Image, in ctx: inout GraphicsContext, tile: CGRect, zoom: CGFloat, night: Bool) {
+        var grain = ctx
+        grain.translateBy(x: 0, y: -KaartData.north)
+        grain.blendMode = .multiply
+        grain.opacity = night ? 0.5 : 1
+        let resolved = grain.resolve(paper)
+        let step = 180 / zoom
+        var y = (tile.minY / step).rounded(.down) * step
+        while y < tile.maxY {
+            var x = (tile.minX / step).rounded(.down) * step
+            while x < tile.maxX {
+                grain.draw(resolved, in: CGRect(x: x, y: y, width: step, height: step))
+                x += step
+            }
+            y += step
+        }
     }
 
     private static func drawMap(
@@ -136,8 +161,9 @@ struct KaartMapCanvas: View, Equatable {
 
 // MARK: - Places
 
-/// One place on the map: a built house (colour), fading (grey + scaffolding), under construction
-/// (scaffolding), or not reached yet (a pencil sketch of what it will be). Sized in world units × zoom.
+/// One place on the map: built (colour), fading (grey + scaffolding), under construction
+/// (scaffolding), or not reached yet (closed shutters, a ribbon and a padlock on the door).
+/// Sized in world units × zoom.
 struct KaartPlaceView: View, Equatable {
     let place: KaartPlace
     let status: SheetStatus
@@ -149,33 +175,20 @@ struct KaartPlaceView: View, Equatable {
     var next = false
     let name: String
 
-    /// Mill, tower, ring and boat plots keep their own outline instead of a canal house.
-    private var outlineOnly: Bool {
-        [.mill, .tower, .ring, .boat].contains(place.outline)
-    }
-
     var body: some View {
         let k = zoom
         let locked = status == .locked
         let geo = KaartData.house(place.n)
-        let width = locked && outlineOnly ? 72 : geo.buttonWidth
-        let tagTop = locked && outlineOnly ? -16 : geo.spriteOrigin.y - 28
+        let width = geo.buttonWidth
+        let tagTop = geo.spriteOrigin.y - 28
         ZStack(alignment: .topLeading) {
             if locked {
-                if outlineOnly {
-                    KaartPlotSketch(outline: place.outline, night: night, zoom: k)
-                        .offset(x: 6 * k, y: 8 * k)
-                } else {
-                    KaartSketchCanvas(n: place.n, night: night, zoom: k)
-                        .offset(x: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k, y: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k)
-                }
+                KaartHouseCanvas(n: place.n, status: status, night: night, season: season, zoom: k)
+                    .offset(x: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k, y: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k)
+                KaartRibbon(door: geo.doorFrame, zoom: k)
                 if next {
                     KaartSketchLabel(n: place.n, next: true, night: night)
                         .position(x: width * k / 2, y: 66 * k + 9)
-                } else {
-                    // An architect's note at the foot of the drawing, left of the door.
-                    KaartSketchLabel(n: place.n, next: false, night: night)
-                        .position(x: (outlineOnly ? 8 : geo.spriteOrigin.x - 10) * k, y: 52 * k)
                 }
             } else {
                 KaartHouseCanvas(n: place.n, status: status, night: night, season: season, zoom: k)
@@ -184,7 +197,7 @@ struct KaartPlaceView: View, Equatable {
                     badge
                         .frame(width: 22 * k, height: 22 * k)
                         .offset(x: geo.badge.x * k, y: geo.badge.y * k)
-                } else {
+                } else if geo.landmark?.sign != "" {
                     // A hanging shop sign instead of a round icon: part of the drawing.
                     KaartShopSign(n: place.n, faded: status == .fading, night: night, zoom: k)
                         .offset(x: (geo.badge.x - 6) * k, y: (geo.badge.y + 6) * k)
@@ -258,7 +271,9 @@ struct KaartHouseCanvas: View, Equatable {
         let geo = KaartData.house(n)
         let pad = Self.pad
         let fading = status == .fading
+        let locked = status == .locked
         let scaffold = status == .current ? geo.scaffoldFull : (fading || status == .growing) ? geo.scaffoldPart : nil
+        let look = KaartLook(night: night, season: season, locked: locked, lightsOn: status == .built)
         let f = night ? 0.62 : 1
         let trim: UInt32 = night ? 0xB9B4A8 : 0xEFEBE2
         let glass: UInt32 = night ? 0x232B3B : 0x3E4C55
@@ -292,12 +307,24 @@ struct KaartHouseCanvas: View, Equatable {
                 house.addFilter(.brightness(0.04))
             }
             house.fill(geo.shadow, with: .color(StadInk.hex(0x1E1E1C, 0.16)))
-            house.fill(geo.side, with: .color(side))
-            house.fill(geo.roof, with: .color(roof))
-            GevelPainter.draw(geo.gevel, palette: palette, in: &house)
-            house.fill(geo.spA, with: .color(extras[0]))
-            house.fill(geo.spB, with: .color(extras[1]))
-            house.fill(geo.spC, with: .color(extras[2]))
+            if let landmark = geo.landmark {
+                KaartLandmarkPainter.draw(landmark, look: look, in: &house)
+            } else {
+                house.fill(geo.side, with: .color(side))
+                KaartDepth.shade(geo.side, night: night, in: &house)
+                house.fill(geo.roof, with: .color(roof))
+                GevelPainter.draw(geo.gevel, palette: palette, in: &house)
+                KaartDepth.shade(geo.gevel.body, night: night, in: &house)
+                if locked {
+                    var windows = geo.gevel.glass
+                    windows.addPath(geo.gevel.lit)
+                    KaartShutters.draw(windows, night: night, in: &house)
+                }
+                house.fill(geo.spA, with: .color(extras[0]))
+                house.fill(geo.spB, with: .color(extras[1]))
+                house.fill(geo.spC, with: .color(extras[2]))
+                KaartDepth.outline(geo.silhouette, night: night, in: &house)
+            }
             if let scaffold {
                 ctx.fill(scaffold.net, with: .color(StadInk.hex(0xF2711C, 0.22)))
                 ctx.stroke(scaffold.poles, with: .color(poleColor), style: StrokeStyle(lineWidth: 3.2, lineCap: .round))

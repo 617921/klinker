@@ -32,7 +32,7 @@ struct KaartParty: Equatable, Identifiable {
 }
 
 /// The party itself, in world space over the place:
-/// - opened: the pencil sketch gives way to colour from the ground up, then confetti;
+/// - opened: the shutters open, the ribbon is cut and the padlock drops, then confetti;
 /// - built: the scaffolding drops, the place's words fly in as paper strips, then confetti;
 /// - restored: a ring and confetti.
 struct KaartPartyLayer: View {
@@ -59,37 +59,37 @@ struct KaartPartyLayer: View {
         let k = zoom
         let geo = KaartData.house(place.n)
         let door = CGPoint(x: place.point.x, y: place.point.y - 8)
-        // The place's 70-unit frame sits at the bottom of a taller box, so tall houses fit inside the mask.
-        let boxHeight: CGFloat = 200
-        let boxCenter = kaartPoint(place.point.x, place.point.y - 23 - (boxHeight - 70) / 2, k)
-        let houseOffset = CGSize(
+        // The place's own frame (as in `StadMapView.placeButton`), so layers line up with the place.
+        let origin = kaartPoint(place.point.x - geo.buttonWidth / 2, place.point.y - 58, k)
+        let house = CGSize(
             width: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k,
-            height: (boxHeight - 70 + geo.spriteOrigin.y - KaartHouseCanvas.pad) * k
+            height: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k
         )
         return ZStack(alignment: .topLeading) {
-            switch party.kind {
-            case .opened:
-                let reveal = ease(min(1, t / 1.1))
-                KaartSketchCanvas(n: place.n, night: night, zoom: k, backing: KaartColors(night: night, season: season).ground)
-                    .offset(houseOffset)
-                    .frame(width: geo.buttonWidth * k, height: boxHeight * k, alignment: .topLeading)
-                    .mask(alignment: .top) {
-                        Rectangle().frame(height: boxHeight * k * (1 - reveal))
-                    }
-                    .position(boxCenter)
-            case .built:
-                let fall = ease(min(1, t / 0.9))
-                KaartScaffoldCanvas(n: place.n, night: night, zoom: k)
-                    .offset(houseOffset)
-                    .frame(width: geo.buttonWidth * k, height: boxHeight * k, alignment: .topLeading)
-                    .offset(y: 70 * k * fall * fall)
-                    .opacity(1 - fall)
-                    .position(boxCenter)
+            ZStack(alignment: .topLeading) {
+                switch party.kind {
+                case .opened:
+                    // The shutters open, the ribbon parts and the padlock drops.
+                    KaartHouseCanvas(n: place.n, status: .locked, night: night, season: season, zoom: k)
+                        .offset(house)
+                        .opacity(1 - ease(min(1, max(0, (t - 0.45) / 0.55))))
+                    KaartRibbon(door: geo.doorFrame, zoom: k, cut: ease(min(1, t / 0.9)))
+                case .built:
+                    let fall = ease(min(1, t / 0.9))
+                    KaartScaffoldCanvas(n: place.n, night: night, zoom: k)
+                        .offset(house)
+                        .offset(y: 70 * k * fall * fall)
+                        .opacity(1 - fall)
+                case .restored:
+                    EmptyView()
+                }
+            }
+            .frame(width: geo.buttonWidth * k, height: 70 * k, alignment: .topLeading)
+            .offset(x: origin.x, y: origin.y)
+            if party.kind == .built {
                 ForEach(party.words.indices, id: \.self) { i in
                     strip(i, t: t, door: door)
                 }
-            case .restored:
-                EmptyView()
             }
             ring(at: door, t: t - party.payoff)
             confetti(at: door, t: t - party.payoff)
