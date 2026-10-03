@@ -41,10 +41,9 @@ struct StadRoundButton: View {
     }
 }
 
-/// Night follows the clock: 20:00–7:00.
+/// Night follows the sun in Amsterdam: from half an hour after sunset to half an hour before sunrise.
 enum StadClock {
     static func isNight(_ date: Date = .now) -> Bool {
-        let hour = Calendar.current.component(.hour, from: date)
-        return hour >= 20 || hour < 7
+        KaartSun.phase(at: date) == .night
     }
 }

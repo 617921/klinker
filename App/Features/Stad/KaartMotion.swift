@@ -30,12 +30,13 @@ nonisolated func kaartPoint(_ x: CGFloat, _ y: CGFloat, _ zoom: CGFloat) -> CGPo
     CGPoint(x: x * zoom, y: (y + KaartData.north) * zoom)
 }
 
-/// Things that move under the places: river barge, canal boat, the pulsing ring and crane at
-/// the place under construction.
+/// Things that move under the places: river barge, canal boat (not on frozen canals), the
+/// pulsing ring and crane at the place under construction.
 struct KaartBelowMotion: View {
     let zoom: CGFloat
     let current: KaartPlace?
     let night: Bool
+    var frozen = false
     let active: Bool
     let reduceMotion: Bool
 
@@ -58,10 +59,12 @@ struct KaartBelowMotion: View {
         return ZStack(alignment: .topLeading) {
             KaartBargeSprite(zoom: k, night: night)
                 .position(kaartPoint(bargeX + 36, 22, k))
-            KaartBoatSprite(zoom: k)
-                .rotationEffect(.degrees(theta - 90))
-                .opacity(boatOpacity)
-                .position(kaartPoint(boatAt.x, boatAt.y, k))
+            if !frozen {
+                KaartBoatSprite(zoom: k)
+                    .rotationEffect(.degrees(theta - 90))
+                    .opacity(boatOpacity)
+                    .position(kaartPoint(boatAt.x, boatAt.y, k))
+            }
             if let current {
                 ring(at: current.point, t: t)
                 KaartCraneSprite(zoom: k)
@@ -263,8 +266,10 @@ private struct KaartMillSails: View, Equatable {
     var body: some View {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
-            ctx.fill(KaartArt.millSails, with: .color(night ? Color.white.opacity(0.05) : StadInk.hex(0xFFFDF6, 0.6)))
-            ctx.stroke(KaartArt.millSails, with: .color(StadInk.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
+            // In pencil, like the rest of the unbuilt city.
+            let ink = KaartPencil(night: night)
+            ctx.fill(KaartArt.millSails, with: .color(ink.wash))
+            ctx.stroke(KaartArt.millSails, with: .color(ink.lead), style: StrokeStyle(lineWidth: 1.2, lineCap: .round, lineJoin: .round))
         }
         .frame(width: 44 * zoom, height: 44 * zoom)
     }

@@ -23,12 +23,4 @@ enum StadLight: String, CaseIterable, Identifiable {
         case .night: "moon"
         }
     }
-
-    func isNight(clockNight: Bool) -> Bool {
-        switch self {
-        case .auto: clockNight
-        case .day: false
-        case .night: true
-        }
-    }
 }
