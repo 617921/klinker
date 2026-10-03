@@ -6,6 +6,8 @@ struct SettingsMenu: View {
     let onReset: () -> Void
     /// Test mode only: play a place's party without earning it.
     var onParty: () -> Void = {}
+    /// Test mode only: Ria brings a postcard.
+    var onPostcard: () -> Void = {}
 
     @Environment(ProgressStore.self) private var progress
     @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
@@ -35,6 +37,9 @@ struct SettingsMenu: View {
             if progress.unlockAll {
                 Button(action: onParty) {
                     Label("Testmodus: speel een feestje af", systemImage: "party.popper")
+                }
+                Button(action: onPostcard) {
+                    Label("Testmodus: ansichtkaart", systemImage: "envelope.open")
                 }
             }
             Divider()

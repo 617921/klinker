@@ -164,6 +164,14 @@ struct VandaagMore: View {
                 KaartLegend()
                     .padding(.top, 6)
             }
+            section("Ansichtkaarten") {
+                let earned = Buurt.all.filter { $0.isComplete(statuses) }.count
+                Text("\(earned) van \(Buurt.all.count) · Maak een buurt af, dan stuurt Ria je een kaart.")
+                    .font(Fonts.body(14))
+                    .foregroundStyle(Theme.muted)
+                    .fixedSize(horizontal: false, vertical: true)
+                AnsichtkaartenRow()
+            }
             section("Ontdekt in de stad") {
                 let discoveries = KaartDiscoveries.shared
                 Text("\(discoveries.count) van \(discoveries.total) gevonden")
