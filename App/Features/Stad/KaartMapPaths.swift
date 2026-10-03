@@ -5,7 +5,6 @@ nonisolated struct KaartMapPaths: Sendable {
     var canals = Path()
     var streets = Path()
     var radials = Path()
-    var rails = Path()
     var water = Path()
     var park = Path()
     var parkPath = Path()
@@ -27,6 +26,12 @@ nonisolated struct KaartMapPaths: Sendable {
     var treesDark = Path()
     /// The polder fields, one rect each (painted per season).
     var fieldRects: [CGRect] = []
+    /// Where a street crosses a canal: the bridge's centre and the street's direction (radians).
+    var bridges: [(center: CGPoint, angle: Double)] = []
+    /// Small ripple marks on the canals.
+    var ripples = Path()
+    /// Houseboats moored along the canals: centre, heading (degrees), colour.
+    var houseboats: [(center: CGPoint, heading: Double, color: UInt32)] = []
     var lamps: [CGPoint] = []
     /// (x, y, body, skin)
     var people: [(CGPoint, UInt32, UInt32)] = []
@@ -70,23 +75,41 @@ nonisolated struct KaartMapPaths: Sendable {
         for t in [18.0, 54, 126, 162] { radials += line(p(120, t), p(660, t)) }
         m.radials = StadSVG.path(radials)
 
-        var rails = ""
+
+        // Bridges: the five radial streets over the four canals, and the quay street over the canal ends.
         for t in [18.0, 54, 90, 126, 162] {
-            let a = t * .pi / 180, ux = cos(a), uy = sin(a), nx = -uy, ny = ux
             for R in [150.0, 290, 430, 570] {
-                for o in [-6.5, 6.5] {
-                    let p1 = CGPoint(x: 500 + (R - 14) * ux + o * nx, y: 96 + (R - 14) * uy + o * ny)
-                    let p2 = CGPoint(x: 500 + (R + 14) * ux + o * nx, y: 96 + (R + 14) * uy + o * ny)
-                    if p1.x > -20 && p1.x < 1020 { rails += line(p1, p2) }
-                }
+                let c = p(R, t)
+                if c.x > 0 && c.x < 1000 { m.bridges.append((c, t * .pi / 180)) }
             }
         }
         for R in [150.0, 290, 430] {
-            for x in [500 - R, 500 + R] {
-                rails += "M\(x - 14) 69.5H\(x + 14)M\(x - 14) 82.5H\(x + 14)"
+            for x in [500 - R, 500 + R] { m.bridges.append((CGPoint(x: x, y: 76), 0)) }
+        }
+
+        var ripples = Path()
+        for R in [150.0, 290, 430, 570] {
+            var i = 0
+            for t in stride(from: 6.0, through: 174, by: 6.5) {
+                i += 1
+                if [18.0, 54, 90, 126, 162].contains(where: { abs($0 - t) < 5 }) { continue }
+                let r = R + (i % 2 == 0 ? 3.5 : -3.5)
+                let start = p(r, t)
+                if start.x < 4 || start.x > 996 { continue }
+                ripples.move(to: start)
+                ripples.addArc(center: CGPoint(x: 500, y: 96), radius: r, startAngle: .degrees(t), endAngle: .degrees(t + 2), clockwise: false)
             }
         }
-        m.rails = StadSVG.path(rails)
+        m.ripples = ripples
+
+        for (R, t, side, color) in [
+            (150.0, 32.0, -1.0, 0x2F4B3A as UInt32), (150, 146, 1, 0x7A1E1E), (290, 40, 1, 0x1F3A6B), (290, 104, -1, 0x2F4B3A),
+            (290, 141, 1, 0x2C2C2A), (430, 30, -1, 0x7A1E1E), (430, 73, 1, 0x24533F), (430, 109, -1, 0x1F3A6B),
+            (430, 148, 1, 0x7A1E1E), (570, 64, 1, 0x2C2C2A), (570, 98, -1, 0x2F4B3A), (570, 117, 1, 0x1F3A6B),
+        ] {
+            let c = p(R + side * 5.5, t)
+            if c.x > 10 && c.x < 990 { m.houseboats.append((c, t + 90, color)) }
+        }
 
         m.water = StadSVG.path(
             "M0 0H1000V50C900 62 820 44 720 54S560 62 480 52S300 44 200 56S60 52 0 58Z"
@@ -129,10 +152,13 @@ nonisolated struct KaartMapPaths: Sendable {
             let a = (x - 222) / 82, b = (y - 338) / 64
             return a * a + b * b < 1
         }
+        // Trees keep clear of the background houses too (a tree in front of or behind a house would overlap it).
+        let fillerBoxes = KaartFiller.shared.houses.map { $0.footprint.insetBy(dx: -6, dy: -5) }
         func okSpot(_ x: Double, _ y: Double) -> Bool {
             if x < 8 || x > 992 || y < 62 || y > 1100 { return false }
-            for o in occupied where abs(x - o.x) < 30 && y > o.y - 62 && y < o.y + 14 { return false }
-            return true
+            for o in occupied where abs(x - o.x) < 34 && y > o.y - 78 && y < o.y + 14 { return false }
+            let spot = CGPoint(x: x, y: y)
+            return !fillerBoxes.contains { $0.contains(spot) }
         }
         var trees = Path(), treesAlt = Path(), treesDark = Path()
         var treeCount = 0
@@ -213,6 +239,14 @@ nonisolated struct KaartMapPaths: Sendable {
             (CGPoint(x: 468, y: 292), 0x2F5BD3), (CGPoint(x: 672, y: 228), 0xC8261B), (CGPoint(x: 330, y: 142), 0x1E1E1C),
             (CGPoint(x: 522, y: 118), 0x3F5A4A), (CGPoint(x: 705, y: 132), 0xF2711C),
         ]
+        // Bike racks: by the station, the market and the tram stop.
+        for (x, y, color) in [
+            (586.0, 120.0, 0x1E1E1C as UInt32), (597, 120, 0xC8261B), (608, 120, 0x2F5BD3), (619, 120, 0x3F5A4A),
+            (380, 120, 0xF2711C), (391, 120, 0x1E1E1C), (402, 120, 0x2F5BD3),
+            (444, 214, 0x5DCAA5), (455, 214, 0x1E1E1C), (622, 196, 0xC8261B), (633, 196, 0x1F3A6B),
+        ] {
+            m.bikes.append((CGPoint(x: x, y: y), color))
+        }
         return m
     }
 }

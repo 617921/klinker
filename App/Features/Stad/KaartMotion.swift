@@ -275,13 +275,13 @@ private struct KaartMillSails: View, Equatable {
     }
 }
 
-/// Ria on her red post bike with the orange bag (svg 70 × 62 drawn at 38 × 34 world units).
+/// Ria on her red post bike with the orange bag (svg 70 × 62 drawn at 28 × 25 world units, house scale).
 private struct KaartRiaSprite: View, Equatable {
     let zoom: CGFloat
 
     var body: some View {
         Canvas { ctx, _ in
-            ctx.scaleBy(x: zoom * 38 / 70, y: zoom * 34 / 62)
+            ctx.scaleBy(x: zoom * 28 / 70, y: zoom * 25 / 62)
             ctx.stroke(KaartArt.riaWheels, with: .color(StadInk.hex(0x1E1E1C)), lineWidth: 3)
             ctx.stroke(KaartArt.riaFrame, with: .color(StadInk.hex(0xC8261B)), style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
             ctx.fill(KaartArt.riaBag, with: .color(StadInk.hex(0xF2711C)))
@@ -290,6 +290,6 @@ private struct KaartRiaSprite: View, Equatable {
             ctx.fill(KaartArt.riaHead, with: .color(StadInk.hex(0xC99A74)))
             ctx.fill(KaartArt.riaCap, with: .color(StadInk.hex(0xF2711C)))
         }
-        .frame(width: 38 * zoom, height: 34 * zoom)
+        .frame(width: 28 * zoom, height: 25 * zoom)
     }
 }

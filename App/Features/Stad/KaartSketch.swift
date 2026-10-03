@@ -103,7 +103,7 @@ nonisolated struct KaartPencil: Sendable {
     init(night: Bool) {
         lead = night ? StadInk.hex(0xC9D3EA, 0.6) : StadInk.hex(0x55534E, 0.8)
         ghost = night ? StadInk.hex(0xC9D3EA, 0.22) : StadInk.hex(0x55534E, 0.28)
-        wash = night ? StadInk.hex(0x2A3146, 0.6) : StadInk.hex(0xFFFDF6, 0.6)
+        wash = night ? StadInk.hex(0x2A3146, 0.45) : StadInk.hex(0xFFFDF6, 0.4)
     }
 }
 
