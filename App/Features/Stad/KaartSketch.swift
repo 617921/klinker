@@ -6,6 +6,8 @@ struct KaartSketchCanvas: View, Equatable {
     let n: Int
     let night: Bool
     let zoom: CGFloat
+    /// Solid ground under the wash, so the sketch can cover a finished house (the "opened" party).
+    var backing: Color? = nil
 
     var body: some View {
         let geo = KaartData.house(n)
@@ -28,6 +30,7 @@ struct KaartSketchCanvas: View, Equatable {
                 details.addPath(g.stripes)
             }
 
+            if let backing { ctx.fill(outline, with: .color(backing)) }
             ctx.fill(outline, with: .color(ink.wash))
             Self.hatch(geo.side, in: &ctx, color: ink.ghost)
 

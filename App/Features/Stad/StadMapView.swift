@@ -43,6 +43,10 @@ struct StadMapView: View {
     /// Unread letters: the brievenbus by the station shows them and opens the post.
     var mail = 0
     var onMail: () -> Void = {}
+    /// A place opening or being built: the map goes there and celebrates.
+    var party: KaartParty?
+    /// Swoop in from far above on the first appearance.
+    var flyIn = false
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var zoom: CGFloat = Self.near
@@ -54,6 +58,9 @@ struct StadMapView: View {
     @State private var appeared = false
     @State private var centered = false
     @State private var scrollRequest: KaartScrollRequest?
+    /// Scale of the whole map around the current place: below 1 while flying in.
+    @State private var camera: CGFloat = 1
+    @State private var revealed = true
 
     private static let near: CGFloat = 1
     private static let far: CGFloat = 0.62
@@ -64,7 +71,11 @@ struct StadMapView: View {
     private var night: Bool { mood.night }
 
     private func status(_ n: Int) -> SheetStatus {
-        n >= 1 && n <= statuses.count ? statuses[n - 1] : .locked
+        // During a party the place already looks the way it ends up (also for the test-mode preview).
+        if let party, party.n == n {
+            return party.kind == .opened ? .current : .built
+        }
+        return n >= 1 && n <= statuses.count ? statuses[n - 1] : .locked
     }
 
     private var riaMessage: String {
@@ -84,6 +95,15 @@ struct StadMapView: View {
                     guard let pick else { return }
                     scroll(to: pick.n, anchor: UnitPoint(x: 0.5, y: 0.27), proxy)
                 }
+                .onChange(of: party?.id) {
+                    guard let party else { return }
+                    // Parties are close-ups: zoom in first, then go to the place.
+                    zoom = Self.near
+                    Task {
+                        try? await Task.sleep(for: .milliseconds(80))
+                        scroll(to: party.n, anchor: UnitPoint(x: 0.5, y: 0.55), proxy)
+                    }
+                }
                 .onChange(of: currentPlace) { _, place in
                     // A new place just opened: walk the map over to it.
                     scroll(to: place, anchor: UnitPoint(x: 0.5, y: 0.5), proxy)
@@ -92,7 +112,18 @@ struct StadMapView: View {
                     appeared = true
                     guard !centered else { return }
                     centered = true
-                    Task { scroll(to: currentPlace, anchor: UnitPoint(x: 0.5, y: 0.5), animated: false, proxy) }
+                    let swoop = flyIn && !reduceMotion
+                    if swoop {
+                        camera = 0.42
+                        revealed = false
+                    }
+                    Task {
+                        scroll(to: currentPlace, anchor: UnitPoint(x: 0.5, y: 0.5), animated: false, proxy)
+                        guard swoop else { return }
+                        try? await Task.sleep(for: .milliseconds(150))
+                        withAnimation(.easeOut(duration: 0.35)) { revealed = true }
+                        withAnimation(.easeInOut(duration: 1.8).delay(0.3)) { camera = 1 }
+                    }
                 }
                 .onDisappear { appeared = false }
         }
@@ -108,6 +139,14 @@ struct StadMapView: View {
             ZStack(alignment: .topLeading) {
                 KaartMapCanvas(night: night, season: mood.season, zoom: k)
                     .equatable()
+                // Paper grain over the ground, under the houses.
+                KaartOldMap.paperTile
+                    .resizable(resizingMode: .tile)
+                    .frame(width: KaartData.worldWidth * k, height: KaartData.contentHeight * k)
+                    .blendMode(.multiply)
+                    .opacity(night ? 0.5 : 1)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
                 KaartBelowMotion(
                     zoom: k, current: currentKaart, night: night, frozen: mood.season == .winter,
                     active: running, reduceMotion: reduceMotion
@@ -115,7 +154,7 @@ struct StadMapView: View {
                 ForEach(KaartData.places) { place in
                     placeButton(place)
                 }
-                mailbox(k)
+                KaartMailboxButton(mail: mail, zoom: k, onMail: onMail)
                 // One-point targets for scrolling: anchors are exact on a 1 × 1 view.
                 ForEach(KaartData.places) { place in
                     Color.clear
@@ -130,6 +169,10 @@ struct StadMapView: View {
                     riaMessage: riaMessage, onRia: riaTapped
                 )
                 KaartLifeMotion(zoom: k, mood: mood, active: running, reduceMotion: reduceMotion)
+                if let party, !reduceMotion {
+                    KaartPartyLayer(party: party, night: night, season: mood.season, zoom: k)
+                        .id(party.id)
+                }
                 Color.clear
                     .frame(width: 1, height: 1)
                     .id(Self.anchorID)
@@ -137,6 +180,8 @@ struct StadMapView: View {
                     .accessibilityHidden(true)
             }
             .frame(width: KaartData.worldWidth * k, height: KaartData.contentHeight * k, alignment: .topLeading)
+            .scaleEffect(camera, anchor: cameraAnchor)
+            .opacity(revealed ? 1 : 0)
             .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: selected)
             .onGeometryChange(for: CGRect.self) { $0.frame(in: .named("kaart")) } action: { tracker.contentFrame = $0 }
             // Room above and below the world so its edges can scroll clear of the top bar and the panel.
@@ -151,6 +196,18 @@ struct StadMapView: View {
         .background(KaartColors(night: night, season: mood.season).ground)
         .overlay {
             KaartWeatherOverlay(mood: mood, active: running, reduceMotion: reduceMotion)
+        }
+        .overlay {
+            if !night {
+                // Aged-paper edges, like a printed map in a frame.
+                RadialGradient(
+                    colors: [StadInk.hex(0x6B4A2E, 0), StadInk.hex(0x6B4A2E, 0.13)],
+                    center: .center, startRadius: 220, endRadius: 520
+                )
+                .blendMode(.multiply)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+            }
         }
         .overlay {
             if night {
@@ -201,38 +258,6 @@ struct StadMapView: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
-    /// The red brievenbus on the quay left of the station, with a count when post is waiting.
-    private func mailbox(_ k: CGFloat) -> some View {
-        Button {
-            Haptics.tap()
-            onMail()
-        } label: {
-            LetterMailbox(hasMail: mail > 0)
-                .frame(width: 30 * k, height: 41 * k)
-                .overlay(alignment: .topTrailing) {
-                    if mail > 0 {
-                        Text("\(min(mail, 99))")
-                            .font(.system(size: 12, weight: .heavy))
-                            .foregroundStyle(Theme.ink)
-                            .padding(.horizontal, 5)
-                            .frame(minWidth: 20, minHeight: 20)
-                            .background(Theme.orange, in: Capsule())
-                            .overlay(Capsule().stroke(Color.white, lineWidth: 1.5))
-                            .offset(x: 12, y: -8)
-                    }
-                }
-                .frame(width: max(44, 30 * k), height: max(48, 41 * k))
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(KaartPlaceButtonStyle())
-        .position(kaartPoint(Self.mailboxPoint.x, Self.mailboxPoint.y, k))
-        .accessibilityLabel(mail > 0
-            ? "Brievenbus: \(mail) \(mail == 1 ? "nieuwe brief" : "nieuwe brieven")"
-            : "Brievenbus: geen nieuwe post")
-        .accessibilityHint("Open de anonieme brieven.")
-    }
-
-    private static let mailboxPoint = CGPoint(x: 392, y: 74)
 
     private func controls(_ proxy: ScrollViewProxy) -> some View {
         VStack(spacing: 8) {
@@ -273,6 +298,13 @@ struct StadMapView: View {
         selected = StadPlacePick(n: n)
         Speech.shared.say(StadPlaces.spoken(n))
         Haptics.tap()
+    }
+
+    /// The current place as a point of the world, for the fly-in.
+    private var cameraAnchor: UnitPoint {
+        guard let place = KaartData.byNumber[currentPlace] else { return .center }
+        let p = kaartPoint(place.point.x, place.point.y - 30, zoom)
+        return UnitPoint(x: p.x / (KaartData.worldWidth * zoom), y: p.y / (KaartData.contentHeight * zoom))
     }
 
     /// Picking scrolls the place into view (see `onChange(of: selected)`).

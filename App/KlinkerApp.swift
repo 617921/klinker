@@ -35,7 +35,7 @@ struct RootView: View {
     @State private var visit: PlaceVisit?
 
     var body: some View {
-        StadView()
+        StadView(covered: round != nil || visit != nil)
             .tint(Theme.ink)
             .environment(\.startRound) { round = $0 }
             .environment(\.enterPlace) { visit = PlaceVisit(sheetNumber: $0) }
