@@ -8,6 +8,8 @@ struct StadPlaceSheet: View {
     let onRepair: () -> Void
     let onPlay: () -> Void
     let onEnter: () -> Void
+    /// Jouw huis (place 3) also opens Noor's house to furnish.
+    var onHouse: (() -> Void)? = nil
 
     @State private var openWord: Word?
 
@@ -56,6 +58,13 @@ struct StadPlaceSheet: View {
                     }
                     .buttonStyle(OutlineButtonStyle())
                     .accessibilityHint("Je woorden hangen hier op hun eigen plek.")
+                }
+                if n == 3, let onHouse {
+                    Button(action: onHouse) {
+                        Label("Richt je huis in", systemImage: "sofa.fill")
+                    }
+                    .buttonStyle(OutlineButtonStyle())
+                    .accessibilityHint("Zet je spullen in het huis van Noor.")
                 }
             }
             .padding(.horizontal, 20)

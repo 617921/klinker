@@ -30,14 +30,19 @@ final class KaartScrollTracker {
     var viewport: CGSize = .zero
 }
 
-/// "Jouw kaart": the illustrated canal-ring city with the 62 places, pannable in both
-/// directions, two zoom levels (buttons or pinch), day/night, and Ria on her round.
+/// The home screen's city: the illustrated canal ring with the 62 places, full screen and
+/// pannable in both directions, two zoom levels (buttons or pinch), day/night, and Ria on her round.
+/// `insets` keeps the top bar and the Vandaag panel from covering places.
 struct StadMapView: View {
     let statuses: [SheetStatus]
     let currentPlace: Int
-    @Binding var night: Bool
+    let night: Bool
     @Binding var selected: StadPlacePick?
     var active = true
+    var insets = EdgeInsets()
+    /// Unread letters: the brievenbus by the station shows them and opens the post.
+    var mail = 0
+    var onMail: () -> Void = {}
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var zoom: CGFloat = Self.near
@@ -48,8 +53,8 @@ struct StadMapView: View {
     @State private var riaToken = 0
     @State private var appeared = false
     @State private var centered = false
+    @State private var scrollRequest: KaartScrollRequest?
 
-    static let viewportHeight: CGFloat = 480
     private static let near: CGFloat = 1
     private static let far: CGFloat = 0.62
     private static let anchorID = "kaart-anchor"
@@ -66,54 +71,28 @@ struct StadMapView: View {
 
     var body: some View {
         ScrollViewReader { proxy in
-            VStack(alignment: .leading, spacing: 10) {
-                header(proxy)
-                    .padding(.horizontal, 16)
-                viewport(proxy)
-            }
-            .onChange(of: zoom) {
-                proxy.scrollTo(Self.anchorID, anchor: .center)
-            }
-            .onAppear {
-                appeared = true
-                guard !centered else { return }
-                centered = true
-                Task { proxy.scrollTo(placeID(currentPlace), anchor: .center) }
-            }
-            .onDisappear { appeared = false }
-        }
-    }
-
-    // MARK: Header
-
-    private func header(_ proxy: ScrollViewProxy) -> some View {
-        let fading = (1...ContentStore.totalSheets).filter { status($0) == .fading }
-        let fresh = fading.isEmpty
-        let label = fresh ? "Alles fris" : fading.count == 1 ? "1 verbleekt" : "\(fading.count) verbleken"
-        return HStack(spacing: 10) {
-            Text("Jouw kaart")
-                .font(.system(size: 26, weight: .heavy))
-                .tracking(-0.6)
-                .accessibilityAddTraits(.isHeader)
-            Spacer(minLength: 8)
-            Button {
-                goToFading(fading, proxy)
-            } label: {
-                Label(label, systemImage: fresh ? "checkmark" : "exclamationmark")
-                    .font(.system(size: 14, weight: .heavy))
-                    .lineLimit(1)
-                    .padding(.horizontal, 14)
-                    .frame(minHeight: 44)
-                    .foregroundStyle(fresh ? Theme.okText : Theme.orangeText)
-                    .background(fresh ? Theme.okBg : StadInk.hex(0xFCE3CF), in: Capsule())
-                    .overlay(Capsule().stroke(fresh ? Theme.okLine : Theme.orange, lineWidth: 2))
-                    .contentShape(Capsule())
-            }
-            .buttonStyle(.plain)
-            .rotationEffect(.degrees(1))
-            .accessibilityLabel(fresh
-                ? "Alles staat er fris bij. Toon je huidige plek."
-                : "\(label). Toon ze op de kaart.")
+            viewport(proxy)
+                .onChange(of: zoom) {
+                    request(world: zoomAnchor, anchor: UnitPoint(x: 0.5, y: 0.5), animated: false) {
+                        proxy.scrollTo(Self.anchorID, anchor: .center)
+                    }
+                }
+                .onChange(of: selected) { _, pick in
+                    // A picked place moves up into the part its sheet leaves free.
+                    guard let pick else { return }
+                    scroll(to: pick.n, anchor: UnitPoint(x: 0.5, y: 0.27), proxy)
+                }
+                .onChange(of: currentPlace) { _, place in
+                    // A new place just opened: walk the map over to it.
+                    scroll(to: place, anchor: UnitPoint(x: 0.5, y: 0.5), proxy)
+                }
+                .onAppear {
+                    appeared = true
+                    guard !centered else { return }
+                    centered = true
+                    Task { scroll(to: currentPlace, anchor: UnitPoint(x: 0.5, y: 0.5), animated: false, proxy) }
+                }
+                .onDisappear { appeared = false }
         }
     }
 
@@ -131,6 +110,15 @@ struct StadMapView: View {
                 ForEach(KaartData.places) { place in
                     placeButton(place)
                 }
+                mailbox(k)
+                // One-point targets for scrolling: anchors are exact on a 1 × 1 view.
+                ForEach(KaartData.places) { place in
+                    Color.clear
+                        .frame(width: 1, height: 1)
+                        .id(placeID(place.n))
+                        .position(kaartPoint(place.point.x, place.point.y - 30, k))
+                        .accessibilityHidden(true)
+                }
                 KaartAboveMotion(
                     zoom: k, bangs: bangs, mill: millSails, night: night, active: running,
                     reduceMotion: reduceMotion, riaFrozen: riaFrozen, riaShift: riaShift,
@@ -145,10 +133,15 @@ struct StadMapView: View {
             .frame(width: KaartData.worldWidth * k, height: KaartData.contentHeight * k, alignment: .topLeading)
             .animation(reduceMotion ? nil : .easeOut(duration: 0.25), value: selected)
             .onGeometryChange(for: CGRect.self) { $0.frame(in: .named("kaart")) } action: { tracker.contentFrame = $0 }
+            // Room above and below the world so its edges can scroll clear of the top bar and the panel.
+            // (Padding, not content margins: `scrollTo` anchors ignore those.)
+            .padding(.top, insets.top)
+            .padding(.bottom, insets.bottom)
         }
+        .modifier(KaartScrollDriver(request: scrollRequest))
         .coordinateSpace(.named("kaart"))
         .onGeometryChange(for: CGSize.self) { $0.size } action: { tracker.viewport = $0 }
-        .frame(height: Self.viewportHeight)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(KaartColors(night: night).ground)
         .overlay {
             if night {
@@ -160,17 +153,10 @@ struct StadMapView: View {
                 .accessibilityHidden(true)
             }
         }
-        .overlay(alignment: .topLeading) {
-            StadDayNightToggle(night: $night, shadow: true)
-                .padding(12)
-        }
-        .overlay(alignment: .bottomLeading) {
-            KaartLegend()
-                .padding(12)
-        }
-        .overlay(alignment: .bottomTrailing) {
+        .overlay(alignment: .topTrailing) {
             controls(proxy)
-                .padding(12)
+                .padding(.trailing, 16)
+                .padding(.top, insets.top + 8)
         }
         .simultaneousGesture(
             MagnifyGesture().onEnded { value in
@@ -197,12 +183,44 @@ struct StadMapView: View {
         }
         .buttonStyle(KaartPlaceButtonStyle())
         .offset(y: isSelected ? -4 * k : 0)
-        .id(placeID(n))
         .position(kaartPoint(place.point.x, place.point.y - 23, k))
         .zIndex(isSelected ? 1 : 0)
         .accessibilityLabel("\(name), vel \(n), \(StadPlaces.statusWord(st))")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
+
+    /// The red brievenbus on the quay left of the station, with a count when post is waiting.
+    private func mailbox(_ k: CGFloat) -> some View {
+        Button {
+            Haptics.tap()
+            onMail()
+        } label: {
+            LetterMailbox(hasMail: mail > 0)
+                .frame(width: 30 * k, height: 41 * k)
+                .overlay(alignment: .topTrailing) {
+                    if mail > 0 {
+                        Text("\(min(mail, 99))")
+                            .font(.system(size: 12, weight: .heavy))
+                            .foregroundStyle(Theme.ink)
+                            .padding(.horizontal, 5)
+                            .frame(minWidth: 20, minHeight: 20)
+                            .background(Theme.orange, in: Capsule())
+                            .overlay(Capsule().stroke(Color.white, lineWidth: 1.5))
+                            .offset(x: 12, y: -8)
+                    }
+                }
+                .frame(width: max(44, 30 * k), height: max(48, 41 * k))
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(KaartPlaceButtonStyle())
+        .position(kaartPoint(Self.mailboxPoint.x, Self.mailboxPoint.y, k))
+        .accessibilityLabel(mail > 0
+            ? "Brievenbus: \(mail) \(mail == 1 ? "nieuwe brief" : "nieuwe brieven")"
+            : "Brievenbus: geen nieuwe post")
+        .accessibilityHint("Open de anonieme brieven.")
+    }
+
+    private static let mailboxPoint = CGPoint(x: 392, y: 74)
 
     private func controls(_ proxy: ScrollViewProxy) -> some View {
         VStack(spacing: 8) {
@@ -245,34 +263,57 @@ struct StadMapView: View {
         Haptics.tap()
     }
 
+    /// Picking scrolls the place into view (see `onChange(of: selected)`).
     private func focus(_ n: Int, _ proxy: ScrollViewProxy) {
-        if reduceMotion {
-            proxy.scrollTo(placeID(n), anchor: .center)
-        } else {
-            withAnimation(.easeInOut(duration: 0.45)) { proxy.scrollTo(placeID(n), anchor: .center) }
-        }
         pick(n)
     }
 
-    private func goToFading(_ fading: [Int], _ proxy: ScrollViewProxy) {
-        guard let first = fading.first else {
-            focus(currentPlace, proxy)
-            return
+    /// Scrolls so a place sits at `anchor` of the part of the map that isn't covered.
+    private func scroll(to n: Int, anchor: UnitPoint, animated: Bool = true, _ proxy: ScrollViewProxy) {
+        guard let place = KaartData.byNumber[n] else { return }
+        request(world: CGPoint(x: place.point.x, y: place.point.y - 30), anchor: anchor, animated: animated) {
+            proxy.scrollTo(placeID(n), anchor: anchor)
         }
-        var next = first
-        if let now = selected?.n, let i = fading.firstIndex(of: now) {
-            next = fading[(i + 1) % fading.count]
+    }
+
+    /// iOS 18+ scrolls to an exact offset. iOS 17 falls back to `ScrollViewReader`, which
+    /// lines up the whole map rather than the target (the targets sit inside `.position`).
+    private func request(world p: CGPoint, anchor: UnitPoint, animated: Bool, fallback: () -> Void) {
+        let animated = animated && !reduceMotion
+        if #available(iOS 18, *) {
+            guard let offset = offset(world: p, anchor: anchor) else { return }
+            scrollRequest = KaartScrollRequest(offset: offset, animated: animated, token: (scrollRequest?.token ?? 0) + 1)
+        } else if animated {
+            withAnimation(.easeInOut(duration: 0.45)) { fallback() }
+        } else {
+            fallback()
         }
-        focus(next, proxy)
+    }
+
+    /// The content offset that puts world point `p` at `anchor` of the uncovered area.
+    private func offset(world p: CGPoint, anchor: UnitPoint) -> CGPoint? {
+        let size = tracker.viewport
+        guard size.width > 0, size.height > 0 else { return nil }
+        let k = zoom
+        let c = kaartPoint(p.x, p.y, k)
+        let free = max(1, size.height - insets.top - insets.bottom)
+        let maxX = max(0, KaartData.worldWidth * k - size.width)
+        let maxY = max(0, KaartData.contentHeight * k + insets.top + insets.bottom - size.height)
+        return CGPoint(
+            x: min(maxX, max(0, c.x - anchor.x * size.width)),
+            y: min(maxY, max(0, c.y - anchor.y * free))
+        )
     }
 
     private func setZoom(_ newZoom: CGFloat) {
         guard newZoom != zoom else { return }
         let frame = tracker.contentFrame
         let size = tracker.viewport
+        // The world point in the middle of the uncovered area stays put.
+        let free = max(1, size.height - insets.top - insets.bottom)
         zoomAnchor = CGPoint(
             x: (-frame.minX + size.width / 2) / zoom,
-            y: (-frame.minY + size.height / 2) / zoom - KaartData.north
+            y: (-frame.minY + insets.top + free / 2) / zoom - KaartData.north
         )
         zoom = newZoom
         Haptics.tap()
@@ -298,111 +339,5 @@ struct StadMapView: View {
         guard let frozen = riaFrozen else { return }
         riaShift = Date.now.timeIntervalSinceReferenceDate - frozen * KaartRia.period
         withAnimation(.easeOut(duration: 0.2)) { riaFrozen = nil }
-    }
-}
-
-private struct KaartPlaceButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
-    }
-}
-
-/// The note in the corner: what the four looks mean (shapes, not just colour).
-private struct KaartLegend: View {
-    var body: some View {
-        Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 5) {
-            GridRow {
-                item(.built, "Gebouwd")
-                item(.growing, "In aanbouw")
-            }
-            GridRow {
-                item(.current, "Nu bezig")
-                item(.fading, "Verbleekt")
-            }
-            GridRow {
-                item(.locked, "Op slot")
-            }
-        }
-        .padding(.horizontal, 11)
-        .padding(.top, 10)
-        .padding(.bottom, 8)
-        .background(Theme.note, in: RoundedRectangle(cornerRadius: 3))
-        .overlay(alignment: .topLeading) {
-            Rectangle().fill(Theme.tapeDe.opacity(0.9)).frame(width: 36, height: 12).rotationEffect(.degrees(-6)).offset(x: 16, y: -6)
-        }
-        .rotationEffect(.degrees(-1))
-        .shadow(color: Theme.ink.opacity(0.18), radius: 4, y: 2)
-        .allowsHitTesting(false)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Legenda: gebouwd, in aanbouw, nu bezig, verbleekt, op slot")
-    }
-
-    private func item(_ status: SheetStatus, _ text: String) -> some View {
-        HStack(spacing: 6) {
-            KaartLegendIcon(status: status)
-                .frame(width: 14, height: 14)
-            Text(text.uppercased())
-                .font(Fonts.label(11))
-                .foregroundStyle(Theme.ink)
-        }
-    }
-}
-
-private struct KaartLegendIcon: View {
-    let status: SheetStatus
-
-    private static let house = StadSVG.path("M2 13V6l5-4 5 4v7z")
-    private static let window = StadSVG.path("M5.5 8h3v3h-3z")
-    private static let scaffold = StadSVG.path("M1 5v9M13 5v9M1 8h12M1 11h12")
-
-    var body: some View {
-        switch status {
-        case .built:
-            ZStack {
-                Self.house.fill(StadInk.hex(0x9A5238))
-                Self.window.fill(StadInk.hex(0xF6D27A))
-            }
-        case .current:
-            Ellipse()
-                .strokeBorder(Theme.orange, lineWidth: 2.5)
-                .frame(width: 14, height: 9)
-        case .growing:
-            ZStack {
-                Self.house.fill(StadInk.hex(0x9A5238))
-                Self.scaffold.stroke(Theme.orange, lineWidth: 1.2)
-            }
-        case .fading:
-            ZStack(alignment: .topTrailing) {
-                Self.house.fill(Theme.tapeOther)
-                Circle().fill(Theme.orange).frame(width: 6, height: 6).offset(x: 2, y: -2)
-            }
-        case .locked:
-            RoundedRectangle(cornerRadius: 2)
-                .strokeBorder(StadInk.hex(0x8E8A80), style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
-                .frame(width: 14, height: 12)
-        }
-    }
-}
-
-private struct KaartCompass: View {
-    var body: some View {
-        VStack(spacing: 2) {
-            Text("N")
-                .font(Fonts.label(12))
-                .foregroundStyle(Theme.ink)
-                .padding(.horizontal, 5)
-                .background(Theme.note, in: RoundedRectangle(cornerRadius: 2))
-            ZStack {
-                Circle().fill(Theme.note)
-                Circle().stroke(Theme.ink, lineWidth: 1.5)
-                StadSVG.path("M17 5l4.25 11.9h-8.5z").fill(Theme.ink)
-                StadSVG.path("M17 29l-4.25-11.9h8.5z").fill(Theme.dashed)
-            }
-            .frame(width: 34, height: 34)
-        }
-        .allowsHitTesting(false)
-        .accessibilityHidden(true)
     }
 }
