@@ -28,6 +28,9 @@ struct StadView: View {
     @State private var parties: [KaartParty] = []
     @State private var party: KaartParty?
     @State private var previewBuilt = true
+    /// Neighbourhoods just finished: Ria brings their postcards after the parties.
+    @State private var postcards: [Buurt] = []
+    @State private var postcard: Buurt?
 
     private var mood: KaartMood { KaartMood.at(now, light: light) }
     private var night: Bool { mood.night }
@@ -38,7 +41,7 @@ struct StadView: View {
 
     /// Something sits over the map, so a party would play unseen.
     private var blocked: Bool {
-        covered || picked != nil || lettersOpen || houseOpen
+        covered || picked != nil || lettersOpen || houseOpen || postcard != nil
     }
 
     var body: some View {
@@ -82,7 +85,8 @@ struct StadView: View {
                     streak: progress.streak(),
                     onDemo: { withAnimation(.spring) { progress.seedDemo() } },
                     onReset: { confirmReset = true },
-                    onParty: previewParty
+                    onParty: previewParty,
+                    onPostcard: previewPostcard
                 )
                 .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { topBarHeight = $0 }
 
@@ -116,6 +120,9 @@ struct StadView: View {
                 onEnter: { pendingVisit = pick.n; picked = nil },
                 onHouse: { pendingHouse = true; picked = nil }
             )
+        }
+        .sheet(item: $postcard) { buurt in
+            AnsichtkaartView(buurt: buurt, isNew: true)
         }
         .letterCover(isPresented: $lettersOpen) {
             LettersView()
@@ -164,6 +171,7 @@ struct StadView: View {
             }
             if let kind { parties.append(KaartParty(n: i + 1, kind: kind, words: words(i + 1))) }
         }
+        postcards += Buurt.all.filter { $0.isComplete(new) && !$0.isComplete(old) }
         playNextParty()
     }
 
@@ -182,8 +190,18 @@ struct StadView: View {
         playNextParty()
     }
 
+    /// Test mode: Ria brings the postcard of the neighbourhood you're in.
+    private func previewPostcard() {
+        postcards.append(Buurt.of(progress.currentSheetNumber) ?? Buurt.all[0])
+        playNextParty()
+    }
+
     private func playNextParty() {
-        guard party == nil, !blocked, !parties.isEmpty else { return }
+        guard party == nil, !blocked else { return }
+        guard !parties.isEmpty else {
+            showNextPostcard()
+            return
+        }
         Task {
             // Let a closing round or sheet finish first.
             try? await Task.sleep(for: .milliseconds(650))
@@ -206,6 +224,16 @@ struct StadView: View {
             withAnimation(.easeOut(duration: 0.3)) { party = nil }
             try? await Task.sleep(for: .milliseconds(350))
             playNextParty()
+        }
+    }
+
+    /// After the parties: the next postcard, if a neighbourhood was finished.
+    private func showNextPostcard() {
+        guard postcard == nil, !postcards.isEmpty else { return }
+        Task {
+            try? await Task.sleep(for: .milliseconds(500))
+            guard party == nil, !blocked, parties.isEmpty, !postcards.isEmpty else { return }
+            postcard = postcards.removeFirst()
         }
     }
 
@@ -260,6 +288,7 @@ private struct StadTopBar: View {
     let onDemo: () -> Void
     let onReset: () -> Void
     let onParty: () -> Void
+    let onPostcard: () -> Void
 
     @Environment(ProgressStore.self) private var progress
 
@@ -281,7 +310,7 @@ private struct StadTopBar: View {
                         .shadow(color: Theme.ink.opacity(0.2), radius: 3, y: 2)
                         .accessibilityLabel("\(streak) \(streak == 1 ? "dag" : "dagen") op rij")
                 }
-                SettingsMenu(onDemo: onDemo, onReset: onReset, onParty: onParty)
+                SettingsMenu(onDemo: onDemo, onReset: onReset, onParty: onParty, onPostcard: onPostcard)
             }
             if progress.unlockAll {
                 Button {
