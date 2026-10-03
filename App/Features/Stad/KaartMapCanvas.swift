@@ -1,46 +1,14 @@
 import SwiftUI
 
-/// Map colours by day and by night (StadKaart `mapGeo`).
-nonisolated struct KaartColors: Sendable {
-    let ground, north, northEdge, meadow, fieldA, fieldB, sand, dike, runway: Color
-    let streetCase, street, park, parkPath, water, edge, rail, jetty, mooredA, mooredB: Color
-    let tree, treeDark, waterLabel, landLabel: Color
-
-    init(night: Bool) {
-        let h = { (v: UInt32) in StadInk.hex(v) }
-        ground = h(night ? 0x20263A : 0xEDE7D6)
-        north = h(night ? 0x262C3F : 0xE3DCC8)
-        northEdge = h(night ? 0x3A3F4E : 0x6E6B64)
-        meadow = h(night ? 0x263126 : 0xE1E6CF)
-        fieldA = h(night ? 0x283528 : 0xDDE7C9)
-        fieldB = h(night ? 0x2C3B2D : 0xCFDDB6)
-        sand = h(night ? 0x3E3B33 : 0xEADFC2)
-        dike = h(night ? 0x2B3B2E : 0xBCD1A3)
-        runway = h(night ? 0x3A3E48 : 0x8E8B83)
-        streetCase = h(night ? 0x3A3F4E : 0xD6CCB4)
-        street = h(night ? 0x4B5163 : 0xFFFFFF)
-        park = h(night ? 0x26392F : 0xCFE0C0)
-        parkPath = h(night ? 0x3D4A3F : 0xE9DFC6)
-        water = h(night ? 0x2B3A58 : 0xA9CBE0)
-        edge = h(night ? 0x1D2A44 : 0x8FB6CF)
-        rail = h(night ? 0x8A8F9E : 0xEFEBE2)
-        jetty = h(night ? 0x2E2117 : 0x4A3524)
-        mooredA = h(night ? 0x1F3328 : 0x2F4B3A)
-        mooredB = h(night ? 0x4A1A1A : 0x7A1E1E)
-        tree = h(night ? 0x2C4A32 : 0x6E9C52)
-        treeDark = h(night ? 0x1F3526 : 0x4E7A3A)
-        waterLabel = h(night ? 0x9FB4D4 : 0x2C5674)
-        landLabel = h(night ? 0x8A9488 : 0x5F5E5A)
-    }
-}
-
-/// The static map, drawn once per zoom level and day/night (not per frame).
+/// The static map, drawn once per zoom level, day/night and season (not per frame).
 struct KaartMapCanvas: View, Equatable {
     let night: Bool
+    var season: GevelSeason = .zomer
     let zoom: CGFloat
 
     var body: some View {
-        let colors = KaartColors(night: night)
+        let colors = KaartColors(night: night, season: season)
+        let season = season
         let showLabels = zoom > 0.8
         let waterFont = Fonts.readingItalic(14)
         let canalFont = Fonts.readingItalic(12)
@@ -48,7 +16,7 @@ struct KaartMapCanvas: View, Equatable {
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             ctx.translateBy(x: 0, y: KaartData.north)
-            Self.drawMap(&ctx, colors: colors, night: night)
+            Self.drawMap(&ctx, colors: colors, night: night, season: season)
             guard showLabels else { return }
             let water = { (s: String) in Text(s).font(waterFont).foregroundStyle(colors.waterLabel) }
             ctx.draw(water("de rivier"), at: CGPoint(x: 250, y: 33), anchor: .bottomLeading)
@@ -68,15 +36,14 @@ struct KaartMapCanvas: View, Equatable {
         .allowsHitTesting(false)
     }
 
-    private static func drawMap(_ ctx: inout GraphicsContext, colors c: KaartColors, night: Bool) {
+    private static func drawMap(_ ctx: inout GraphicsContext, colors c: KaartColors, night: Bool, season: GevelSeason) {
         let m = KaartMapPaths.shared
         ctx.fill(Path(CGRect(x: 0, y: -KaartData.north, width: 1000, height: KaartData.contentHeight)), with: .color(c.ground))
         ctx.fill(Path(CGRect(x: 0, y: -KaartData.north, width: 1000, height: KaartData.north)), with: .color(c.north))
         ctx.fill(Path(CGRect(x: 0, y: -5, width: 1000, height: 5)), with: .color(c.northEdge))
 
         ctx.fill(m.meadow, with: .color(c.meadow))
-        ctx.fill(m.fieldsA, with: .color(c.fieldA))
-        ctx.fill(m.fieldsB, with: .color(c.fieldB))
+        KaartSouth.drawFields(&ctx, rects: m.fieldRects, colors: c)
         ctx.fill(m.sand, with: .color(c.sand))
         ctx.fill(m.dike, with: .color(c.dike))
         ctx.fill(m.runway, with: .color(c.runway))
@@ -99,9 +66,15 @@ struct KaartMapCanvas: View, Equatable {
         ctx.fill(m.jetty, with: .color(c.jetty))
         ctx.fill(m.mooredA, with: .color(c.mooredA))
         ctx.fill(m.mooredB, with: .color(c.mooredB))
-        ctx.stroke(m.shimmer, with: .color(.white.opacity(0.45)), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        if c.frozen {
+            KaartSouth.drawIce(&ctx, night: night)
+        } else {
+            ctx.stroke(m.shimmer, with: .color(.white.opacity(0.45)), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        }
+        KaartSouth.drawCountryside(&ctx, night: night, season: season)
         ctx.fill(m.treesDark, with: .color(c.treeDark))
         ctx.fill(m.trees, with: .color(c.tree))
+        ctx.fill(m.treesAlt, with: .color(c.treeAlt))
 
         let lampGreen = StadInk.hex(0x2B3A33)
         for q in m.lamps {
@@ -134,28 +107,48 @@ struct KaartMapCanvas: View, Equatable {
 // MARK: - Places
 
 /// One place on the map: a built house (colour), fading (grey + scaffolding), under construction
-/// (scaffolding), or an empty dashed plot with its number. Sized in world units × zoom.
+/// (scaffolding), or not reached yet (a pencil sketch of what it will be). Sized in world units × zoom.
 struct KaartPlaceView: View, Equatable {
     let place: KaartPlace
     let status: SheetStatus
     let night: Bool
+    var season: GevelSeason = .zomer
     let zoom: CGFloat
     let selected: Bool
+    /// The place that opens after the current one (gets a "volgende" note).
+    var next = false
     let name: String
+
+    /// Mill, tower, ring and boat plots keep their own outline instead of a canal house.
+    private var outlineOnly: Bool {
+        [.mill, .tower, .ring, .boat].contains(place.outline)
+    }
 
     var body: some View {
         let k = zoom
         let locked = status == .locked
         let geo = KaartData.house(place.n)
-        let width = locked ? 72 : geo.buttonWidth
+        let width = locked && outlineOnly ? 72 : geo.buttonWidth
+        let tagTop = locked && outlineOnly ? -16 : geo.spriteOrigin.y - 28
         ZStack(alignment: .topLeading) {
             if locked {
-                KaartPlotCanvas(outline: place.outline, night: night, zoom: k)
-                    .offset(x: 6 * k, y: 8 * k)
-                numberTag
-                    .position(x: 36 * k, y: 44 * k + 8)
+                if outlineOnly {
+                    KaartPlotSketch(outline: place.outline, night: night, zoom: k)
+                        .offset(x: 6 * k, y: 8 * k)
+                } else {
+                    KaartSketchCanvas(n: place.n, night: night, zoom: k)
+                        .offset(x: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k, y: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k)
+                }
+                if next {
+                    KaartSketchLabel(n: place.n, next: true, night: night)
+                        .position(x: width * k / 2, y: 66 * k + 9)
+                } else {
+                    // An architect's note at the foot of the drawing, left of the door.
+                    KaartSketchLabel(n: place.n, next: false, night: night)
+                        .position(x: (outlineOnly ? 8 : geo.spriteOrigin.x - 10) * k, y: 52 * k)
+                }
             } else {
-                KaartHouseCanvas(n: place.n, status: status, night: night, zoom: k)
+                KaartHouseCanvas(n: place.n, status: status, night: night, season: season, zoom: k)
                     .offset(x: (geo.spriteOrigin.x - KaartHouseCanvas.pad) * k, y: (geo.spriteOrigin.y - KaartHouseCanvas.pad) * k)
                 badge
                     .frame(width: 22 * k, height: 22 * k)
@@ -174,7 +167,7 @@ struct KaartPlaceView: View, Equatable {
             }
             if selected {
                 nameTag
-                    .position(x: width * k / 2, y: (locked ? -16 : geo.spriteOrigin.y - 28) * k + 2)
+                    .position(x: width * k / 2, y: tagTop * k + 2)
             }
         }
         .frame(width: width * k, height: 70 * k, alignment: .topLeading)
@@ -195,19 +188,6 @@ struct KaartPlaceView: View, Equatable {
                     .font(.system(size: max(7, 11 * zoom), weight: .bold))
                     .foregroundStyle(fg)
             )
-    }
-
-    private var numberTag: some View {
-        Text("\(place.n)")
-            .font(Fonts.label(11))
-            .foregroundStyle(night ? StadInk.hex(0xC9CDD8) : Theme.muted)
-            .padding(.horizontal, 4)
-            .background(night ? StadInk.hex(0x2E3446) : Theme.note, in: RoundedRectangle(cornerRadius: 2))
-            .overlay(
-                RoundedRectangle(cornerRadius: 2)
-                    .stroke(night ? StadInk.hex(0x5A6175) : Theme.tapeOther, style: StrokeStyle(lineWidth: 1.5, dash: [3, 2]))
-            )
-            .fixedSize()
     }
 
     private var nameTag: some View {
@@ -233,6 +213,7 @@ struct KaartHouseCanvas: View, Equatable {
     let n: Int
     let status: SheetStatus
     let night: Bool
+    var season: GevelSeason = .zomer
     let zoom: CGFloat
 
     static let pad: CGFloat = 6
@@ -254,10 +235,13 @@ struct KaartHouseCanvas: View, Equatable {
             litGlass: StadInk.hex(night && status == .built ? 0xF6D27A : glass),
             box: StadInk.hex(0x3F5A4A),
             bloom: StadInk.hex(0xC8261B),
-            snow: nil
+            snow: season == .winter ? StadInk.hex(night ? 0xC9CDD8 : 0xFFFFFF) : nil
         )
         let side = StadInk.hex(Gevelkit.shade(geo.color, night ? 0.42 : 0.74))
-        let roof = StadInk.hex(Gevelkit.shade(geo.roofColor, night ? 0.6 : 1))
+        // Winter puts snow on every roof.
+        let roof = season == .winter
+            ? StadInk.hex(night ? 0x8D93A6 : 0xF4F2EC)
+            : StadInk.hex(Gevelkit.shade(geo.roofColor, night ? 0.6 : 1))
         let extras = geo.spFills.map { StadInk.hex(Gevelkit.shade($0, f)) }
         let poleColor = StadInk.hex(night ? 0xA8A69E : 0x5F5E5A)
         Canvas { ctx, _ in
@@ -285,27 +269,6 @@ struct KaartHouseCanvas: View, Equatable {
             }
         }
         .frame(width: (geo.spriteSize.width + 2 * pad) * zoom, height: (geo.spriteSize.height + 2 * pad) * zoom)
-        .allowsHitTesting(false)
-    }
-}
-
-/// A dashed plot outline for a place that is still locked.
-struct KaartPlotCanvas: View, Equatable {
-    let outline: KaartOutline
-    let night: Bool
-    let zoom: CGFloat
-
-    var body: some View {
-        Canvas { ctx, _ in
-            ctx.scaleBy(x: zoom, y: zoom)
-            let base = KaartArt.base(outline)
-            ctx.fill(base, with: .color(night ? StadInk.hex(0xA0AABE, 0.10) : StadInk.hex(0xC9C4B8, 0.28)))
-            ctx.stroke(base, with: .color(StadInk.hex(night ? 0x6C7385 : 0xB4B2A9)), style: StrokeStyle(lineWidth: 1.4, dash: [3, 3]))
-            let shape = KaartArt.outline(outline)
-            ctx.fill(shape, with: .color(night ? Color.white.opacity(0.05) : StadInk.hex(0xFFFDF6, 0.6)))
-            ctx.stroke(shape, with: .color(StadInk.hex(night ? 0x8A90A2 : 0x8E8A80)), style: StrokeStyle(lineWidth: 1.6, lineJoin: .round, dash: [4, 3]))
-        }
-        .frame(width: 60 * zoom, height: 60 * zoom)
         .allowsHitTesting(false)
     }
 }

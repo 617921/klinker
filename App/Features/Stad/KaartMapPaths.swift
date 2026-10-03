@@ -22,7 +22,11 @@ nonisolated struct KaartMapPaths: Sendable {
     var mooredB = Path()
     var shimmer = Path()
     var trees = Path()
+    /// Every third crown: blossom in spring, deeper orange in autumn.
+    var treesAlt = Path()
     var treesDark = Path()
+    /// The polder fields, one rect each (painted per season).
+    var fieldRects: [CGRect] = []
     var lamps: [CGPoint] = []
     /// (x, y, body, skin)
     var people: [(CGPoint, UInt32, UInt32)] = []
@@ -96,6 +100,7 @@ nonisolated struct KaartMapPaths: Sendable {
             for c in 0..<3 {
                 let d = rect(590 + Double(c) * 140, 772 + Double(row) * 50, 132, 44)
                 if (row + c) % 2 == 0 { m.fieldsA.addPath(d) } else { m.fieldsB.addPath(d) }
+                m.fieldRects.append(CGRect(x: 590 + Double(c) * 140, y: 772 + Double(row) * 50, width: 132, height: 44))
             }
         }
         m.ditch = StadSVG.path("M586 768V1024M726 768V1024M866 768V1024")
@@ -129,10 +134,16 @@ nonisolated struct KaartMapPaths: Sendable {
             for o in occupied where abs(x - o.x) < 30 && y > o.y - 62 && y < o.y + 14 { return false }
             return true
         }
-        var trees = Path(), treesDark = Path()
+        var trees = Path(), treesAlt = Path(), treesDark = Path()
+        var treeCount = 0
         func addTree(_ x: Double, _ y: Double, _ rr: Double) {
             treesDark.addPath(dot(x + 1.5, y + 2, rr))
-            trees.addPath(dot(x, y, r(rr - 1.4)))
+            if treeCount % 3 == 2 {
+                treesAlt.addPath(dot(x, y, r(rr - 1.4)))
+            } else {
+                trees.addPath(dot(x, y, r(rr - 1.4)))
+            }
+            treeCount += 1
         }
         for R in [150.0, 290, 430, 570] {
             for off in [-17.0, 17] {
@@ -176,6 +187,7 @@ nonisolated struct KaartMapPaths: Sendable {
             addTree(x, 1022 + rnd.next() * 6, 6)
         }
         m.trees = trees
+        m.treesAlt = treesAlt
         m.treesDark = treesDark
 
         // Extras: lamps, people, parked bikes.

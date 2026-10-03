@@ -9,7 +9,7 @@ struct StadView: View {
     @Environment(\.startRound) private var startRound
     @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
 
-    @State private var clockNight = StadClock.isNight()
+    @State private var now = Date.now
     @State private var picked: StadPlacePick?
     @State private var pendingRound: RoundKind?
     @State private var pendingVisit: Int?
@@ -22,7 +22,8 @@ struct StadView: View {
     @State private var topBarHeight: CGFloat = 60
     @State private var peekHeight: CGFloat = 200
 
-    private var night: Bool { light.isNight(clockNight: clockNight) }
+    private var mood: KaartMood { KaartMood.at(now, light: light) }
+    private var night: Bool { mood.night }
 
     var body: some View {
         let statuses = (1...ContentStore.totalSheets).map { progress.status(ofSheet: $0) }
@@ -32,7 +33,7 @@ struct StadView: View {
                 StadMapView(
                     statuses: statuses,
                     currentPlace: progress.currentSheetNumber,
-                    night: night,
+                    mood: mood,
                     selected: $picked,
                     active: onScreen && detent != .full,
                     insets: EdgeInsets(top: top + topBarHeight, leading: 0, bottom: peekHeight, trailing: 0),
@@ -106,13 +107,13 @@ struct StadView: View {
         }
         .onAppear {
             onScreen = true
-            clockNight = StadClock.isNight()
+            now = .now
         }
         .onDisappear { onScreen = false }
         .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(60))
-                clockNight = StadClock.isNight()
+                now = .now
             }
         }
     }

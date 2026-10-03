@@ -36,7 +36,7 @@ final class KaartScrollTracker {
 struct StadMapView: View {
     let statuses: [SheetStatus]
     let currentPlace: Int
-    let night: Bool
+    let mood: KaartMood
     @Binding var selected: StadPlacePick?
     var active = true
     var insets = EdgeInsets()
@@ -60,6 +60,8 @@ struct StadMapView: View {
     private static let anchorID = "kaart-anchor"
 
     private func placeID(_ n: Int) -> String { "kaart-\(n)" }
+
+    private var night: Bool { mood.night }
 
     private func status(_ n: Int) -> SheetStatus {
         n >= 1 && n <= statuses.count ? statuses[n - 1] : .locked
@@ -104,9 +106,12 @@ struct StadMapView: View {
         let currentKaart = status(currentPlace) == .current ? KaartData.byNumber[currentPlace] : nil
         return ScrollView([.horizontal, .vertical], showsIndicators: false) {
             ZStack(alignment: .topLeading) {
-                KaartMapCanvas(night: night, zoom: k)
+                KaartMapCanvas(night: night, season: mood.season, zoom: k)
                     .equatable()
-                KaartBelowMotion(zoom: k, current: currentKaart, night: night, active: running, reduceMotion: reduceMotion)
+                KaartBelowMotion(
+                    zoom: k, current: currentKaart, night: night, frozen: mood.season == .winter,
+                    active: running, reduceMotion: reduceMotion
+                )
                 ForEach(KaartData.places) { place in
                     placeButton(place)
                 }
@@ -124,6 +129,7 @@ struct StadMapView: View {
                     reduceMotion: reduceMotion, riaFrozen: riaFrozen, riaShift: riaShift,
                     riaMessage: riaMessage, onRia: riaTapped
                 )
+                KaartLifeMotion(zoom: k, mood: mood, active: running, reduceMotion: reduceMotion)
                 Color.clear
                     .frame(width: 1, height: 1)
                     .id(Self.anchorID)
@@ -142,7 +148,10 @@ struct StadMapView: View {
         .coordinateSpace(.named("kaart"))
         .onGeometryChange(for: CGSize.self) { $0.size } action: { tracker.viewport = $0 }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(KaartColors(night: night).ground)
+        .background(KaartColors(night: night, season: mood.season).ground)
+        .overlay {
+            KaartWeatherOverlay(mood: mood, active: running, reduceMotion: reduceMotion)
+        }
         .overlay {
             if night {
                 RadialGradient(
@@ -178,7 +187,10 @@ struct StadMapView: View {
         return Button {
             pick(n)
         } label: {
-            KaartPlaceView(place: place, status: st, night: night, zoom: k, selected: isSelected, name: name)
+            KaartPlaceView(
+                place: place, status: st, night: night, season: mood.season, zoom: k, selected: isSelected,
+                next: st == .locked && n == currentPlace + 1, name: name
+            )
                 .equatable()
         }
         .buttonStyle(KaartPlaceButtonStyle())
