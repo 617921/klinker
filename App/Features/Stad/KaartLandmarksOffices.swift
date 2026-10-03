@@ -126,7 +126,7 @@ nonisolated extension KaartLandmarks {
         pen.fill(red, .color(0xC8261B))
         pen.fill(blue, .color(0x1F3A6B))
         pen.rect(x - 0.6, top + 26, 9.2, 3, .ink)
-        pen.art.signAt = CGPoint(x: front.maxX - 4, y: front.minY + 30)
+        pen.art.signAt = CGPoint(x: front.maxX - 4, y: front.minY + 16)
         pen.art.sign = "scissors"
         return pen.art
     }
@@ -173,7 +173,7 @@ nonisolated extension KaartLandmarks {
             chalk.addRect(CGRect(x: bx + 3.5, y: y, width: i == 0 ? 7 : 5.5, height: 0.9))
         }
         pen.fill(chalk, .white)
-        pen.art.signAt = CGPoint(x: front.maxX - 4, y: front.minY + 30)
+        pen.art.signAt = CGPoint(x: front.maxX - 4, y: front.minY + 16)
         pen.art.sign = "fork.knife"
         return pen.art
     }
