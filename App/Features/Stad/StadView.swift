@@ -4,7 +4,11 @@ import SwiftUI
 /// and the Vandaag panel over the bottom (today's round, current place, post, house; pull up for more).
 /// Day and night follow the clock unless set in the menu.
 struct StadView: View {
+    /// A round or a place interior is open over the map: parties wait until it closes.
+    var covered = false
+
     @Environment(ProgressStore.self) private var progress
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.enterPlace) private var enterPlace
     @Environment(\.startRound) private var startRound
     @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
@@ -21,12 +25,24 @@ struct StadView: View {
     @State private var detent: VandaagDetent = .peek
     @State private var topBarHeight: CGFloat = 60
     @State private var peekHeight: CGFloat = 200
+    @State private var parties: [KaartParty] = []
+    @State private var party: KaartParty?
+    @State private var previewBuilt = true
 
     private var mood: KaartMood { KaartMood.at(now, light: light) }
     private var night: Bool { mood.night }
 
+    private var statuses: [SheetStatus] {
+        (1...ContentStore.totalSheets).map { progress.status(ofSheet: $0) }
+    }
+
+    /// Something sits over the map, so a party would play unseen.
+    private var blocked: Bool {
+        covered || picked != nil || lettersOpen || houseOpen
+    }
+
     var body: some View {
-        let statuses = (1...ContentStore.totalSheets).map { progress.status(ofSheet: $0) }
+        let statuses = statuses
         GeometryReader { geo in
             let top = geo.safeAreaInsets.top
             ZStack(alignment: .top) {
@@ -38,7 +54,9 @@ struct StadView: View {
                     active: onScreen && detent != .full,
                     insets: EdgeInsets(top: top + topBarHeight, leading: 0, bottom: peekHeight, trailing: 0),
                     mail: LetterShelf(content: .shared, store: .shared, progress: progress).unreadCount,
-                    onMail: { lettersOpen = true }
+                    onMail: { lettersOpen = true },
+                    party: party,
+                    flyIn: true
                 )
                 .ignoresSafeArea()
 
@@ -63,9 +81,18 @@ struct StadView: View {
                 StadTopBar(
                     streak: progress.streak(),
                     onDemo: { withAnimation(.spring) { progress.seedDemo() } },
-                    onReset: { confirmReset = true }
+                    onReset: { confirmReset = true },
+                    onParty: previewParty
                 )
                 .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { topBarHeight = $0 }
+
+                if let party {
+                    KaartPartyBanner(party: party)
+                        .padding(.horizontal, 16)
+                        .padding(.top, topBarHeight + 6)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .allowsHitTesting(false)
+                }
 
                 VandaagPanel(
                     detent: $detent,
@@ -110,11 +137,77 @@ struct StadView: View {
             now = .now
         }
         .onDisappear { onScreen = false }
+        .onChange(of: statuses) { old, new in noteChanges(from: old, to: new) }
+        .onChange(of: blocked) { playNextParty() }
         .task {
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(60))
                 now = .now
             }
+        }
+    }
+
+    // MARK: Parties
+
+    /// Places that opened, got built or came back from fading since the last look.
+    /// Demo, reset and test mode change many places at once: those aren't celebrated.
+    private func noteChanges(from old: [SheetStatus], to new: [SheetStatus]) {
+        guard old.count == new.count else { return }
+        let changed = old.indices.filter { old[$0] != new[$0] }
+        guard !changed.isEmpty, changed.count <= 3 else { return }
+        for i in changed {
+            let kind: KaartParty.Kind? = switch (old[i], new[i]) {
+            case (.locked, .current), (.locked, .growing): .opened
+            case (.current, .built), (.growing, .built): .built
+            case (.fading, .built): .restored
+            default: nil
+            }
+            if let kind { parties.append(KaartParty(n: i + 1, kind: kind, words: words(i + 1))) }
+        }
+        playNextParty()
+    }
+
+    private func words(_ n: Int) -> [Word] {
+        progress.content.sheet(n)?.words ?? []
+    }
+
+    /// Test mode: build the current place, or open the next one, without earning it.
+    private func previewParty() {
+        let n = progress.currentSheetNumber
+        let next = min(ContentStore.totalSheets, n + 1)
+        parties.append(previewBuilt
+            ? KaartParty(n: n, kind: .built, words: words(n))
+            : KaartParty(n: next, kind: .opened, words: words(next)))
+        previewBuilt.toggle()
+        playNextParty()
+    }
+
+    private func playNextParty() {
+        guard party == nil, !blocked, !parties.isEmpty else { return }
+        Task {
+            // Let a closing round or sheet finish first.
+            try? await Task.sleep(for: .milliseconds(650))
+            guard party == nil, !blocked, !parties.isEmpty else { return }
+            let next = parties.removeFirst()
+            setDetent(.peek)
+            withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { party = next }
+            Speech.shared.say(StadPlaces.spoken(next.n))
+            AccessibilityNotification.Announcement(announcement(next)).post()
+            try? await Task.sleep(for: .seconds(reduceMotion ? 0.3 : next.payoff))
+            Haptics.success()
+            try? await Task.sleep(for: .seconds(max(1.6, next.duration - next.payoff) + 0.6))
+            withAnimation(.easeOut(duration: 0.3)) { party = nil }
+            try? await Task.sleep(for: .milliseconds(350))
+            playNextParty()
+        }
+    }
+
+    private func announcement(_ party: KaartParty) -> String {
+        let place = StadPlaces.spoken(party.n)
+        return switch party.kind {
+        case .opened: "Nieuwe plek: \(place) is open."
+        case .built: "Gebouwd: \(place) staat."
+        case .restored: "\(place) staat er weer fris bij."
         }
     }
 
@@ -159,6 +252,7 @@ private struct StadTopBar: View {
     let streak: Int
     let onDemo: () -> Void
     let onReset: () -> Void
+    let onParty: () -> Void
 
     @Environment(ProgressStore.self) private var progress
 
@@ -180,7 +274,7 @@ private struct StadTopBar: View {
                         .shadow(color: Theme.ink.opacity(0.2), radius: 3, y: 2)
                         .accessibilityLabel("\(streak) \(streak == 1 ? "dag" : "dagen") op rij")
                 }
-                SettingsMenu(onDemo: onDemo, onReset: onReset)
+                SettingsMenu(onDemo: onDemo, onReset: onReset, onParty: onParty)
             }
             if progress.unlockAll {
                 Button {

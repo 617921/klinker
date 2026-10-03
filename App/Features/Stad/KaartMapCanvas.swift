@@ -12,11 +12,14 @@ struct KaartMapCanvas: View, Equatable {
         let showLabels = zoom > 0.8
         let waterFont = Fonts.readingItalic(14)
         let canalFont = Fonts.readingItalic(12)
-        let landFont = Fonts.label(12)
         Canvas { ctx, _ in
             ctx.scaleBy(x: zoom, y: zoom)
             ctx.translateBy(x: 0, y: KaartData.north)
             Self.drawMap(&ctx, colors: colors, night: night, season: season)
+            KaartOldMap.drawDistricts(&ctx, night: night)
+            KaartOldMap.drawCountryNames(&ctx, night: night, paper: colors.ground)
+            KaartOldMap.drawCartouche(&ctx, night: night)
+            KaartOldMap.drawFrame(&ctx, night: night)
             guard showLabels else { return }
             let water = { (s: String) in Text(s).font(waterFont).foregroundStyle(colors.waterLabel) }
             ctx.draw(water("de rivier"), at: CGPoint(x: 250, y: 33), anchor: .bottomLeading)
@@ -27,9 +30,6 @@ struct KaartMapCanvas: View, Equatable {
                 c.rotate(by: .degrees(14))
                 c.draw(Text(name).font(canalFont).foregroundStyle(colors.waterLabel), at: CGPoint(x: 0, y: 7), anchor: .bottom)
             }
-            let land = { (s: String) in Text(s).font(landFont).tracking(2).foregroundStyle(colors.landLabel) }
-            ctx.draw(land("POLDER"), at: CGPoint(x: 800, y: 1014), anchor: .bottomLeading)
-            ctx.draw(land("STRAND"), at: CGPoint(x: 150, y: 1088), anchor: .bottomLeading)
         }
         .frame(width: KaartData.worldWidth * zoom, height: KaartData.contentHeight * zoom)
         .accessibilityHidden(true)

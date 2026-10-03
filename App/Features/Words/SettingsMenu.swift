@@ -4,6 +4,8 @@ import SwiftUI
 struct SettingsMenu: View {
     let onDemo: () -> Void
     let onReset: () -> Void
+    /// Test mode only: play a place's party without earning it.
+    var onParty: () -> Void = {}
 
     @Environment(ProgressStore.self) private var progress
     @AppStorage(StadLight.storageKey) private var light: StadLight = .auto
@@ -22,6 +24,11 @@ struct SettingsMenu: View {
                 withAnimation(.spring) { progress.setUnlockAll(on) }
             })) {
                 Label("Testmodus: alle plekken open", systemImage: "lock.open")
+            }
+            if progress.unlockAll {
+                Button(action: onParty) {
+                    Label("Testmodus: speel een feestje af", systemImage: "party.popper")
+                }
             }
             Divider()
             Button(action: onDemo) {
