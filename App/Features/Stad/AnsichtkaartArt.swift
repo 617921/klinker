@@ -378,7 +378,7 @@ struct AnsichtkaartBack: View {
     }
 
     private var message: String {
-        let names = Array(Set(buurt.picks + Array(buurt.places)).sorted { a, b in
+        let names = Array(Set(buurt.picks + buurt.places).sorted { a, b in
             let ia = buurt.picks.firstIndex(of: a) ?? 99 + a, ib = buurt.picks.firstIndex(of: b) ?? 99 + b
             return ia < ib
         }.prefix(3)).map(StadPlaces.spoken)

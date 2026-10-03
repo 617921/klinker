@@ -1,13 +1,13 @@
 import Foundation
 import Observation
 
-/// A neighbourhood of Klinkerstad: about eight places in a row of lessons. When every place in it
-/// is open, Ria brings a Delft Blue postcard of it.
+/// A neighbourhood of Klinkerstad, named after a real Amsterdam neighbourhood where its places
+/// really are. When every place in it is open, Ria brings a Delft Blue postcard of it.
 nonisolated struct Buurt: Identifiable, Hashable, Sendable {
     let id: Int
     /// "de Jordaan", "het Centrum".
     let name: String
-    let places: ClosedRange<Int>
+    let places: [Int]
     /// The buildings on the postcard, left to right.
     let picks: [Int]
     /// The one window lit warm on the card.
@@ -17,18 +17,33 @@ nonisolated struct Buurt: Identifiable, Hashable, Sendable {
 
     var title: String { "Groeten uit \(name)" }
 
+    /// Grouped by where such places really are in Amsterdam, in the order their cards arrive
+    /// (researched 2026-10-03; see FEATURES.md for the real examples).
     static let all: [Buurt] = [
-        Buurt(id: 1, name: "het Centrum", places: 1...8, picks: [2, 3, 8], warm: 3),
-        Buurt(id: 2, name: "de Grachtengordel", places: 9...16, picks: [10, 14, 16], warm: 14),
-        Buurt(id: 3, name: "de Jordaan", places: 17...24, picks: [19, 22, 23], warm: 19),
-        Buurt(id: 4, name: "het Museumkwartier", places: 25...32, picks: [27, 25, 26], warm: 27),
-        Buurt(id: 5, name: "de Pijp", places: 33...40, picks: [33, 34, 40], warm: 40),
-        Buurt(id: 6, name: "het Platteland", places: 41...48, picks: [45, 44], warm: 45, rural: true),
-        Buurt(id: 7, name: "de Plantage", places: 49...55, picks: [50, 49, 53], warm: 49),
-        Buurt(id: 8, name: "Noord", places: 56...62, picks: [56, 57, 62], warm: 57),
+        // Noordermarkt-side canals, Winkel 43, bruine cafés ('t Smalle, Papeneiland).
+        Buurt(id: 1, name: "de Jordaan", places: [2, 3, 4, 6, 9, 10], picks: [2, 3, 6], warm: 3),
+        // Rembrandttoren, Oosterpark, Montessori College Oost, OLVG Oost.
+        Buurt(id: 2, name: "Oost", places: [7, 11, 13, 17, 18], picks: [7, 17, 13], warm: 17),
+        // Centraal Station, OBA Oosterdok, Stopera, Magna Plaza, Bureau Warmoesstraat,
+        // Tuschinski, Entrepotdok, Oude Kerk, Stadsschouwburg.
+        Buurt(id: 3, name: "het Centrum", places: [1, 8, 12, 14, 16, 21, 23, 24, 25, 26], picks: [25, 23, 16], warm: 23),
+        // Albert Cuypmarkt, De Dageraad, the eating-out quarter.
+        Buurt(id: 4, name: "de Pijp", places: [5, 19, 20, 27, 28, 33, 34], picks: [19, 28, 20], warm: 28),
+        // ABN AMRO tower, VU and VU-NT2, Rechtbank Amsterdam, the big law and notary firms.
+        Buurt(id: 5, name: "de Zuidas", places: [15, 29, 30, 31, 32, 40, 41], picks: [15, 29, 32], warm: 29),
+        // Molen van Sloten, the Belastingdienst tower at Teleport, Sloterstrand, under Schiphol's flight paths.
+        Buurt(id: 6, name: "Nieuw-West", places: [36, 37, 39, 42, 43, 44, 46, 48], picks: [39, 44, 46], warm: 44, rural: true),
+        // Rijksmuseum, Zuiderbad, Conservatorium Hotel, Kazerne Dirk, Concertgebouw.
+        Buurt(id: 7, name: "het Museumkwartier", places: [22, 35, 49, 50, 51, 53, 55, 56], picks: [55, 22, 53], warm: 22),
+        // NDSM (MediaWharf, IJ-Hallen), A Lab, Vliegenbos, Landelijk Noord, Concertgemaal Kadoelen,
+        // the IJ ferries and the A'DAM Lookout.
+        Buurt(id: 8, name: "Noord", places: [38, 45, 47, 52, 54, 57, 58, 59, 60, 61, 62], picks: [57, 62, 60], warm: 60),
     ]
 
     static func of(_ n: Int) -> Buurt? { all.first { $0.places.contains(n) } }
+
+    /// The place that opens last: the postcard comes then.
+    var last: Int { places.max() ?? 0 }
 
     /// Every place open: its words all answered right at least once.
     func isComplete(_ statuses: [SheetStatus]) -> Bool {
