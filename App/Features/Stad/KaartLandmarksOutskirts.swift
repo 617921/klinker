@@ -162,6 +162,8 @@ nonisolated extension KaartLandmarks {
         cap.addQuadCurve(to: CGPoint(x: 58, y: -140), control: CGPoint(x: 36, y: -172))
         cap.closeSubpath()
         pen.fill(cap, .roof)
+        pen.art.marks[.dak] = cap.boundingRect
+        pen.art.marks[.wiek] = CGRect(x: 58.6, y: -192.2, width: 4, height: 4)
         let hub = CGPoint(x: 36, y: -146)
         for angle in [20.0, 110, 200, 290] {
             let a = angle * .pi / 180

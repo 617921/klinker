@@ -63,6 +63,10 @@ nonisolated struct KaartLandmark: Sendable {
     var signAt: CGPoint?
     /// The SF Symbol painted on the shop sign (default: `PlaceCatalog.symbol`). "" hangs no sign.
     var sign: String?
+    /// Where the Gevelplaat can point at each named part (art units).
+    var marks: [GevelDeel: CGRect] = [:]
+    /// The gable type, when the front is a canal house (the plate names it: "de klokgevel").
+    var gable: GableType?
 
     var bounds: CGRect {
         layers.reduce(CGRect.null) { box, layer in

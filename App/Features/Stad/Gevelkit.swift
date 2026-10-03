@@ -126,6 +126,9 @@ nonisolated struct GevelGeometry: Sendable {
     var curtains = Path()
     /// Warehouse shutters beside the windows (fill, door colour).
     var shutters = Path()
+    /// Where the hoisting beam and the door lamp are (for the Gevelplaat); null if none.
+    var hoist = CGRect.null
+    var lamp = CGRect.null
 }
 
 /// A tiny SVG-like pen: same commands as the prototype's path strings.
@@ -241,6 +244,7 @@ nonisolated enum Gevelkit {
         var trim = Path(), glass = Path(), lit = Path(), mull = Path(), deco = Path(), door = Path()
         var awning = Path(), stripes = Path(), box = Path(), bloom = Path(), snow = Path()
         var ornament = Path(), iron = Path(), steps = Path(), curtains = Path(), shutters = Path()
+        var hoistRect = CGRect.null, lampRect = CGRect.null
         var li = 0
 
         func isLit() -> Bool {
@@ -301,6 +305,7 @@ nonisolated enum Gevelkit {
         }
 
         func hoistBeam(_ top: Double) {
+            hoistRect = CGRect(x: cx - 2.5, y: top + 3, width: 5, height: 12)
             deco.addPath(rect(cx - 2.5, top + 3, 5, 5))
             var p = GevelPen()
             p.M(r(cx - 0.6), r(top + 8))
@@ -514,6 +519,7 @@ nonisolated enum Gevelkit {
             let lampX = o.doorLeft ? dx + dw + 5 : dx - 9
             iron.addPath(rect(lampX + 1.5, db - dh + 2, 1, 6))
             lit.addPath(rect(lampX, db - dh + 8, 4, 6))
+            lampRect = CGRect(x: lampX, y: db - dh + 2, width: 4, height: 12)
             deco.addPath(rect(lampX - 0.5, db - dh + 7, 5, 1.4))
             // Plants in pots at the foot of the steps.
             let px = o.doorLeft ? dx + dw + 10 : dx - 13
@@ -586,7 +592,8 @@ nonisolated enum Gevelkit {
             size: CGSize(width: W + 6, height: T), topY: topY,
             body: body.path, edge: edge.path, trim: trim, glass: glass, lit: lit, mull: mull,
             door: door, awning: awning, stripes: stripes, box: box, bloom: bloom, snow: snow, deco: deco,
-            brick: brick, ornament: ornament, iron: iron, steps: steps, curtains: curtains, shutters: shutters
+            brick: brick, ornament: ornament, iron: iron, steps: steps, curtains: curtains, shutters: shutters,
+            hoist: hoistRect, lamp: lampRect
         )
     }
 
