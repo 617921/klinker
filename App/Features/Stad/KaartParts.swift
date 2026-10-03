@@ -64,6 +64,7 @@ struct KaartMailboxButton: View {
         let k = zoom
         Button {
             Haptics.tap()
+            KlinkerAudio.shared.play(.paper)
             onMail()
         } label: {
             LetterMailbox(hasMail: mail > 0)

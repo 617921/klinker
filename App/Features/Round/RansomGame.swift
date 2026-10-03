@@ -64,6 +64,7 @@ final class RansomGame {
         guard answer == nil, let task else { return }
         guard !glued.isEmpty else {
             showEmptyError = true
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
             return
         }
@@ -77,8 +78,10 @@ final class RansomGame {
         round.sentenceScore = RoundModel.Score(right: score, total: tasks.count)
         Speech.shared.say(roundSentenceText(task.nl))
         if ok {
+            KlinkerAudio.shared.play(.correct)
             Haptics.success()
         } else {
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
         }
     }

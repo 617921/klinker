@@ -147,7 +147,14 @@ struct StadMapView: View {
                         withAnimation(.easeInOut(duration: 1.8).delay(0.3)) { camera = 1 }
                     }
                 }
-                .onDisappear { appeared = false }
+                .onDisappear {
+                    appeared = false
+                    syncAmbience()
+                }
+                .onChange(of: visibleWorld) { syncAmbience() }
+                .onChange(of: mood) { syncAmbience() }
+                .onChange(of: active) { syncAmbience() }
+                .onChange(of: appeared) { syncAmbience() }
         }
     }
 
@@ -318,6 +325,7 @@ struct StadMapView: View {
 
     private func pick(_ n: Int) {
         selected = StadPlacePick(n: n)
+        KlinkerAudio.shared.play(.tap)
         Speech.shared.say(StadPlaces.spoken(n))
         Haptics.tap()
     }
@@ -415,9 +423,17 @@ struct StadMapView: View {
         if world != visibleWorld { visibleWorld = world }
     }
 
+    /// Tells the city soundscape what's on screen.
+    private func syncAmbience() {
+        CityAmbience.shared.update(active: active && appeared, mood: mood, visible: visibleWorld, zoom: zoom)
+    }
+
     private func found(_ detail: KaartDetail, at point: CGPoint) {
         let isNew = KaartDiscoveries.shared.mark(detail.id)
-        Speech.shared.say(detail.spoken)
+        let sound = detail.kind.sound
+        KlinkerAudio.shared.play(sound.effect)
+        if isNew && sound.effect != .found { KlinkerAudio.shared.play(.found, volume: 0.7) }
+        Speech.shared.say(detail.spoken, after: sound.wordAfter)
         if isNew { Haptics.success() } else { Haptics.tap() }
         let next = KaartBubble(detail: detail, point: point, isNew: isNew)
         withAnimation(reduceMotion ? nil : .spring(response: 0.3, dampingFraction: 0.7)) { bubble = next }
@@ -449,7 +465,8 @@ struct StadMapView: View {
         withAnimation(.easeOut(duration: 0.2)) { riaFrozen = phase }
         riaToken += 1
         let token = riaToken
-        Speech.shared.say(riaMessage)
+        KlinkerAudio.shared.play(.bikeBell)
+        Speech.shared.say(riaMessage, after: 0.9)
         Haptics.tap()
         Task {
             try? await Task.sleep(for: .seconds(5.2))

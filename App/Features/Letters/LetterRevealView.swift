@@ -44,6 +44,7 @@ struct LetterRevealScreen: View {
         }
         .onAppear {
             store.markRevealSeen()
+            KlinkerAudio.shared.play(.roundDone)
             Haptics.success()
         }
     }

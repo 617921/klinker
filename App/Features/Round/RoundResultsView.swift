@@ -66,6 +66,7 @@ struct RoundResultsView: View {
         }
         .onAppear {
             changes = round.changes
+            KlinkerAudio.shared.play(.roundDone)
             Haptics.success()
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { shown = true }
         }

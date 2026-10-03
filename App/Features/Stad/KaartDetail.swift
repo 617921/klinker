@@ -192,3 +192,18 @@ struct KaartWordBubble: View {
         .accessibilityElement(children: .combine)
     }
 }
+
+extension KaartDetailKind {
+    /// What a tap makes you hear before the word: the thing's own sound where it has one
+    /// (a bell, a horn, the organ, a splash, a till), else the music box of a find.
+    var sound: (effect: KlinkerSound, wordAfter: Double) {
+        switch self {
+        case .draaiorgel: (.organ, 0.2)
+        case .bloemenfiets, .bakfiets, .poes: (.bikeBell, 0.8)
+        case .rondvaartboot, .sloep: (.boatHorn, 0.7)
+        case .eend, .zwaan, .meerkoet, .waterfiets, .roeiboot, .hengel: (.splash, 0.35)
+        case .stroopwafel, .friet, .haring, .kaas, .oliebol, .ijsje: (.register, 0.5)
+        default: (.found, 0.35)
+        }
+    }
+}

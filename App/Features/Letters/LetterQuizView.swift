@@ -96,6 +96,7 @@ struct LetterQuizScreen: View {
     private func pick(_ index: Int, in question: LetterQuestion) {
         guard !session.answeredRight else { return }
         if index == question.answer {
+            KlinkerAudio.shared.play(.correct)
             Haptics.success()
             Speech.shared.say(question.options[index])
             if session.question >= questions.count - 1 {
@@ -108,6 +109,7 @@ struct LetterQuizScreen: View {
                 withAnimation(.easeOut(duration: 0.2)) { session.answeredRight = true }
             }
         } else {
+            KlinkerAudio.shared.play(.wrong)
             Haptics.error()
             session.wrongPicks.insert(index)
             session.lastWrong = index
